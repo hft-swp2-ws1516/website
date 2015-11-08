@@ -1,14 +1,15 @@
+<script>
 
+    d3.csv("population.csv", function (err, data) {
 
-d3.csv("population.csv", function (err, data) {
-
-    var config = {
+         var config = {
         "data0": "Country (or dependent territory)",
         "data1": "Population",
         "label0": "label 0",
         "label1": "label 1",
         "color0": "#99ccff",
         "color1": "#0050A1",
+
         "width": 800,
         "height": 400
     };
@@ -215,4 +216,5 @@ d3.csv("population.csv", function (err, data) {
     d3.select(self.frameElement).style("height", height + "px");
 });
 
-
+</
+script >;
