@@ -8,17 +8,11 @@
    Base styles: opinionated defaults
    ========================================================================== */
 
-   html {
-    margin: 0 auto;
-    height: 100%;
+html {
+    background:#e7e7ff;
     color: #222;
     font-size: 1em;
     line-height: 1.4;
-
-}
-
-body {
-    margin: 0 auto;
 }
 
 /*
@@ -29,7 +23,7 @@ body {
  * Customize the background color to match your design.
  */
 
- ::selection {
+::selection {
     background: #b3d4fc;
     text-shadow: none;
 }
@@ -38,7 +32,7 @@ body {
  * A better looking default horizontal rule
  */
 
- hr {
+hr {
     display: block;
     height: 1px;
     border: 0;
@@ -53,12 +47,12 @@ body {
  * https://github.com/h5bp/html5-boilerplate/issues/440
  */
 
- audio,
- canvas,
- iframe,
- img,
- svg,
- video {
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
     vertical-align: middle;
 }
 
@@ -66,7 +60,7 @@ body {
  * Remove default fieldset styles.
  */
 
- fieldset {
+fieldset {
     border: 0;
     margin: 0;
     padding: 0;
@@ -75,52 +69,26 @@ body {
 /*
  * Allow only vertical resizing of textareas.
  */
- 
- textarea {
+
+textarea {
     resize: vertical;
 }
 
-.header{
-    background: transparent linear-gradient(#292929, #252525) repeat scroll 0% 0%;
-    margin: 0 auto;
-    text-align: center;
-    padding: 0;
-    height: 54px;
-}
 
-
-.content_wrapper{
-    margin: 0 auto;
-    max-width: 1260px;
-    padding: 15px 30px;
-}
-
-/*
-
-Main Menu styles
-
-*/
 .menu, .menu ul , .menu li ,menu a{
     list-style: none;
     padding: 0;
-    margin: 0 auto;
+    margin: 0;
     outline: none;
 }
 
-ul.menu{
-    padding: 0;
-    margin: 0;
-}
-
-
 .menu {
     display: inline-block;
+    position: fixed;
     cursor: default;
     z-index: 500;
-    margin: 0 auto;
+    width: 100%;
     border-collapse: collapse;
-    padding: 0;
-   
 }
 .menu li{
     list-style: none;
@@ -131,10 +99,10 @@ ul.menu{
 
 
 .menu li {
-    background: #414350;
-    background: linear-gradient(#292929, #252525);
-   /* border-bottom: 2px solid #495d60;
-    border-top: 2px solid #303030; */
+    background: #4c7880;
+    background: #4c7880;
+    border-bottom: 2px solid #495d60;
+    border-top: 2px solid #495d60;
     min-width: 160px;
     text-align: center;
 
@@ -160,8 +128,9 @@ ul.menu{
     color: #fcfcfc;
     text-shadow: 0 0 1px rgba(0,0,0,.35);
 
+    background: #4c7880;
     border-left: 1px solid #4b4441;
-    border-right: 1px solid #312a27;
+    border-right: 1px solid #4b4441;
 
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
@@ -169,7 +138,7 @@ ul.menu{
     -ms-transition: all .3s ease;
     transition: all .3s ease;
 }
-.menu > li:hover > a { background: #4b4441; }
+.menu > li:hover > a { background: #999999; }
 .menu a {
     border-left: 3px solid rgba(0, 0, 0, 0);
     color: #808080;
@@ -185,7 +154,7 @@ ul.menu{
    Browser Upgrade Prompt
    ========================================================================== */
 
-   .browserupgrade {
+.browserupgrade {
     margin: 0.2em 0;
     background: #ccc;
     color: #000;
@@ -204,7 +173,7 @@ ul.menu{
  * Hide visually and from screen readers:
  */
 
- .hidden {
+.hidden {
     display: none !important;
 }
 
@@ -213,7 +182,7 @@ ul.menu{
  * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
  */
 
- .visuallyhidden {
+.visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -230,8 +199,8 @@ ul.menu{
  * https://www.drupal.org/node/897638
  */
 
- .visuallyhidden.focusable:active,
- .visuallyhidden.focusable:focus {
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
     clip: auto;
     height: auto;
     margin: 0;
@@ -244,7 +213,7 @@ ul.menu{
  * Hide visually and from screen readers, but maintain layout
  */
 
- .invisible {
+.invisible {
     visibility: hidden;
 }
 
@@ -260,8 +229,8 @@ ul.menu{
  *    `:before` to contain the top-margins of child elements.
  */
 
- .clearfix:before,
- .clearfix:after {
+.clearfix:before,
+.clearfix:after {
     content: " "; /* 1 */
     display: table; /* 2 */
 }
@@ -276,7 +245,7 @@ ul.menu{
    Modify as content requires.
    ========================================================================== */
 
-   @media only screen and (min-width: 35em) {
+@media only screen and (min-width: 35em) {
     /* Style adjustments for viewports that meet the condition */
 }
 
@@ -292,14 +261,14 @@ ul.menu{
    http://www.phpied.com/delay-loading-your-print-css/
    ========================================================================== */
 
-   @media print {
+@media print {
     *,
     *:before,
     *:after {
         background: transparent !important;
         color: #000 !important;
         /* Black prints faster:
-        http://www.sanbeiji.com/archives/953 */
+                                          http://www.sanbeiji.com/archives/953 */
         box-shadow: none !important;
         text-shadow: none !important;
     }
@@ -321,8 +290,8 @@ ul.menu{
      * Don't show links that are fragment identifiers,
      * or use the `javascript:` pseudo protocol
      */
-     a[href^="#"]:after,
-     a[href^="javascript:"]:after {
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
         content: "";
     }
 
@@ -336,7 +305,7 @@ ul.menu{
      * Printing Tables:
      * http://css-discuss.incutio.com/wiki/Printing_Tables
      */
-     thead {
+    thead {
         display: table-header-group;
     }
 
