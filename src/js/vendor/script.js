@@ -17,7 +17,7 @@
 
       return this.each(function() {
         cssmenu.find('li ul').parent().addClass('has-sub');
-        if (settings.format != 'select') {
+        if (settings.format !== 'select') {
           cssmenu.prepend('<div id="menu-button">' + settings.title + '</div>');
           $(this).find("#menu-button").on('click', function(){
             $(this).toggleClass('menu-opened');
@@ -103,7 +103,7 @@
 $(document).ready(function(){
 
 $(window).load(function() {
-  $("#cssmenu").menumaker({
+  $("#menu_main").menumaker({
     title: "Menu",
     format: "dropdown"
   });
@@ -121,7 +121,7 @@ $("#menu_main > ul > li").each(function() {
 });
 
 if (foundActive === false) {
-  activeElement = $("#cssmenu > ul > li").first();
+  activeElement = $("#menu_main > ul > li").first();
 }
 
 defaultPosition = indicatorPosition = activeElement.position().left + activeElement.width()/2 - 5;
