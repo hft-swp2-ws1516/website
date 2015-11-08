@@ -1,0 +1,148 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 08.11.2015, 00:58:20
+    Author     : Ermali
+*/
+
+/*
+==============================================================================
+= Maybe it will be a good idea to have .css file for the Main_Manu           =
+==============================================================================
+*/
+
+.main_Menu{
+    //put stuff in here!
+}
+
+.main_Menu.a:hover{
+    // keep thinging of some hover styling
+}
+
+
+/*cascading the menu div tag over the id. If other wishes are pretended,
+please feel free to use the upper blocks*/
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700);
+#menu_main {
+  background: #f96e5b;
+  width: auto;
+}
+#menu_main ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  display: block;
+  zoom: 1;
+}
+#menu_main ul:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+#menu_main ul li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+#menu_main.align-right ul li {
+  float: right;
+}
+#menu_main.align-center ul {
+  text-align: center;
+}
+#menu_main ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  padding: 15px 25px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px;
+  position: relative;
+  -webkit-transition: color .25s;
+  -moz-transition: color .25s;
+  -ms-transition: color .25s;
+  -o-transition: color .25s;
+  transition: color .25s;
+}
+#menu_main ul li a:hover {
+  color: #333333;
+}
+#menu_main ul li a:hover:before {
+  width: 100%;
+}
+#menu_main ul li a:after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: -3px;
+  top: 19px;
+  height: 6px;
+  width: 6px;
+  background: #ffffff;
+  opacity: .5;
+}
+#menu_main ul li a:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 0;
+  background: #333333;
+  -webkit-transition: width .25s;
+  -moz-transition: width .25s;
+  -ms-transition: width .25s;
+  -o-transition: width .25s;
+  transition: width .25s;
+}
+#menu_main ul li.last > a:after,
+#menu_main ul li:last-child > a:after {
+  display: none;
+}
+#menu_main ul li.active a {
+  color: #333333;
+}
+#menu_main ul li.active a:before {
+  width: 100%;
+}
+#menu_main.align-right li.last > a:after,
+#menu_main.align-right li:last-child > a:after {
+  display: block;
+}
+#menu_main.align-right li:first-child a:after {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  #menu_main ul li {
+    float: none;
+    display: block;
+  }
+  #menu_main ul li a {
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-bottom: 1px solid #fb998c;
+  }
+  #menu_main ul li.last > a,
+  #menu_main ul li:last-child > a {
+    border: 0;
+  }
+  #menu_main ul li a:after {
+    display: none;
+  }
+  #menu_main ul li a:before {
+    display: none;
+  }
+}
