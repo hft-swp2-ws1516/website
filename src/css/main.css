@@ -9,7 +9,6 @@
    ========================================================================== */
 
 html {
-    background:#e7e7ff;
     color: #222;
     font-size: 1em;
     line-height: 1.4;
@@ -99,10 +98,10 @@ textarea {
 
 
 .menu li {
-    background: #4c7880;
-    background: #4c7880;
-    border-bottom: 2px solid #495d60;
-    border-top: 2px solid #495d60;
+    background: #504949;
+    background: linear-gradient(#292929, #252525);
+    border-bottom: 2px solid #2e2e2e;
+    border-top: 2px solid #303030;
     min-width: 160px;
     text-align: center;
 
@@ -128,9 +127,9 @@ textarea {
     color: #fcfcfc;
     text-shadow: 0 0 1px rgba(0,0,0,.35);
 
-    background: #4c7880;
+    background: #372f2b;
     border-left: 1px solid #4b4441;
-    border-right: 1px solid #4b4441;
+    border-right: 1px solid #312a27;
 
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
@@ -138,7 +137,10 @@ textarea {
     -ms-transition: all .3s ease;
     transition: all .3s ease;
 }
-.menu > li:hover > a { background: #999999; }
+
+.menu > li:hover > a {
+    background: #4b4441;
+}
 .menu a {
     border-left: 3px solid rgba(0, 0, 0, 0);
     color: #808080;
