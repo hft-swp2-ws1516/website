@@ -10,7 +10,6 @@
     <!-- Load d3.js and c3.js -->
     <script src="js/c3-0.4.10/d3.min.js" charset="utf-8"></script>
     <script src="js/c3-0.4.10/c3.min.js"></script>
-    <title>Global Statistic TLS Handshake</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -20,8 +19,6 @@
 
 var foo = {
     "domains": [
-
-
 
     {
         "domain": "google.com",
@@ -605,8 +602,8 @@ var foo = {
 
 
     var testdaten = {
-       "dhe":[
-       {
+     "dhe":[
+     {
         "keysize": "256",
         "size": 312,
     },
@@ -640,9 +637,11 @@ var foo = {
    <script>
    window.onload = function () {
 
+
+   // Sample Data, this is ja required json format, that c3 requires
     var testdaten = {
-       "dhe":[
-       {
+     "dhe":[
+     {
         "keysize": "256",
         "size": 312,
         "percent": 3,
@@ -670,6 +669,7 @@ var foo = {
       ]
 
   };
+
   var chart = c3.generate({
     legend:{
         show:false,
@@ -694,18 +694,9 @@ axis: {
 
     },
 
-    y2: {
-        show: true,
-        default: [0, 100],
-        label: 'in percent'
-
-    }
 
 },
 
-axes: {
-    testdaten: 'y2',
-},
 bar: {
     width: {
         ratio: 0.6
@@ -714,11 +705,71 @@ bar: {
 
 });
 
+  // Second chart with multidimensinonal Array. I didn't figure out how we can use the additional y-axis 
+  // in the first chart
+
+  var charty2 = c3.generate({
+    bindto: '#charty2',
+    data: {
+      columns: [
+      ['key-size', 634,  21254, 1432, 253542, 11343, 132543],
+      ['percent', 1, 10, 2, 80, 6, 20 ],
+      ],
+      type: 'bar',
+      types: {
+        percent: 'line',
+    },
+    axes: {
+       'percent': 'y2'
+   },
+},
+axis: {
+    x: {
+       type: 'category',
+       categories: ['256', '512', '768', '1024', '1536', '2048']
+   },
+   y: {
+      label: {
+        text: 'Counts',
+        position: 'outer-middle'
+    }
+},
+y2: {
+  show: true,
+  label: {
+    text: 'In percent',
+    position: 'outer-middle'
+},
+max: 100,
+min: 0
+}
+}
+
+
+});
+
+
 
 };
 </script>
 
 <body>
+
+    <div class="header">
+        <ul class="menu">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="globaldata.html">Global Statistics</a></li>
+            <li><a href="crawler.html">World Map</a></li>
+            <li><a href="crawlDemand.html">Analyze Me</a></li>
+            <li><a href="credits.html">CREDITS</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+    </div>
+    <br><br><br><br><br>
+    <h2 >Which DHE parameter key-size do the TLS Server prefer?</h2>
+    <div id="chart"></div>
+    With 2 Y-axes
+    <div id="charty2"></div>
 
 <div class="header">
     <ul class="menu">
