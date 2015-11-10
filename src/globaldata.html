@@ -602,8 +602,8 @@ var foo = {
 
 
     var testdaten = {
-     "dhe":[
-     {
+       "dhe":[
+       {
         "keysize": "256",
         "size": 312,
     },
@@ -639,9 +639,9 @@ var foo = {
 
 
    // Sample Data, this is ja required json format, that c3 requires
-    var testdaten = {
-     "dhe":[
-     {
+   var testdaten = {
+       "dhe":[
+       {
         "keysize": "256",
         "size": 312,
         "percent": 3,
@@ -720,19 +720,19 @@ bar: {
         percent: 'line',
     },
     axes: {
-       'percent': 'y2'
-   },
+     'percent': 'y2'
+ },
 },
 axis: {
     x: {
-       type: 'category',
-       categories: ['256', '512', '768', '1024', '1536', '2048']
-   },
-   y: {
-      label: {
-        text: 'Counts',
-        position: 'outer-middle'
-    }
+     type: 'category',
+     categories: ['256', '512', '768', '1024', '1536', '2048']
+ },
+ y: {
+  label: {
+    text: 'Counts',
+    position: 'outer-middle'
+}
 },
 y2: {
   show: true,
@@ -765,23 +765,12 @@ min: 0
             <li><a href="contact.html">CONTACT</a></li>
         </ul>
     </div>
-    <br><br><br><br><br>
-    <h2 >Which DHE parameter key-size do the TLS Server prefer?</h2>
-    <div id="chart"></div>
-    With 2 Y-axes
-    <div id="charty2"></div>
-
-<div class="header">
-    <ul class="menu">
-        <li><a href="index.html">HOME</a></li>
-        <li><a href="globaldata.html">Global Statistics</a></li>
-        <li><a href="crawler.html">World Map</a></li>
-        <li><a href="crawlDemand.html">Analyze Me</a></li>
-        <li><a href="credits.html">CREDITS</a></li>
-        <li><a href="contact.html">CONTACT</a></li>
-    </ul>
-</div>
-    <div id="chart"></div>
+    <div class="content_wrapper">
+        <h2 >Which DHE parameter key-size do the TLS Server prefer?</h2>
+        <div id="chart"></div>
+        With 2 Y-axes
+        <div id="charty2"></div>
+    </div>
 
 </body>
 

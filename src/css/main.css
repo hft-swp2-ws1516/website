@@ -8,10 +8,16 @@
    Base styles: opinionated defaults
    ========================================================================== */
 
-html {
+   html {
+    margin: 0 auto;
+    height: 100%;
     color: #222;
     font-size: 1em;
     line-height: 1.4;
+}
+
+body {
+    margin: 0 auto;
 }
 
 /*
@@ -22,7 +28,7 @@ html {
  * Customize the background color to match your design.
  */
 
-::selection {
+ ::selection {
     background: #b3d4fc;
     text-shadow: none;
 }
@@ -31,7 +37,7 @@ html {
  * A better looking default horizontal rule
  */
 
-hr {
+ hr {
     display: block;
     height: 1px;
     border: 0;
@@ -46,12 +52,12 @@ hr {
  * https://github.com/h5bp/html5-boilerplate/issues/440
  */
 
-audio,
-canvas,
-iframe,
-img,
-svg,
-video {
+ audio,
+ canvas,
+ iframe,
+ img,
+ svg,
+ video {
     vertical-align: middle;
 }
 
@@ -59,7 +65,7 @@ video {
  * Remove default fieldset styles.
  */
 
-fieldset {
+ fieldset {
     border: 0;
     margin: 0;
     padding: 0;
@@ -69,10 +75,26 @@ fieldset {
  * Allow only vertical resizing of textareas.
  */
 
-textarea {
+ textarea {
     resize: vertical;
 }
 
+.header{
+    background: transparent linear-gradient(#292929, #252525) repeat scroll 0% 0%;
+    margin: 0 auto; left:0px; right:0px;
+    padding: 0;
+    height: 52px;
+    text-align: center;
+    position: fixed;
+    z-index: 500;
+
+}
+
+.content_wrapper{
+    margin: 0 auto;
+    max-width: 1260px;
+    padding: 50px 30px;
+}
 
 .menu, .menu ul , .menu li ,menu a{
     list-style: none;
@@ -83,11 +105,10 @@ textarea {
 
 .menu {
     display: inline-block;
-    position: fixed;
     cursor: default;
     z-index: 500;
-    width: 100%;
     border-collapse: collapse;
+    margin: 0 auto; left:0px; right:0px;
 }
 .menu li{
     list-style: none;
@@ -100,8 +121,8 @@ textarea {
 .menu li {
     background: #504949;
     background: linear-gradient(#292929, #252525);
-    border-bottom: 2px solid #2e2e2e;
-    border-top: 2px solid #303030;
+    /*border-bottom: 2px solid #2e2e2e;
+    border-top: 2px solid #303030;*/
     min-width: 160px;
     text-align: center;
 
@@ -117,7 +138,7 @@ textarea {
     position: relative;
     display: block;
     z-index: 510;
-    height: 54px;
+    height: 52px;
     padding: 0 20px;
     line-height: 54px;
 
@@ -127,9 +148,7 @@ textarea {
     color: #fcfcfc;
     text-shadow: 0 0 1px rgba(0,0,0,.35);
 
-    background: #372f2b;
-    border-left: 1px solid #4b4441;
-    border-right: 1px solid #312a27;
+   background: transparent linear-gradient(#292929, #252525) repeat scroll 0% 0%;
 
     -webkit-transition: all .3s ease;
     -moz-transition: all .3s ease;
@@ -156,7 +175,7 @@ textarea {
    Browser Upgrade Prompt
    ========================================================================== */
 
-.browserupgrade {
+   .browserupgrade {
     margin: 0.2em 0;
     background: #ccc;
     color: #000;
@@ -175,7 +194,7 @@ textarea {
  * Hide visually and from screen readers:
  */
 
-.hidden {
+ .hidden {
     display: none !important;
 }
 
@@ -184,7 +203,7 @@ textarea {
  * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
  */
 
-.visuallyhidden {
+ .visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -201,8 +220,8 @@ textarea {
  * https://www.drupal.org/node/897638
  */
 
-.visuallyhidden.focusable:active,
-.visuallyhidden.focusable:focus {
+ .visuallyhidden.focusable:active,
+ .visuallyhidden.focusable:focus {
     clip: auto;
     height: auto;
     margin: 0;
@@ -215,7 +234,7 @@ textarea {
  * Hide visually and from screen readers, but maintain layout
  */
 
-.invisible {
+ .invisible {
     visibility: hidden;
 }
 
@@ -231,8 +250,8 @@ textarea {
  *    `:before` to contain the top-margins of child elements.
  */
 
-.clearfix:before,
-.clearfix:after {
+ .clearfix:before,
+ .clearfix:after {
     content: " "; /* 1 */
     display: table; /* 2 */
 }
@@ -247,7 +266,7 @@ textarea {
    Modify as content requires.
    ========================================================================== */
 
-@media only screen and (min-width: 35em) {
+   @media only screen and (min-width: 35em) {
     /* Style adjustments for viewports that meet the condition */
 }
 
@@ -263,14 +282,14 @@ textarea {
    http://www.phpied.com/delay-loading-your-print-css/
    ========================================================================== */
 
-@media print {
+   @media print {
     *,
     *:before,
     *:after {
         background: transparent !important;
         color: #000 !important;
         /* Black prints faster:
-                                          http://www.sanbeiji.com/archives/953 */
+        http://www.sanbeiji.com/archives/953 */
         box-shadow: none !important;
         text-shadow: none !important;
     }
@@ -292,8 +311,8 @@ textarea {
      * Don't show links that are fragment identifiers,
      * or use the `javascript:` pseudo protocol
      */
-    a[href^="#"]:after,
-    a[href^="javascript:"]:after {
+     a[href^="#"]:after,
+     a[href^="javascript:"]:after {
         content: "";
     }
 
@@ -307,7 +326,7 @@ textarea {
      * Printing Tables:
      * http://css-discuss.incutio.com/wiki/Printing_Tables
      */
-    thead {
+     thead {
         display: table-header-group;
     }
 
