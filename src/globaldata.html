@@ -602,8 +602,8 @@ var foo = {
 
 
     var testdaten = {
-       "dhe":[
-       {
+     "dhe":[
+     {
         "keysize": "256",
         "size": 312,
     },
@@ -640,8 +640,8 @@ var foo = {
 
    // Sample Data, this is ja required json format, that c3 requires
    var testdaten = {
-       "dhe":[
-       {
+     "dhe":[
+     {
         "keysize": "256",
         "size": 312,
         "percent": 3,
@@ -666,11 +666,23 @@ var foo = {
           "percent": 15,
       },
 
-      ]
+      ],
 
-  };
+      "pfs":[
+      {
+        "PFS: " : "PFS enabled",
+        "amount": 80,
+    },
+    {
+        "PFS: " : "PFS disabled",
+        "amount": 80,
+    }
+    ]
 
-  var chart = c3.generate({
+};
+
+var chart = c3.generate({
+    bindto: '#chart',
     legend:{
         show:false,
     },
@@ -705,15 +717,17 @@ bar: {
 
 });
 
+
+
   // Second chart with multidimensinonal Array. I didn't figure out how we can use the additional y-axis 
   // in the first chart
 
   var charty2 = c3.generate({
     bindto: '#charty2',
-      size: {
+    size: {
       width: 640
   },
-    data: {
+  data: {
       columns: [
       ['key-size', 634,  21254, 1432, 253542, 11343, 132543],
       ['percent', 1, 10, 2, 80, 6, 20 ],
@@ -723,19 +737,19 @@ bar: {
         percent: 'line',
     },
     axes: {
-     'percent': 'y2'
- },
+       'percent': 'y2'
+   },
 },
 axis: {
     x: {
-     type: 'category',
-     categories: ['256', '512', '768', '1024', '1536', '2048']
- },
- y: {
-  label: {
-    text: 'Counts',
-    position: 'outer-middle'
-}
+       type: 'category',
+       categories: ['256', '512', '768', '1024', '1536', '2048']
+   },
+   y: {
+      label: {
+        text: 'Counts',
+        position: 'outer-middle'
+    }
 },
 y2: {
   show: true,
@@ -751,6 +765,21 @@ min: 0
 
 });
 
+var test_array_JSONs = [
+    {"PFS enabled": 80, "PFS Disabled": 20},
+];
+
+
+var donutChart = c3.generate ({
+    bindto: '#pie',
+    data: {
+        json: test_array_JSONs,
+        keys: {
+            value: ['PFS enabled', 'PFS Disabled']
+        },
+        type: 'pie'
+    }
+});
 
 
 };
@@ -773,6 +802,11 @@ min: 0
         <div id="chart"></div>
         With 2 Y-axes
         <div id="charty2"></div>
+
+        <h2>How many TLS-Server support perfect forward secrecy(PFS)?</h2>
+
+        <div id="pie"></div>
+
     </div>
 
 </body>
