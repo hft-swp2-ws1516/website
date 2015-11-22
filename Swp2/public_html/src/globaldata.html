@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Global Statistic TLS Handshake</title>
+    <!-- Load c3.css -->
+    <link href="js/c3-0.4.10/c3.css" rel="stylesheet" type="text/css">
+    <!-- Load d3.js and c3.js -->
+    <script src="js/c3-0.4.10/d3.min.js" charset="utf-8"></script>
+    <script src="js/c3-0.4.10/c3.min.js"></script>
+    <!-- JQuery CDN -->
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- Stylesheets-->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<script>
+// Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
+window.onload = function () {
+
+   // Sample Data, this is ja required json format, that c3 requires
+   var testdaten = {
+       "dhe":[
+       {
+        "keysize": "256",
+        "size": 312,
+        "percent": 3,
+    },
+    {
+        "keysize": "512",
+        "size": 31232,
+        "percent": 12,
+    },
+    {
+      "keysize": "768",
+      "size": 6534,
+      "percent": 20,    },
+      {
+          "keysize": "1024",
+          "size": 256434,
+          "percent": 80,
+      },
+      {
+          "keysize": "2048",
+          "size": 65100,
+          "percent": 15,
+      },
+
+      ],
+
+      "pfs":[
+      {
+        "PFS: " : "PFS enabled",
+        "amount": 80,
+    },
+    {
+        "PFS: " : "PFS disabled",
+        "amount": 80,
+    }
+    ]
+
+};
+
+var test_array_JSONs = [
+{"PFS enabled": 80, "PFS Disabled": 20},
+];
+
+/*
+* All in one Chart. 
+*/
+var chart = c3.generate({
+    bindto: '#chart',
+    legend:{
+        show:true,
+    },
+    size: {
+      width: 640
+  },
+  data: {
+    labels:true,
+    type: 'bar',
+    json: testdaten.dhe,
+    keys: {
+        x: 'keysize',
+        value: ['size']
+    },
+
+},
+
+axis: {
+    x: {
+        type: 'category',
+
+    },
+
+
+},
+
+bar: {
+    width: {
+        ratio: 0.6
+    }
+},
+zoom: {
+  enabled: true
+},
+
+});
+
+  /*
+  * Load PFS-Pie-Chart function. 
+  */
+
+  $("#loadPFS").click( function()
+  { 
+     chart.load({
+        json: test_array_JSONs,
+        keys: {
+            value: ['PFS enabled', 'PFS Disabled']
+        },
+        type: 'pie',
+        unload: chart.columns,
+
+    });
+ }
+ );
+
+   /*
+  * Load DHE-Parameter-Chart function with one Y-Axis. 
+  */
+
+  $("#loadDHEParameter").click( function()
+  { 
+     chart.load({
+         type: 'bar',
+         json: testdaten.dhe,
+         keys: {
+            x: 'keysize',
+            value: ['size']
+        },
+
+        unload: chart.columns,
+
+    });
+ }
+ );
+
+  // !! The following charts are only for test purposes !!
+  // Second chart with multidimensinonal Array. I didn't figure out how we can use the additional y-axis 
+  // in the first chart
+
+  var charty2 = c3.generate({
+    bindto: '#charty2',
+    size: {
+      width: 640
+  },
+  data: {
+      columns: [
+      ['key-size', 634,  21254, 1432, 253542, 11343, 132543],
+      ['percent', 1, 10, 2, 80, 6, 20 ],
+      ],
+      type: 'bar',
+      types: {
+        percent: 'line',
+    },
+    axes: {
+     'percent': 'y2'
+ },
+},
+axis: {
+    x: {
+     type: 'category',
+     categories: ['256', '512', '768', '1024', '1536', '2048']
+ },
+ y: {
+  label: {
+    text: 'Counts',
+    position: 'outer-middle'
+}
+},
+y2: {
+  show: true,
+  label: {
+    text: 'In percent',
+    position: 'outer-middle'
+},
+max: 100,
+min: 0
+}
+}
+
+
+});
+
+
+  var donutChart = c3.generate ({
+    bindto: '#pie',
+    data: {
+        json: test_array_JSONs,
+        keys: {
+            value: ['PFS enabled', 'PFS Disabled']
+        },
+        type: 'pie'
+    }
+});
+
+
+
+
+};
+</script>
+
+<body>
+
+    <div class="header">
+        <ul class="menu">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="globaldata.html">Global Statistics</a></li>
+            <li><a href="crawler.html">World Map</a></li>
+            <li><a href="crawlDemand.html">Analyze Me</a></li>
+            <li><a href="credits.html">CREDITS</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+    </div>
+    <div class="content_wrapper">
+        <h2 >Which DHE parameter key-size do the TLS Server prefer?</h2>
+        <div id="chart"></div>
+        <button id="loadPFS">PFS</button>
+        <button id="loadDHEParameter">DHE-Parameter</button>
+        <br>
+        With 2 Y-axes
+        <div id="charty2"></div>
+
+        <h2>How many TLS-Server support perfect forward secrecy(PFS)?</h2>
+
+        <div id="pie"></div>
+
+    </div>
+
+</body>
+
+</html>
