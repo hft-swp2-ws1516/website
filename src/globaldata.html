@@ -4,7 +4,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Global Statistic TLS Handshake</title>
+        <title>TLS analyzer</title>
         <!-- Load c3.css -->
         <link href="js/c3-0.4.10/c3.css" rel="stylesheet" type="text/css">
         <!-- Load d3.js and c3.js -->
@@ -229,7 +229,7 @@
                         </fieldset>
                         <fieldset>
                             <legend>Key Exchange and Authentication</legend>
-                            <input id="filterKeyExAndAuth" list="keyExAuth">
+                            <input id="filterKeyExAndAuth" list="keyExAuth" onblur="manageFilterSelection()">
                             <datalist id="keyExAuth">
                                 <option value="RSA">
                                 <option value="DH_RSA">
@@ -255,7 +255,7 @@
                         </fieldset>
                         <fieldset>
                             <legend>Bulk Cipher and Key Length (in bits)</legend>
-                            <input id="filterCipher" list="cipher">
+                            <input id="filterCipher" list="cipher" onblur="manageFilterSelection()">
                             <datalist id="cipher">
                                 <option value="AES_GCM">
                                 <option value="AES_CCM">
@@ -274,7 +274,7 @@
                                 <option value="RC4">
                                 <option value="none">
                             </datalist>
-                            <input id="filterKeyLen" list="keyLen">
+                            <input id="filterKeyLen" list="keyLen" onblur="manageFilterSelection()">
                             <datalist id="keyLen">
                                 <option value="40">
                                 <option value="56">
@@ -285,7 +285,7 @@
                         </fieldset>
                         <fieldset>
                             <legend>Message Authenticity</legend>
-                            <input id="filterMsgAuth" list="msgAuth">
+                            <input id="filterMsgAuth" list="msgAuth" onblur="manageFilterSelection()">
                             <datalist id="msgAuth">
                                 <option value="MD5">
                                 <option value="SHA1">
@@ -305,8 +305,9 @@
                     </fieldset>
                 </form>
             </div>
-            <h2 >Which DHE parameter key-size do the TLS Server prefer?</h2>
+            
             <div id="charts">
+                <h2 >Which DHE parameter key-size do the TLS Server prefer?</h2>
                 <button id="loadPFS">PFS</button>
                 <button id="loadDHEParameter">DHE-Parameter</button>
                 <br>

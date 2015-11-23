@@ -2,17 +2,14 @@
 
 function manageFilterSelection() {
 
-    var keyExAndAuthList = document.getElementById("keyExAuth");
-    var cipherList = document.getElementById("cipher");
     var cipherSelection = document.getElementById("filterCipher").value;
-    var keyLenList = document.getElementById("keyLen");
-    var msgAuthList = document.getElementById("msgAuth").options;
     var protocolSelection = document.getElementById("filterProtocol").value;
-
-    keyExAndAuthList.innerHTML = getKeyAndAuth(protocolSelection);
-    cipherList.innerHTML = getCiphers(protocolSelection);
-    keyLenList.innerHTML = getKeyLengths(cipherSelection);
-
+    
+    document.getElementById("keyExAuth").innerHTML = getKeyAndAuth(protocolSelection);
+    document.getElementById("cipher").innerHTML = getCiphers(protocolSelection);
+    document.getElementById("keyLen").innerHTML = getKeyLengths(protocolSelection, cipherSelection);
+    document.getElementById("msgAuth").innerHTML = getMsgAuth(protocolSelection);
+    
 }
 
 function resetFilters() {
@@ -20,8 +17,7 @@ function resetFilters() {
     document.getElementById("keyExAuth").innerHTML = getKeyAndAuth("all");
     document.getElementById("cipher").innerHTML = getCiphers("all");
     document.getElementById("keyLen").innerHTML = getKeyLengths("all");
-    var msgAuthList = document.getElementById("msgAuth");
-
+    document.getElementById("msgAuth").innerHTML = getMsgAuth("all");
 
 }
 
@@ -35,7 +31,8 @@ function getKeyAndAuth(protocolSelection) {
                       <option value=\"DHE_RSA\">\n\
                       <option value=\"DH_DSS\">\n\
                       <option value=\"DHE_DSS\">";
-    } else if (protocolSelection === "TLS 1.0" || protocolSelection === "TLS 1.1" || protocolSelection === "TLS 1.2") {
+    } else if (protocolSelection === "TLS 1.0" || protocolSelection === "TLS 1.1" 
+            || protocolSelection === "TLS 1.2") {
         return "<option value=\"RSA\">\n\
                      <option value=\"DH_RSA\">\n\
                      <option value=\"DHE_RSA\">\n\
@@ -150,7 +147,6 @@ function getCiphers(protocolSelection) {
                                 <option value=\"RC4\">\n\
                                 <option value=\"none\">";
     }
-
 }
 
 function getKeyLengths(protocolSelection, cipherSelection) {
@@ -167,12 +163,51 @@ function getKeyLengths(protocolSelection, cipherSelection) {
     } else if (cipherSelection === "GOST_28147-89_CNT") {
         return "<option value=\"256\">";
     } else if (cipherSelection === "DES_CBC") {
-        return "<option value=\"40\">\n\
+        if (protocolSelection === "TLS 1.1") {
+            return "<option value=\"56\">";
+        } else {
+            return "<option value=\"40\">\n\
                 <option value=\"56\">";
+        }
     } else if (cipherSelection === "RC2_CBC") {
         return "<option value=\"40\">";
-    }else if(cipherSelection === "ChaCha_20-POLY1305"){
+    } else if (cipherSelection === "ChaCha_20-POLY1305") {
         return "<option value=\"256\">";
+    } else if (cipherSelection === "RC4") {
+        if (protocolSelection === "TLS 1.1" || protocolSelection === "TLS 1.2") {
+            return "<option value=\"128\">";
+        } else {
+            return "option value=\"40\">\n\
+                    option value=\"128\">";
+        }
+    } else {
+        return "<option value=\"40\">\n\
+                <option value=\"56\">\n\
+                <option value=\"112\">\n\
+                <option value=\"128\">\n\
+                <option value=\"256\">";
+    }
+
+}
+
+function getMsgAuth(protocolSelection) {
+
+    if (protocolSelection === "SSL 2.0") {
+        return "<option value=\"MD5\">";
+    } else if (protocolSelection === "SSL 3.0" || protocolSelection === "TLS 1.0"
+            || protocolSelection === "TLS 1.1") {
+        return "<option value=\"MD5\">\n\
+                <option value=\"SHA1\">\n\
+                <option value=\"GOST_28147-89_IMIT\">\n\
+                <option value=\"GOST_R34.11-94\">";
+    } else {
+        return "<option value=\"MD5\">\n\
+                <option value=\"SHA1\">\n\
+                <option value=\"SHA256\">\n\
+                <option value=\"SHA384\">\n\
+                <option value=\"AEAD\">\n\
+                <option value=\"GOST_28147-89_IMIT\">\n\
+                <option value=\"GOST_R34.11-94\">";
     }
 
 }
