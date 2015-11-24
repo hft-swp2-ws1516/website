@@ -18,30 +18,27 @@
         // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
         window.onload = function () {
 
-
-
-
-
-
-
+            // helper function for Timeslider
             function timestamp(str){
                 return new Date(str).getTime();   
             }
-            // noUiSlider -> for selecting a timespan for displaying changes
 
+            // noUiSlider -> for selecting a timespan for displaying changes
             var dateSlider = document.getElementById('slider-date');
 
             noUiSlider.create(dateSlider, {
                 connect: true,
                 range: {
-                 min: timestamp('2015-10'),
-                 max: timestamp('2016')
+                 // Range is from where the project started to the current date
+                 min: timestamp('2015-10-15'),
+                 max: new Date().getTime()
              },
-                // Steps of one week
-                step: 30 * 24 * 60 * 60 * 1000,
+                // Steps of one month 
+                // (365.25d/y ) / 12 = 30,4375
+                step: 30.4375 * 24 * 60 * 60 * 1000,
 
                 // Two more timestamps indicate the handle starting positions.
-                start: [ timestamp('2015-10'), timestamp('2015-11') ],
+                start: [ new Date().getTime(), new Date().getTime() ],
             });
 
             // Create a list of day and monthnames.
@@ -60,8 +57,7 @@
 
              // Create a string representation of the date.
              function formatDate ( date ) {
-                return weekdays[date.getDay()] + ", " +
-                date.getDate() + nth(date.getDate()) + " " +
+                return  date.getDate() + nth(date.getDate()) + " " +
                 months[date.getMonth()] + " " +
                 date.getFullYear();
             }
@@ -78,19 +74,18 @@
             });
 
 
-
-
            // Append a suffix to dates.
-        // Example: 23 => 23rd, 1 => 1st.
-        function nth (d) {
-          if(d>3 && d<21) return 'th';
-          switch (d % 10) {
-            case 1:  return "st";
-            case 2:  return "nd";
-            case 3:  return "rd";
-            default: return "th";
+           // Example: 23 => 23rd, 1 => 1st.
+           function nth (d) {
+              if(d>3 && d<21) return 'th';
+              switch (d % 10) {
+                case 1:  return "st";
+                case 2:  return "nd";
+                case 3:  return "rd";
+                default: return "th";
+            }
         }
-    }
+
 
 
 
@@ -99,45 +94,53 @@
                 "dhe": [
                 {
                     "keysize": "256",
-                    "size": 312,
-                    "percent": 3,
+                    "size": 3123,
+                    "sizenew": 3320,
+                    "percent": 0.5,
+
                 },
                 {
                     "keysize": "512",
                     "size": 31232,
-                    "percent": 12,
+                    "sizenew": 29000,
+                    "percent": -0.4,
                 },
                 {
                     "keysize": "768",
                     "size": 6534,
-                    "percent": 20, },
-                    {
-                        "keysize": "1024",
-                        "size": 256434,
-                        "percent": 80,
-                    },
-                    {
-                        "keysize": "2048",
-                        "size": 65100,
-                        "percent": 15,
-                    },
-                    ],
-                    "pfs": [
-                    {
-                        "PFS: ": "PFS enabled",
-                        "amount": 80,
-                    },
-                    {
-                        "PFS: ": "PFS disabled",
-                        "amount": 80,
-                    }
-                    ]
+                    "sizenew": 6203,
+                    "percent": -0.1, 
+                },
+                {
+                    "keysize": "1024",
+                    "size": 256434,
+                    "sizenew": 270323,
+                    "percent": 3,
+                },
+                {
+                    "keysize": "2048",
+                    "size": 65100,
+                    "sizenew": 124303,
+                    "percent": 50,
+                },
+                ],
+                "pfs": [
+                {
+                    "PFS: ": "PFS enabled",
+                    "amount": 80,
+                },
+                {
+                    "PFS: ": "PFS disabled",
+                    "amount": 80,
+                }
+                ]
 
-                };
+            };
 
-                var test_array_JSONs = [
-                {"PFS enabled": 80, "PFS Disabled": 20},
-                ];
+            var test_array_JSONs = [
+            {"PFS enabled": 80, "PFS Disabled": 20},
+            ];
+
 
             /*
              * All in one Chart. 
@@ -156,21 +159,33 @@
                     json: testdaten.dhe,
                     keys: {
                         x: 'keysize',
-                        value: ['size']
+                        value: ['size', 'sizenew', 'percent']
+                    },
+                    types: {
+                        percent: 'line',
+                    },
+                    axes: {
+                        'percent': 'y2'
                     },
                 },
                 axis: {
                     x: {
                         type: 'category',
                     },
+                    y2: {
+                        show: true,
+                        label: {
+                            text: 'In percent',
+                            position: 'outer-middle'
+                        },
+                        max: 100,
+                        min: 0
+                    }
                 },
                 bar: {
                     width: {
                         ratio: 0.6
                     }
-                },
-                zoom: {
-                    enabled: true
                 },
             });
 
@@ -190,6 +205,31 @@
                 });
             }
             );
+
+
+             // This is called when the reload button is clicked!
+
+             $("#applytimespan").click(function ()
+             {
+                var start = dateSlider.noUiSlider.get();
+                if (start[0] == start[1]) { 
+                   chart.load({
+                    type: 'bar',
+                    json: testdaten.dhe,
+                    keys: {
+                        x: 'keysize',
+                        value: ['size']
+                    },
+                    unload: chart.columns,
+                });
+               }
+               else{
+                alert("Not Yet implemented");
+            }
+        }
+        );
+
+
 
             /*
              * Load DHE-Parameter-Chart function with one Y-Axis. 
@@ -272,6 +312,10 @@ var donutChart = c3.generate({
 
 
 };
+</script>
+
+<script type="text/javascript">
+
 </script>
 
 <body>
@@ -652,14 +696,16 @@ var donutChart = c3.generate({
             <button id="loadPFS">PFS</button>
             <button id="loadDHEParameter">DHE-Parameter</button>
             <div id="slider-date"></div>
-            <span id="event-start"></span>
-            <span id="event-end"></span>
+            Start:<span id="event-start"></span><br>
+            End:<span id="event-end"></span> <br>
+            <button onclick="applytimespan()" id="applytimespan">Reload</button>
             <br>
             <br>
             <h2 >Which DHE parameter key-size do the TLS Server prefer?</h2>
             <br>
             With 2 Y-axes
             <div id="charty2"></div>
+            <div id="chart_panel"></div>
 
             <h2>How many TLS-Server support perfect forward secrecy(PFS)?</h2>
 
