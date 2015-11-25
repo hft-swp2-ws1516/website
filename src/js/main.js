@@ -1,6 +1,5 @@
-<script>
 
-    d3.csv("population.csv", function (err, data) {
+     d3.csv("population.csv", function (err, data) {
 
          var config = {
         "data0": "Country (or dependent territory)",
@@ -216,5 +215,3 @@
     d3.select(self.frameElement).style("height", height + "px");
 });
 
-</
-script >;
