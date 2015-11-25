@@ -11,7 +11,8 @@
     <!-- Load c3.css -->
     <link href="js/c3-0.4.10/c3.css" rel="stylesheet" type="text/css">
     <!-- Stylesheets-->
-    <link rel="stylesheet" href="css/statistics.css"> 
+    <link rel="stylesheet" href="css/statistics.css">
+    <link href="css/site.css" rel="stylesheet">
 </head>
 
 <script>
@@ -20,7 +21,7 @@
 
             // helper function for Timeslider
             function timestamp(str){
-                return new Date(str).getTime();   
+                return new Date(str).getTime();
             }
 
             // noUiSlider -> for selecting a timespan for displaying changes
@@ -33,7 +34,7 @@
                  min: timestamp('2015-10-15'),
                  max: new Date().getTime()
              },
-                // Steps of one month 
+                // Steps of one month
                 // (365.25d/y ) / 12 = 30,4375
                 step: 30.4375 * 24 * 60 * 60 * 1000,
 
@@ -109,7 +110,7 @@
                     "keysize": "768",
                     "size": 6534,
                     "sizenew": 6203,
-                    "percent": -0.1, 
+                    "percent": -0.1,
                 },
                 {
                     "keysize": "1024",
@@ -143,7 +144,7 @@
 
 
             /*
-             * All in one Chart. 
+             * All in one Chart.
              */
              var chart = c3.generate({
                 bindto: '#chart',
@@ -190,7 +191,7 @@
             });
 
             /*
-             * Load PFS-Pie-Chart function. 
+             * Load PFS-Pie-Chart function.
              */
 
              $("#loadPFS").click(function ()
@@ -212,7 +213,7 @@
              $("#applytimespan").click(function ()
              {
                 var start = dateSlider.noUiSlider.get();
-                if (start[0] == start[1]) { 
+                if (start[0] == start[1]) {
                    chart.load({
                     type: 'bar',
                     json: testdaten.dhe,
@@ -232,7 +233,7 @@
 
 
             /*
-             * Load DHE-Parameter-Chart function with one Y-Axis. 
+             * Load DHE-Parameter-Chart function with one Y-Axis.
              */
 
              $("#loadDHEParameter").click(function ()
@@ -250,7 +251,7 @@
             );
 
             // !! The following charts are only for test purposes !!
-            // Second chart with multidimensinonal Array. I didn't figure out how we can use the additional y-axis 
+            // Second chart with multidimensinonal Array. I didn't figure out how we can use the additional y-axis
             // in the first chart
 
             var charty2 = c3.generate({
@@ -314,20 +315,14 @@ var donutChart = c3.generate({
 };
 </script>
 
-<script type="text/javascript">
 
-</script>
 
 <body>
 
-    <div class="header">
-        <ul class="headerMenu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="globaldata.html">Global Statistics</a></li>
-            <li><a href="crawlDemand.html">Analyse Me</a></li>
-        </ul>
-    </div>
-    <div class="content_wrapper">
+<!-- Use this for the new menuitems. If they are any changes just remember you should change the menu.js file into js-folder
+        and the menu item will display dynamicly-->
+<nav id="nav01"></nav>
+    <div id="main">
         <div>
             <form id="filterBox" name="filterBox" action="js/filterData.js" method="POST" onsubmit="applyFilters()">
                 <fieldset>
@@ -711,7 +706,7 @@ var donutChart = c3.generate({
 
             <div id="pie"></div>
         </div>
-
+    </div>
         <!-- Skripts -->
         <!-- Load d3.js and c3.js -->
         <script src="js/c3-0.4.10/d3.min.js" charset="utf-8"></script>
@@ -722,7 +717,7 @@ var donutChart = c3.generate({
         <script type="text/javascript" src="js/filterData.js"></script>
         <!-- noUislider -->
         <script type="text/javascript" src="js/nouislider.min.js"></script>
-
-    </body>
-
-    </html>
+        <!-- for the menu -->
+        <script src="js/menu.js"></script>
+</body>
+</html>
