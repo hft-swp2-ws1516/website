@@ -13,6 +13,8 @@
     <!-- Stylesheets-->
     <link rel="stylesheet" href="css/statistics.css">
     <link href="css/site.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <script>
@@ -321,7 +323,7 @@ var donutChart = c3.generate({
 
 <!-- Use this for the new menuitems. If they are any changes just remember you should change the menu.js file into js-folder
         and the menu item will display dynamicly-->
-<nav id="nav01"></nav>
+<nav id="nav01" class="navbar navbar-default navbar-fixed-top"></nav>
     <div id="main">
         <div>
             <form id="filterBox" name="filterBox" action="js/filterData.js" method="POST" onsubmit="applyFilters()">
