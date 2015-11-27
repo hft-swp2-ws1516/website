@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>TLS analyzer</title>
@@ -17,314 +15,11 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<script>
-        // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
-        window.onload = function () {
-
-            // helper function for Timeslider
-            function timestamp(str){
-                return new Date(str).getTime();
-            }
-
-            // noUiSlider -> for selecting a timespan for displaying changes
-            var dateSlider = document.getElementById('slider-date');
-
-            noUiSlider.create(dateSlider, {
-                connect: true,
-                range: {
-                 // Range is from where the project started to the current date
-                 min: timestamp('2015-10-15'),
-                 max: new Date().getTime()
-             },
-                // Steps of one month
-                // (365.25d/y ) / 12 = 30,4375
-                step: 30.4375 * 24 * 60 * 60 * 1000,
-
-                // Two more timestamps indicate the handle starting positions.
-                start: [ new Date().getTime(), new Date().getTime() ],
-            });
-
-            // Create a list of day and monthnames.
-            var
-            weekdays = [
-            "Sunday", "Monday", "Tuesday",
-            "Wednesday", "Thursday", "Friday",
-            "Saturday"
-            ],
-            months = [
-            "January", "February", "March",
-            "April", "May", "June", "July",
-            "August", "September", "October",
-            "November", "December"
-            ];
-
-             // Create a string representation of the date.
-             function formatDate ( date ) {
-                return  date.getDate() + nth(date.getDate()) + " " +
-                months[date.getMonth()] + " " +
-                date.getFullYear();
-            }
-
-
-
-            var dateValues = [
-            document.getElementById('event-start'),
-            document.getElementById('event-end')
-            ];
-
-            dateSlider.noUiSlider.on('update', function( values, handle ) {
-                dateValues[handle].innerHTML = formatDate(new Date(+values[handle]));
-            });
-
-
-           // Append a suffix to dates.
-           // Example: 23 => 23rd, 1 => 1st.
-           function nth (d) {
-              if(d>3 && d<21) return 'th';
-              switch (d % 10) {
-                case 1:  return "st";
-                case 2:  return "nd";
-                case 3:  return "rd";
-                default: return "th";
-            }
-        }
-
-
-
-
-            // Sample Data, this is ja required json format, that c3 requires
-            var testdaten = {
-                "dhe": [
-                {
-                    "keysize": "256",
-                    "size": 3123,
-                    "sizenew": 3320,
-                    "percent": 0.5,
-
-                },
-                {
-                    "keysize": "512",
-                    "size": 31232,
-                    "sizenew": 29000,
-                    "percent": -0.4,
-                },
-                {
-                    "keysize": "768",
-                    "size": 6534,
-                    "sizenew": 6203,
-                    "percent": -0.1,
-                },
-                {
-                    "keysize": "1024",
-                    "size": 256434,
-                    "sizenew": 270323,
-                    "percent": 3,
-                },
-                {
-                    "keysize": "2048",
-                    "size": 65100,
-                    "sizenew": 124303,
-                    "percent": 50,
-                },
-                ],
-                "pfs": [
-                {
-                    "PFS: ": "PFS enabled",
-                    "amount": 80,
-                },
-                {
-                    "PFS: ": "PFS disabled",
-                    "amount": 80,
-                }
-                ]
-
-            };
-
-            var test_array_JSONs = [
-            {"PFS enabled": 80, "PFS Disabled": 20},
-            ];
-
-
-            /*
-             * All in one Chart.
-             */
-             var chart = c3.generate({
-                bindto: '#chart',
-                legend: {
-                    show: true,
-                },
-                size: {
-                    width: 640
-                },
-                data: {
-                    labels: true,
-                    type: 'bar',
-                    json: testdaten.dhe,
-                    keys: {
-                        x: 'keysize',
-                        value: ['size', 'sizenew', 'percent']
-                    },
-                    types: {
-                        percent: 'line',
-                    },
-                    axes: {
-                        'percent': 'y2'
-                    },
-                },
-                axis: {
-                    x: {
-                        type: 'category',
-                    },
-                    y2: {
-                        show: true,
-                        label: {
-                            text: 'In percent',
-                            position: 'outer-middle'
-                        },
-                        max: 100,
-                        min: 0
-                    }
-                },
-                bar: {
-                    width: {
-                        ratio: 0.6
-                    }
-                },
-            });
-
-            /*
-             * Load PFS-Pie-Chart function.
-             */
-
-             $("#loadPFS").click(function ()
-             {
-                chart.load({
-                    json: test_array_JSONs,
-                    keys: {
-                        value: ['PFS enabled', 'PFS Disabled']
-                    },
-                    type: 'pie',
-                    unload: chart.columns,
-                });
-            }
-            );
-
-
-             // This is called when the reload button is clicked!
-
-             $("#applytimespan").click(function ()
-             {
-                var start = dateSlider.noUiSlider.get();
-                if (start[0] == start[1]) {
-                   chart.load({
-                    type: 'bar',
-                    json: testdaten.dhe,
-                    keys: {
-                        x: 'keysize',
-                        value: ['size']
-                    },
-                    unload: chart.columns,
-                });
-               }
-               else{
-                alert("Not Yet implemented");
-            }
-        }
-        );
-
-
-
-            /*
-             * Load DHE-Parameter-Chart function with one Y-Axis.
-             */
-
-             $("#loadDHEParameter").click(function ()
-             {
-                chart.load({
-                    type: 'bar',
-                    json: testdaten.dhe,
-                    keys: {
-                        x: 'keysize',
-                        value: ['size']
-                    },
-                    unload: chart.columns,
-                });
-            }
-            );
-
-            // !! The following charts are only for test purposes !!
-            // Second chart with multidimensinonal Array. I didn't figure out how we can use the additional y-axis
-            // in the first chart
-
-            var charty2 = c3.generate({
-                bindto: '#charty2',
-                size: {
-                    width: 640
-                },
-                data: {
-                    columns: [
-                    ['key-size', 634, 21254, 1432, 253542, 11343, 132543],
-                    ['percent', 1, 10, 2, 80, 6, 20],
-                    ],
-                    type: 'bar',
-                    types: {
-                        percent: 'line',
-                    },
-                    axes: {
-                        'percent': 'y2'
-                    },
-                },
-                axis: {
-                    x: {
-                        type: 'category',
-                        categories: ['256', '512', '768', '1024', '1536', '2048']
-                    },
-                    y: {
-                        label: {
-                            text: 'Counts',
-                            position: 'outer-middle'
-                        }
-                    },
-                    y2: {
-                        show: true,
-                        label: {
-                            text: 'In percent',
-                            position: 'outer-middle'
-                        },
-                        max: 100,
-                        min: 0
-                    }
-                }
-
-
-            });
-
-
-var donutChart = c3.generate({
-    bindto: '#pie',
-    data: {
-        json: test_array_JSONs,
-        keys: {
-            value: ['PFS enabled', 'PFS Disabled']
-        },
-        type: 'pie'
-    }
-});
-
-
-
-
-};
-</script>
-
-
-
 <body>
-
 <!-- Use this for the new menuitems. If they are any changes just remember you should change the menu.js file into js-folder
-        and the menu item will display dynamicly-->
-<nav id="nav01" class="navbar navbar-default navbar-fixed-top"></nav>
-    <div id="main">
+    and the menu item will display dynamicly -->
+    <nav id="nav01" class="navbar navbar-default navbar-fixed-top"></nav>
+    <div class="container">
         <div>
             <form id="filterBox" name="filterBox" action="js/filterData.js" method="POST" onsubmit="applyFilters()">
                 <fieldset>
@@ -709,17 +404,321 @@ var donutChart = c3.generate({
             <div id="pie"></div>
         </div>
     </div>
-        <!-- Skripts -->
-        <!-- Load d3.js and c3.js -->
-        <script src="js/c3-0.4.10/d3.min.js" charset="utf-8"></script>
-        <script src="js/c3-0.4.10/c3.min.js"></script>
-        <!-- JQuery CDN -->
-        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-        <script type="text/javascript" src="js/filterData.js"></script>
-        <!-- noUislider -->
-        <script type="text/javascript" src="js/nouislider.min.js"></script>
-        <!-- for the menu -->
-        <script src="js/menu.js"></script>
+    <!-- Skripts -->
+    <!-- Load d3.js and c3.js -->
+    <script src="js/c3-0.4.10/d3.min.js" charset="utf-8"></script>
+    <script src="js/c3-0.4.10/c3.min.js"></script>
+    <!-- JQuery CDN -->
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- Filter Menu -->
+    <script type="text/javascript" src="js/filterData.js"></script>
+    <!-- noUislider -->
+    <script type="text/javascript" src="js/nouislider.min.js"></script>
+    <!-- for the menu -->
+    <script src="js/menu.js"></script>
+    <script>
+        // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
+        window.onload = function () {
+
+            // helper function for Timeslider
+            function timestamp(str){
+                return new Date(str).getTime();
+            }
+
+            // noUiSlider -> for selecting a timespan for displaying changes
+            var dateSlider = document.getElementById('slider-date');
+
+            noUiSlider.create(dateSlider, {
+                connect: true,
+                range: {
+                 // Range is from where the project started to the current date
+                 min: timestamp('2015-10-15'),
+                 max: new Date().getTime()
+             },
+                // Steps of one month
+                // (365.25d/y ) / 12 = 30,4375
+                step: 30.4375 * 24 * 60 * 60 * 1000,
+
+                // Two more timestamps indicate the handle starting positions.
+                start: [ new Date().getTime(), new Date().getTime() ],
+            });
+
+            // Create a list of day and monthnames.
+            var
+            weekdays = [
+            "Sunday", "Monday", "Tuesday",
+            "Wednesday", "Thursday", "Friday",
+            "Saturday"
+            ],
+            months = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+            ];
+
+             // Create a string representation of the date.
+             function formatDate ( date ) {
+                return  date.getDate() + nth(date.getDate()) + " " +
+                months[date.getMonth()] + " " +
+                date.getFullYear();
+            }
+
+
+            // Span Elements -> The start and end values are displayed there
+            var dateValues = [
+            document.getElementById('event-start'),
+            document.getElementById('event-end')
+            ];
+            // Update Handler -> Updates the span elements
+            dateSlider.noUiSlider.on('update', function( values, handle ) {
+                dateValues[handle].innerHTML = formatDate(new Date(+values[handle]));
+            });
+
+
+           // Append a suffix to dates.
+           // Example: 23 => 23rd, 1 => 1st.
+           function nth (d) {
+              if(d>3 && d<21) return 'th';
+              switch (d % 10) {
+                case 1:  return "st";
+                case 2:  return "nd";
+                case 3:  return "rd";
+                default: return "th";
+            }
+        }
+
+
+
+
+            // Sample Data, this is ja required json format, that c3 requires
+            var testdaten = {
+                "dhe": [
+                {
+                    "keysize": "256",
+                    "size": 3123,
+                    "sizenew": 3320,
+                    "percent": 0.5,
+
+                },
+                {
+                    "keysize": "512",
+                    "size": 31232,
+                    "sizenew": 29000,
+                    "percent": -0.4,
+                },
+                {
+                    "keysize": "768",
+                    "size": 6534,
+                    "sizenew": 6203,
+                    "percent": -0.1,
+                },
+                {
+                    "keysize": "1024",
+                    "size": 256434,
+                    "sizenew": 270323,
+                    "percent": 3,
+                },
+                {
+                    "keysize": "2048",
+                    "size": 65100,
+                    "sizenew": 124303,
+                    "percent": 50,
+                },
+                ],
+                "pfs": [
+                {
+                    "PFS: ": "PFS enabled",
+                    "amount": 80,
+                },
+                {
+                    "PFS: ": "PFS disabled",
+                    "amount": 80,
+                }
+                ]
+
+            };
+
+            var test_array_JSONs = [
+            {"PFS enabled": 80, "PFS Disabled": 20},
+            ];
+
+
+            /*
+             * All in one Chart.
+             */
+             var chart = c3.generate({
+                bindto: '#chart',
+                legend: {
+                    show: true,
+                },
+                size: {
+                    width: 640
+                },
+                data: {
+                    labels: true,
+                    type: 'bar',
+                    json: testdaten.dhe,
+                    keys: {
+                        x: 'keysize',
+                        value: ['size', 'sizenew', 'percent']
+                    },
+                    types: {
+                        percent: 'line',
+                    },
+                    axes: {
+                        'percent': 'y2'
+                    },
+                },
+                axis: {
+                    x: {
+                        type: 'category',
+                    },
+                    y2: {
+                        show: true,
+                        label: {
+                            text: 'In percent',
+                            position: 'outer-middle'
+                        },
+                        max: 100,
+                        min: 0
+                    }
+                },
+                bar: {
+                    width: {
+                        ratio: 0.6
+                    }
+                },
+            });
+
+            /*
+             * Load PFS-Pie-Chart function.
+             */
+
+             $("#loadPFS").click(function ()
+             {
+                chart.load({
+                    json: test_array_JSONs,
+                    keys: {
+                        value: ['PFS enabled', 'PFS Disabled']
+                    },
+                    type: 'pie',
+                    unload: chart.columns,
+                });
+            }
+            );
+
+
+             // This is called when the reload button is clicked!
+
+             $("#applytimespan").click(function ()
+             {
+                // Check if start and end values of the slieder are the same
+                var start = dateSlider.noUiSlider.get();
+                // If yes then get normal Json
+                if (start[0] == start[1]) {
+                   chart.load({
+                    type: 'bar',
+                    json: testdaten.dhe,
+                    keys: {
+                        x: 'keysize',
+                        value: ['size']
+                    },
+                    unload: chart.columns,
+                });
+               }
+               // Otherwise get the two differen json objects, compare, and make a chart
+               else{
+                alert("Not Yet implemented");
+            }
+        }
+        );
+
+
+
+            /*
+             * Load DHE-Parameter-Chart function with one Y-Axis.
+             */
+
+             $("#loadDHEParameter").click(function ()
+             {
+                chart.load({
+                    type: 'bar',
+                    json: testdaten.dhe,
+                    keys: {
+                        x: 'keysize',
+                        value: ['size']
+                    },
+                    unload: chart.columns,
+                });
+            }
+            );
+
+            // !! The following charts are only for test purposes !!
+            // Second chart with multidimensinonal Array. I didn't figure out how we can use the additional y-axis
+            // in the first chart
+
+            var charty2 = c3.generate({
+                bindto: '#charty2',
+                size: {
+                    width: 640
+                },
+                data: {
+                    columns: [
+                    ['key-size', 634, 21254, 1432, 253542, 11343, 132543],
+                    ['percent', 1, 10, 2, 80, 6, 20],
+                    ],
+                    type: 'bar',
+                    types: {
+                        percent: 'line',
+                    },
+                    axes: {
+                        'percent': 'y2'
+                    },
+                },
+                axis: {
+                    x: {
+                        type: 'category',
+                        categories: ['256', '512', '768', '1024', '1536', '2048']
+                    },
+                    y: {
+                        label: {
+                            text: 'Counts',
+                            position: 'outer-middle'
+                        }
+                    },
+                    y2: {
+                        show: true,
+                        label: {
+                            text: 'In percent',
+                            position: 'outer-middle'
+                        },
+                        max: 100,
+                        min: 0
+                    }
+                }
+
+
+            });
+
+
+var donutChart = c3.generate({
+    bindto: '#pie',
+    data: {
+        json: test_array_JSONs,
+        keys: {
+            value: ['PFS enabled', 'PFS Disabled']
+        },
+        type: 'pie'
+    }
+});
+
+
+
+
+};
+</script>
+
 </body>
 </html>
