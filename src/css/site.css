@@ -26,7 +26,6 @@ ul#menu li {
 }
 
 ul#menu li a {
-    background-color: #ffffff;
     text-decoration: none;
     color: #696969;
     /*border-radius: 4px 4px 0 0; */
@@ -41,4 +40,7 @@ ul#menu li a {
 ul#menu li a:hover {
     color: #696969;
     background-color: #f1f1f1;
+}
+.content-wrapper{
+    padding-top: 50px;
 }
