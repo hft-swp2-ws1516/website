@@ -9,5 +9,6 @@ document.getElementById("nav01").innerHTML =
     "<li><a href='index.html'>Home</a></li>" +
     "<li><a href='globaldata.html'>Global</a></li>" +
     "<li><a href='analyze-me.html'>Analyze Me</a></li>" +
+    "<li><a href='allgraphs.html'>All Graphs</a></li>" +
     "</ul>";
 
