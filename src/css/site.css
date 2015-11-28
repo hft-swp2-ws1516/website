@@ -17,12 +17,14 @@ h1 {
 
 ul#menu {
     padding: 0;
-    margin-bottom: 11px;
+    display: inline-block;
+    vertical-align:middle;
 }
 
 ul#menu li {
     display: inline;
     margin-right: 3px;
+
 }
 
 ul#menu li a {
@@ -30,9 +32,11 @@ ul#menu li a {
     color: #696969;
     /*border-radius: 4px 4px 0 0; */
     /* by default the top navbar heigth is 50 px */
-    height: 50px;
+    padding-top: 25px;
+    padding-bottom: 25px;
     width: 100px;
-    display: block;
+    display: inline-block;
+    vertical-align:middle;
     float: left;
     text-align: center;
 }
@@ -42,5 +46,5 @@ ul#menu li a:hover {
     background-color: #f1f1f1;
 }
 .content-wrapper{
-    padding-top: 50px;
+    padding-top: 70px;
 }
