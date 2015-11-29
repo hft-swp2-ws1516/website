@@ -54,22 +54,22 @@
                 <h3 class="panel-title">Select Timespan</h3>
             </div>
             <div class="panel-body">
-               <!-- noUIslider -->
-               Timespan:
-               <div  id="slider-date"></div>
-               <br>
-               Start:<span id="event-start"></span><br>
-               End:<span id="event-end"></span> <br><br>
-               <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
-           </div>
-       </div>
+             <!-- noUIslider -->
+             Timespan:
+             <div  id="slider-date"></div>
+             <br>
+             Start:<span id="event-start"></span><br>
+             End:<span id="event-end"></span> <br><br>
+             <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
+         </div>
+     </div>
 
 
 
-   </div>
+ </div>
 
-   <!-- Graphs -->
-   <div class="col-md-8">
+ <!-- Graphs -->
+ <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-body">
 
@@ -292,6 +292,10 @@
              * Load PFS-Pie-Chart function.
              */
 
+             $.ajaxSetup({
+                timeout: 2000
+            });
+
 
              $("#loadPFS").click(function ()
              {
@@ -308,6 +312,14 @@
                         });
                     } ).error(function() {
                         alert( "Error Loading JSON" );
+                        chart.load({
+                            json: test_array_JSONs,
+                            keys: {
+                                value: ['PFS enabled', 'PFS Disabled']
+                            },
+                            type: 'pie',
+                            unload: chart.columns,
+                        });
                     });
 
                     // empty all elements within the div tag with id dynamic
@@ -340,9 +352,7 @@
 
              $("#loadDHEParameter").click(function ()
              {
-                $.ajaxSetup({
-                    timeout: 2000
-              });
+
                 // Load data from the server using a HTTP GET request
                 // jquery.get is a equivalent to $.ajax({....
                     jQuery.get( "http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function( response ) { 
@@ -357,6 +367,15 @@
                         });
                     } ).error(function() {
                         alert( "Error Loading JSON" );
+                        chart.load({
+                            type: 'bar',
+                            json: testdaten.dhe,
+                            keys: {
+                                x: 'keysize',
+                                value: ['size']
+                            },
+                            unload: chart.columns,
+                        });
                     });
 
                 // takes the dynamic div tag out of the DOM
@@ -371,14 +390,14 @@
 
              $("#ciphersuites").click(function ()
              {
-               chart.load({
-                unload: chart.columns,
-            });
-               $("#dynamic").load("filterciphers.html");
-               $("#dropdownMenu1").html('Cipher Suites <span class="caret"></span>');
+                 chart.load({
+                    unload: chart.columns,
+                });
+                 $("#dynamic").load("filterciphers.html");
+                 $("#dropdownMenu1").html('Cipher Suites <span class="caret"></span>');
 
-           }
-           );
+             }
+             );
 
              var globalChartNumber = 1;
 
