@@ -54,22 +54,22 @@
                 <h3 class="panel-title">Select Timespan</h3>
             </div>
             <div class="panel-body">
-               <!-- noUIslider -->
-               Timespan:
-               <div  id="slider-date"></div>
-               <br>
-               Start:<span id="event-start"></span><br>
-               End:<span id="event-end"></span> <br><br>
-               <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
-           </div>
-       </div>
+             <!-- noUIslider -->
+             Timespan:
+             <div  id="slider-date"></div>
+             <br>
+             Start:<span id="event-start"></span><br>
+             End:<span id="event-end"></span> <br><br>
+             <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
+         </div>
+     </div>
 
 
 
-   </div>
+ </div>
 
-   <!-- Graphs -->
-   <div class="col-md-8">
+ <!-- Graphs -->
+ <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-body">
 
@@ -303,7 +303,9 @@
                             type: 'pie',
                             unload: chart.columns,
                         });
-                    } );
+                     } ).error(function() {
+                        alert( "Error Loading JSON" );
+                    });
 
                     // empty all elements within the div tag with id dynamic
                     $("#dynamic").empty();
@@ -320,7 +322,7 @@
                 // If yes then get normal Json
                 if (start[0] == start[1]) {
                   alert("Not Yet implemented");
-               }
+              }
                // Otherwise get the two differen json objects, compare, and make a chart
                else{
                 alert("Not Yet implemented");
@@ -348,12 +350,13 @@
                             },
                             unload: chart.columns,
                         });
-                    } );
+                    } ).error(function() {
+                        alert( "Error Loading JSON" );
+                    });
 
                 // takes the dynamic div tag out of the DOM
                 $("#dynamic").empty();
                 $("#dropdownMenu1").html('Diffie-Hellman Keygroups <span class="caret"></span>');
-
             }
             );
 
@@ -363,14 +366,14 @@
 
              $("#ciphersuites").click(function ()
              {
-               chart.load({
-                unload: chart.columns,
-            });
-               $("#dynamic").load("filterciphers.html");
-               $("#dropdownMenu1").html('Cipher Suites <span class="caret"></span>');
+                 chart.load({
+                    unload: chart.columns,
+                });
+                 $("#dynamic").load("filterciphers.html");
+                 $("#dropdownMenu1").html('Cipher Suites <span class="caret"></span>');
 
-           }
-           );
+             }
+             );
 
              var globalChartNumber = 1;
 
