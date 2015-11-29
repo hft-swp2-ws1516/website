@@ -89,10 +89,6 @@ textarea {
     z-index: 500;
 }
 
-.content_wrapper{
-    max-width: 1260px;
-    padding: 50px 30px;
-}
 
 .menu, .menu ul , .menu li ,menu a{
     list-style: none;

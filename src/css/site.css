@@ -7,13 +7,6 @@ body {
     padding: 3px;
 }
 
-#main {
-    padding: 5px;
-    padding-left:  15px;
-    padding-right: 15px;
-    background-color: #ffffff;
-    border-radius: 0 0 5px 5px;
-}
 
 h1 {
     font-family: Georgia, serif;
@@ -24,23 +17,34 @@ h1 {
 
 ul#menu {
     padding: 0;
-    margin-bottom: 11px;
+    display: inline-block;
+    vertical-align:middle;
 }
 
 ul#menu li {
     display: inline;
     margin-right: 3px;
+
 }
 
 ul#menu li a {
-    background-color: #ffffff;
-    padding: 10px 20px;
     text-decoration: none;
     color: #696969;
-    border-radius: 4px 4px 0 0;
+    /*border-radius: 4px 4px 0 0; */
+    /* by default the top navbar heigth is 50 px */
+    padding-top: 25px;
+    padding-bottom: 25px;
+    width: 100px;
+    display: inline-block;
+    vertical-align:middle;
+    float: left;
+    text-align: center;
 }
 
 ul#menu li a:hover {
-    color: white;
-    background-color: black;
+    color: #696969;
+    background-color: #f1f1f1;
+}
+.content-wrapper{
+    padding-top: 70px;
 }
