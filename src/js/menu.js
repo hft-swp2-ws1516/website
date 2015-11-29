@@ -20,8 +20,8 @@ document.getElementById("nav01").innerHTML =
 
 // for footer menu
 document.getElementById("footer").innerHTML =
+"<div class='container'>"+ 
 "&copy; TLS Crawler"+
-"<div>"+ 
 "Ein Projekt der HfT Stuttgart."+
 "&#124;<a href='url'>Kontakt</a>"+
 "&#124;<a href='url'>Impressum</a>"+

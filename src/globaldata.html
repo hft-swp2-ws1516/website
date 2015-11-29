@@ -54,22 +54,22 @@
                 <h3 class="panel-title">Select Timespan</h3>
             </div>
             <div class="panel-body">
-             <!-- noUIslider -->
-             Timespan:
-             <div  id="slider-date"></div>
-             <br>
-             Start:<span id="event-start"></span><br>
-             End:<span id="event-end"></span> <br><br>
-             <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
-         </div>
-     </div>
+               <!-- noUIslider -->
+               Timespan:
+               <div  id="slider-date"></div>
+               <br>
+               Start:<span id="event-start"></span><br>
+               End:<span id="event-end"></span> <br><br>
+               <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
+           </div>
+       </div>
 
 
 
- </div>
+   </div>
 
- <!-- Graphs -->
- <div class="col-md-8">
+   <!-- Graphs -->
+   <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-body">
 
@@ -97,6 +97,7 @@
 </div>
 </div>
 </div>
+<footer id="footer"></footer>
 <!-- Skripts are located in the end of the Body tag for faster Page Loading -->
 <!-- for the menu -->
 <script src="js/menu.js"></script>
@@ -305,7 +306,7 @@
                             type: 'pie',
                             unload: chart.columns,
                         });
-                     } ).error(function() {
+                    } ).error(function() {
                         alert( "Error Loading JSON" );
                     });
 
@@ -339,6 +340,9 @@
 
              $("#loadDHEParameter").click(function ()
              {
+                $.ajaxSetup({
+                    timeout: 2000
+              });
                 // Load data from the server using a HTTP GET request
                 // jquery.get is a equivalent to $.ajax({....
                     jQuery.get( "http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function( response ) { 
@@ -367,14 +371,14 @@
 
              $("#ciphersuites").click(function ()
              {
-                 chart.load({
-                    unload: chart.columns,
-                });
-                 $("#dynamic").load("filterciphers.html");
-                 $("#dropdownMenu1").html('Cipher Suites <span class="caret"></span>');
+               chart.load({
+                unload: chart.columns,
+            });
+               $("#dynamic").load("filterciphers.html");
+               $("#dropdownMenu1").html('Cipher Suites <span class="caret"></span>');
 
-             }
-             );
+           }
+           );
 
              var globalChartNumber = 1;
 
