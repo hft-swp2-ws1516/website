@@ -292,14 +292,19 @@
 
              $("#loadPFS").click(function ()
              {
-                chart.load({
-                    json: test_array_JSONs,
-                    keys: {
-                        value: ['PFS enabled', 'PFS Disabled']
-                    },
-                    type: 'pie',
-                    unload: chart.columns,
-                });
+                // Load data from the server using a HTTP GET request
+                // jquery.get is a equivalent to $.ajax({....
+                    jQuery.get( "http://tls.thejetlag.de:1337/api/v0/pfs/overview", function( response ) { 
+                        chart.load({
+                            json: [response],
+                            keys: {
+                                value: ['pfsEnabled', 'pfsDisabled']
+                            },
+                            type: 'pie',
+                            unload: chart.columns,
+                        });
+                    } );
+
                     // empty all elements within the div tag with id dynamic
                     $("#dynamic").empty();
                     $("#dropdownMenu1").html('How many Server supports Perfect Forward Secrecy? <span class="caret"></span>');
@@ -314,15 +319,7 @@
                 var start = dateSlider.noUiSlider.get();
                 // If yes then get normal Json
                 if (start[0] == start[1]) {
-                   chart.load({
-                    type: 'bar',
-                    json: testdaten.dhe,
-                    keys: {
-                        x: 'keysize',
-                        value: ['size']
-                    },
-                    unload: chart.columns,
-                });
+                  alert("Not Yet implemented");
                }
                // Otherwise get the two differen json objects, compare, and make a chart
                else{
@@ -338,15 +335,21 @@
 
              $("#loadDHEParameter").click(function ()
              {
-                chart.load({
-                    type: 'bar',
-                    json: testdaten.dhe,
-                    keys: {
-                        x: 'keysize',
-                        value: ['size']
-                    },
-                    unload: chart.columns,
-                });
+
+                // Load data from the server using a HTTP GET request
+                // jquery.get is a equivalent to $.ajax({....
+                    jQuery.get( "http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function( response ) { 
+                        chart.load({
+                            type: 'bar',
+                            json: response,
+                            keys: {
+                                x: 'kx',
+                                value: ['count', 'kxStrenght']
+                            },
+                            unload: chart.columns,
+                        });
+                    } );
+
                 // takes the dynamic div tag out of the DOM
                 $("#dynamic").empty();
                 $("#dropdownMenu1").html('Diffie-Hellman Keygroups <span class="caret"></span>');
@@ -401,7 +404,6 @@
             */
 
             var random = Math.floor((Math.random() * 3) + 1); 
-
             loadChartbyNumber(random);
 
             /*
