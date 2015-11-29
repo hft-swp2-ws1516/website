@@ -72,13 +72,19 @@
    <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-body">
-          <div id="charts">
+
+        <div id="charts">
             <!-- The charts are displayed here -->
             <div id="chart"></div>
+            <!-- display next or previous chart -->
             <nav>
               <ul class="pager">
-                <li id="previouschart"><a href="#">Previous</a></li>
-                <li id="nextchart"><a href="#">Next</a></li>
+                <button id="previouschart" type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                </button>
+                <button id="nextchart" type="button" class="btn btn-default btn-lg">
+                    <span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </button>
             </ul>
         </nav>
     </div>
@@ -177,8 +183,6 @@
                 default: return "th";
             }
         }
-
-
 
 
             // Sample Data, this is ja required json format, that c3 requires
@@ -296,14 +300,14 @@
                     type: 'pie',
                     unload: chart.columns,
                 });
-                         // takes the dynamic div tag out of the DOM
-                         $("#dynamic").empty();
-                     }
-                     );
+                    // empty all elements within the div tag with id dynamic
+                    $("#dynamic").empty();
+                    $("#dropdownMenu1").html('How many Server supports Perfect Forward Secrecy? <span class="caret"></span>');
+                }
+                );
 
 
              // This is called when the reload button is clicked!
-
              $("#applytimespan").click(function ()
              {
                 // Check if start and end values of the slieder are the same
@@ -345,9 +349,10 @@
                 });
                 // takes the dynamic div tag out of the DOM
                 $("#dynamic").empty();
+                $("#dropdownMenu1").html('Diffie-Hellman Keygroups <span class="caret"></span>');
+
             }
             );
-
 
             /*
              * Load Cipher Suites Chart
@@ -359,27 +364,73 @@
                 unload: chart.columns,
             });
                $("#dynamic").load("filterciphers.html");
+               $("#dropdownMenu1").html('Cipher Suites <span class="caret"></span>');
+
            }
            );
+
+             var globalChartNumber = 1;
+
+
+
+             function loadChartbyNumber(number){
+
+                switch(number){
+                    case 1:
+                    $( "#loadPFS" ).trigger( "click" );
+                    globalChartNumber = 1;
+                    break;
+                    case 2:
+                    $( "#loadDHEParameter" ).trigger( "click" );
+                    globalChartNumber = 2;
+                    break;
+                    case 3:
+                    $( "#ciphersuites" ).trigger( "click" );
+                    globalChartNumber = 3;
+                    break;
+                    default:
+                    alert("Problem with loading Chart");
+                }
+            }
+
+
+
 
             /*
             * randomly load a chart
             */
 
             var random = Math.floor((Math.random() * 3) + 1); 
-            switch(random){
-                case 1:
-                $( "#loadPFS" ).trigger( "click" );
-                break;
-                case 2:
-                $( "#loadDHEParameter" ).trigger( "click" );
-                break;
-                case 3:
-                $( "#ciphersuites" ).trigger( "click" );
-                break;
-                default:
-            }
 
+            loadChartbyNumber(random);
+
+            /*
+            * Select previous or next chart by decreasing or increasing the globalnumber
+            */
+
+            $("#previouschart").click(function ()
+            {
+              globalChartNumber--;
+              if (globalChartNumber <= 0 ) {
+                globalChartNumber = 1;
+                return;
+            };
+            loadChartbyNumber(globalChartNumber);
+
+        }
+        );
+
+            $("#nextchart").click(function ()
+            {
+                globalChartNumber++;
+                if (globalChartNumber > 3 ) {
+                    globalChartNumber = 3;
+                    return;
+                };
+                loadChartbyNumber(globalChartNumber);
+
+            }
+            );
 
 
             // !! The following charts are only for test purposes !!
