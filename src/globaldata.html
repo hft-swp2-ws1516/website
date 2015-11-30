@@ -45,7 +45,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Content will be loaded dynamically exterm html pages with .load() function -->
             <div id="dynamic"></div>
 
@@ -63,8 +62,6 @@
              <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
          </div>
      </div>
-
-
 
  </div>
 
@@ -303,7 +300,7 @@
                 // jquery.get is a equivalent to $.ajax({....
                     jQuery.get( "http://tls.thejetlag.de:1337/api/v0/pfs/overview", function( response ) { 
                         chart.load({
-                            json: [response],
+                            json: response,
                             keys: {
                                 value: ['pfsEnabled', 'pfsDisabled']
                             },
@@ -358,7 +355,7 @@
                     jQuery.get( "http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function( response ) { 
                         chart.load({
                             type: 'bar',
-                            json: response,
+                            json: response[0].distribution,
                             keys: {
                                 x: 'kx',
                                 value: ['count', 'kxStrenght']
