@@ -48,3 +48,7 @@ ul#menu li a:hover {
 .content-wrapper{
     padding-top: 70px;
 }
+
+.ui-datepicker-calendar {
+    display: none;
+    }
