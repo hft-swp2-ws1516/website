@@ -4,441 +4,137 @@
     <meta charset="UTF-8">
     <title>TLS analyzer</title>
     <!-- CSS Stylesheets -->
-    <!-- noUISlider c3.css -->
-    <link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
-    <!-- Load c3.css -->
-    <link href="js/c3-0.4.10/c3.css" rel="stylesheet" type="text/css">
-    <!-- Stylesheets-->
     <link rel="stylesheet" href="css/statistics.css">
     <link href="css/site.css" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Load c3.css -->
+    <link href="js/c3-0.4.10/c3.css" rel="stylesheet" type="text/css">
+    <!-- noUISlider c3.css -->
+    <link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
+    <!-- jquery ui css -->
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
 </head>
 
 <body>
 <!-- Use this for the new menuitems. If they are any changes just remember you should change the menu.js file into js-folder
     and the menu item will display dynamicly -->
     <nav id="nav01" class="navbar navbar-default navbar-fixed-top"></nav>
+
     <div class="container">
-        <div class="row">
-          <div class="col-md-4">
+        <!-- Wrapper for padding-top 50x because of fixed nav bar -->
+        <div class="content-wrapper">
+            <div class="row">
+              <div class="col-md-4">
 
-             <div>
-                <form id="filterBox" name="filterBox" action="js/filterData.js" method="POST" onsubmit="applyFilters()">
-                    <fieldset>
-                        <legend>Apply a Filter</legend>
-                        <fieldset>
-                            <legend>Top Level Domain</legend>
-                            <input id="filterTLD" list="tl_domains" placeholder="Type something to get started!">
-                            <datalist id="tl_domains">
-                                <option value=".com" />
-                                <option value=".org" />
-                                <option value=".net" />
-                                <option value=".int" />
-                                <option value=".edu" />
-                                <option value=".gov" />
-                                <option value=".mil" />
-                                <option value=".arpa" />
-                                <option value=".ac">Ascension Island (.ac)</option>
-                                <option value=".ad">Andorra (.ad)</option>
-                                <option value=".ae">United Arab Emirates (.ae)</option>
-                                <option value=".af">Afghanistan (.af)</option>
-                                <option value=".ag">Antigua and Barbuda (.ag)</option>
-                                <option value=".ai">Anguilla (.ai)</option>
-                                <option value=".al">Albania (.al)</option>
-                                <option value=".am">Armenia (.am)</option>
-                                <option value=".an">Netherlands Antilles (.an)</option>
-                                <option value=".ao">Angola (.ao)</option>
-                                <option value=".aq">Antarctique (.aq)</option>
-                                <option value=".ar">Argentina (.ar)</option>
-                                <option value=".as">American Samoa (.as)</option>
-                                <option value=".at">Austria (.at)</option>
-                                <option value=".au">Australia (.au)</option>
-                                <option value=".aw">Aruba (.aw)</option>
-                                <option value=".ax">Aland (.ax)</option>
-                                <option value=".az">Azerbaijan (.az)</option>
-                                <option value=".ba">Bosnia and Herzegovina (.ba)</option>
-                                <option value=".bb">Barbados (.bb)</option>
-                                <option value=".db">Bangladesh (.db)</option>
-                                <option value=".be">Belgium (.be)</option>
-                                <option value=".bf">Burkina Faso (.bf)</option>
-                                <option value=".bg">Bulgaria (.bg)</option>
-                                <option value=".bh">Bahrain (.bh)</option>
-                                <option value=".bi">Burundi (.bi)</option>
-                                <option value=".bj">Benin (.bj)</option>
-                                <option value=".bm">Bermuda (.bm)</option>
-                                <option value=".bn">Brunei (.bn)</option>
-                                <option value=".bo">Bolivia (.bo)</option>
-                                <option value=".bq">Bonaire (.bq)</option>
-                                <option value=".br">Brazil (.br)</option>
-                                <option value=".bs">Bahamas (.bs)</option>
-                                <option value=".bt">Bhutan (.bt)</option>
-                                <option value=".bv">Bouvet Island (.bv)</option>
-                                <option value=".bw">Botswana (.bw)</option>
-                                <option value=".by">Belarus (.by)</option>
-                                <option value=".bz">Belize (.bz)</option>
-                                <option value=".ca">Canada (.ca)</option>
-                                <option value=".cc">Cocos (.cc)</option>
-                                <option value=".cd">Democratic Republic of the Congo (.cd)</option>
-                                <option value=".cf">Central African Republic (.cf)</option>
-                                <option value=".cg">Republic of the Congo (.cg)</option>
-                                <option value=".ch">Switzerland (.ch)</option>
-                                <option value=".ci">Côte d'Ivoire (.ci)</option>
-                                <option value=".ck">Cook Islands (.ck)</option>
-                                <option value=".cl">Chile (.cl)</option>
-                                <option value=".cm">Cameroon (.cm)</option>
-                                <option value=".cn">People's Republic of China (.cn)</option>
-                                <option value=".co">Colombia (.co)</option>
-                                <option value=".cr">Costa Rica (.cr)</option>
-                                <option value=".cs">Serbia and Montenegro (.cs)</option>
-                                <option value=".cu">Cuba (.cu)</option>
-                                <option value=".cv">Cape Verde (.cv)</option>
-                                <option value=".cw">Curaçao (.cw)</option>
-                                <option value=".cx">Christmas Island (.cx)</option>
-                                <option value=".cy">Cyprus (.cy)</option>
-                                <option value=".cz">Czech Republic (.cz)</option>
-                                <option value=".de">Germany (.de)</option>
-                                <option value=".dj">Djibouti (.dj)</option>
-                                <option value=".dk">Denmark (.dk)</option>
-                                <option value=".dm">Dominika (.dm)</option>
-                                <option value=".do">Dominican Republic (.do)</option>
-                                <option value=".dz">Algeria (.dz)</option>
-                                <option value=".ec">Ecuador (.ec)</option>
-                                <option value=".ee">Estonia (.ee)</option>
-                                <option value=".eg">Egypt (.eg)</option>
-                                <option value=".eh">Western Sahara (.eh)</option>
-                                <option value=".er">Eritrea (.er)</option>
-                                <option value=".es">Spain (.es)</option>
-                                <option value=".et">Ethiopia (.et)</option>
-                                <option value=".eu">European Union (.eu)</option>
-                                <option value=".fi">Finland (.fi)</option>
-                                <option value=".fj">Fiji (.fj)</option>
-                                <option value=".fk">Falkland Islands (.fk)</option>
-                                <option value=".fm">Federated States of Micronesia (.fm)</option>
-                                <option value=".fo">Faroe Islands (.fo)</option>
-                                <option value=".fr">France (.fr)</option>
-                                <option value=".ga">Gabon (.ga)</option>
-                                <option value=".gb">United Kingdom (.gb)</option>
-                                <option value=".gd">Grenada (.gd)</option>
-                                <option value=".ge">Georgia (.ge)</option>
-                                <option value=".gf">French Guiana( (.gf)</option>
-                                <option value=".gg">Guernsey (.gg)</option>
-                                <option value=".gh">Ghana (.gh)</option>
-                                <option value=".gi">Gibraltar (.gi)</option>
-                                <option value=".gl">Greenland (.gl)</option>
-                                <option value=".gm">The Gambia (.gm)</option>
-                                <option value=".gn">Guinea (.gn)</option>
-                                <option value=".gp">Guadeloupe (.gp)</option>
-                                <option value=".gq">Equatorial Guinea (.gq)</option>
-                                <option value=".gr">Greece (.gr)</option>
-                                <option value=".gs">South Georgia and the South Sandwich Islands (.gs)</option>
-                                <option value=".gt">Guatemala (.gt)</option>
-                                <option value=".gu">Guam (.gu)</option>
-                                <option value=".gw">Guinea-Bissau (.gw)</option>
-                                <option value=".gy">Guyana (.gy)</option>
-                                <option value=".hk">Hong Kong (.hk)</option>
-                                <option value=".hm">Heard Island and McDonald Islands (.hm)</option>
-                                <option value=".hn">Honduras (.hn)</option>
-                                <option value=".hr">Croatia (.hr)</option>
-                                <option value=".ht">Haiti (.ht)</option>
-                                <option value=".hu">Hungary (.hu)</option>
-                                <option value=".id">Indonesia (.id)</option>
-                                <option value=".ie">Ireland (.ie)</option>
-                                <option value=".il">Israel (.il)</option>
-                                <option value=".im">Isle of Man (.im)</option>
-                                <option value=".in">India (.in)</option>
-                                <option value=".io">British Indian Ocean Territory</option>
-                                <option value=".iq">Iraq (.iq)</option>
-                                <option value=".ir">Iran (.ir)</option>
-                                <option value=".is">Iceland (.is)</option>
-                                <option value=".it">Italy (.it)</option>
-                                <option value=".je">Jersey (.je)</option>
-                                <option value=".jm">Jamaica (.jm)</option>
-                                <option value=".jo">Jordan (.jo)</option>
-                                <option value=".jp">Japan (.jp)</option>
-                                <option value=".ke">Kenya (.ke)</option>
-                                <option value=".kg">Kyrgyzstan (.kg)</option>
-                                <option value=".kh">Cambodia (.kh)</option>
-                                <option value=".ki">Kiribati (.ki)</option>
-                                <option value=".km">Comoros (.km)</option>
-                                <option value=".kn">Saint Kitts and Nevis (.kn)</option>
-                                <option value=".kp">Democratic People's Republic of Korea (.kp)</option>
-                                <option value=".kr">Republic of Korea (.kr)</option>
-                                <option value=".krd">Kurdistan (.krd)</option>
-                                <option value=".kw">Kuwait (.kw)</option>
-                                <option value=".ky">Cayman Islands (.ky)</option>
-                                <option value=".kz">Kazakhstan (.kz)</option>
-                                <option value=".la">Laos (.la)</option>
-                                <option value=".lb">Lebanon (.lb)</option>
-                                <option value=".lc">Saint Lucia (.lc)</option>
-                                <option value=".li">Liechtenstein (.li)</option>
-                                <option value=".lk">Sri Lanka (.lk)</option>
-                                <option value=".lr">Liberia (.lr)</option>
-                                <option value=".ls">Lesotho (.ls)</option>
-                                <option value=".lt">Lithuania (.lt)</option>
-                                <option value=".lu">Luxembourg (.lu)</option>
-                                <option value=".lv">Latvia (.lv)</option>
-                                <option value=".ly">Lybia (.ly)</option>
-                                <option value=".ma">Morocco (.ma)</option>
-                                <option value=".mc">Monaco (.mc)</option>
-                                <option value=".md">Moldova (.md)</option>
-                                <option value=".me">Montenegro</option>
-                                <option value=".mg">Madagascar (.mg)</option>
-                                <option value=".mh">Marshall Islands (.mh)</option>
-                                <option value=".mk">Macedonia (.mk)</option>
-                                <option value=".ml">Mali (.ml)</option>
-                                <option value=".mm">Myanmar (.mm)</option>
-                                <option value=".mn">Mongolia (.mn)</option>
-                                <option value=".mo">Macau (.mo)</option>
-                                <option value=".mp">Northern Mariana Islands (.mp)</option>
-                                <option value=".mq">Martinique (.mq)</option>
-                                <option value=".mr">Mauretania (.mr)</option>
-                                <option value=".ms">Montserrat (.ms)</option>
-                                <option value=".mt">Malta (.mt)</option>
-                                <option value=".mu">Mauritius (.mu)</option>
-                                <option value=".mv">Maldives (.mv)</option>
-                                <option value=".mw">Malawi (.mw)</option>
-                                <option value=".mx">Mexico (.mx)</option>
-                                <option value=".my">Malaysia (.my)</option>
-                                <option value=".mz">Mozambique (.mz)</option>
-                                <option value=".na">Namibia (.na)</option>
-                                <option value=".nc">New Caledonia (.nc)</option>
-                                <option value=".ne">Niger (.ne)</option>
-                                <option value=".nf">Norfolk Island (.nf)</option>
-                                <option value=".ng">Nigeria (.ng)</option>
-                                <option value=".ni">Nicaragua (.ni)</option>
-                                <option value=".nl">Netherlands (.nl)</option>
-                                <option value=".no">Norway (.no)</option>
-                                <option value=".np">Nepal (.np)</option>
-                                <option value=".nr">Nauru (.nr)</option>
-                                <option value=".nu">Niue (.nu)</option>
-                                <option value=".nz">New Zealand (.nz)</option>
-                                <option value=".om">Oman (.om)</option>
-                                <option value=".pa">Panama (.pa)</option>
-                                <option value=".pe">Peru (.pe)</option>
-                                <option value=".pf">French Polynesia (.pf)</option>
-                                <option value=".pg">Papua New Guinea (.pg)</option>
-                                <option value=".ph">Philippines (.ph)</option>
-                                <option value=".pk">Pakistan (.pk)</option>
-                                <option value=".pl">Poland (.pl)</option>
-                                <option value=".pm">Saint-Pierre et Miquelon (.pm)</option>
-                                <option value=".pn">Pitcairn Islands (.pn)</option>
-                                <option value=".pr">Puerto Rico (.pr)</option>
-                                <option value=".ps">Palestine (.ps)</option>
-                                <option value=".pt">Portugal (.pt)</option>
-                                <option value=".pw">Palau (.pw)</option>
-                                <option value=".py">Paraquay (.py)</option>
-                                <option value=".qa">Qatar (.qa)</option>
-                                <option value=".re">Réunion (.re)</option>
-                                <option value=".ro">Romania (.ro)</option>
-                                <option value=".rs">Serbia (.rs)</option>
-                                <option value=".ru">Russia (.ru)</option>
-                                <option value=".rw">Rwanda (.rw)</option>
-                                <option value=".sa">Saudi Arabia (.sa)</option>
-                                <option value=".sb">Solomon Islands (.sb)</option>
-                                <option value=".sc">Seychelles (.sc)</option>
-                                <option value=".sd">Sudan (.sd)</option>
-                                <option value=".se">Sweden (.se)</option>
-                                <option value=".sg">Singapore (.sg)</option>
-                                <option value=".sh">Saint Helena (.sh)</option>
-                                <option value=".si">Slovenia (.si)</option>
-                                <option value=".sj">Svalbard and Jan Mayen Islands</option>
-                                <option value=".sk">Slovakia (.sk)</option>
-                                <option value=".sl">Sierra Leone (.sl)</option>
-                                <option value=".sm">San Marino (.sm)</option>
-                                <option value=".sn">Senegal (.sn)</option>
-                                <option value=".so">Somalia (.so)</option>
-                                <option value=".sr">Suriname (.sr)</option>
-                                <option value=".ss">South Sudan (.ss)</option>
-                                <option value=".st">São Tomé and Príncipe (.st)</option>
-                                <option value=".su">Soviet Union (.su)</option>
-                                <option value=".sv">El Salvador (.sv)</option>
-                                <option value=".sx">Sint Maarten (.sx)</option>
-                                <option value=".sy">Syria (.sy)</option>
-                                <option value=".sz">Swaziland (.sz)</option>
-                                <option value=".tc">Turcs and Caicos Islands (.tc)</option>
-                                <option value=".td">Chad (.td)</option>
-                                <option value=".tf">French Southern and Antarctic Lands (.tf)</option>
-                                <option value=".tg">Togo (.tg)</option>
-                                <option value=".th">Thailand (.th)</option>
-                                <option value=".tj">Tajikistan (.tj)</option>
-                                <option value=".tk">Tokelau (.tk)</option>
-                                <option value=".tl">East Timor (.tl)</option>
-                                <option value=".tm">Turkmenistan (.tm)</option>
-                                <option value=".tn">Tunisia (.tn)</option>
-                                <option value=".to">Tonga (.to)</option>
-                                <option value=".tl">East Timor (.tl (formerly .tp))</option>
-                                <option value=".tr">Turkey (.tr)</option>
-                                <option value=".tt">Trinidad and Tobago (.tt)</option>
-                                <option value=".tv">Tuvalu (.tv)</option>
-                                <option value=".tw">Taiwan (.tw)</option>
-                                <option value=".tz">Tanzania (.tz)</option>
-                                <option value=".ua">Ukraine (.ua)</option>
-                                <option value=".ug">Uganda (.ug)</option>
-                                <option value=".uk">United Kingdom (.uk)</option>
-                                <option value=".us">United States of America (.us)</option>
-                                <option value=".uy">Uruguay (.uy)</option>
-                                <option value=".uz">Uzbekistan (.uz)</option>
-                                <option value=".va">Vatican City (.va)</option>
-                                <option value=".vc">Saint Vincent and the Grenadines (.vc)</option>
-                                <option value=".ve">Venezuela (.ve)</option>
-                                <option value=".vg">British Virgin Islands (.vg)</option>
-                                <option value=".vi">United States Virgin Islands (.vi)</option>
-                                <option value=".vn">Vietnam (.vn)</option>
-                                <option value=".vu">Vanuatu (.vu)</option>
-                                <option value=".wf">Wallis and Futuna (.wf)</option>
-                                <option value=".ws">Samoa (.ws)</option>
-                                <option value=".ye">Yemen (.ye)</option>
-                                <option value=".yt">Mayotte (.yt)</option>
-                                <option value=".za">South Africa (.za)</option>
-                                <option value=".zm">Zambia (.zm)</option>
-                                <option value=".zr">Zaire (.zr)</option>
-                                <option value=".zw">Zimbabwe (.zw)</option>
-                            </datalist>
-                        </fieldset>
-                        <fieldset>
-                            <legend>SSL / TLS Version</legend>
-                            <input id="filterProtocol" list="ssl_tls" onblur="manageFilterSelection()">
-                            <datalist id="ssl_tls">
-                                <option value="SSL 2.0" />
-                                <option value="SSL 3.0" />
-                                <option value="TLS 1.0" />
-                                <option value="TLS 1.1" />
-                                <option value="TLS 1.2" />
-                            </datalist>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Key Exchange and Authentication</legend>
-                            <input id="filterKeyExAndAuth" list="keyExAuth" onblur="manageFilterSelection()">
-                            <datalist id="keyExAuth">
-                                <option value="RSA" />
-                                <option value="DH_RSA" />
-                                <option value="DHE_RSA" />
-                                <option value="ECDH_RSA" />
-                                <option value="ECDHE_RSA" />
-                                <option value="DH_DSS" />
-                                <option value="DHE_DSS" />
-                                <option value="ECDH_ECDSA" />
-                                <option value="ECDHE_ECDSA" />
-                                <option value="PSK" />
-                                <option value="PSK_RSA" />
-                                <option value="DHE_PSK" />
-                                <option value="ECDHE_PSK" />
-                                <option value="SRP" />
-                                <option value="SRP_DSS" />
-                                <option value="SRP_RSA" />
-                                <option value="KERBEROS" />
-                                <option value="DH_ANON" />
-                                <option value="ECDH_ANON" />
-                                <option value="GOST" />
-                            </datalist>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Bulk Cipher and Key Length (in bits)</legend>
-                            <input id="filterCipher" list="cipher" onblur="manageFilterSelection()">
-                            <datalist id="cipher">
-                                <option value="AES_GCM" />
-                                <option value="AES_CCM" />
-                                <option value="AES_CBC" />
-                                <option value="CAMELLIA_GCM" />
-                                <option value="CAMELLIA_CBC" />
-                                <option value="ARIA_GCM" />
-                                <option value="ARIA_CBC" />
-                                <option value="SEED_CBC" />
-                                <option value="3DES_EDE_CBC" />
-                                <option value="GOST_28147-89_CNT" />
-                                <option value="IDEA_CBC" />
-                                <option value="DES_CBC" />
-                                <option value="RC2_CBC" />
-                                <option value="ChaCha_20-POLY1305" />
-                                <option value="RC4" />
-                                <option value="none" />
-                            </datalist>
-                            <input id="filterKeyLen" list="keyLen" onblur="manageFilterSelection()">
-                            <datalist id="keyLen">
-                                <option value="40" />
-                                <option value="56" />
-                                <option value="112" />
-                                <option value="128" />
-                                <option value="256" />
-                            </datalist>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Message Authenticity</legend>
-                            <input id="filterMsgAuth" list="msgAuth" onblur="manageFilterSelection()">
-                            <datalist id="msgAuth">
-                                <option value="MD5" />
-                                <option value="SHA1" />
-                                <option value="SHA256" />
-                                <option value="SHA384" />
-                                <option value="AEAD" />
-                                <option value="GOST_28147-89_IMIT" />
-                                <option value="GOST_R34.11-94" />
-                            </datalist>
-                        </fieldset>
-                        <fieldset>
-                            <div id="filterButtons">
-                                <input id="filterApply" type="submit" value="Apply Filter">
-                                <input id="filterReset" type="reset" value="Reset Filter">
-                            </div>
-                        </fieldset>
-                    </fieldset>
-                </form>
-            </div>
-
-        </div>
-        <div class="col-md-8">
-         <div class="content-wrapper">
-
-
-
-                <div id="charts">
-                    <div id="chart"></div>
-                    <button id="loadPFS">PFS</button>
-                    <button id="loadDHEParameter">DHE-Parameter</button>
-                    <br><br> Timespan:
-                    <div  id="slider-date"></div>
-                    <br>
-                    Start:<span id="event-start"></span><br>
-                    End:<span id="event-end"></span> <br>
-                    <button onclick="applytimespan()" id="applytimespan">Reload</button>
-                    <br>
-                    <br>
-                    <h2 >Which DHE parameter key-size do the TLS Server prefer?</h2>
-                    <br>
-                    With 2 Y-axes
-                    <div id="charty2"></div>
-                    <div id="chart_panel"></div>
-
-                    <h2>How many TLS-Server support perfect forward secrecy(PFS)?</h2>
-
-                    <div id="pie"></div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Select Chart</h3>
                 </div>
+                <div class="panel-body">
+                    <!--Bootstrap Drop down menu for choosing charts -->
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Select a Chart
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li id="loadPFS"><a href="#">How many TLS Server support Perfect Forward Secrecy?</a></li>
+                            <li id="loadDHEParameter"><a href="#">Diffie-Hellman Keygroups</a></li>
+                            <li id="ciphersuites"><a href="#">Cipher Suites</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Content will be loaded dynamically exterm html pages with .load() function -->
+            <div id="dynamic"></div>
 
-
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Select Timespan (Slider)</h3>
+            </div>
+            <div class="panel-body">
+               <!-- noUIslider -->
+               Timespan:
+               <div  id="slider-date"></div>
+               <br>
+               Start:<span id="event-start"></span><br>
+               End:<span id="event-end"></span> <br><br>
+               <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
+           </div>
+       </div>
+       <!-- alternativly Date Picker (from jquery ui lib) -->
+       <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Select Timespan (Datepicker)</h3>
         </div>
+        <div class="panel-body">
+           <!-- jQuery ui Datepicker-->
+           <label for="startDate">Start :</label>
+           <input name="startDate" id="datepickerStart" class="date-picker" /><br>
+           <label for="startDate">End :</label>
+           <input name="startDate" id="datepickerEnd" class="date-picker" />
+           <br><br>
+           <button class="btn btn-default">Apply Timespan</button>
+       </div>
+   </div>
+
+</div>
+
+<!-- Graphs -->
+<div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <div id="charts">
+            <!-- The charts are displayed here -->
+            <div id="chart"></div>
+            <!-- display next or previous chart -->
+            <nav>
+              <ul class="pager">
+                <button id="previouschart" type="button" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                </button>
+                <button id="nextchart" type="button" class="btn btn-default btn-lg">
+                    <span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </button>
+            </ul>
+        </nav>
     </div>
+</div>
+</div>
 
+</div>
 
 
 </div>
 </div>
+</div>
+<footer id="footer"></footer>
 <!-- Skripts are located in the end of the Body tag for faster Page Loading -->
+<!-- for the menu -->
+<script src="js/menu.js"></script>
 <!-- Load d3.js and c3.js -->
 <script src="js/c3-0.4.10/d3.min.js" charset="utf-8"></script>
 <script src="js/c3-0.4.10/c3.min.js"></script>
 <!-- JQuery CDN -->
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="js/jquery-1.11.3.min.js"></script>
 <!-- Filter Menu -->
 <script type="text/javascript" src="js/filterData.js"></script>
 <!-- noUislider -->
 <script type="text/javascript" src="js/nouislider.min.js"></script>
-<!-- for the menu -->
-<script src="js/menu.js"></script>
+<!-- Bootstrap -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Jquery ui -->
+<script src="js/jquery-ui.min.js"></script>
 <script>
+
+
         // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
         window.onload = function () {
+
+
 
             // helper function for Timeslider
             function timestamp(str){
@@ -452,7 +148,7 @@
                 connect: true,
                 range: {
                  // Range is from where the project started to the current date
-                 min: timestamp('2015-10-15'),
+                 min: timestamp('2010-10-15'),
                  max: new Date().getTime()
              },
                 // Steps of one month
@@ -490,6 +186,7 @@
             document.getElementById('event-start'),
             document.getElementById('event-end')
             ];
+
             // Update Handler -> Updates the span elements
             dateSlider.noUiSlider.on('update', function( values, handle ) {
                 dateValues[handle].innerHTML = formatDate(new Date(+values[handle]));
@@ -507,7 +204,6 @@
                 default: return "th";
             }
         }
-
 
 
 
@@ -615,38 +311,52 @@
              * Load PFS-Pie-Chart function.
              */
 
+             $.ajaxSetup({
+                timeout: 2000
+            });
+
+
              $("#loadPFS").click(function ()
              {
-                chart.load({
-                    json: test_array_JSONs,
-                    keys: {
-                        value: ['PFS enabled', 'PFS Disabled']
-                    },
-                    type: 'pie',
-                    unload: chart.columns,
-                });
-            }
-            );
+                // Load data from the server using a HTTP GET request
+                // jquery.get is a equivalent to $.ajax({....
+                    jQuery.get( "http://tls.thejetlag.de:1337/api/v0/pfs/overview", function( response ) { 
+                        chart.load({
+                            json: response,
+                            keys: {
+                                value: ['pfsEnabled', 'pfsDisabled']
+                            },
+                            type: 'pie',
+                            unload: chart.columns,
+                        });
+                    } ).error(function() {
+                        alert( "Error Loading JSON" );
+                        chart.load({
+                            json: test_array_JSONs,
+                            keys: {
+                                value: ['PFS enabled', 'PFS Disabled']
+                            },
+                            type: 'pie',
+                            unload: chart.columns,
+                        });
+                    });
+
+                    // empty all elements within the div tag with id dynamic
+                    $("#dynamic").empty();
+                    $("#dropdownMenu1").html('How many Server supports Perfect Forward Secrecy? <span class="caret"></span>');
+                }
+                );
 
 
              // This is called when the reload button is clicked!
-
              $("#applytimespan").click(function ()
              {
                 // Check if start and end values of the slieder are the same
                 var start = dateSlider.noUiSlider.get();
                 // If yes then get normal Json
                 if (start[0] == start[1]) {
-                   chart.load({
-                    type: 'bar',
-                    json: testdaten.dhe,
-                    keys: {
-                        x: 'keysize',
-                        value: ['size']
-                    },
-                    unload: chart.columns,
-                });
-               }
+                  alert("Not Yet implemented");
+              }
                // Otherwise get the two differen json objects, compare, and make a chart
                else{
                 alert("Not Yet implemented");
@@ -655,22 +365,118 @@
         );
 
 
-
             /*
              * Load DHE-Parameter-Chart function with one Y-Axis.
              */
 
              $("#loadDHEParameter").click(function ()
              {
-                chart.load({
-                    type: 'bar',
-                    json: testdaten.dhe,
-                    keys: {
-                        x: 'keysize',
-                        value: ['size']
-                    },
-                    unload: chart.columns,
-                });
+
+                // Load data from the server using a HTTP GET request
+                // jquery.get is a equivalent to $.ajax({....
+                    jQuery.get( "http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function( response ) { 
+                        chart.load({
+                            type: 'bar',
+                            json: response[0].distribution,
+                            keys: {
+                                x: 'kx',
+                                value: ['count', 'kxStrength']
+                            },
+                            unload: chart.columns,
+                        });
+                    } ).error(function() {
+                        alert( "Error Loading JSON" );
+                        chart.load({
+                            type: 'bar',
+                            json: testdaten.dhe,
+                            keys: {
+                                x: 'keysize',
+                                value: ['size']
+                            },
+                            unload: chart.columns,
+                        });
+                    });
+
+                // takes the dynamic div tag out of the DOM
+                $("#dynamic").empty();
+                $("#dropdownMenu1").html('Diffie-Hellman Keygroups <span class="caret"></span>');
+            }
+            );
+
+            /*
+             * Load Cipher Suites Chart
+             */
+
+             $("#ciphersuites").click(function ()
+             {
+               chart.load({
+                unload: chart.columns,
+            });
+               $("#dynamic").load("filterciphers.html");
+               $("#dropdownMenu1").html('Cipher Suites <span class="caret"></span>');
+
+           }
+           );
+
+             var globalChartNumber = 1;
+
+
+
+             function loadChartbyNumber(number){
+
+                switch(number){
+                    case 1:
+                    $( "#loadPFS" ).trigger( "click" );
+                    globalChartNumber = 1;
+                    break;
+                    case 2:
+                    $( "#loadDHEParameter" ).trigger( "click" );
+                    globalChartNumber = 2;
+                    break;
+                    case 3:
+                    $( "#ciphersuites" ).trigger( "click" );
+                    globalChartNumber = 3;
+                    break;
+                    default:
+                    alert("Problem with loading Chart");
+                }
+            }
+
+
+
+
+            /*
+            * randomly load a chart
+            */
+
+            var random = Math.floor((Math.random() * 3) + 1); 
+            loadChartbyNumber(random);
+
+            /*
+            * Select previous or next chart by decreasing or increasing the globalnumber
+            */
+
+            $("#previouschart").click(function ()
+            {
+              globalChartNumber--;
+              if (globalChartNumber <= 0 ) {
+                globalChartNumber = 1;
+                return;
+            };
+            loadChartbyNumber(globalChartNumber);
+
+        }
+        );
+
+            $("#nextchart").click(function ()
+            {
+                globalChartNumber++;
+                if (globalChartNumber > 3 ) {
+                    globalChartNumber = 3;
+                    return;
+                };
+                loadChartbyNumber(globalChartNumber);
+
             }
             );
 
@@ -732,6 +538,78 @@ var donutChart = c3.generate({
         type: 'pie'
     }
 });
+
+$('#datepickerStart').datepicker(
+{
+    dateFormat: "mm/yy",
+    changeMonth: true,
+    changeYear: true,
+    showButtonPanel: true,
+    onClose: function(dateText, inst) {
+
+
+        function isDonePressed(){
+            return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
+        }
+
+        if (isDonePressed()){
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
+
+                                 $('.date-picker').focusout()//Added to remove focus from datepicker input box on selecting date
+                             }
+                         },
+                         beforeShow : function(input, inst) {
+
+                            inst.dpDiv.addClass('month_year_datepicker')
+
+                            if ((datestr = $(this).val()).length > 0) {
+                                year = datestr.substring(datestr.length-4, datestr.length);
+                                month = datestr.substring(0, 2);
+                                $(this).datepicker('option', 'defaultDate', new Date(year, month-1, 1));
+                                $(this).datepicker('setDate', new Date(year, month-1, 1));
+                                $(".ui-datepicker-calendar").hide();
+                            }
+                        }
+                    });
+
+
+$('#datepickerEnd').datepicker(
+{
+    dateFormat: "mm/yy",
+    changeMonth: true,
+    changeYear: true,
+    showButtonPanel: true,
+    onClose: function(dateText, inst) {
+
+
+        function isDonePressed(){
+            return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
+        }
+
+        if (isDonePressed()){
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
+
+                                 $('.date-picker').focusout()//Added to remove focus from datepicker input box on selecting date
+                             }
+                         },
+                         beforeShow : function(input, inst) {
+
+                            inst.dpDiv.addClass('month_year_datepicker')
+
+                            if ((datestr = $(this).val()).length > 0) {
+                                year = datestr.substring(datestr.length-4, datestr.length);
+                                month = datestr.substring(0, 2);
+                                $(this).datepicker('option', 'defaultDate', new Date(year, month-1, 1));
+                                $(this).datepicker('setDate', new Date(year, month-1, 1));
+                                $(".ui-datepicker-calendar").hide();
+                            }
+                        }
+                    });
+
 
 };
 </script>

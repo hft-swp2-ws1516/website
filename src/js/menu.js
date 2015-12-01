@@ -7,7 +7,7 @@
 document.getElementById("nav01").innerHTML =
 "<div class='container'>"+
 "<div class='row'>"+
-"<div class='col-md-4'><ul id='menu'>" +
+"<div class='col-md-4'><ul class='nav navbar-nav'>" +
 "<li><a href='index.html'>Home</a></li>" +
 "<li><a href='globaldata.html'>Global</a></li>" +
 "<li><a href='analyze-me.html'>Analyze Me</a></li>" +
@@ -17,3 +17,13 @@ document.getElementById("nav01").innerHTML =
 "</div>"+
 "</div>";
 
+
+// for footer menu
+document.getElementById("footer").innerHTML =
+"<div class='container'>"+ 
+"&copy; TLS Crawler"+
+"Ein Projekt der HfT Stuttgart."+
+"&#124;<a href='url'>Kontakt</a>"+
+"&#124;<a href='url'>Impressum</a>"+
+"&#124;<a href='url'> weitere Links </a>"+
+"</div>";
