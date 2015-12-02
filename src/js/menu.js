@@ -18,12 +18,20 @@ document.getElementById("nav01").innerHTML =
 "</div>";
 
 
+
 // for footer menu
+var n = new Date();
+var d = n.getFullYear(); // dynamic Date
 document.getElementById("footer").innerHTML =
 "<div class='container'>"+
-"&copy;" + document.write(new Date()) "TLS Crawler"+
-"Ein Projekt der HfT Stuttgart."+
-"&#124;<a href='url'>Kontakt</a>"+
-"&#124;<a href='url'>Impressum</a>"+
-"&#124;<a href='url'> weitere Links </a>"+
+" &copy; "+d+" TLS Crawler ist "+
+" ein Projekt der HfT Stuttgart. "+
+" &#124;<a href='url'> Kontakt</a> "+
+" &#124;<a href='url'> Impressum</a> "+
+" &#124;<a href='url'> weitere Links </a> "+
 "</div>";
+
+
+
+
+
