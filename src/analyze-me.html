@@ -3,13 +3,22 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Experimental Study on TLS-Handshakes</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
     <link href="css/site.css" rel="stylesheet">
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!--CSS only for Checkbox-->
+    <link rel="stylesheet" href="css/checkbox.css">
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -23,22 +32,86 @@
 and the menu item will display dynamicly-->
 <nav id="nav01" class="navbar navbar-default navbar-fixed-top"></nav>
 
+
+<!--Begin of Modal-Window-->
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="urls-ref" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Title : [should implement some action if a url is selected]</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>URL's</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>www.hft-stuttgart.de</td>
+
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>www.dein-favorite.de</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td colspan="2">www.die-schnauze-voll.de</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div><!--End of Modal-Window-->
+
+
 <div class="container">
     <div class="content-wrapper">
         <h1 align="center">Search your prefered URL! </h1>
         <hr>
-        <form role="form">
-            <div class="form-group">
-                <label for="inputlg">Type your URL below</label>
-                <input class="form-control input-lg" id="inputlg" type="text">
-                <br>
-                <button type="button" class="btn btn-info btn-block">Block-level Button</button>
-            </div>
-        </form>
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <label>Type your URL below</label>
+                </td>
+                <td align="right">
+                    <input type="checkbox" id="test7"/>
+                    <label for="test7">Show the list of searched URL's.</label>
+                </td>
+            </tr>
+        </table>
+        <!-- Large modal -->
+
+
+        <!-- end Large modal -->
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon3">https://myfavorite-website.com/</span>
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+        </div>
+        <br>
+        <button type="button" class="btn btn-info btn-block">Analyze my specified URL</button>
+        <br>
     </div>
 </div>
 
-<div class="footer"></div>
+<footer id="footer"></footer>
+<script src="js/menu.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/{{JQUERY_VERSION}}/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script>
 <!-- Dynamic Menu -->
@@ -60,6 +133,15 @@ and the menu item will display dynamicly-->
     }(window, document, 'script', 'ga'));
     ga('create', 'UA-XXXXX-X', 'auto');
     ga('send', 'pageview');
+</script>
+
+<!--Open up the Modal-Window if Checkbox is checked-->
+<script>
+    $('input[type="checkbox"]').on('change', function(e){
+        if(e.target.checked){
+            $('#urls-ref').modal();
+        }
+    });
 </script>
 </body>
 </html>
