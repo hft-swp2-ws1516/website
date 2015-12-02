@@ -28,7 +28,7 @@ document.getElementById("footer").innerHTML =
 " ein Projekt der HfT Stuttgart. "+
 " &#124;<a href='url'> Kontakt</a> "+
 " &#124;<a href='url'> Impressum</a> "+
-" &#124;<a href='url'> weitere Links </a> "+
+" &#124;<a href='url'> Subscribe </a> "+
 "</div>";
 
 
