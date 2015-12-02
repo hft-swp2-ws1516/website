@@ -55,30 +55,30 @@
                 <h3 class="panel-title">Select Timespan (Slider)</h3>
             </div>
             <div class="panel-body">
-               <!-- noUIslider -->
-               Timespan:
-               <div  id="slider-date"></div>
-               <br>
-               Start:<span id="event-start"></span><br>
-               End:<span id="event-end"></span> <br><br>
-               <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
-           </div>
-       </div>
-       <!-- alternativly Date Picker (from jquery ui lib) -->
-       <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Select Timespan (Datepicker)</h3>
-        </div>
-        <div class="panel-body">
-           <!-- jQuery ui Datepicker-->
-           <label for="startDate">Start :</label>
-           <input name="startDate" id="datepickerStart" class="date-picker" /><br>
-           <label for="startDate">End :</label>
-           <input name="startDate" id="datepickerEnd" class="date-picker" />
-           <br><br>
-           <button class="btn btn-default">Apply Timespan</button>
-       </div>
-   </div>
+             <!-- noUIslider -->
+             Timespan:
+             <div  id="slider-date"></div>
+             <br>
+             Start: <span id="event-start"></span><br>
+             End: <span id="event-end"></span> <br><br>
+             <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
+         </div>
+     </div>
+     <!-- alternativly Date Picker (from jquery ui lib) -->
+     <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Select Timespan (Datepicker)</h3>
+    </div>
+    <div class="panel-body">
+     <!-- jQuery ui Datepicker-->
+     <label for="startDate">Start :</label>
+     <input name="startDate" id="datepickerStart" class="date-picker" /><br>
+     <label for="startDate">End :</label>
+     <input name="startDate" id="datepickerEnd" class="date-picker" />
+     <br><br>
+     <button class="btn btn-default">Apply Timespan</button>
+ </div>
+</div>
 
 </div>
 
@@ -134,8 +134,6 @@
         // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
         window.onload = function () {
 
-
-
             // helper function for Timeslider
             function timestamp(str){
                 return new Date(str).getTime();
@@ -148,7 +146,7 @@
                 connect: true,
                 range: {
                  // Range is from where the project started to the current date
-                 min: timestamp('2010-10-15'),
+                 min: timestamp('2015-11-15'),
                  max: new Date().getTime()
              },
                 // Steps of one month
@@ -175,8 +173,7 @@
 
              // Create a string representation of the date.
              function formatDate ( date ) {
-                return  date.getDate() + nth(date.getDate()) + " " +
-                months[date.getMonth()] + " " +
+                return  months[date.getMonth()] + " " +
                 date.getFullYear();
             }
 
@@ -296,8 +293,7 @@
                             text: 'In percent',
                             position: 'outer-middle'
                         },
-                        max: 100,
-                        min: 0
+                      
                     }
                 },
                 bar: {
@@ -307,43 +303,105 @@
                 },
             });
 
-            /*
-             * Load PFS-Pie-Chart function.
-             */
 
-             $.ajaxSetup({
+            // Timeout setup for ajax
+            // If the API is not responding within 2 seconds, the hard coded charts will be loaded
+            $.ajaxSetup({
                 timeout: 2000
             });
 
+
+            // Formatting date because of Datefield  e.g. 2015_11 field in the api  
+            function formatDate2(date){
+             var string = date.getFullYear()+"_"+(date.getMonth()+1);
+             return string;
+
+         }
+
+            /*
+             * Load PFS-Pie-Chart function.
+             */
 
              $("#loadPFS").click(function ()
              {
                 // Load data from the server using a HTTP GET request
                 // jquery.get is a equivalent to $.ajax({....
                     jQuery.get( "http://tls.thejetlag.de:1337/api/v0/pfs/overview", function( response ) { 
-                        chart.load({
-                            json: response,
-                            keys: {
-                                value: ['pfsEnabled', 'pfsDisabled']
-                            },
-                            type: 'pie',
-                            unload: chart.columns,
-                        });
-                    } ).error(function() {
-                        alert( "Error Loading JSON" );
-                        chart.load({
-                            json: test_array_JSONs,
-                            keys: {
-                                value: ['PFS enabled', 'PFS Disabled']
-                            },
-                            type: 'pie',
-                            unload: chart.columns,
-                        });
+                         // Check if start and end values of the slieder are the same
+                         var start = dateSlider.noUiSlider.get();
+                         if (start[0] != start[1]) {
+                            // Date take only integers
+                            var beginn = formatDate2(new Date(parseInt(start[0])));
+                            var end = formatDate2(new Date(parseInt(start[1])));
+
+                            // We need error handling, what if the response array has only on entry?
+                            // Index for the two json elements which will be compared
+                            var b;
+                            var e;
+
+                            // index of begin json element and index of end json element
+                            for (var i = 0; i < response.length; i++) {
+                                if (response[i].month == beginn) { 
+                                    b = i;
+                                };
+                                if (response[i].month == end) { 
+                                    e = i;
+                                };
+                            };
+
+                            chart.load({
+                                columns: [
+                                [ beginn, response[b].pfsEnabled, response[b].pfsDisabled],
+                                [ end, response[e].pfsEnabled, response[e].pfsDisabled],
+                                [ 'percent', response[e].pfsEnabled-response[b].pfsEnabled, response[e].pfsDisabled-response[b].pfsDisabled]
+                                ],
+                                types: {
+                                    percent: 'line',
+                                },
+                                axes: {
+                                    'percent': 'y2'
+                                },
+
+                                type: 'bar',
+
+
+                                unload: chart.columns,
+                            });
+
+
+
+
+                            //alert("beginn"+ b +" end "+ e);
+
+
+                        } else{
+                           chart.load({
+                        // json format [{ .... }]
+                        json: [response[0]],
+                        keys: {
+                            value: ['pfsEnabled', 'pfsDisabled']
+                        },
+                        type: 'pie',
+                        unload: chart.columns,
                     });
+                       }        
+
+
+                   } ).error(function() {
+                    alert( "Error Loading JSON" );
+                    chart.load({
+                        json: test_array_JSONs,
+                        keys: {
+                            value: ['PFS enabled', 'PFS Disabled']
+                        },
+                        type: 'pie',
+                        unload: chart.columns,
+                    });
+                });
 
                     // empty all elements within the div tag with id dynamic
                     $("#dynamic").empty();
-                    $("#dropdownMenu1").html('How many Server supports Perfect Forward Secrecy? <span class="caret"></span>');
+                    $("#dropdownMenu1").html('How many Server support Perfect Forward Secrecy? <span class="caret"></span>');
                 }
                 );
 
@@ -409,14 +467,14 @@
 
              $("#ciphersuites").click(function ()
              {
-               chart.load({
-                unload: chart.columns,
-            });
-               $("#dynamic").load("filterciphers.html");
-               $("#dropdownMenu1").html('Cipher Suites <span class="caret"></span>');
+                 chart.load({
+                    unload: chart.columns,
+                });
+                 $("#dynamic").load("filterciphers.html");
+                 $("#dropdownMenu1").html('Cipher Suites <span class="caret"></span>');
 
-           }
-           );
+             }
+             );
 
              var globalChartNumber = 1;
 
@@ -516,11 +574,11 @@
                     y2: {
                         show: true,
                         label: {
-                            text: 'In percent',
+                            text: 'In peprcent',
                             position: 'outer-middle'
                         },
                         max: 100,
-                        min: 0
+                        min: -100
                     }
                 }
 
