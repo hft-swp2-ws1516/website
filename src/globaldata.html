@@ -307,7 +307,7 @@
             // Timeout setup for ajax
             // If the API is not responding within 2 seconds, the hard coded charts will be loaded
             $.ajaxSetup({
-                timeout: 2000
+                timeout: 6000
             });
 
 
@@ -349,11 +349,26 @@
                                 };
                             };
 
+                            // calc the increase or decline in percent
+
+                            var totalFirst = response[b].pfsEnabled + response[b].pfsDisabled;
+                            var pfs1Percent1 = ((response[b].pfsEnabled/totalFirst) * 100).toFixed(2);
+                            var pfs1Percent2 = ((response[b].pfsDisabled/totalFirst) * 100).toFixed(2);
+
+                           // alert(pfs1Percent1 + " " + pfs1Percent2);
+
+
+                            var totalSecond = response[e].pfsEnabled + response[e].pfsDisabled;
+                            pfs2Percent1 = ((response[e].pfsEnabled/totalSecond) * 100).toFixed(2);
+                            pfs2Percent2 = ((response[e].pfsDisabled/totalSecond) * 100).toFixed(2);
+
+                             //alert(pfs2Percent1 + " " + pfs2Percent2);
+
                             chart.load({
                                 columns: [
                                 [ beginn, response[b].pfsEnabled, response[b].pfsDisabled],
                                 [ end, response[e].pfsEnabled, response[e].pfsDisabled],
-                                [ 'percent', response[e].pfsEnabled-response[b].pfsEnabled, response[e].pfsDisabled-response[b].pfsDisabled]
+                                [ 'percent', pfs2Percent1- pfs1Percent1, pfs2Percent2 - pfs1Percent2]
                                 ],
                                 types: {
                                     percent: 'line',
