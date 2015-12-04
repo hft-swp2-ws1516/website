@@ -31,7 +31,7 @@ document.getElementById("footer").innerHTML =
 " &#124;<a href='#subscription' data-toggle='modal'> Subscribe </a> "+
 "</div>";
 
-
+// open Subscribe Modal
 document.getElementById("subscribe").innerHTML =
     "<div class='container'>"+
     "<div class='modal fade' id='subscription' role='dialog'>"+
