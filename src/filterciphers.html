@@ -5,7 +5,8 @@
     </div>
     <div class="panel-body">
         <div>
-            <form id="filterBox" name="filterBox" action="js/filterData.js" method="POST" onsubmit="applyFilters()">
+            <form id="filterBox" name="filterBox" action="js/filterData.js" method="POST" onsubmit="applyFilters()" 
+                  onmouseover="initFilters()">
                 <fieldset>
                     <fieldset>
                         <legend>Top Level Domain</legend>
@@ -280,11 +281,11 @@
                         <legend>SSL / TLS Version</legend>
                         <input id="filterProtocol" list="ssl_tls" onblur="manageFilterSelection()">
                         <datalist id="ssl_tls">
-                            <option value="SSL 2.0"></option>
-                            <option value="SSL 3.0"></option>
-                            <option value="TLS 1.0"></option>
-                            <option value="TLS 1.1"></option>
-                            <option value="TLS 1.2"></option>
+                            <option value="SSLv2"></option>
+                            <option value="SSLv3"></option>
+                            <option value="TLSv1.0"></option>
+                            <option value="TLSv1.1"></option>
+                            <option value="TLSv1.2"></option>
                         </datalist>
                     </fieldset>
                     <fieldset>
@@ -292,6 +293,7 @@
                         <input id="filterKeyExAndAuth" list="keyExAuth" onkeyup="manageFilterSelection()"
                                onblur="manageFilterSelection()">
                         <datalist id="keyExAuth">
+                            <!--
                             <option value="RSA"></option>
                             <option value="DH-RSA"></option>
                             <option value="DHE-RSA"></option>
@@ -312,6 +314,7 @@
                             <option value="DH-ANON"></option>
                             <option value="ECDH-ANON"></option>
                             <option value="GOST"></option>
+                            -->
                         </datalist>
                     </fieldset>
                     <fieldset>
@@ -319,6 +322,7 @@
                         <input id="filterCipher" list="cipher" onkeyup="manageFilterSelection()" 
                                onblur="manageFilterSelection()">
                         <datalist id="cipher">
+                            <!--
                             <option value="AES-GCM"></option>
                             <option value="AES-CCM"></option>
                             <option value="AES-CBC"></option>
@@ -336,6 +340,7 @@
                             <option value="ChaCha-20-POLY1305"></option>
                             <option value="RC4"></option>
                             <option value="none"></option>
+                            -->
                         </datalist>
                         <input id="filterKeyLen" list="keyLen" onkeyup="manageFilterSelection()" 
                                onblur="manageFilterSelection()">
@@ -352,6 +357,7 @@
                         <input id="filterMsgAuth" list="msgAuth" onkeyup="manageFilterSelection()"
                                onblur="manageFilterSelection()">
                         <datalist id="msgAuth">
+                            <!--
                             <option value="MD5"></option>
                             <option value="SHA"></option>    
                             <option value="SHA1"></option>
@@ -360,6 +366,7 @@
                             <option value="AEAD"></option>
                             <option value="GOST-28147-89-IMIT"></option>
                             <option value="GOST-R34.11-94"></option>
+                            -->
                         </datalist>
                     </fieldset>
                     <fieldset>

@@ -1,4 +1,21 @@
 
+function initFilters() {
+
+    var protocol = document.getElementById("filterProtocol").value;
+    var keyExAndAuth = document.getElementById("filterKeyExAndAuth").value;
+    var bulkCipher = document.getElementById("filterCipher").value;
+    var keyLen = document.getElementById("filterKeyLen").value;
+    var msgAuth = document.getElementById("filterMsgAuth").value;
+
+    if (protocol === "" && keyExAndAuth === "" && bulkCipher === "" && keyLen === ""
+            && msgAuth === "") {
+        document.getElementById("keyExAuth").innerHTML = getKeyAndAuth("all");
+        document.getElementById("cipher").innerHTML = getCiphers("all");
+        document.getElementById("keyLen").innerHTML = getKeyLengths("all", "all");
+        document.getElementById("msgAuth").innerHTML = getMsgAuth("all");
+    }
+
+}
 
 function manageFilterSelection() {
 
@@ -27,11 +44,15 @@ function displayFilter() {
         }
         if (keyLen === "" && bulkCipher !== "") {
             bulkCipher += "-";
-        } else {
-            if (keyLen !== "") {
-                keyLen += "-";
-            }
+        } else if (keyLen !== "" && (bulkCipher === "AES-CBC" || bulkCipher === "AES-CCM" || bulkCipher === "AES-GCM")) {
+            var left = bulkCipher.split("-")[0];
+            var right = bulkCipher.split("-")[1];
+            bulkCipher = left;
+            keyLen += "-" + right + "-";
+        } else if (keyLen !== "") {
+            keyLen += "-";
         }
+
 
         document.getElementById("displayFilterSelection").innerHTML = "Current cipher string to search for:<br>\n\
         " + [keyExAndAuth, bulkCipher, keyLen, msgAuth].join("");
@@ -50,21 +71,28 @@ function resetFilters() {
 
 function getKeyAndAuth(protocolSelection) {
 
-    if (protocolSelection === "SSL 2.0") {
-        return "<option value=\"RSA\"></option>";
-    } else if (protocolSelection === "SSL 3.0") {
-        return "<option value=\"RSA\">\n\
-                      <option value=\"DH-RSA\"></option>\n\
-                      <option value=\"DHE-RSA\"></option>\n\
+    if (protocolSelection === "SSLv2") {
+        return "<option value=\"EXP\"></option>\n\
+                <option value=\"RSA\"></option>";
+    } else if (protocolSelection === "SSLv3") {
+        return "<option value=\"EXP\"></option>\n\
+                      <option value=\"RSA\"></option>\n\
                       <option value=\"DH-DSS\"></option>\n\
-                      <option value=\"DHE-DSS\"></option>";
-    } else if (protocolSelection === "TLS 1.0" || protocolSelection === "TLS 1.1"
-            || protocolSelection === "TLS 1.2") {
-        return "<option value=\"RSA\"></option>\n\
+                      <option value=\"DH-RSA\"></option>\n\
+                      <option value=\"DHE-DSS\"></option>\n\
+                      <option value=\"DHE-RSA\"></option>\n\
+                      <option value=\"DH-anon\"></option>\n\
+                      <option value=\"DH-anon-EXP\"></option>\n\
+                      <option value=\"ECDHE-RSA\"></option>";
+    } else if (protocolSelection === "TLSv1.0" || protocolSelection === "TLSv1.1"
+            || protocolSelection === "TLSv1.2") {
+        return "<option value=\"AECDH\"></option>\n\
+                    <option value=\"RSA\"></option>\n\
                      <option value=\"DH-RSA\"></option>\n\
                      <option value=\"DHE-RSA\"></option>\n\
                      <option value=\"ECDH-RSA\"></option>\n\
                      <option value=\"ECDHE-RSA\"></option>\n\
+                     <option value=\"EDH-RSA\"></option>\n\
                      <option value=\"DH-DSS\"></option>\n\
                      <option value=\"DHE-DSS\"></option>\n\
                      <option value=\"ECDH-ECDSA\"></option>\n\
@@ -81,11 +109,13 @@ function getKeyAndAuth(protocolSelection) {
                      <option value=\"ECDH-ANON\"></option>\n\
                      <option value=\"GOST\"></option>";
     } else {
-        return "<option value=\"RSA\"></option>\n\
+        return "<option value=\"AECDH\"></option>\n\
+                     <option value=\"RSA\"></option>\n\
                      <option value=\"DH-RSA\"></option>\n\
                      <option value=\"DHE-RSA\"></option>\n\
                      <option value=\"ECDH-RSA\"></option>\n\
                      <option value=\"ECDHE-RSA\"></option>\n\
+                     <option value=\"EDH-RSA\"></option>\n\
                      <option value=\"DH-DSS\"></option>\n\
                      <option value=\"DHE-DSS\"></option>\n\
                      <option value=\"ECDH-ECDSA\"></option>\n\
@@ -106,21 +136,23 @@ function getKeyAndAuth(protocolSelection) {
 
 function getCiphers(protocolSelection) {
 
-    if (protocolSelection === "SSL 2.0") {
+    if (protocolSelection === "SSLv2") {
         return "<option value=\"DES-CBC3\"></option>\n\
                         <option value=\"IDEA-CBC\"></option>\n\
                         <option value=\"DES-CBC\"></option>\n\
                         <option value=\"RC2-CBC\"></option>\n\
                         <option value=\"RC4\"></option>";
-    } else if (protocolSelection === "SSL 3.0") {
-        return "<option value=\"DES-CBC3\">\n\
+    } else if (protocolSelection === "SSLv3") {
+        return "<option value=\"AES\"></option>\n\
+                        <option value=\"DES-CBC3\"></option>\n\
                         <option value=\"IDEA-CBC\"></option>\n\
                         <option value=\"DES-CBC\"></option>\n\
                         <option value=\"RC2-CBC\"></option>\n\
                         <option value=\"RC4\"></option>\n\
                         <option value=\"none\"></option>";
-    } else if (protocolSelection === "TLS 1.0") {
-        return "<option value=\"AES-CBC\">\n\
+    } else if (protocolSelection === "TLSv1.0") {
+        return "<option value=\"AES\"></option>\n\
+                                <option value=\"AES-CBC\">\n\
                                 <option value=\"CAMELLIA-CBC\"></option>\n\
                                 <option value=\"ARIA-CBC\"></option>\n\
                                 <option value=\"SEED-CBC\"></option>\n\
@@ -131,8 +163,9 @@ function getCiphers(protocolSelection) {
                                 <option value=\"RC2-CBC\"></option>\n\
                                 <option value=\"RC4\"></option>\n\
                                 <option value=\"none\"></option>";
-    } else if (protocolSelection === "TLS 1.1") {
-        return "<option value=\"AES-CBC\">\n\
+    } else if (protocolSelection === "TLSv1.1") {
+        return "<option value=\"AES\"></option>\n\
+                                <option value=\"AES-CBC\">\n\
                                 <option value=\"CAMELLIA\"></option>\n\
                                 <option value=\"CAMELLIA-CBC\"></option>\n\
                                 <option value=\"ARIA-CBC\"></option>\n\
@@ -143,8 +176,9 @@ function getCiphers(protocolSelection) {
                                 <option value=\"DES-CBC\"></option>\n\
                                 <option value=\"RC4\"></option>\n\
                                 <option value=\"none\"></option>";
-    } else if (protocolSelection === "TLS 1.2") {
-        return "<option value=\"AES-GCM\">\n\
+    } else if (protocolSelection === "TLSv1.2") {
+        return "<option value=\"AES\"></option>\n\
+                                <option value=\"AES-GCM\"></option>\n\
                                 <option value=\"AES-CCM\"></option>\n\
                                 <option value=\"AES-CBC\"></option>\n\
                                 <option value=\"CAMELLIA\"></option>\n\
@@ -159,7 +193,8 @@ function getCiphers(protocolSelection) {
                                 <option value=\"RC4\"></option>\n\
                                 <option value=\"none\"></option>";
     } else {
-        return "<option value=\"AES-GCM\">\n\
+        return "<option value=\"AES\"></option>\n\
+                                <option value=\"AES-GCM\"></option>\n\
                                 <option value=\"AES-CCM\"></option>\n\
                                 <option value=\"AES-CBC\"></option>\n\
                                 <option value=\"CAMELLIA\"></option>\n\
@@ -181,7 +216,8 @@ function getCiphers(protocolSelection) {
 
 function getKeyLengths(protocolSelection, cipherSelection) {
 
-    if (cipherSelection === "AES-GCM" || cipherSelection === "AES-CCM" || cipherSelection === "AES-CBC"
+    if (cipherSelection === "AES" || cipherSelection === "AES-GCM" || cipherSelection === "AES-CCM"
+            || cipherSelection === "AES-CBC" || cipherSelection === "CAMELLIA"
             || cipherSelection === "CAMELLIA-GCM" || cipherSelection === "CAMELLIA-CBC"
             || cipherSelection === "ARIA-GCM" || cipherSelection === "ARIA-CBC") {
         return "<option value=\"128\">\n\
@@ -204,7 +240,7 @@ function getKeyLengths(protocolSelection, cipherSelection) {
     } else if (cipherSelection === "ChaCha-20-POLY1305") {
         return "<option value=\"256\">";
     } else if (cipherSelection === "RC4") {
-        if (protocolSelection === "TLS 1.1" || protocolSelection === "TLS 1.2") {
+        if (protocolSelection === "TLSv1.1" || protocolSelection === "TLSv1.2") {
             return "<option value=\"128\">";
         } else {
             return "option value=\"40\">\n\
@@ -222,12 +258,12 @@ function getKeyLengths(protocolSelection, cipherSelection) {
 
 function getMsgAuth(protocolSelection) {
 
-    if (protocolSelection === "SSL 2.0") {
+    if (protocolSelection === "SSLv2") {
         return "<option value=\"MD5\">";
-    } else if (protocolSelection === "SSL 3.0" || protocolSelection === "TLS 1.0"
-            || protocolSelection === "TLS 1.1") {
+    } else if (protocolSelection === "SSLv3" || protocolSelection === "TLSv1.0"
+            || protocolSelection === "TLSv1.1") {
         return "<option value=\"MD5\">\n\
-                <option value=\"SHA1\">\n\
+                <option value=\"SHA\">\n\
                 <option value=\"SHA1\">\n\
                 <option value=\"GOST-28147-89-IMIT\">\n\
                 <option value=\"GOST-R34.11-94\">";
