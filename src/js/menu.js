@@ -28,10 +28,37 @@ document.getElementById("footer").innerHTML =
 " ein Projekt der HfT Stuttgart. "+
 " &#124;<a href='url'> Kontakt</a> "+
 " &#124;<a href='url'> Impressum</a> "+
-" &#124;<a href='url'> Subscribe </a> "+
+" &#124;<a href='#subscription' data-toggle='modal'> Subscribe </a> "+
 "</div>";
 
 
-
-
-
+document.getElementById("subscribe").innerHTML =
+    "<div class='container'>"+
+    "<div class='modal fade' id='subscription' role='dialog'>"+
+    "   <div class='modal-dialog'>"+
+    "       <div class='modal-content'>"+
+    "           <div class='modal-header'>"+
+    "               <button type='button' class='close' data-dismiss='modal'>&times;</button>"+
+    "               <h4 class='modal-title'><b>Subscribe for get e-mailed</b></h4>"+
+    "           </div>"+
+    "           <div class='modal-body'>"+
+    "               <div class='form-group'>"+
+    "                   <label for='name'>Your Name:</label>"+
+    "                   <input type='email' class='form-control' id='name' placeholder='Your Name'>"+
+    "               </div>"+
+    "               <div class='input-group input-group-lg'>"+
+    "                   <span class='input-group-addon' id='sizing-addon1'>@</span>"+
+    "                   <input type='text' class='form-control' placeholder='Email' aria-describedby='sizing-addon1'>"+
+    "               </div><br><hr>"+
+    "               <div>"+
+    "                   <input id='agree' name='radio' type='radio' class='radio'>"+
+    "                   <label for='agree'>I hereby agree to receive e-mails!</label>"+
+    "               </div>"+
+    "           </div>"+
+    "       <div class='modal-footer'>"+
+    "           <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>"+
+    "           <button type='button' class='btn btn-success'>Save</button>"+
+    "       </div>"+
+    "   </div>"+
+    "</div>"+
+    "</div>";<!--End of Modal-Window-->
