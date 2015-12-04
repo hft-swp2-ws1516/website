@@ -280,80 +280,86 @@
                         <legend>SSL / TLS Version</legend>
                         <input id="filterProtocol" list="ssl_tls" onblur="manageFilterSelection()">
                         <datalist id="ssl_tls">
-                            <option value="SSL 2.0">
-                            <option value="SSL 3.0">
-                            <option value="TLS 1.0">
-                            <option value="TLS 1.1">
-                            <option value="TLS 1.2">
+                            <option value="SSL 2.0"></option>
+                            <option value="SSL 3.0"></option>
+                            <option value="TLS 1.0"></option>
+                            <option value="TLS 1.1"></option>
+                            <option value="TLS 1.2"></option>
                         </datalist>
                     </fieldset>
                     <fieldset>
                         <legend>Key Exchange and Authentication</legend>
-                        <input id="filterKeyExAndAuth" list="keyExAuth" onblur="manageFilterSelection()">
+                        <input id="filterKeyExAndAuth" list="keyExAuth" onkeyup="manageFilterSelection()"
+                               onblur="manageFilterSelection()">
                         <datalist id="keyExAuth">
-                            <option value="RSA">
-                            <option value="DH_RSA">
-                            <option value="DHE_RSA">
-                            <option value="ECDH_RSA">
-                            <option value="ECDHE_RSA">
-                            <option value="DH_DSS">
-                            <option value="DHE_DSS">
-                            <option value="ECDH_ECDSA">
-                            <option value="ECDHE_ECDSA">
-                            <option value="PSK">
-                            <option value="PSK_RSA">
-                            <option value="DHE_PSK">
-                            <option value="ECDHE_PSK">
-                            <option value="SRP">
-                            <option value="SRP_DSS">
-                            <option value="SRP_RSA">
-                            <option value="KERBEROS">
-                            <option value="DH_ANON">
-                            <option value="ECDH_ANON">
-                            <option value="GOST">
+                            <option value="RSA"></option>
+                            <option value="DH-RSA"></option>
+                            <option value="DHE-RSA"></option>
+                            <option value="ECDH-RSA"></option>
+                            <option value="ECDHE-RSA"></option>
+                            <option value="DH-DSS"></option>
+                            <option value="DHE-DSS"></option>
+                            <option value="ECDH-ECDSA"></option>
+                            <option value="ECDHE-ECDSA"></option>
+                            <option value="PSK"></option>
+                            <option value="PSK-RSA"></option>
+                            <option value="DHE-PSK"></option>
+                            <option value="ECDHE-PSK"></option>
+                            <option value="SRP"></option>
+                            <option value="SRP-DSS"></option>
+                            <option value="SRP-RSA"></option>
+                            <option value="KERBEROS"></option>
+                            <option value="DH-ANON"></option>
+                            <option value="ECDH-ANON"></option>
+                            <option value="GOST"></option>
                         </datalist>
                     </fieldset>
                     <fieldset>
                         <legend>Bulk Cipher and Key Length (in bits)</legend>
-                        <input id="filterCipher" list="cipher" onblur="manageFilterSelection()">
+                        <input id="filterCipher" list="cipher" onkeyup="manageFilterSelection()" 
+                               onblur="manageFilterSelection()">
                         <datalist id="cipher">
-                            <option value="AES_GCM">
-                            <option value="AES_CCM">
-                            <option value="AES_CBC">
-                            <option value="CAMELLIA_GCM">
-                            <option value="CAMELLIA_CBC">
-                            <option value="ARIA_GCM">
-                            <option value="ARIA_CBC">
-                            <option value="SEED_CBC">
-                            <option value="3DES_EDE_CBC">
-                            <option value="GOST_28147-89_CNT">
-                            <option value="IDEA_CBC">
-                            <option value="DES_CBC">
-                            <option value="RC2_CBC">
-                            <option value="ChaCha_20-POLY1305">
-                            <option value="RC4">
-                            <option value="none">
+                            <option value="AES-GCM"></option>
+                            <option value="AES-CCM"></option>
+                            <option value="AES-CBC"></option>
+                            <option value="CAMELLIA"></option>
+                            <option value="CAMELLIA-GCM"></option>
+                            <option value="CAMELLIA-CBC"></option>
+                            <option value="ARIA-GCM"></option>
+                            <option value="ARIA-CBC"></option>
+                            <option value="SEED-CBC"></option>
+                            <option value="DES-CBC3"></option>
+                            <option value="GOST-28147-89-CNT"></option>
+                            <option value="IDEA-CBC"></option>
+                            <option value="DES-CBC"></option>
+                            <option value="RC2-CBC"></option>
+                            <option value="ChaCha-20-POLY1305"></option>
+                            <option value="RC4"></option>
+                            <option value="none"></option>
                         </datalist>
-                        <input id="filterKeyLen" list="keyLen" onblur="manageFilterSelection()">
+                        <input id="filterKeyLen" list="keyLen" onkeyup="manageFilterSelection()" 
+                               onblur="manageFilterSelection()">
                         <datalist id="keyLen">
-                            <option value="40">
-                            <option value="56">
-                            <option value="112">
-                            <option value="128">
-                            <option value="256">
+                            <option value="40"></option>
+                            <option value="56"></option>
+                            <option value="112"></option>
+                            <option value="128"></option>
+                            <option value="256"></option>
                         </datalist>
                     </fieldset>
                     <fieldset>
                         <legend>Message Authenticity</legend>
-                        <input id="filterMsgAuth" list="msgAuth" onblur="manageFilterSelection()">
+                        <input id="filterMsgAuth" list="msgAuth" onkeyup="manageFilterSelection()"
+                               onblur="manageFilterSelection()">
                         <datalist id="msgAuth">
-                            <option value="MD5">
-                            <option value="SHA1">
-                            <option value="SHA256">
-                            <option value="SHA384">
-                            <option value="AEAD">
-                            <option value="GOST_28147-89_IMIT">
-                            <option value="GOST_R34.11-94">
+                            <option value="MD5"></option>
+                            <option value="SHA"></option>    
+                            <option value="SHA1"></option>
+                            <option value="SHA256"></option>
+                            <option value="SHA384"></option>
+                            <option value="AEAD"></option>
+                            <option value="GOST-28147-89-IMIT"></option>
+                            <option value="GOST-R34.11-94"></option>
                         </datalist>
                     </fieldset>
                     <fieldset>
@@ -408,9 +414,12 @@
                         <br>
                     </fieldset>
                     <fieldset>
+                        <p id="displayFilterSelection"></p>
+                    </fieldset>
+                    <fieldset>
                         <div id="filterButtons">
                             <input id="filterApply" type="submit" value="Apply Filter">
-                            <input id="filterReset" type="reset" value="Reset Filter">
+                            <input id="filterReset" type="reset" value="Reset Filter" onClick="resetFilters()">
                         </div>
                     </fieldset>
                 </fieldset>
