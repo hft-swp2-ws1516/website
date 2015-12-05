@@ -38,7 +38,7 @@
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                      <li id="loadPFS"><a href="#PFS">How many TLS Server support Perfect Forward Secrecy?</a></li>
+                                      <li id="loadPFS"><a href="#PFS">Perfect Forward Secrecy Support</a></li>
                                       <li id="loadDHEParameter"><a href="#DHEkeygroups">Diffie-Hellman Keygroups</a></li>
                                       <li id="ciphersuites"><a href="#CipherSuites">Cipher Suites</a></li>
                                       <li role="separator" class="divider"></li>
@@ -113,8 +113,7 @@
     <script type="text/javascript" src="js/nouislider.min.js"></script>
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
-    <!-- Jquery ui -->
-    <script src="js/jquery-ui.min.js"></script>
+
     <script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
     <script>
 
@@ -264,19 +263,12 @@
                         width: 640
                     },
                     data: {
-                        labels: true,
-                        type: 'bar',
-                        json: testdaten.dhe,
-                        keys: {
-                            x: 'keysize',
-                            value: ['size', 'sizenew', 'percent']
-                        },
-                        types: {
-                            percent: 'line',
-                        },
-                        axes: {
-                            'percent': 'y2'
-                        },
+                        x: 'x',
+                        columns: [
+                        ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],
+                        ['data1', 30, 200, 100, 400, 150, 250],
+                        ['data2', 130, 340, 200, 500, 250, 350]
+                        ]
                     },
                     axis: {
                         x: {
@@ -330,52 +322,75 @@
 
                             // We need error handling, what if the response array has only on entry?
                             // Index for the two json elements which will be compared
-                            var b;
-                            var e;
+                            var beginning;
+                            var ending;
 
                             // index of begin json element and index of end json element
                             for (var i = 0; i < response.length; i++) {
                                 if (response[i].month == beginn) {
-                                    b = i;
+                                    beginning = i;
                                 }
                                 ;
                                 if (response[i].month == end) {
-                                    e = i;
+                                    ending = i;
                                 }
                                 ;
                             }
                             ;
 
+                            // filling the x axis with dates
+                            var months = ['x'];
+                            for (var i = beginning; i <= ending; i++) {
+                                months.push(response[i].month);
+                            };
+
+                            // filling data about pfs enabled
+                            var pfsEnabled = ['PFS Enabled'];
+                            for (var i = beginning; i <= ending; i++) {
+                                pfsEnabled.push(response[i].pfsEnabled);
+                            };
+
+                            // filling data about pfs disabled 
+                            var pfsDisabled =['PFS Disabled'];
+                            for (var i = beginning; i <= ending; i++) {
+                                pfsDisabled.push(response[i].pfsDisabled);
+                            };
+
+
                             // calc the increase or decline in percent
 
-                            var totalFirst = response[b].pfsEnabled + response[b].pfsDisabled;
-                            var pfs1Percent1 = ((response[b].pfsEnabled / totalFirst) * 100).toFixed(2);
-                            var pfs1Percent2 = ((response[b].pfsDisabled / totalFirst) * 100).toFixed(2);
+                            var totalFirst = response[beginning].pfsEnabled + response[beginning].pfsDisabled;
+                            var pfs1Percent1 = ((response[beginning].pfsEnabled / totalFirst) * 100).toFixed(2);
+                            var pfs1Percent2 = ((response[beginning].pfsDisabled / totalFirst) * 100).toFixed(2);
 
                             // alert(pfs1Percent1 + " " + pfs1Percent2);
 
+                            var totalSecond = response[ending].pfsEnabled + response[ending].pfsDisabled;
+                            pfs2Percent1 = ((response[ending].pfsEnabled / totalSecond) * 100).toFixed(2);
+                            pfs2Percent2 = ((response[ending].pfsDisabled / totalSecond) * 100).toFixed(2);
 
-                            var totalSecond = response[e].pfsEnabled + response[e].pfsDisabled;
-                            pfs2Percent1 = ((response[e].pfsEnabled / totalSecond) * 100).toFixed(2);
-                            pfs2Percent2 = ((response[e].pfsDisabled / totalSecond) * 100).toFixed(2);
+                           // alert(pfs2Percent1 + " " + pfs2Percent2);
 
-                            //alert(pfs2Percent1 + " " + pfs2Percent2);
+                           chart.load({
 
-                            chart.load({
-                                columns: [
-                                [beginn, response[b].pfsEnabled, response[b].pfsDisabled],
-                                [end, response[e].pfsEnabled, response[e].pfsDisabled],
-                                ['percent', pfs2Percent1 - pfs1Percent1, pfs2Percent2 - pfs1Percent2]
-                                ],
-                                types: {
-                                    percent: 'line',
-                                },
-                                axes: {
-                                    'percent': 'y2'
-                                },
-                                type: 'bar',
-                                unload: chart.columns,
-                            });
+                            columns: [
+                            months,
+                            pfsEnabled,
+                            pfsDisabled,
+                            ['change', pfs2Percent1 - pfs1Percent1, pfs2Percent2 - pfs1Percent2],
+
+                            ],
+
+                            types: {
+                                change: 'line',
+                            },
+                            axes: {
+                                'change': 'y2',
+                                'x': 'x'
+                            },
+                            type: 'line',
+                            unload: chart.columns,
+                        });
 
 
 
@@ -410,7 +425,7 @@
 
                     // empty all elements within the div tag with id dynamic
                     $("#dynamic").empty();
-                    $("#dropdownMenu1").html('How many Server support Perfect Forward Secrecy? <span class="caret"></span>');
+                    $("#dropdownMenu1").html('Perfect Forward Secrecy Support <span class="caret"></span>');
                 }
                 );
 
@@ -418,16 +433,9 @@
                 // This is called when the reload button is clicked!
                 $("#applytimespan").click(function ()
                 {
-                    // Check if start and end values of the slieder are the same
-                    var start = dateSlider.noUiSlider.get();
-                    // If yes then get normal Json
-                    if (start[0] == start[1]) {
-                        alert("Not Yet implemented");
-                    }
-                    // Otherwise get the two differen json objects, compare, and make a chart
-                    else {
-                        alert("Not Yet implemented");
-                    }
+                    // the called function depends of the hash value in the URL
+                    $( "#load"+window.location.hash.substring(1) ).trigger( "click" );
+
                 }
                 );
 
