@@ -1,3 +1,15 @@
+var HttpClient = function () {
+    this.get = function (url, callback, protocol, cipherString) {
+        var httpRequest = new XMLHttpRequest();
+        httpRequest.onreadystatechange = function () {
+            if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+                callback(httpRequest.responseText, protocol, cipherString);
+            }
+        };
+        httpRequest.open("GET", url, true);
+        httpRequest.send(null);
+    };
+};
 
 function initFilters() {
 
@@ -13,6 +25,7 @@ function initFilters() {
         document.getElementById("cipher").innerHTML = getCiphers("all");
         document.getElementById("keyLen").innerHTML = getKeyLengths("all", "all");
         document.getElementById("msgAuth").innerHTML = getMsgAuth("all");
+        document.getElementById("displayFilterSelection").innerHTML = "[none]";
     }
 
 }
@@ -54,8 +67,8 @@ function displayFilter() {
         }
 
 
-        document.getElementById("displayFilterSelection").innerHTML = "Current cipher string to search for:<br>\n\
-        " + [keyExAndAuth, bulkCipher, keyLen, msgAuth].join("");
+        document.getElementById("displayFilterSelection").innerHTML =
+                [keyExAndAuth, bulkCipher, keyLen, msgAuth].join("");
     }
 }
 
@@ -66,7 +79,38 @@ function resetFilters() {
     document.getElementById("keyLen").innerHTML = getKeyLengths("all");
     document.getElementById("msgAuth").innerHTML = getMsgAuth("all");
 
-    document.getElementById("displayFilterSelection").innerHTML = "";
+    document.getElementById("displayFilterSelection").innerHTML = "[none]";
+}
+
+function applyFilters() {
+
+    var url = "http://tls.thejetlag.de:1337/api/v0/ciphers/summary";
+    var tldSelection = document.getElementById("filterTLD").value;
+
+    if (tldSelection !== "") {
+        tldSelection = tldSelection.replace('.', '');
+        url += "?tld=" + tldSelection;
+    }
+
+    var protocol = document.getElementById("filterProtocol").value;
+    var cipherString = document.getElementById("displayFilterSelection").innerHTML;
+    var httpClient = new HttpClient();
+    httpClient.get(url, parseResponse, protocol, cipherString);
+
+}
+
+function parseResponse(response, protocol, cipherString) {
+
+    var totalHosts = "";
+    var matchingHosts = "";
+    response.split("month").forEach(function (monthlyScan) {
+        //Nooooo, StackOverFlow is down...
+    });
+
+
+
+
+
 }
 
 function getKeyAndAuth(protocolSelection) {
