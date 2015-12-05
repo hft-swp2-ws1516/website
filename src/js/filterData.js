@@ -101,14 +101,39 @@ function applyFilters() {
 
 function parseResponse(response, protocol, cipherString) {
 
-    var totalHosts = "";
-    var matchingHosts = "";
-    response.split("month").forEach(function (monthlyScan) {
-        //Nooooo, StackOverFlow is down...
+    var months = [];
+    var totalHosts = [];
+    var monthBody = [];
+    var hostsAccepting = [];
+    var hostsPreferring = [];
+
+    console.log("Hello!");
+    cipherString = "\"cipher\":\"" + cipherString + "\",";
+    console.log("Cipher string: " + cipherString);
+
+    response.match(/month.:.(\d*).(\d*)/g).forEach(function (month) {
+        months.push(month.split(":")[1].replace('"', ''));
     });
 
+    response.match(/totalHosts.:.(\d*)/g).forEach(function (number) {
+        totalHosts.push(number.split(":")[1]);
+    });
 
+    monthBody = response.match(/\[[^\[\]]*\]/g);
+    monthBody.forEach(function (outer) {
+        outer.match(/{(.*?)}/g).forEach(function (inner) {
+            var count = 0;
+            if (inner.match(protocol) !== null && inner.match(cipherString) !== null) {
+                var count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
+                if (inner.indexOf("preferred") > -1) {
+                    hostsPreferring.push(count);
+                } else {
+                    hostsAccepting.push(count);
+                }
+            }
+        });
 
+    });
 
 
 }
