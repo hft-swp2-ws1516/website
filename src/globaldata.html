@@ -40,6 +40,7 @@
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                                       <li id="loadPFS"><a href="#PFS">Perfect Forward Secrecy Support</a></li>
                                       <li id="loadDHEParameter"><a href="#DHEkeygroups">Diffie-Hellman Keygroups</a></li>
+                                      <li id="loadECDHEParameter"><a href="#ECDHEkeygroups">Elliptic Curve Diffie-Hellman Keygroups</a></li>
                                       <li id="ciphersuites"><a href="#CipherSuites">Cipher Suites</a></li>
                                       <li role="separator" class="divider"></li>
                                       <li><a href="#logjam">Logjam Attack</a></li>
@@ -121,9 +122,13 @@
             // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
             window.onload = function () {
 
-
-            //Configuration:
-            var numberOfCharts = 3;
+                //Configuration:
+                var numberOfCharts = 4;
+                // Timeout setup for ajax
+                // If the API is not responding within 2 seconds, the hard coded charts will be loaded
+                $.ajaxSetup({
+                    timeout: 3000
+                });
 
                 // helper function for Timeslider
                 function timestamp(str) {
@@ -147,14 +152,8 @@
                     start: [new Date().getTime(), new Date().getTime()],
                 });
 
-                // Create a list of day and monthnames.
-                var
-                weekdays = [
-                "Sunday", "Monday", "Tuesday",
-                "Wednesday", "Thursday", "Friday",
-                "Saturday"
-                ],
-                months = [
+                // Create a list of monthnames.
+                var  months = [
                 "January", "February", "March",
                 "April", "May", "June", "July",
                 "August", "September", "October",
@@ -178,25 +177,6 @@
                 dateSlider.noUiSlider.on('update', function (values, handle) {
                     dateValues[handle].innerHTML = formatDate(new Date(+values[handle]));
                 });
-
-
-                // Append a suffix to dates.
-                // Example: 23 => 23rd, 1 => 1st.
-                function nth(d) {
-                    if (d > 3 && d < 21)
-                        return 'th';
-                    switch (d % 10) {
-                        case 1:
-                        return "st";
-                        case 2:
-                        return "nd";
-                        case 3:
-                        return "rd";
-                        default:
-                        return "th";
-                    }
-                }
-
 
 
                 // Sample Data, this is ja required json format, that c3 requires
@@ -290,12 +270,6 @@
                 });
 
 
-                // Timeout setup for ajax
-                // If the API is not responding within 2 seconds, the hard coded charts will be loaded
-                $.ajaxSetup({
-                    timeout: 6000
-                });
-
 
                 // Formatting date because of Datefield  e.g. 2015_11 field in the api
                 function formatDate2(date) {
@@ -371,8 +345,9 @@
 
                            // alert(pfs2Percent1 + " " + pfs2Percent2);
 
-                           chart.load({
+                     
 
+                           chart.load({
                             columns: [
                             months,
                             pfsEnabled,
@@ -391,27 +366,17 @@
                             type: 'line',
                             unload: chart.columns,
                         });
-
-
-
-
-                            //alert("beginn"+ b +" end "+ e);
-
-
-                        } else {
-                            chart.load({
+                       } else {
+                        chart.load({
                                 // json format [{ .... }]
-                                json: [response[0]],
+                                json: [response[response.length-1]],
                                 keys: {
                                     value: ['pfsEnabled', 'pfsDisabled']
                                 },
                                 type: 'pie',
                                 unload: chart.columns,
                             });
-                        }
-
-
-                    }).error(function () {
+                    }}).error(function () {
                         alert("Error Loading JSON");
                         chart.load({
                             json: test_array_JSONs,
@@ -450,12 +415,67 @@
                     // Load data from the server using a HTTP GET request
                     // jquery.get is a equivalent to $.ajax({....
                         jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
+                            // remove ECDHE data 
+                            var latestElement = response[response.length-1].distribution;
+                            for(var i = latestElement.length - 1; i >= 0; i--) {
+                                if (latestElement[i].kx == "ECDH") {
+                                    latestElement.splice(i, 1);
+                                };
+                            }
+
                             chart.load({
                                 type: 'bar',
-                                json: response[0].distribution,
+                                json: response[response.length-1].distribution,
                                 keys: {
-                                    x: 'kx',
-                                    value: ['count', 'kxStrength']
+                                    x: 'kxStrength',
+                                    value: ['count']
+                                },
+                                unload: chart.columns,
+                            });
+                        }).error(function () {
+                            alert("Error Loading JSON");
+                            chart.load({
+                                type: 'bar',
+                                json: testdaten.dhe,
+                                keys: {
+                                    x: 'keysize',
+                                    value: ['size']
+                                },
+                                unload: chart.columns,
+                            });
+                        });
+
+                    // takes the dynamic div tag out of the DOM
+                    $("#dynamic").empty();
+                    $("#dropdownMenu1").html('Diffie-Hellman Keygroups <span class="caret"></span>');
+                }
+                );
+
+
+             /*
+                 * Load DHE-Parameter-Chart function with one Y-Axis.
+                 */
+
+                 $("#loadECDHEParameter").click(function ()
+                 {
+
+                    // Load data from the server using a HTTP GET request
+                    // jquery.get is a equivalent to $.ajax({....
+                        jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
+                            // remove ECDHE data 
+                            var latestElement = response[response.length-1].distribution;
+                            for(var i = latestElement.length - 1; i >= 0; i--) {
+                                if (latestElement[i].kx == "DH") {
+                                    latestElement.splice(i, 1);
+                                };
+                            }
+
+                            chart.load({
+                                type: 'bar',
+                                json: response[response.length-1].distribution,
+                                keys: {
+                                    x: 'kxStrength',
+                                    value: ['count']
                                 },
                                 unload: chart.columns,
                             });
@@ -496,7 +516,6 @@
                  var globalChartNumber = 1;
 
 
-
                  function loadChartbyNumber(number) {
                     switch(number){
                         case 1:
@@ -511,8 +530,13 @@
                         window.location = '#DHEkeygroups';
                         break;
                         case 3:
-                        $( "#ciphersuites" ).trigger( "click" );
+                        $( "#loadECDHEParameter" ).trigger( "click" );
                         globalChartNumber = 3;
+                        window.location = '#ECDHEParameter';
+                        break;
+                        case 4:
+                        $( "#ciphersuites" ).trigger( "click" );
+                        globalChartNumber = 4;
                         $('#nextchart').hide();
                         window.location = '#CipherSuites';
                         break;
@@ -521,7 +545,6 @@
 
                     }
                 }
-
 
                 var hash = window.location.hash.substring(1);
 
@@ -533,18 +556,14 @@
                     loadChartbyNumber(2);
                     break;
                     case 'CipherSuites':
-                    loadChartbyNumber(3);
+                    loadChartbyNumber(4);
                     break;
+                    case 'ECDHEParameter':
+                    loadChartbyNumber(3);
                     default:
                     var random = Math.floor((Math.random() * numberOfCharts) + 1); 
                     loadChartbyNumber(random);
                 }
-
-
-                /*
-                 * randomly load a chart
-                 */
-
 
                 /*
                  * Select previous or next chart by decreasing or increasing the globalnumber
@@ -560,7 +579,6 @@
                     return;
                 };
                 loadChartbyNumber(globalChartNumber);
-
 
             }
             );
@@ -580,69 +598,8 @@
                 }
                 );
 
-                // !! The following charts are only for test purposes !!
-                // Second chart with multidimensinonal Array. I didn't figure out how we can use the additional y-axis
-                // in the first chart
+             };
+             </script>
 
-                var charty2 = c3.generate({
-                    bindto: '#charty2',
-                    size: {
-                        width: 640
-                    },
-                    data: {
-                        columns: [
-                        ['key-size', 634, 21254, 1432, 253542, 11343, 132543],
-                        ['percent', 1, 10, 2, 80, 6, 20],
-                        ],
-                        type: 'bar',
-                        types: {
-                            percent: 'line',
-                        },
-                        axes: {
-                            'percent': 'y2'
-                        },
-                    },
-                    axis: {
-                        x: {
-                            type: 'category',
-                            categories: ['256', '512', '768', '1024', '1536', '2048']
-                        },
-                        y: {
-                            label: {
-                                text: 'Counts',
-                                position: 'outer-middle'
-                            }
-                        },
-                        y2: {
-                            show: true,
-                            label: {
-                                text: 'In peprcent',
-                                position: 'outer-middle'
-                            },
-                            max: 100,
-                            min: -100
-                        }
-                    }
-
-
-                });
-
-
-var donutChart = c3.generate({
-    bindto: '#pie',
-    data: {
-        json: test_array_JSONs,
-        keys: {
-            value: ['PFS enabled', 'PFS Disabled']
-        },
-        type: 'pie'
-    }
-});
-
-
-
-};
-</script>
-
-</body>
-</html>
+         </body>
+         </html>
