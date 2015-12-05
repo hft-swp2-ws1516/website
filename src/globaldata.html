@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>TLS analyser</title>
-        <!-- CSS Stylesheets -->
-        <link rel="stylesheet" href="css/statistics.css">
-        <link href="css/site.css" rel="stylesheet">
-        <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <!-- Load c3.css -->
-        <link href="js/c3-0.4.10/c3.css" rel="stylesheet" type="text/css">
-        <!-- noUISlider c3.css -->
-        <link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
-        <!-- jquery ui css -->
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/datepicker/bootstrap-datepicker3.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>TLS analyser</title>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/statistics.css">
+    <link href="css/site.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Load c3.css -->
+    <link href="js/c3-0.4.10/c3.css" rel="stylesheet" type="text/css">
+    <!-- noUISlider c3.css -->
+    <link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
+    <!-- jquery ui css -->
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/datepicker/bootstrap-datepicker3.css">
+</head>
 
-    <body>
+<body>
         <!-- Use this for the new menuitems. If they are any changes just remember you should change the menu.js file into js-folder
-            and the menu item will display dynamicly -->
+        and the menu item will display dynamicly -->
         <nav id="nav01" class="navbar navbar-default navbar-fixed-top"></nav>
 
         <div class="container">
@@ -38,103 +38,93 @@
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li id="loadPFS"><a href="#">How many TLS Server support Perfect Forward Secrecy?</a></li>
-                                        <li id="loadDHEParameter"><a href="#">Diffie-Hellman Keygroups</a></li>
-                                        <li id="ciphersuites"><a href="#">Cipher Suites</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Separated link</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Content will be loaded dynamically exterm html pages with .load() function -->
-                        <div id="dynamic"></div>
+                                      <li id="loadPFS"><a href="#PFS">How many TLS Server support Perfect Forward Secrecy?</a></li>
+                                      <li id="loadDHEParameter"><a href="#DHEkeygroups">Diffie-Hellman Keygroups</a></li>
+                                      <li id="ciphersuites"><a href="#CipherSuites">Cipher Suites</a></li>
+                                      <li role="separator" class="divider"></li>
+                                      <li><a href="#logjam">Logjam Attack</a></li>
+                                      <li><a href="#certs">Certificates</a></li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- Content will be loaded dynamically exterm html pages with .load() function -->
+                      <div id="dynamic"></div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Select Timespan (Slider)</h3>
-                            </div>
-                            <div class="panel-body">
-                                <!-- noUIslider -->
-                                Timespan:
-                                <div  id="slider-date"></div>
-                                <br>
-                                Start: <span id="event-start"></span><br>
-                                End: <span id="event-end"></span> <br><br>
-                                <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
-                            </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Select Timespan (Slider)</h3>
                         </div>
-                        <!-- alternativly Date Picker (from jquery ui lib) -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Select Timespan (Datepicker)</h3>
-                            </div>
-                            <div class="panel-body">
-                                <!-- jQuery ui Datepicker-->
-                                <label for="startDate">Start :</label>
-                                <input name="startDate" id="datepickerStart" class="date-picker" /><br>
-                                <label for="startDate">End :</label>
-                                <input name="startDate" id="datepickerEnd" class="date-picker" />
-                                <br><br>
-                                <button class="btn btn-default">Apply Timespan</button>
-                            </div>
+                        <div class="panel-body">
+                            <!-- noUIslider -->
+                            Timespan:
+                            <div  id="slider-date"></div>
+                            <br>
+                            Start: <span id="event-start"></span><br>
+                            End: <span id="event-end"></span> <br><br>
+                            <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
                         </div>
-
                     </div>
-
-                    <!-- Graphs -->
-                    <div class="col-md-8">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-
-                                <div id="charts">
-                                    <!-- The charts are displayed here -->
-                                    <div id="chart"></div>
-                                    <!-- display next or previous chart -->
-                                    <nav>
-                                        <ul class="pager">
-                                            <button id="previouschart" type="button" class="btn btn-default btn-lg">
-                                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                            </button>
-                                            <button id="nextchart" type="button" class="btn btn-default btn-lg">
-                                                <span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                            </button>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
 
                 </div>
+
+                <!-- Graphs -->
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+
+                            <div id="charts">
+                                <!-- The charts are displayed here -->
+                                <div id="chart"></div>
+                                <!-- display next or previous chart -->
+                                <nav>
+                                    <ul class="pager">
+                                        <button id="previouschart" type="button" class="btn btn-default btn-lg">
+                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        </button>
+                                        <button id="nextchart" type="button" class="btn btn-default btn-lg">
+                                            <span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        </button>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
             </div>
         </div>
-        <footer id="footer"></footer>
-        <div id="subscribe"></div>
-        <!-- Skripts are located in the end of the Body tag for faster Page Loading -->
-        <!-- for the menu -->
-        <script src="js/menu.js"></script>
-        <!-- Load d3.js and c3.js -->
-        <script src="js/c3-0.4.10/d3.min.js" charset="utf-8"></script>
-        <script src="js/c3-0.4.10/c3.min.js"></script>
-        <!-- JQuery CDN -->
-        <script src="js/jquery-1.11.3.min.js"></script>
-        <!-- Filter Menu -->
-        <script type="text/javascript" src="js/filterData.js"></script>
-        <!-- noUislider -->
-        <script type="text/javascript" src="js/nouislider.min.js"></script>
-        <!-- Bootstrap -->
-        <script src="js/bootstrap.min.js"></script>
-        <!-- Jquery ui -->
-        <script src="js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
-        <script>
+    </div>
+    <footer id="footer"></footer>
+    <div id="subscribe"></div>
+    <!-- Skripts are located in the end of the Body tag for faster Page Loading -->
+    <!-- for the menu -->
+    <script src="js/menu.js"></script>
+    <!-- Load d3.js and c3.js -->
+    <script src="js/c3-0.4.10/d3.min.js" charset="utf-8"></script>
+    <script src="js/c3-0.4.10/c3.min.js"></script>
+    <!-- JQuery CDN -->
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <!-- Filter Menu -->
+    <script type="text/javascript" src="js/filterData.js"></script>
+    <!-- noUislider -->
+    <script type="text/javascript" src="js/nouislider.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Jquery ui -->
+    <script src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
+    <script>
 
 
             // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
             window.onload = function () {
+
+
+            //Configuration:
+            var numberOfCharts = 3;
 
                 // helper function for Timeslider
                 function timestamp(str) {
@@ -160,29 +150,29 @@
 
                 // Create a list of day and monthnames.
                 var
-                        weekdays = [
-                            "Sunday", "Monday", "Tuesday",
-                            "Wednesday", "Thursday", "Friday",
-                            "Saturday"
-                        ],
-                        months = [
-                            "January", "February", "March",
-                            "April", "May", "June", "July",
-                            "August", "September", "October",
-                            "November", "December"
-                        ];
+                weekdays = [
+                "Sunday", "Monday", "Tuesday",
+                "Wednesday", "Thursday", "Friday",
+                "Saturday"
+                ],
+                months = [
+                "January", "February", "March",
+                "April", "May", "June", "July",
+                "August", "September", "October",
+                "November", "December"
+                ];
 
                 // Create a string representation of the date.
                 function formatDate(date) {
                     return  months[date.getMonth()] + " " +
-                            date.getFullYear();
+                    date.getFullYear();
                 }
 
 
                 // Span Elements -> The start and end values are displayed there
                 var dateValues = [
-                    document.getElementById('event-start'),
-                    document.getElementById('event-end')
+                document.getElementById('event-start'),
+                document.getElementById('event-end')
                 ];
 
                 // Update Handler -> Updates the span elements
@@ -198,13 +188,13 @@
                         return 'th';
                     switch (d % 10) {
                         case 1:
-                            return "st";
+                        return "st";
                         case 2:
-                            return "nd";
+                        return "nd";
                         case 3:
-                            return "rd";
+                        return "rd";
                         default:
-                            return "th";
+                        return "th";
                     }
                 }
 
@@ -213,59 +203,59 @@
                 // Sample Data, this is ja required json format, that c3 requires
                 var testdaten = {
                     "dhe": [
-                        {
-                            "keysize": "256",
-                            "size": 3123,
-                            "sizenew": 3320,
-                            "percent": 0.5,
-                        },
-                        {
-                            "keysize": "512",
-                            "size": 31232,
-                            "sizenew": 29000,
-                            "percent": -0.4,
-                        },
-                        {
-                            "keysize": "768",
-                            "size": 6534,
-                            "sizenew": 6203,
-                            "percent": -0.1,
-                        },
-                        {
-                            "keysize": "1024",
-                            "size": 256434,
-                            "sizenew": 270323,
-                            "percent": 3,
-                        },
-                        {
-                            "keysize": "2048",
-                            "size": 65100,
-                            "sizenew": 124303,
-                            "percent": 50,
-                        },
+                    {
+                        "keysize": "256",
+                        "size": 3123,
+                        "sizenew": 3320,
+                        "percent": 0.5,
+                    },
+                    {
+                        "keysize": "512",
+                        "size": 31232,
+                        "sizenew": 29000,
+                        "percent": -0.4,
+                    },
+                    {
+                        "keysize": "768",
+                        "size": 6534,
+                        "sizenew": 6203,
+                        "percent": -0.1,
+                    },
+                    {
+                        "keysize": "1024",
+                        "size": 256434,
+                        "sizenew": 270323,
+                        "percent": 3,
+                    },
+                    {
+                        "keysize": "2048",
+                        "size": 65100,
+                        "sizenew": 124303,
+                        "percent": 50,
+                    },
                     ],
                     "pfs": [
-                        {
-                            "PFS: ": "PFS enabled",
-                            "amount": 80,
-                        },
-                        {
-                            "PFS: ": "PFS disabled",
-                            "amount": 80,
-                        }
+                    {
+                        "PFS: ": "PFS enabled",
+                        "amount": 80,
+                    },
+                    {
+                        "PFS: ": "PFS disabled",
+                        "amount": 80,
+                    }
                     ]
 
                 };
 
                 var test_array_JSONs = [
-                    {"PFS enabled": 80, "PFS Disabled": 20},
+                {"PFS enabled": 80, "PFS Disabled": 20},
                 ];
 
 
                 /*
                  * All in one Chart.
                  */
-                var chart = c3.generate({
+                 var chart = c3.generate({
                     bindto: '#chart',
                     legend: {
                         show: true,
@@ -326,11 +316,11 @@
                  * Load PFS-Pie-Chart function.
                  */
 
-                $("#loadPFS").click(function ()
-                {
+                 $("#loadPFS").click(function ()
+                 {
                     // Load data from the server using a HTTP GET request
                     // jquery.get is a equivalent to $.ajax({....
-                    jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/overview", function (response) {
+                        jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/overview", function (response) {
                         // Check if start and end values of the slieder are the same
                         var start = dateSlider.noUiSlider.get();
                         if (start[0] != start[1]) {
@@ -373,9 +363,9 @@
 
                             chart.load({
                                 columns: [
-                                    [beginn, response[b].pfsEnabled, response[b].pfsDisabled],
-                                    [end, response[e].pfsEnabled, response[e].pfsDisabled],
-                                    ['percent', pfs2Percent1 - pfs1Percent1, pfs2Percent2 - pfs1Percent2]
+                                [beginn, response[b].pfsEnabled, response[b].pfsDisabled],
+                                [end, response[e].pfsEnabled, response[e].pfsDisabled],
+                                ['percent', pfs2Percent1 - pfs1Percent1, pfs2Percent2 - pfs1Percent2]
                                 ],
                                 types: {
                                     percent: 'line',
@@ -446,33 +436,33 @@
                  * Load DHE-Parameter-Chart function with one Y-Axis.
                  */
 
-                $("#loadDHEParameter").click(function ()
-                {
+                 $("#loadDHEParameter").click(function ()
+                 {
 
                     // Load data from the server using a HTTP GET request
                     // jquery.get is a equivalent to $.ajax({....
-                    jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
-                        chart.load({
-                            type: 'bar',
-                            json: response[0].distribution,
-                            keys: {
-                                x: 'kx',
-                                value: ['count', 'kxStrength']
-                            },
-                            unload: chart.columns,
+                        jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
+                            chart.load({
+                                type: 'bar',
+                                json: response[0].distribution,
+                                keys: {
+                                    x: 'kx',
+                                    value: ['count', 'kxStrength']
+                                },
+                                unload: chart.columns,
+                            });
+                        }).error(function () {
+                            alert("Error Loading JSON");
+                            chart.load({
+                                type: 'bar',
+                                json: testdaten.dhe,
+                                keys: {
+                                    x: 'keysize',
+                                    value: ['size']
+                                },
+                                unload: chart.columns,
+                            });
                         });
-                    }).error(function () {
-                        alert("Error Loading JSON");
-                        chart.load({
-                            type: 'bar',
-                            json: testdaten.dhe,
-                            keys: {
-                                x: 'keysize',
-                                value: ['size']
-                            },
-                            unload: chart.columns,
-                        });
-                    });
 
                     // takes the dynamic div tag out of the DOM
                     $("#dynamic").empty();
@@ -484,8 +474,8 @@
                  * Load Cipher Suites Chart
                  */
 
-                $("#ciphersuites").click(function ()
-                {
+                 $("#ciphersuites").click(function ()
+                 {
                     chart.load({
                         unload: chart.columns,
                     });
@@ -495,65 +485,88 @@
                 }
                 );
 
-                var globalChartNumber = 1;
+                 var globalChartNumber = 1;
 
 
 
-                function loadChartbyNumber(number) {
-
-                    switch (number) {
+                 function loadChartbyNumber(number) {
+                    switch(number){
                         case 1:
-                            $("#loadPFS").trigger("click");
-                            globalChartNumber = 1;
-                            break;
+                        $( "#loadPFS" ).trigger( "click" );
+                        globalChartNumber = 1;
+                        $('#previouschart').hide();
+                        window.location = '#PFS';
+                        break;
                         case 2:
-                            $("#loadDHEParameter").trigger("click");
-                            globalChartNumber = 2;
-                            break;
+                        $( "#loadDHEParameter" ).trigger( "click" );
+                        globalChartNumber = 2;
+                        window.location = '#DHEkeygroups';
+                        break;
                         case 3:
-                            $("#ciphersuites").trigger("click");
-                            globalChartNumber = 3;
-                            break;
+                        $( "#ciphersuites" ).trigger( "click" );
+                        globalChartNumber = 3;
+                        $('#nextchart').hide();
+                        window.location = '#CipherSuites';
+                        break;
                         default:
-                            alert("Problem with loading Chart");
+                        alert("Problem with loading Chart");
+
                     }
                 }
 
 
+                var hash = window.location.hash.substring(1);
+
+                switch(hash){
+                    case 'PFS':
+                    loadChartbyNumber(1);
+                    break;
+                    case 'DHEkeygroups':
+                    loadChartbyNumber(2);
+                    break;
+                    case 'CipherSuites':
+                    loadChartbyNumber(3);
+                    break;
+                    default:
+                    var random = Math.floor((Math.random() * numberOfCharts) + 1); 
+                    loadChartbyNumber(random);
+                }
 
 
                 /*
                  * randomly load a chart
                  */
 
-                var random = Math.floor((Math.random() * 3) + 1);
-                loadChartbyNumber(random);
 
                 /*
                  * Select previous or next chart by decreasing or increasing the globalnumber
                  */
 
-                $("#previouschart").click(function ()
-                {
-                    globalChartNumber--;
-                    if (globalChartNumber <= 0) {
-                        globalChartNumber = 1;
-                        return;
-                    }
-                    ;
-                    loadChartbyNumber(globalChartNumber);
+                 $("#previouschart").click(function ()
+                 {
+                  globalChartNumber--;
+                  $('#nextchart').show();
+                  if (globalChartNumber <= 1 ) {
+                    loadChartbyNumber(1);
+                    globalChartNumber = 1;
+                    return;
+                };
+                loadChartbyNumber(globalChartNumber);
 
-                }
-                );
 
-                $("#nextchart").click(function ()
-                {
+            }
+            );
+
+                 $("#nextchart").click(function ()
+                 {
                     globalChartNumber++;
-                    if (globalChartNumber > 3) {
-                        globalChartNumber = 3;
+                    $('#previouschart').show();
+                    if (globalChartNumber >= numberOfCharts ) {
+                        globalChartNumber = numberOfCharts;
+                        $('#nextchart').hide();
+                        loadChartbyNumber(numberOfCharts);
                         return;
-                    }
-                    ;
+                    };
                     loadChartbyNumber(globalChartNumber);
 
                 }
@@ -570,8 +583,8 @@
                     },
                     data: {
                         columns: [
-                            ['key-size', 634, 21254, 1432, 253542, 11343, 132543],
-                            ['percent', 1, 10, 2, 80, 6, 20],
+                        ['key-size', 634, 21254, 1432, 253542, 11343, 132543],
+                        ['percent', 1, 10, 2, 80, 6, 20],
                         ],
                         type: 'bar',
                         types: {
@@ -607,91 +620,21 @@
                 });
 
 
-                var donutChart = c3.generate({
-                    bindto: '#pie',
-                    data: {
-                        json: test_array_JSONs,
-                        keys: {
-                            value: ['PFS enabled', 'PFS Disabled']
-                        },
-                        type: 'pie'
-                    }
-                });
-
-                $('#datepickerStart').datepicker(
-                        {
-                            dateFormat: "mm/yy",
-                            changeMonth: true,
-                            changeYear: true,
-                            showButtonPanel: true,
-                            onClose: function (dateText, inst) {
+var donutChart = c3.generate({
+    bindto: '#pie',
+    data: {
+        json: test_array_JSONs,
+        keys: {
+            value: ['PFS enabled', 'PFS Disabled']
+        },
+        type: 'pie'
+    }
+});
 
 
-                                function isDonePressed() {
-                                    return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
-                                }
 
-                                if (isDonePressed()) {
-                                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-                                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-                                    $(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
+};
+</script>
 
-                                    $('.date-picker').focusout()//Added to remove focus from datepicker input box on selecting date
-                                }
-                            },
-                            beforeShow: function (input, inst) {
-
-                                inst.dpDiv.addClass('month_year_datepicker')
-
-                                if ((datestr = $(this).val()).length > 0) {
-                                    year = datestr.substring(datestr.length - 4, datestr.length);
-                                    month = datestr.substring(0, 2);
-                                    $(this).datepicker('option', 'defaultDate', new Date(year, month - 1, 1));
-                                    $(this).datepicker('setDate', new Date(year, month - 1, 1));
-                                    $(".ui-datepicker-calendar").hide();
-                                }
-                            }
-                        });
-
-
-                $('#datepickerEnd').datepicker(
-                        {
-                            dateFormat: "mm/yy",
-                            changeMonth: true,
-                            changeYear: true,
-                            showButtonPanel: true,
-                            onClose: function (dateText, inst) {
-
-
-                                function isDonePressed() {
-                                    return ($('#ui-datepicker-div').html().indexOf('ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all ui-state-hover') > -1);
-                                }
-
-                                if (isDonePressed()) {
-                                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-                                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-                                    $(this).datepicker('setDate', new Date(year, month, 1)).trigger('change');
-
-                                    $('.date-picker').focusout()//Added to remove focus from datepicker input box on selecting date
-                                }
-                            },
-                            beforeShow: function (input, inst) {
-
-                                inst.dpDiv.addClass('month_year_datepicker')
-
-                                if ((datestr = $(this).val()).length > 0) {
-                                    year = datestr.substring(datestr.length - 4, datestr.length);
-                                    month = datestr.substring(0, 2);
-                                    $(this).datepicker('option', 'defaultDate', new Date(year, month - 1, 1));
-                                    $(this).datepicker('setDate', new Date(year, month - 1, 1));
-                                    $(".ui-datepicker-calendar").hide();
-                                }
-                            }
-                        });
-
-
-            };
-        </script>
-
-    </body>
+</body>
 </html>

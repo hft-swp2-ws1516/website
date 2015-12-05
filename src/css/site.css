@@ -48,7 +48,19 @@ ul#menu li a:hover {
 .content-wrapper{
     padding-top: 70px;
 }
+/* Timeslider only visible for mobile devices */
+@media (min-width:768px) {
+    #timeslider {
+        display: none;
+    }
+}
+
+@media (max-height: :768px) {
+    #datepicker {
+        display: none;
+    }
+}
 
 .ui-datepicker-calendar {
     display: none;
-    }
+}
