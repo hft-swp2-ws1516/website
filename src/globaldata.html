@@ -101,8 +101,6 @@
     <footer id="footer"></footer>
     <div id="subscribe"></div>
     <!-- Skripts are located in the end of the Body tag for faster Page Loading -->
-    <!-- for the menu -->
-    <script src="js/menu.js"></script>
     <!-- Load d3.js and c3.js -->
     <script src="js/c3-0.4.10/d3.min.js" charset="utf-8"></script>
     <script src="js/c3-0.4.10/c3.min.js"></script>
@@ -114,7 +112,8 @@
     <script type="text/javascript" src="js/nouislider.min.js"></script>
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
-
+    <!-- for the menu -->
+    <script src="js/menu.js"></script>
     <script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
     <script>
 
@@ -288,7 +287,7 @@
                      var comparedate = new Date(split[0], split[1]-1);
                      for (var j = i+1; j < response.length; j++) {
                          var split2 = response[j].month.split('_');
-                         if (comparedate.getTime() < new Date(split2[0],split2[1]-1).getTime()) 
+                         if (comparedate.getTime() < new Date(split2[0],split2[1]-1).getTime())
                          {
                             latestElement = j;
                         };
@@ -346,7 +345,7 @@
                                 pfsEnabled.push(response[i].pfsEnabled);
                             };
 
-                            // filling data about pfs disabled 
+                            // filling data about pfs disabled
                             var pfsDisabled =['PFS Disabled'];
                             for (var i = beginning; i <= ending; i++) {
                                 pfsDisabled.push(response[i].pfsDisabled);
@@ -437,7 +436,7 @@
                     // Load data from the server using a HTTP GET request
                     // jquery.get is a equivalent to $.ajax({....
                         jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
-                            // remove ECDHE data 
+                            // remove ECDHE data
                             var latestElement = response[response.length-1].distribution;
                             for(var i = latestElement.length - 1; i >= 0; i--) {
                                 if (latestElement[i].kx == "ECDH") {
@@ -484,7 +483,7 @@
                     // Load data from the server using a HTTP GET request
                     // jquery.get is a equivalent to $.ajax({....
                         jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
-                            // remove ECDHE data 
+                            // remove ECDHE data
                             var latestElement = response[response.length-1].distribution;
                             for(var i = latestElement.length - 1; i >= 0; i--) {
                                 if (latestElement[i].kx == "DH") {
@@ -593,7 +592,7 @@
                             },
                             unload: chart.columns,
                         });
-                       } 
+                       }
                    }).error(function () {
                     alert("Error Loading JSON");
                     chart.load({
@@ -668,7 +667,7 @@ switch(hash){
     loadChartbyNumber(5);
     break;
     default:
-    var random = Math.floor((Math.random() * numberOfCharts) + 1); 
+    var random = Math.floor((Math.random() * numberOfCharts) + 1);
     loadChartbyNumber(random);
 }
 
