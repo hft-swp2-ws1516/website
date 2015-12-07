@@ -1,16 +1,16 @@
 /*
-     ----------------------------------------------
-                         CHECKBOX
-     ----------------------------------------------
+     ---------------------------------------------------------------------------------
+                         CHECKBOX & Radio: just change the type you like
+     ---------------------------------------------------------------------------------
      */
 /* Base for label styling */
-[type="checkbox"]:not(:checked),
-[type="checkbox"]:checked {
+[type="radio"]:not(:checked),
+[type="radio"]:checked {
     position: absolute;
     left: -9999px;
 }
-[type="checkbox"]:not(:checked) + label,
-[type="checkbox"]:checked + label {
+[type="radio"]:not(:checked) + label,
+[type="radio"]:checked + label {
     position: relative;
     padding-left: 25px;
     cursor: pointer;
@@ -18,7 +18,7 @@
 
 /* checkbox aspect */
 
-[type="checkbox"]:checked + label:before {
+[type="radio"]:checked + label:before {
     content: '';
     position: absolute;
     left:0; top: 0px;
@@ -28,7 +28,7 @@
     border-radius: 3px;
 //box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
 }
-[type="checkbox"]:not(:checked) + label:before {
+[type="radio"]:not(:checked) + label:before {
     content: '';
     position: absolute;
     left:0; top: 0px;
@@ -40,7 +40,7 @@
 }
 /* checked mark aspect */
 
-[type="checkbox"]:checked + label:after {
+[type="radio"]:checked + label:after {
     content: '✔';
     position: absolute;
     top: 0; left: 4px;
@@ -48,7 +48,7 @@
     color: #f8f8f8;
     transition: all .2s;
 }
-[type="checkbox"]:not(:checked) + label:after {
+[type="radio"]:not(:checked) + label:after {
     content: '✔';
     position: absolute;
     top: 0; left: 4px;
@@ -58,30 +58,30 @@
 
 }
 /* checked mark aspect changes */
-[type="checkbox"]:not(:checked) + label:after {
+[type="radio"]:not(:checked) + label:after {
     opacity: 1;
     transform: scale(1);
 }
-[type="checkbox"]:checked + label:after {
+[type="radio"]:checked + label:after {
     opacity: 1;
     transform: scale(1);
 }
 /* disabled checkbox */
-[type="checkbox"]:disabled:not(:checked) + label:before,
-[type="checkbox"]:disabled:checked + label:before {
+[type="radio"]:disabled:not(:checked) + label:before,
+[type="radio"]:disabled:checked + label:before {
     box-shadow: none;
     border-color: #449d44;
     background-color: #0a2222;
 }
-[type="checkbox"]:disabled:checked + label:after {
+[type="radio"]:disabled:checked + label:after {
     color: #999;
 }
-[type="checkbox"]:disabled + label {
+[type="radio"]:disabled + label {
     color: #aaa;
 }
 /* accessibility */
-[type="checkbox"]:checked:focus + label:before,
-[type="checkbox"]:not(:checked):focus + label:before {
+[type="radio"]:checked:focus + label:before,
+[type="radio"]:not(:checked):focus + label:before {
     outline: none !important;
 }
 
@@ -90,6 +90,6 @@ label:hover:before {
 //border: 1px solid #4778d9!important;
 }
 
-[type="checkbox"]:not(:checked) + label {
+[type="radio"]:not(:checked) + label {
     color: #ddd;
 }
