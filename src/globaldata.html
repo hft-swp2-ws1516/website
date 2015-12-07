@@ -43,7 +43,7 @@
                                       <li id="loadECDHEParameter"><a href="#ECDHEkeygroups">Elliptic Curve Diffie-Hellman Keygroups</a></li>
                                       <li id="ciphersuites"><a href="#CipherSuites">Cipher Suites</a></li>
                                       <li role="separator" class="divider"></li>
-                                      <li><a href="#logjam">Logjam Attack</a></li>
+                                      <li id="loadlogjam"><a href="#logjam">Logjam Attack</a></li>
                                       <li><a href="#certs">Certificates</a></li>
                                   </ul>
                               </div>
@@ -123,12 +123,14 @@
             window.onload = function () {
 
                 //Configuration:
-                var numberOfCharts = 4;
+                var numberOfCharts = 5;
                 // Timeout setup for ajax
                 // If the API is not responding within 2 seconds, the hard coded charts will be loaded
                 $.ajaxSetup({
                     timeout: 3000
                 });
+
+                var globalChartNumber = 1;
 
                 // helper function for Timeslider
                 function timestamp(str) {
@@ -278,6 +280,26 @@
 
                 }
 
+                function getLatestElementIndex(response)
+                {
+                    var latestElement = 0;
+                    for (var i = 0; i < response.length; i++) {
+                     var split = response[i].month.split('_');
+                     var comparedate = new Date(split[0], split[1]-1);
+                     for (var j = i+1; j < response.length; j++) {
+                         var split2 = response[j].month.split('_');
+                         if (comparedate.getTime() < new Date(split2[0],split2[1]-1).getTime()) 
+                         {
+                            latestElement = j;
+                        };
+                    };
+                };
+
+                return latestElement;
+
+            }
+
+
                 /*
                  * Load PFS-Pie-Chart function.
                  */
@@ -345,7 +367,7 @@
 
                            // alert(pfs2Percent1 + " " + pfs2Percent2);
 
-                     
+
 
                            chart.load({
                             columns: [
@@ -494,7 +516,7 @@
 
                     // takes the dynamic div tag out of the DOM
                     $("#dynamic").empty();
-                    $("#dropdownMenu1").html('Diffie-Hellman Keygroups <span class="caret"></span>');
+                    $("#dropdownMenu1").html('Elliptic Curve Diffie-Hellman Keygroups <span class="caret"></span>');
                 }
                 );
 
@@ -513,57 +535,142 @@
                 }
                 );
 
-                 var globalChartNumber = 1;
+                 function filterResponseByTimespan(response, start, end){
+                    var filtered = [];
+                    var date = new Date(start.getFullYear(), start.getMonth());
+                    var end = new Date(end.getFullYear(), end.getMonth());
 
-
-                 function loadChartbyNumber(number) {
-                    switch(number){
-                        case 1:
-                        $( "#loadPFS" ).trigger( "click" );
-                        globalChartNumber = 1;
-                        $('#previouschart').hide();
-                        window.location = '#PFS';
-                        break;
-                        case 2:
-                        $( "#loadDHEParameter" ).trigger( "click" );
-                        globalChartNumber = 2;
-                        window.location = '#DHEkeygroups';
-                        break;
-                        case 3:
-                        $( "#loadECDHEParameter" ).trigger( "click" );
-                        globalChartNumber = 3;
-                        window.location = '#ECDHEParameter';
-                        break;
-                        case 4:
-                        $( "#ciphersuites" ).trigger( "click" );
-                        globalChartNumber = 4;
-                        $('#nextchart').hide();
-                        window.location = '#CipherSuites';
-                        break;
-                        default:
-                        alert("Problem with loading Chart");
-
-                    }
+                    while(date.getTime() <= end.getTime()) {
+                        for (var i = 0; i < response.length; i++) {
+                            if (response[i].month == formatDate2(date)) {
+                                filtered.push(response[i]);
+                                break;
+                            };
+                        };
+                        // if value is 12, then the first month of the next year will be set
+                        date.setMonth(date.getMonth()+1);
+                    };
+                    return filtered;
                 }
 
-                var hash = window.location.hash.substring(1);
 
-                switch(hash){
-                    case 'PFS':
-                    loadChartbyNumber(1);
-                    break;
-                    case 'DHEkeygroups':
-                    loadChartbyNumber(2);
-                    break;
-                    case 'CipherSuites':
-                    loadChartbyNumber(4);
-                    break;
-                    case 'ECDHEParameter':
-                    loadChartbyNumber(3);
-                    default:
-                    var random = Math.floor((Math.random() * numberOfCharts) + 1); 
-                    loadChartbyNumber(random);
-                }
+
+                /*
+                 * Load Logjam Graph
+                 */
+
+                 $("#loadlogjam").click(function ()
+                 {
+                    // Load data from the server using a HTTP GET request
+                    // jquery.get is a equivalent to $.ajax({....
+                        jQuery.get("http://tls.thejetlag.de:1337/api/v0/exp/overview", function (response) {
+
+                            var start = dateSlider.noUiSlider.get();
+                            if (start[0] != start[1]) {
+
+                            // filter response Array by timespan
+                            filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])) , new Date(parseInt(start[1])) );
+
+                            chart.load({
+                               json: filtered,
+                               keys: {
+                                x: 'month',
+                                value: ['expEnabled', 'expDisabled']
+                            },
+                            type: 'line',
+                            unload: chart.columns,
+                        });
+                        }else{
+                           // index of latest element in response array
+                           var latestElement = response[getLatestElementIndex(response)];
+
+                           var totalcount = latestElement.total;
+                           chart.load({
+                            type: 'pie',
+                            json: [latestElement],
+                            keys: {
+                                value: ['expEnabled', 'expDisabled']
+                            },
+                            unload: chart.columns,
+                        });
+                       } 
+                   }).error(function () {
+                    alert("Error Loading JSON");
+                    chart.load({
+                        type: 'bar',
+                        json: testdaten.dhe,
+                        keys: {
+                            x: 'keysize',
+                            value: ['size']
+                        },
+                        unload: chart.columns,
+                    });
+                });
+                   $("#dynamic").empty();
+                   $("#dropdownMenu1").html('Logjam Attack <span class="caret"></span>');
+
+               }
+               );
+
+
+
+
+function loadChartbyNumber(number) {
+    switch(number){
+        case 1:
+        $( "#loadPFS" ).trigger( "click" );
+        globalChartNumber = 1;
+        $('#previouschart').hide();
+        window.location = '#PFS';
+        break;
+        case 2:
+        $( "#loadDHEParameter" ).trigger( "click" );
+        globalChartNumber = 2;
+        window.location = '#DHEkeygroups';
+        break;
+        case 3:
+        $( "#loadECDHEParameter" ).trigger( "click" );
+        globalChartNumber = 3;
+        window.location = '#ECDHEParameter';
+        break;
+        case 4:
+        $( "#ciphersuites" ).trigger( "click" );
+        globalChartNumber = 4;
+        window.location = '#CipherSuites';
+        break;
+        case 5:
+        $( "#loadlogjam" ).trigger( "click" );
+        globalChartNumber = 5;
+        $('#nextchart').hide();
+        window.location = '#logjam';
+        break;
+        default:
+        alert("Problem with loading Chart");
+
+    }
+}
+
+var hash = window.location.hash.substring(1);
+
+switch(hash){
+    case 'PFS':
+    loadChartbyNumber(1);
+    break;
+    case 'DHEkeygroups':
+    loadChartbyNumber(2);
+    break;
+    case 'CipherSuites':
+    loadChartbyNumber(4);
+    break;
+    case 'ECDHEParameter':
+    loadChartbyNumber(3);
+    case 'logjam':
+    loadChartbyNumber(5);
+    break;
+    default:
+    var random = Math.floor((Math.random() * numberOfCharts) + 1); 
+    loadChartbyNumber(random);
+}
 
                 /*
                  * Select previous or next chart by decreasing or increasing the globalnumber
