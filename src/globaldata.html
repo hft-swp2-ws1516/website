@@ -390,6 +390,10 @@
                                                             'change': 'y2',
                                                             'x': 'x'
                                                         },
+                                                         colors: {
+                                                            pfsEnabled: '#2CA02C', // green
+                                                            pfsDisabled: '#D62728', // red
+                                                        },
                                                         type: 'line',
                                                         unload: chart.columns,
                                                     });
@@ -402,6 +406,10 @@
                                                         },
                                                         type: 'pie',
                                                         unload: chart.columns,
+                                                         colors: {
+                                                            pfsEnabled: '#2CA02C', // green
+                                                            pfsDisabled: '#D62728', // red
+                                                        },
                                                     });
                                                 }
                                             }).error(function () {
@@ -590,6 +598,10 @@
                                                         },
                                                         type: 'line',
                                                         unload: chart.columns,
+                                                         colors: {
+                                                            expEnabled: '#D62728', //green
+                                                            expDisabled: '#2CA02C', // red
+                                                        },
                                                     });
                                                 } else {
                                                     // index of latest element in response array
@@ -603,6 +615,10 @@
                                                             value: ['expEnabled', 'expDisabled']
                                                         },
                                                         unload: chart.columns,
+                                                            colors: {
+                                                            expEnabled: '#D62728', //green
+                                                            expDisabled: '#2CA02C', // red
+                                                        },
                                                     });
                                                 }
                                             }).error(function () {
