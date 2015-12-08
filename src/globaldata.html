@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>TLS analyser</title>
-    <!-- CSS Stylesheets -->
-    <link rel="stylesheet" href="css/statistics.css">
-    <link href="css/site.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/toggle.css">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Load c3.css -->
-    <link href="js/c3-0.4.10/c3.css" rel="stylesheet" type="text/css">
-    <!-- noUISlider c3.css -->
-    <link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
-    <!-- jquery ui css -->
-    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/datepicker/bootstrap-datepicker3.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>TLS analyser</title>
+        <!-- CSS Stylesheets -->
+        <link rel="stylesheet" href="css/statistics.css">
+        <link href="css/site.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/toggle.css">
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- Load c3.css -->
+        <link href="js/c3-0.4.10/c3.css" rel="stylesheet" type="text/css">
+        <!-- noUISlider c3.css -->
+        <link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
+        <!-- jquery ui css -->
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/datepicker/bootstrap-datepicker3.css">
+    </head>
 
-<body>
+    <body>
         <!-- Use this for the new menuitems. If they are any changes just remember you should change the menu.js file into js-folder
         and the menu item will display dynamicly -->
         <nav id="nav01" class="navbar navbar-default navbar-fixed-top"></nav>
@@ -39,674 +39,687 @@
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                      <li id="loadPFS"><a href="#PFS">Perfect Forward Secrecy Support</a></li>
-                                      <li id="loadDHEParameter"><a href="#DHEkeygroups">Diffie-Hellman Keygroups</a></li>
-                                      <li id="loadECDHEParameter"><a href="#ECDHEkeygroups">Elliptic Curve Diffie-Hellman Keygroups</a></li>
-                                      <li id="ciphersuites"><a href="#CipherSuites">Cipher Suites</a></li>
-                                      <li role="separator" class="divider"></li>
-                                      <li id="loadlogjam"><a href="#logjam">Logjam Attack</a></li>
-                                      <li><a href="#certs">Certificates</a></li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </div>
-                      <!-- Content will be loaded dynamically exterm html pages with .load() function -->
-                      <div id="dynamic"></div>
-
-                      <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Select Timespan (Slider)</h3>
-                        </div>
-                        <div class="panel-body">
-                            <!-- noUIslider -->
-                            Timespan:
-                            <div  id="slider-date"></div>
-                            <br>
-                            Start: <span id="event-start"></span><br>
-                            End: <span id="event-end"></span> <br><br>
-                            <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Graphs -->
-                <div class="col-md-8">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-
-                            <div id="charts">
-                                <!-- The charts are displayed here -->
-                                <div id="chart"></div>
-                                <!-- display next or previous chart -->
-                                <nav>
-                                    <ul class="pager">
-                                        <button id="previouschart" type="button" class="btn btn-default btn-lg">
-                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                        </button>
-                                        <button id="nextchart" type="button" class="btn btn-default btn-lg">
-                                            <span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                        </button>
+                                        <li id="loadPFS"><a href="#PFS">Perfect Forward Secrecy Support</a></li>
+                                        <li id="loadDHEParameter"><a href="#DHEkeygroups">Diffie-Hellman Keygroups</a></li>
+                                        <li id="loadECDHEParameter"><a href="#ECDHEkeygroups">Elliptic Curve Diffie-Hellman Keygroups</a></li>
+                                        <li id="ciphersuites"><a href="#CipherSuites">Cipher Suites</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li id="loadlogjam"><a href="#logjam">Logjam Attack</a></li>
+                                        <li><a href="#certs">Certificates</a></li>
                                     </ul>
-                                </nav>
+                                </div>
                             </div>
                         </div>
+                        <!-- Content will be loaded dynamically exterm html pages with .load() function -->
+                        <div id="dynamic"></div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Select Timespan (Slider)</h3>
+                            </div>
+                            <div class="panel-body">
+                                <!-- noUIslider -->
+                                Timespan:
+                                <div  id="slider-date"></div>
+                                <br>
+                                Start: <span id="event-start"></span><br>
+                                End: <span id="event-end"></span> <br><br>
+                                <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
+                            </div>
+                        </div>
+
                     </div>
 
+                    <!-- Graphs -->
+                    <div class="col-md-8">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+
+                                <div id="charts">
+                                    <!-- The charts are displayed here -->
+                                    <div id="chart"></div>
+                                    <!-- display next or previous chart -->
+                                    <nav>
+                                        <ul class="pager">
+                                            <button id="previouschart" type="button" class="btn btn-default btn-lg">
+                                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                            </button>
+                                            <button id="nextchart" type="button" class="btn btn-default btn-lg">
+                                                <span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                            </button>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
                 </div>
-
-
             </div>
         </div>
-    </div>
-    <footer id="footer"></footer>
-    <div id="subscribe"></div>
-    <!-- Skripts are located in the end of the Body tag for faster Page Loading -->
-    <!-- Load d3.js and c3.js -->
-    <script src="js/c3-0.4.10/d3.min.js" charset="utf-8"></script>
-    <script src="js/c3-0.4.10/c3.min.js"></script>
-    <!-- JQuery CDN -->
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <!-- Filter Menu -->
-    <script type="text/javascript" src="js/filterData.js"></script>
-    <!-- noUislider -->
-    <script type="text/javascript" src="js/nouislider.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- for the menu -->
-    <script src="js/menu.js"></script>
-    <script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
-    <script>
-
-
-            // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
-            window.onload = function () {
-
-                //Configuration:
-                var numberOfCharts = 5;
-                // Timeout setup for ajax
-                // If the API is not responding within 2 seconds, the hard coded charts will be loaded
-                $.ajaxSetup({
-                    timeout: 3000
-                });
-
-                var globalChartNumber = 1;
-
-                // helper function for Timeslider
-                function timestamp(str) {
-                    return new Date(str).getTime();
-                }
-
-                // noUiSlider -> for selecting a timespan for displaying changes
-                var dateSlider = document.getElementById('slider-date');
-
-                noUiSlider.create(dateSlider, {
-                    connect: true,
-                    range: {
-                        // Range is from where the project started to the current date
-                        min: timestamp('2015-11-15'),
-                        max: new Date().getTime()
-                    },
-                    // Steps of one month
-                    // (365.25d/y ) / 12 = 30,4375
-                    step: 30.4375 * 24 * 60 * 60 * 1000,
-                    // Two more timestamps indicate the handle starting positions.
-                    start: [new Date().getTime(), new Date().getTime()],
-                });
-
-                // Create a list of monthnames.
-                var  months = [
-                "January", "February", "March",
-                "April", "May", "June", "July",
-                "August", "September", "October",
-                "November", "December"
-                ];
-
-                // Create a string representation of the date.
-                function formatDate(date) {
-                    return  months[date.getMonth()] + " " +
-                    date.getFullYear();
-                }
-
-
-                // Span Elements -> The start and end values are displayed there
-                var dateValues = [
-                document.getElementById('event-start'),
-                document.getElementById('event-end')
-                ];
-
-                // Update Handler -> Updates the span elements
-                dateSlider.noUiSlider.on('update', function (values, handle) {
-                    dateValues[handle].innerHTML = formatDate(new Date(+values[handle]));
-                });
-
-
-                // Sample Data, this is ja required json format, that c3 requires
-                var testdaten = {
-                    "dhe": [
-                    {
-                        "keysize": "256",
-                        "size": 3123,
-                        "sizenew": 3320,
-                        "percent": 0.5,
-                    },
-                    {
-                        "keysize": "512",
-                        "size": 31232,
-                        "sizenew": 29000,
-                        "percent": -0.4,
-                    },
-                    {
-                        "keysize": "768",
-                        "size": 6534,
-                        "sizenew": 6203,
-                        "percent": -0.1,
-                    },
-                    {
-                        "keysize": "1024",
-                        "size": 256434,
-                        "sizenew": 270323,
-                        "percent": 3,
-                    },
-                    {
-                        "keysize": "2048",
-                        "size": 65100,
-                        "sizenew": 124303,
-                        "percent": 50,
-                    },
-                    ],
-                    "pfs": [
-                    {
-                        "PFS: ": "PFS enabled",
-                        "amount": 80,
-                    },
-                    {
-                        "PFS: ": "PFS disabled",
-                        "amount": 80,
-                    }
-                    ]
-
-                };
-
-                var test_array_JSONs = [
-                {"PFS enabled": 80, "PFS Disabled": 20},
-                ];
-
-
-                /*
-                 * All in one Chart.
-                 */
-                 var chart = c3.generate({
-                    bindto: '#chart',
-                    legend: {
-                        show: true,
-                    },
-                    size: {
-                        width: 640
-                    },
-                    data: {
-                        x: 'x',
-                        columns: [
-                        ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],
-                        ['data1', 30, 200, 100, 400, 150, 250],
-                        ['data2', 130, 340, 200, 500, 250, 350]
-                        ]
-                    },
-                    axis: {
-                        x: {
-                            type: 'category',
-                        },
-                        y2: {
-                            show: true,
-                            label: {
-                                text: 'In percent',
-                                position: 'outer-middle'
-                            },
-                        }
-                    },
-                    bar: {
-                        width: {
-                            ratio: 0.6
-                        }
-                    },
-                });
-
-
-
-                // Formatting date because of Datefield  e.g. 2015_11 field in the api
-                function formatDate2(date) {
-                    var string = date.getFullYear() + "_" + (date.getMonth() + 1);
-                    return string;
-
-                }
-
-                function getLatestElementIndex(response)
-                {
-                    var latestElement = 0;
-                    for (var i = 0; i < response.length; i++) {
-                     var split = response[i].month.split('_');
-                     var comparedate = new Date(split[0], split[1]-1);
-                     for (var j = i+1; j < response.length; j++) {
-                         var split2 = response[j].month.split('_');
-                         if (comparedate.getTime() < new Date(split2[0],split2[1]-1).getTime())
-                         {
-                            latestElement = j;
-                        };
-                    };
-                };
-
-                return latestElement;
-
-            }
-
-
-                /*
-                 * Load PFS-Pie-Chart function.
-                 */
-
-                 $("#loadPFS").click(function ()
-                 {
-                    // Load data from the server using a HTTP GET request
-                    // jquery.get is a equivalent to $.ajax({....
-                        jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/overview", function (response) {
-                        // Check if start and end values of the slieder are the same
-                        var start = dateSlider.noUiSlider.get();
-                        if (start[0] != start[1]) {
-                            // Date take only integers
-                            var beginn = formatDate2(new Date(parseInt(start[0])));
-                            var end = formatDate2(new Date(parseInt(start[1])));
-
-                            // We need error handling, what if the response array has only on entry?
-                            // Index for the two json elements which will be compared
-                            var beginning;
-                            var ending;
-
-                            // index of begin json element and index of end json element
-                            for (var i = 0; i < response.length; i++) {
-                                if (response[i].month == beginn) {
-                                    beginning = i;
-                                }
-                                ;
-                                if (response[i].month == end) {
-                                    ending = i;
-                                }
-                                ;
-                            }
-                            ;
-
-                            // filling the x axis with dates
-                            var months = ['x'];
-                            for (var i = beginning; i <= ending; i++) {
-                                months.push(response[i].month);
-                            };
-
-                            // filling data about pfs enabled
-                            var pfsEnabled = ['PFS Enabled'];
-                            for (var i = beginning; i <= ending; i++) {
-                                pfsEnabled.push(response[i].pfsEnabled);
-                            };
-
-                            // filling data about pfs disabled
-                            var pfsDisabled =['PFS Disabled'];
-                            for (var i = beginning; i <= ending; i++) {
-                                pfsDisabled.push(response[i].pfsDisabled);
-                            };
-
-
-                            // calc the increase or decline in percent
-
-                            var totalFirst = response[beginning].pfsEnabled + response[beginning].pfsDisabled;
-                            var pfs1Percent1 = ((response[beginning].pfsEnabled / totalFirst) * 100).toFixed(2);
-                            var pfs1Percent2 = ((response[beginning].pfsDisabled / totalFirst) * 100).toFixed(2);
-
-                            // alert(pfs1Percent1 + " " + pfs1Percent2);
-
-                            var totalSecond = response[ending].pfsEnabled + response[ending].pfsDisabled;
-                            pfs2Percent1 = ((response[ending].pfsEnabled / totalSecond) * 100).toFixed(2);
-                            pfs2Percent2 = ((response[ending].pfsDisabled / totalSecond) * 100).toFixed(2);
-
-                           // alert(pfs2Percent1 + " " + pfs2Percent2);
-
-
-
-                           chart.load({
-                            columns: [
-                            months,
-                            pfsEnabled,
-                            pfsDisabled,
-                            ['change', pfs2Percent1 - pfs1Percent1, pfs2Percent2 - pfs1Percent2],
-
-                            ],
-
-                            types: {
-                                change: 'line',
-                            },
-                            axes: {
-                                'change': 'y2',
-                                'x': 'x'
-                            },
-                            type: 'line',
-                            unload: chart.columns,
-                        });
-                       } else {
-                        chart.load({
-                                // json format [{ .... }]
-                                json: [response[response.length-1]],
-                                keys: {
-                                    value: ['pfsEnabled', 'pfsDisabled']
-                                },
-                                type: 'pie',
-                                unload: chart.columns,
-                            });
-                    }}).error(function () {
-                        alert("Error Loading JSON");
-                        chart.load({
-                            json: test_array_JSONs,
-                            keys: {
-                                value: ['PFS enabled', 'PFS Disabled']
-                            },
-                            type: 'pie',
-                            unload: chart.columns,
-                        });
-                    });
-
-                    // empty all elements within the div tag with id dynamic
-                    $("#dynamic").empty();
-                    $("#dropdownMenu1").html('Perfect Forward Secrecy Support <span class="caret"></span>');
-                }
-                );
-
-
-                // This is called when the reload button is clicked!
-                $("#applytimespan").click(function ()
-                {
-                    // the called function depends of the hash value in the URL
-                    $( "#load"+window.location.hash.substring(1) ).trigger( "click" );
-
-                }
-                );
-
-
-                /*
-                 * Load DHE-Parameter-Chart function with one Y-Axis.
-                 */
-
-                 $("#loadDHEParameter").click(function ()
-                 {
-
-                    // Load data from the server using a HTTP GET request
-                    // jquery.get is a equivalent to $.ajax({....
-                        jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
-                            // remove ECDHE data
-                            var latestElement = response[response.length-1].distribution;
-                            for(var i = latestElement.length - 1; i >= 0; i--) {
-                                if (latestElement[i].kx == "ECDH") {
-                                    latestElement.splice(i, 1);
-                                };
-                            }
-
-                            chart.load({
-                                type: 'bar',
-                                json: response[response.length-1].distribution,
-                                keys: {
-                                    x: 'kxStrength',
-                                    value: ['count']
-                                },
-                                unload: chart.columns,
-                            });
-                        }).error(function () {
-                            alert("Error Loading JSON");
-                            chart.load({
-                                type: 'bar',
-                                json: testdaten.dhe,
-                                keys: {
-                                    x: 'keysize',
-                                    value: ['size']
-                                },
-                                unload: chart.columns,
-                            });
-                        });
-
-                    // takes the dynamic div tag out of the DOM
-                    $("#dynamic").empty();
-                    $("#dropdownMenu1").html('Diffie-Hellman Keygroups <span class="caret"></span>');
-                }
-                );
-
-
-             /*
-                 * Load DHE-Parameter-Chart function with one Y-Axis.
-                 */
-
-                 $("#loadECDHEParameter").click(function ()
-                 {
-
-                    // Load data from the server using a HTTP GET request
-                    // jquery.get is a equivalent to $.ajax({....
-                        jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
-                            // remove ECDHE data
-                            var latestElement = response[response.length-1].distribution;
-                            for(var i = latestElement.length - 1; i >= 0; i--) {
-                                if (latestElement[i].kx == "DH") {
-                                    latestElement.splice(i, 1);
-                                };
-                            }
-
-                            chart.load({
-                                type: 'bar',
-                                json: response[response.length-1].distribution,
-                                keys: {
-                                    x: 'kxStrength',
-                                    value: ['count']
-                                },
-                                unload: chart.columns,
-                            });
-                        }).error(function () {
-                            alert("Error Loading JSON");
-                            chart.load({
-                                type: 'bar',
-                                json: testdaten.dhe,
-                                keys: {
-                                    x: 'keysize',
-                                    value: ['size']
-                                },
-                                unload: chart.columns,
-                            });
-                        });
-
-                    // takes the dynamic div tag out of the DOM
-                    $("#dynamic").empty();
-                    $("#dropdownMenu1").html('Elliptic Curve Diffie-Hellman Keygroups <span class="caret"></span>');
-                }
-                );
-
-                /*
-                 * Load Cipher Suites Chart
-                 */
-
-                 $("#ciphersuites").click(function ()
-                 {
-                    chart.load({
-                        unload: chart.columns,
-                    });
-                    $("#dynamic").load("filterciphers.html");
-                    $("#dropdownMenu1").html('Cipher Suites <span class="caret"></span>');
-
-                }
-                );
-
-                 function filterResponseByTimespan(response, start, end){
-                    var filtered = [];
-                    var date = new Date(start.getFullYear(), start.getMonth());
-                    var end = new Date(end.getFullYear(), end.getMonth());
-
-                    while(date.getTime() <= end.getTime()) {
-                        for (var i = 0; i < response.length; i++) {
-                            if (response[i].month == formatDate2(date)) {
-                                filtered.push(response[i]);
-                                break;
-                            };
-                        };
-                        // if value is 12, then the first month of the next year will be set
-                        date.setMonth(date.getMonth()+1);
-                    };
-                    return filtered;
-                }
-
-
-
-                /*
-                 * Load Logjam Graph
-                 */
-
-                 $("#loadlogjam").click(function ()
-                 {
-                    // Load data from the server using a HTTP GET request
-                    // jquery.get is a equivalent to $.ajax({....
-                        jQuery.get("http://tls.thejetlag.de:1337/api/v0/exp/overview", function (response) {
-
-                            var start = dateSlider.noUiSlider.get();
-                            if (start[0] != start[1]) {
-
-                            // filter response Array by timespan
-                            filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])) , new Date(parseInt(start[1])) );
-
-                            chart.load({
-                               json: filtered,
-                               keys: {
-                                x: 'month',
-                                value: ['expEnabled', 'expDisabled']
-                            },
-                            type: 'line',
-                            unload: chart.columns,
-                        });
-                        }else{
-                           // index of latest element in response array
-                           var latestElement = response[getLatestElementIndex(response)];
-
-                           var totalcount = latestElement.total;
-                           chart.load({
-                            type: 'pie',
-                            json: [latestElement],
-                            keys: {
-                                value: ['expEnabled', 'expDisabled']
-                            },
-                            unload: chart.columns,
-                        });
-                       }
-                   }).error(function () {
-                    alert("Error Loading JSON");
-                    chart.load({
-                        type: 'bar',
-                        json: testdaten.dhe,
-                        keys: {
-                            x: 'keysize',
-                            value: ['size']
-                        },
-                        unload: chart.columns,
-                    });
-                });
-                   $("#dynamic").empty();
-                   $("#dropdownMenu1").html('Logjam Attack <span class="caret"></span>');
-
-               }
-               );
-
-
-
-
-function loadChartbyNumber(number) {
-    switch(number){
-        case 1:
-        $( "#loadPFS" ).trigger( "click" );
-        globalChartNumber = 1;
-        $('#previouschart').hide();
-        window.location = '#PFS';
-        break;
-        case 2:
-        $( "#loadDHEParameter" ).trigger( "click" );
-        globalChartNumber = 2;
-        window.location = '#DHEkeygroups';
-        break;
-        case 3:
-        $( "#loadECDHEParameter" ).trigger( "click" );
-        globalChartNumber = 3;
-        window.location = '#ECDHEParameter';
-        break;
-        case 4:
-        $( "#ciphersuites" ).trigger( "click" );
-        globalChartNumber = 4;
-        window.location = '#CipherSuites';
-        break;
-        case 5:
-        $( "#loadlogjam" ).trigger( "click" );
-        globalChartNumber = 5;
-        $('#nextchart').hide();
-        window.location = '#logjam';
-        break;
-        default:
-        alert("Problem with loading Chart");
-
-    }
-}
-
-var hash = window.location.hash.substring(1);
-
-switch(hash){
-    case 'PFS':
-    loadChartbyNumber(1);
-    break;
-    case 'DHEkeygroups':
-    loadChartbyNumber(2);
-    break;
-    case 'CipherSuites':
-    loadChartbyNumber(4);
-    break;
-    case 'ECDHEParameter':
-    loadChartbyNumber(3);
-    case 'logjam':
-    loadChartbyNumber(5);
-    break;
-    default:
-    var random = Math.floor((Math.random() * numberOfCharts) + 1);
-    loadChartbyNumber(random);
-}
-
-                /*
-                 * Select previous or next chart by decreasing or increasing the globalnumber
-                 */
-
-                 $("#previouschart").click(function ()
-                 {
-                  globalChartNumber--;
-                  $('#nextchart').show();
-                  if (globalChartNumber <= 1 ) {
-                    loadChartbyNumber(1);
-                    globalChartNumber = 1;
-                    return;
-                };
-                loadChartbyNumber(globalChartNumber);
-
-            }
-            );
-
-                 $("#nextchart").click(function ()
-                 {
-                    globalChartNumber++;
-                    $('#previouschart').show();
-                    if (globalChartNumber >= numberOfCharts ) {
-                        globalChartNumber = numberOfCharts;
-                        $('#nextchart').hide();
-                        loadChartbyNumber(numberOfCharts);
-                        return;
-                    };
-                    loadChartbyNumber(globalChartNumber);
-
-                }
-                );
-
-             };
-             </script>
-
-         </body>
-         </html>
+        <div id="displayFilteredData"></div>
+        <footer id="footer"></footer>
+        <div id="subscribe"></div>
+        <!-- Skripts are located in the end of the Body tag for faster Page Loading -->
+        <!-- Load d3.js and c3.js -->
+        <script src="js/c3-0.4.10/d3.min.js" charset="utf-8"></script>
+        <script src="js/c3-0.4.10/c3.min.js"></script>
+        <!-- JQuery CDN -->
+        <script src="js/jquery-1.11.3.min.js"></script>
+        <!-- Filter Menu -->
+        <script type="text/javascript" src="js/filterData.js"></script>
+        <!-- noUislider -->
+        <script type="text/javascript" src="js/nouislider.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- for the menu -->
+        <script src="js/menu.js"></script>
+        <script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
+        <script>
+
+
+                                    // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
+                                    window.onload = function () {
+
+                                        //Configuration:
+                                        var numberOfCharts = 5;
+                                        // Timeout setup for ajax
+                                        // If the API is not responding within 2 seconds, the hard coded charts will be loaded
+                                        $.ajaxSetup({
+                                            timeout: 3000
+                                        });
+
+                                        var globalChartNumber = 1;
+
+                                        // helper function for Timeslider
+                                        function timestamp(str) {
+                                            return new Date(str).getTime();
+                                        }
+
+                                        // noUiSlider -> for selecting a timespan for displaying changes
+                                        var dateSlider = document.getElementById('slider-date');
+
+                                        noUiSlider.create(dateSlider, {
+                                            connect: true,
+                                            range: {
+                                                // Range is from where the project started to the current date
+                                                min: timestamp('2015-11-15'),
+                                                max: new Date().getTime()
+                                            },
+                                            // Steps of one month
+                                            // (365.25d/y ) / 12 = 30,4375
+                                            step: 30.4375 * 24 * 60 * 60 * 1000,
+                                            // Two more timestamps indicate the handle starting positions.
+                                            start: [new Date().getTime(), new Date().getTime()],
+                                        });
+
+                                        // Create a list of monthnames.
+                                        var months = [
+                                            "January", "February", "March",
+                                            "April", "May", "June", "July",
+                                            "August", "September", "October",
+                                            "November", "December"
+                                        ];
+
+                                        // Create a string representation of the date.
+                                        function formatDate(date) {
+                                            return  months[date.getMonth()] + " " +
+                                                    date.getFullYear();
+                                        }
+
+
+                                        // Span Elements -> The start and end values are displayed there
+                                        var dateValues = [
+                                            document.getElementById('event-start'),
+                                            document.getElementById('event-end')
+                                        ];
+
+                                        // Update Handler -> Updates the span elements
+                                        dateSlider.noUiSlider.on('update', function (values, handle) {
+                                            dateValues[handle].innerHTML = formatDate(new Date(+values[handle]));
+                                        });
+
+
+                                        // Sample Data, this is ja required json format, that c3 requires
+                                        var testdaten = {
+                                            "dhe": [
+                                                {
+                                                    "keysize": "256",
+                                                    "size": 3123,
+                                                    "sizenew": 3320,
+                                                    "percent": 0.5,
+                                                },
+                                                {
+                                                    "keysize": "512",
+                                                    "size": 31232,
+                                                    "sizenew": 29000,
+                                                    "percent": -0.4,
+                                                },
+                                                {
+                                                    "keysize": "768",
+                                                    "size": 6534,
+                                                    "sizenew": 6203,
+                                                    "percent": -0.1,
+                                                },
+                                                {
+                                                    "keysize": "1024",
+                                                    "size": 256434,
+                                                    "sizenew": 270323,
+                                                    "percent": 3,
+                                                },
+                                                {
+                                                    "keysize": "2048",
+                                                    "size": 65100,
+                                                    "sizenew": 124303,
+                                                    "percent": 50,
+                                                },
+                                            ],
+                                            "pfs": [
+                                                {
+                                                    "PFS: ": "PFS enabled",
+                                                    "amount": 80,
+                                                },
+                                                {
+                                                    "PFS: ": "PFS disabled",
+                                                    "amount": 80,
+                                                }
+                                            ]
+
+                                        };
+
+                                        var test_array_JSONs = [
+                                            {"PFS enabled": 80, "PFS Disabled": 20}
+                                        ];
+
+
+                                        /*
+                                         * All in one Chart.
+                                         */
+                                        var chart = c3.generate({
+                                            bindto: '#chart',
+                                            legend: {
+                                                show: true,
+                                            },
+                                            size: {
+                                                width: 640
+                                            },
+                                            data: {
+                                                x: 'x',
+                                                columns: [
+                                                    ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],
+                                                    ['data1', 30, 200, 100, 400, 150, 250],
+                                                    ['data2', 130, 340, 200, 500, 250, 350]
+                                                ]
+                                            },
+                                            axis: {
+                                                x: {
+                                                    type: 'category',
+                                                },
+                                                y2: {
+                                                    show: true,
+                                                    label: {
+                                                        text: 'In percent',
+                                                        position: 'outer-middle'
+                                                    },
+                                                }
+                                            },
+                                            bar: {
+                                                width: {
+                                                    ratio: 0.6
+                                                }
+                                            },
+                                        });
+
+
+
+                                        // Formatting date because of Datefield  e.g. 2015_11 field in the api
+                                        function formatDate2(date) {
+                                            var string = date.getFullYear() + "_" + (date.getMonth() + 1);
+                                            return string;
+
+                                        }
+
+                                        function getLatestElementIndex(response)
+                                        {
+                                            var latestElement = 0;
+                                            for (var i = 0; i < response.length; i++) {
+                                                var split = response[i].month.split('_');
+                                                var comparedate = new Date(split[0], split[1] - 1);
+                                                for (var j = i + 1; j < response.length; j++) {
+                                                    var split2 = response[j].month.split('_');
+                                                    if (comparedate.getTime() < new Date(split2[0], split2[1] - 1).getTime())
+                                                    {
+                                                        latestElement = j;
+                                                    }
+                                                    ;
+                                                }
+                                                ;
+                                            }
+                                            ;
+
+                                            return latestElement;
+
+                                        }
+
+
+                                        /*
+                                         * Load PFS-Pie-Chart function.
+                                         */
+
+                                        $("#loadPFS").click(function ()
+                                        {
+                                            // Load data from the server using a HTTP GET request
+                                            // jquery.get is a equivalent to $.ajax({....
+                                            jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/overview", function (response) {
+                                                // Check if start and end values of the slieder are the same
+                                                var start = dateSlider.noUiSlider.get();
+                                                if (start[0] != start[1]) {
+                                                    // Date take only integers
+                                                    var beginn = formatDate2(new Date(parseInt(start[0])));
+                                                    var end = formatDate2(new Date(parseInt(start[1])));
+
+                                                    // We need error handling, what if the response array has only on entry?
+                                                    // Index for the two json elements which will be compared
+                                                    var beginning;
+                                                    var ending;
+
+                                                    // index of begin json element and index of end json element
+                                                    for (var i = 0; i < response.length; i++) {
+                                                        if (response[i].month == beginn) {
+                                                            beginning = i;
+                                                        }
+                                                        ;
+                                                        if (response[i].month == end) {
+                                                            ending = i;
+                                                        }
+                                                        ;
+                                                    }
+                                                    ;
+
+                                                    // filling the x axis with dates
+                                                    var months = ['x'];
+                                                    for (var i = beginning; i <= ending; i++) {
+                                                        months.push(response[i].month);
+                                                    }
+                                                    ;
+
+                                                    // filling data about pfs enabled
+                                                    var pfsEnabled = ['PFS Enabled'];
+                                                    for (var i = beginning; i <= ending; i++) {
+                                                        pfsEnabled.push(response[i].pfsEnabled);
+                                                    }
+                                                    ;
+
+                                                    // filling data about pfs disabled
+                                                    var pfsDisabled = ['PFS Disabled'];
+                                                    for (var i = beginning; i <= ending; i++) {
+                                                        pfsDisabled.push(response[i].pfsDisabled);
+                                                    }
+                                                    ;
+
+
+                                                    // calc the increase or decline in percent
+
+                                                    var totalFirst = response[beginning].pfsEnabled + response[beginning].pfsDisabled;
+                                                    var pfs1Percent1 = ((response[beginning].pfsEnabled / totalFirst) * 100).toFixed(2);
+                                                    var pfs1Percent2 = ((response[beginning].pfsDisabled / totalFirst) * 100).toFixed(2);
+
+                                                    // alert(pfs1Percent1 + " " + pfs1Percent2);
+
+                                                    var totalSecond = response[ending].pfsEnabled + response[ending].pfsDisabled;
+                                                    pfs2Percent1 = ((response[ending].pfsEnabled / totalSecond) * 100).toFixed(2);
+                                                    pfs2Percent2 = ((response[ending].pfsDisabled / totalSecond) * 100).toFixed(2);
+
+                                                    // alert(pfs2Percent1 + " " + pfs2Percent2);
+
+
+
+                                                    chart.load({
+                                                        columns: [
+                                                            months,
+                                                            pfsEnabled,
+                                                            pfsDisabled,
+                                                            ['change', pfs2Percent1 - pfs1Percent1, pfs2Percent2 - pfs1Percent2],
+                                                        ],
+                                                        types: {
+                                                            change: 'line',
+                                                        },
+                                                        axes: {
+                                                            'change': 'y2',
+                                                            'x': 'x'
+                                                        },
+                                                        type: 'line',
+                                                        unload: chart.columns,
+                                                    });
+                                                } else {
+                                                    chart.load({
+                                                        // json format [{ .... }]
+                                                        json: [response[response.length - 1]],
+                                                        keys: {
+                                                            value: ['pfsEnabled', 'pfsDisabled']
+                                                        },
+                                                        type: 'pie',
+                                                        unload: chart.columns,
+                                                    });
+                                                }
+                                            }).error(function () {
+                                                alert("Error Loading JSON");
+                                                chart.load({
+                                                    json: test_array_JSONs,
+                                                    keys: {
+                                                        value: ['PFS enabled', 'PFS Disabled']
+                                                    },
+                                                    type: 'pie',
+                                                    unload: chart.columns,
+                                                });
+                                            });
+
+                                            // empty all elements within the div tag with id dynamic
+                                            $("#dynamic").empty();
+                                            $("#dropdownMenu1").html('Perfect Forward Secrecy Support <span class="caret"></span>');
+                                        }
+                                        );
+
+
+                                        // This is called when the reload button is clicked!
+                                        $("#applytimespan").click(function ()
+                                        {
+                                            // the called function depends of the hash value in the URL
+                                            $("#load" + window.location.hash.substring(1)).trigger("click");
+
+                                        }
+                                        );
+
+
+                                        /*
+                                         * Load DHE-Parameter-Chart function with one Y-Axis.
+                                         */
+
+                                        $("#loadDHEParameter").click(function ()
+                                        {
+
+                                            // Load data from the server using a HTTP GET request
+                                            // jquery.get is a equivalent to $.ajax({....
+                                            jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
+                                                // remove ECDHE data
+                                                var latestElement = response[response.length - 1].distribution;
+                                                for (var i = latestElement.length - 1; i >= 0; i--) {
+                                                    if (latestElement[i].kx == "ECDH") {
+                                                        latestElement.splice(i, 1);
+                                                    }
+                                                    ;
+                                                }
+
+                                                chart.load({
+                                                    type: 'bar',
+                                                    json: response[response.length - 1].distribution,
+                                                    keys: {
+                                                        x: 'kxStrength',
+                                                        value: ['count']
+                                                    },
+                                                    unload: chart.columns,
+                                                });
+                                            }).error(function () {
+                                                alert("Error Loading JSON");
+                                                chart.load({
+                                                    type: 'bar',
+                                                    json: testdaten.dhe,
+                                                    keys: {
+                                                        x: 'keysize',
+                                                        value: ['size']
+                                                    },
+                                                    unload: chart.columns,
+                                                });
+                                            });
+
+                                            // takes the dynamic div tag out of the DOM
+                                            $("#dynamic").empty();
+                                            $("#dropdownMenu1").html('Diffie-Hellman Keygroups <span class="caret"></span>');
+                                        }
+                                        );
+
+
+                                        /*
+                                         * Load DHE-Parameter-Chart function with one Y-Axis.
+                                         */
+
+                                        $("#loadECDHEParameter").click(function ()
+                                        {
+
+                                            // Load data from the server using a HTTP GET request
+                                            // jquery.get is a equivalent to $.ajax({....
+                                            jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
+                                                // remove ECDHE data
+                                                var latestElement = response[response.length - 1].distribution;
+                                                for (var i = latestElement.length - 1; i >= 0; i--) {
+                                                    if (latestElement[i].kx == "DH") {
+                                                        latestElement.splice(i, 1);
+                                                    }
+                                                    ;
+                                                }
+
+                                                chart.load({
+                                                    type: 'bar',
+                                                    json: response[response.length - 1].distribution,
+                                                    keys: {
+                                                        x: 'kxStrength',
+                                                        value: ['count']
+                                                    },
+                                                    unload: chart.columns,
+                                                });
+                                            }).error(function () {
+                                                alert("Error Loading JSON");
+                                                chart.load({
+                                                    type: 'bar',
+                                                    json: testdaten.dhe,
+                                                    keys: {
+                                                        x: 'keysize',
+                                                        value: ['size']
+                                                    },
+                                                    unload: chart.columns,
+                                                });
+                                            });
+
+                                            // takes the dynamic div tag out of the DOM
+                                            $("#dynamic").empty();
+                                            $("#dropdownMenu1").html('Elliptic Curve Diffie-Hellman Keygroups <span class="caret"></span>');
+                                        }
+                                        );
+
+                                        /*
+                                         * Load Cipher Suites Chart
+                                         */
+
+                                        $("#ciphersuites").click(function ()
+                                        {
+                                            chart.load({
+                                                unload: chart.columns,
+                                            });
+                                            $("#dynamic").load("filterciphers.html");
+                                            $("#dropdownMenu1").html('Cipher Suites <span class="caret"></span>');
+
+                                        }
+                                        );
+
+                                        function filterResponseByTimespan(response, start, end) {
+                                            var filtered = [];
+                                            var date = new Date(start.getFullYear(), start.getMonth());
+                                            var end = new Date(end.getFullYear(), end.getMonth());
+
+                                            while (date.getTime() <= end.getTime()) {
+                                                for (var i = 0; i < response.length; i++) {
+                                                    if (response[i].month == formatDate2(date)) {
+                                                        filtered.push(response[i]);
+                                                        break;
+                                                    }
+                                                    ;
+                                                }
+                                                ;
+                                                // if value is 12, then the first month of the next year will be set
+                                                date.setMonth(date.getMonth() + 1);
+                                            }
+                                            ;
+                                            return filtered;
+                                        }
+
+
+
+                                        /*
+                                         * Load Logjam Graph
+                                         */
+
+                                        $("#loadlogjam").click(function ()
+                                        {
+                                            // Load data from the server using a HTTP GET request
+                                            // jquery.get is a equivalent to $.ajax({....
+                                            jQuery.get("http://tls.thejetlag.de:1337/api/v0/exp/overview", function (response) {
+
+                                                var start = dateSlider.noUiSlider.get();
+                                                if (start[0] != start[1]) {
+
+                                                    // filter response Array by timespan
+                                                    filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
+                                                    chart.load({
+                                                        json: filtered,
+                                                        keys: {
+                                                            x: 'month',
+                                                            value: ['expEnabled', 'expDisabled']
+                                                        },
+                                                        type: 'line',
+                                                        unload: chart.columns,
+                                                    });
+                                                } else {
+                                                    // index of latest element in response array
+                                                    var latestElement = response[getLatestElementIndex(response)];
+
+                                                    var totalcount = latestElement.total;
+                                                    chart.load({
+                                                        type: 'pie',
+                                                        json: [latestElement],
+                                                        keys: {
+                                                            value: ['expEnabled', 'expDisabled']
+                                                        },
+                                                        unload: chart.columns,
+                                                    });
+                                                }
+                                            }).error(function () {
+                                                alert("Error Loading JSON");
+                                                chart.load({
+                                                    type: 'bar',
+                                                    json: testdaten.dhe,
+                                                    keys: {
+                                                        x: 'keysize',
+                                                        value: ['size']
+                                                    },
+                                                    unload: chart.columns,
+                                                });
+                                            });
+                                            $("#dynamic").empty();
+                                            $("#dropdownMenu1").html('Logjam Attack <span class="caret"></span>');
+
+                                        }
+                                        );
+
+
+
+
+                                        function loadChartbyNumber(number) {
+                                            switch (number) {
+                                                case 1:
+                                                    $("#loadPFS").trigger("click");
+                                                    globalChartNumber = 1;
+                                                    $('#previouschart').hide();
+                                                    window.location = '#PFS';
+                                                    break;
+                                                case 2:
+                                                    $("#loadDHEParameter").trigger("click");
+                                                    globalChartNumber = 2;
+                                                    window.location = '#DHEkeygroups';
+                                                    break;
+                                                case 3:
+                                                    $("#loadECDHEParameter").trigger("click");
+                                                    globalChartNumber = 3;
+                                                    window.location = '#ECDHEParameter';
+                                                    break;
+                                                case 4:
+                                                    $("#ciphersuites").trigger("click");
+                                                    globalChartNumber = 4;
+                                                    window.location = '#CipherSuites';
+                                                    break;
+                                                case 5:
+                                                    $("#loadlogjam").trigger("click");
+                                                    globalChartNumber = 5;
+                                                    $('#nextchart').hide();
+                                                    window.location = '#logjam';
+                                                    break;
+                                                default:
+                                                    alert("Problem with loading Chart");
+
+                                            }
+                                        }
+
+                                        var hash = window.location.hash.substring(1);
+
+                                        switch (hash) {
+                                            case 'PFS':
+                                                loadChartbyNumber(1);
+                                                break;
+                                            case 'DHEkeygroups':
+                                                loadChartbyNumber(2);
+                                                break;
+                                            case 'CipherSuites':
+                                                loadChartbyNumber(4);
+                                                break;
+                                            case 'ECDHEParameter':
+                                                loadChartbyNumber(3);
+                                            case 'logjam':
+                                                loadChartbyNumber(5);
+                                                break;
+                                            default:
+                                                var random = Math.floor((Math.random() * numberOfCharts) + 1);
+                                                loadChartbyNumber(random);
+                                        }
+
+                                        /*
+                                         * Select previous or next chart by decreasing or increasing the globalnumber
+                                         */
+
+                                        $("#previouschart").click(function ()
+                                        {
+                                            globalChartNumber--;
+                                            $('#nextchart').show();
+                                            if (globalChartNumber <= 1) {
+                                                loadChartbyNumber(1);
+                                                globalChartNumber = 1;
+                                                return;
+                                            }
+                                            ;
+                                            loadChartbyNumber(globalChartNumber);
+
+                                        }
+                                        );
+
+                                        $("#nextchart").click(function ()
+                                        {
+                                            globalChartNumber++;
+                                            $('#previouschart').show();
+                                            if (globalChartNumber >= numberOfCharts) {
+                                                globalChartNumber = numberOfCharts;
+                                                $('#nextchart').hide();
+                                                loadChartbyNumber(numberOfCharts);
+                                                return;
+                                            }
+                                            ;
+                                            loadChartbyNumber(globalChartNumber);
+
+                                        }
+                                        );
+
+                                    };
+        </script>
+        
+    </body>
+</html>

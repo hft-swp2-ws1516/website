@@ -5,7 +5,7 @@
     </div>
     <div class="panel-body">
         <div>
-            <form id="filterBox" name="filterBox" action="js/filterData.js" method="POST" onsubmit="applyFilters()" 
+            <form id="filterBox" name="filterBox" action="js/filterData.js" method="POST" onsubmit="return applyFilters();" 
                   onmouseover="initFilters()">
                 <fieldset>
                     <fieldset>
@@ -293,28 +293,6 @@
                         <input id="filterKeyExAndAuth" list="keyExAuth" onkeyup="manageFilterSelection()"
                                onblur="manageFilterSelection()">
                         <datalist id="keyExAuth">
-                            <!--
-                            <option value="RSA"></option>
-                            <option value="DH-RSA"></option>
-                            <option value="DHE-RSA"></option>
-                            <option value="ECDH-RSA"></option>
-                            <option value="ECDHE-RSA"></option>
-                            <option value="DH-DSS"></option>
-                            <option value="DHE-DSS"></option>
-                            <option value="ECDH-ECDSA"></option>
-                            <option value="ECDHE-ECDSA"></option>
-                            <option value="PSK"></option>
-                            <option value="PSK-RSA"></option>
-                            <option value="DHE-PSK"></option>
-                            <option value="ECDHE-PSK"></option>
-                            <option value="SRP"></option>
-                            <option value="SRP-DSS"></option>
-                            <option value="SRP-RSA"></option>
-                            <option value="KERBEROS"></option>
-                            <option value="DH-ANON"></option>
-                            <option value="ECDH-ANON"></option>
-                            <option value="GOST"></option>
-                            -->
                         </datalist>
                     </fieldset>
                     <fieldset>
@@ -322,25 +300,6 @@
                         <input id="filterCipher" list="cipher" onkeyup="manageFilterSelection()" 
                                onblur="manageFilterSelection()">
                         <datalist id="cipher">
-                            <!--
-                            <option value="AES-GCM"></option>
-                            <option value="AES-CCM"></option>
-                            <option value="AES-CBC"></option>
-                            <option value="CAMELLIA"></option>
-                            <option value="CAMELLIA-GCM"></option>
-                            <option value="CAMELLIA-CBC"></option>
-                            <option value="ARIA-GCM"></option>
-                            <option value="ARIA-CBC"></option>
-                            <option value="SEED-CBC"></option>
-                            <option value="DES-CBC3"></option>
-                            <option value="GOST-28147-89-CNT"></option>
-                            <option value="IDEA-CBC"></option>
-                            <option value="DES-CBC"></option>
-                            <option value="RC2-CBC"></option>
-                            <option value="ChaCha-20-POLY1305"></option>
-                            <option value="RC4"></option>
-                            <option value="none"></option>
-                            -->
                         </datalist>
                         <input id="filterKeyLen" list="keyLen" onkeyup="manageFilterSelection()" 
                                onblur="manageFilterSelection()">
@@ -357,16 +316,6 @@
                         <input id="filterMsgAuth" list="msgAuth" onkeyup="manageFilterSelection()"
                                onblur="manageFilterSelection()">
                         <datalist id="msgAuth">
-                            <!--
-                            <option value="MD5"></option>
-                            <option value="SHA"></option>    
-                            <option value="SHA1"></option>
-                            <option value="SHA256"></option>
-                            <option value="SHA384"></option>
-                            <option value="AEAD"></option>
-                            <option value="GOST-28147-89-IMIT"></option>
-                            <option value="GOST-R34.11-94"></option>
-                            -->
                         </datalist>
                     </fieldset>
                     <fieldset>

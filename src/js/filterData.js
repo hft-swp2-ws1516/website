@@ -1,3 +1,4 @@
+
 var HttpClient = function () {
     this.get = function (url, callback, protocol, cipherString) {
         var httpRequest = new XMLHttpRequest();
@@ -10,6 +11,12 @@ var HttpClient = function () {
         httpRequest.send(null);
     };
 };
+
+var months = [];
+var totalHosts = [];
+var monthBody = [];
+var hostsAccepting = [];
+var hostsPreferring = [];
 
 function initFilters() {
 
@@ -84,6 +91,11 @@ function resetFilters() {
 
 function applyFilters() {
 
+    months = [];
+    totalHosts = [];
+    hostsAccepting = [];
+    hostsPreferring = [];
+
     var url = "http://tls.thejetlag.de:1337/api/v0/ciphers/summary";
     var tldSelection = document.getElementById("filterTLD").value;
 
@@ -95,21 +107,16 @@ function applyFilters() {
     var protocol = document.getElementById("filterProtocol").value;
     var cipherString = document.getElementById("displayFilterSelection").innerHTML;
     var httpClient = new HttpClient();
+
     httpClient.get(url, parseResponse, protocol, cipherString);
+
+    displayGraphs(months, totalHosts, hostsAccepting, hostsPreferring);
+
+    return false;
 
 }
 
 function parseResponse(response, protocol, cipherString) {
-
-    var months = [];
-    var totalHosts = [];
-    var monthBody = [];
-    var hostsAccepting = [];
-    var hostsPreferring = [];
-
-    console.log("Hello!");
-    cipherString = "\"cipher\":\"" + cipherString + "\",";
-    console.log("Cipher string: " + cipherString);
 
     response.match(/month.:.(\d*).(\d*)/g).forEach(function (month) {
         months.push(month.split(":")[1].replace('"', ''));
@@ -122,8 +129,7 @@ function parseResponse(response, protocol, cipherString) {
     monthBody = response.match(/\[[^\[\]]*\]/g);
     monthBody.forEach(function (outer) {
         outer.match(/{(.*?)}/g).forEach(function (inner) {
-            var count = 0;
-            if (inner.match(protocol) !== null && inner.match(cipherString) !== null) {
+            if (inner.match(protocol) !== null && inner.match("\"" + cipherString + "\"") !== null) {
                 var count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
                 if (inner.indexOf("preferred") > -1) {
                     hostsPreferring.push(count);
@@ -132,9 +138,13 @@ function parseResponse(response, protocol, cipherString) {
                 }
             }
         });
-
     });
 
+}
+
+function displayGraphs(months, totalHosts, hostsAccepting, hostsPreferring) {
+    
+    
 
 }
 
