@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>TLS analyser</title>
-        <!-- CSS Stylesheets -->
-        <link rel="stylesheet" href="css/statistics.css">
-        <link href="css/site.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/toggle.css">
-        <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <!-- Load c3.css -->
-        <link href="js/c3-0.4.10/c3.css" rel="stylesheet" type="text/css">
-        <!-- noUISlider c3.css -->
-        <link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
-        <!-- jquery ui css -->
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="css/datepicker/bootstrap-datepicker3.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>TLS analyser</title>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/statistics.css">
+    <link href="css/site.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/toggle.css">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Load c3.css -->
+    <link href="js/c3-0.4.10/c3.css" rel="stylesheet" type="text/css">
+    <!-- noUISlider c3.css -->
+    <link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
+    <!-- jquery ui css -->
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/datepicker/bootstrap-datepicker3.css">
+</head>
 
-    <body>
+<body>
         <!-- Use this for the new menuitems. If they are any changes just remember you should change the menu.js file into js-folder
         and the menu item will display dynamicly -->
         <nav id="nav01" class="navbar navbar-default navbar-fixed-top"></nav>
@@ -39,7 +39,7 @@
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li id="loadPFS"><a href="#PFS">Perfect Forward Secrecy Support</a></li>
+                                        <li id="loadPFS" ><a  href="#PFS">Perfect Forward Secrecy Support</a></li>
                                         <li id="loadDHEParameter"><a href="#DHEkeygroups">Diffie-Hellman Keygroups</a></li>
                                         <li id="loadECDHEParameter"><a href="#ECDHEkeygroups">Elliptic Curve Diffie-Hellman Keygroups</a></li>
                                         <li id="ciphersuites"><a href="#CipherSuites">Cipher Suites</a></li>
@@ -119,7 +119,6 @@
         <script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
         <script>
 
-
                                     // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
                                     window.onload = function () {
 
@@ -152,28 +151,28 @@
                                             // (365.25d/y ) / 12 = 30,4375
                                             step: 30.4375 * 24 * 60 * 60 * 1000,
                                             // Two more timestamps indicate the handle starting positions.
-                                            start: [new Date().getTime(), new Date().getTime()],
+                                            start: [timestamp('2015-11-15') , new Date().getTime()],
                                         });
 
                                         // Create a list of monthnames.
                                         var months = [
-                                            "January", "February", "March",
-                                            "April", "May", "June", "July",
-                                            "August", "September", "October",
-                                            "November", "December"
+                                        "January", "February", "March",
+                                        "April", "May", "June", "July",
+                                        "August", "September", "October",
+                                        "November", "December"
                                         ];
 
                                         // Create a string representation of the date.
                                         function formatDate(date) {
                                             return  months[date.getMonth()] + " " +
-                                                    date.getFullYear();
+                                            date.getFullYear();
                                         }
 
 
                                         // Span Elements -> The start and end values are displayed there
                                         var dateValues = [
-                                            document.getElementById('event-start'),
-                                            document.getElementById('event-end')
+                                        document.getElementById('event-start'),
+                                        document.getElementById('event-end')
                                         ];
 
                                         // Update Handler -> Updates the span elements
@@ -185,59 +184,59 @@
                                         // Sample Data, this is ja required json format, that c3 requires
                                         var testdaten = {
                                             "dhe": [
-                                                {
-                                                    "keysize": "256",
-                                                    "size": 3123,
-                                                    "sizenew": 3320,
-                                                    "percent": 0.5,
-                                                },
-                                                {
-                                                    "keysize": "512",
-                                                    "size": 31232,
-                                                    "sizenew": 29000,
-                                                    "percent": -0.4,
-                                                },
-                                                {
-                                                    "keysize": "768",
-                                                    "size": 6534,
-                                                    "sizenew": 6203,
-                                                    "percent": -0.1,
-                                                },
-                                                {
-                                                    "keysize": "1024",
-                                                    "size": 256434,
-                                                    "sizenew": 270323,
-                                                    "percent": 3,
-                                                },
-                                                {
-                                                    "keysize": "2048",
-                                                    "size": 65100,
-                                                    "sizenew": 124303,
-                                                    "percent": 50,
-                                                },
+                                            {
+                                                "keysize": "256",
+                                                "size": 3123,
+                                                "sizenew": 3320,
+                                                "percent": 0.5,
+                                            },
+                                            {
+                                                "keysize": "512",
+                                                "size": 31232,
+                                                "sizenew": 29000,
+                                                "percent": -0.4,
+                                            },
+                                            {
+                                                "keysize": "768",
+                                                "size": 6534,
+                                                "sizenew": 6203,
+                                                "percent": -0.1,
+                                            },
+                                            {
+                                                "keysize": "1024",
+                                                "size": 256434,
+                                                "sizenew": 270323,
+                                                "percent": 3,
+                                            },
+                                            {
+                                                "keysize": "2048",
+                                                "size": 65100,
+                                                "sizenew": 124303,
+                                                "percent": 50,
+                                            },
                                             ],
                                             "pfs": [
-                                                {
-                                                    "PFS: ": "PFS enabled",
-                                                    "amount": 80,
-                                                },
-                                                {
-                                                    "PFS: ": "PFS disabled",
-                                                    "amount": 80,
-                                                }
+                                            {
+                                                "PFS: ": "PFS enabled",
+                                                "amount": 80,
+                                            },
+                                            {
+                                                "PFS: ": "PFS disabled",
+                                                "amount": 80,
+                                            }
                                             ]
 
                                         };
 
                                         var test_array_JSONs = [
-                                            {"PFS enabled": 80, "PFS Disabled": 20}
+                                        {"PFS enabled": 80, "PFS Disabled": 20}
                                         ];
 
 
                                         /*
                                          * All in one Chart.
                                          */
-                                        var chart = c3.generate({
+                                         var chart = c3.generate({
                                             bindto: '#chart',
                                             legend: {
                                                 show: true,
@@ -248,9 +247,9 @@
                                             data: {
                                                 x: 'x',
                                                 columns: [
-                                                    ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],
-                                                    ['data1', 30, 200, 100, 400, 150, 250],
-                                                    ['data2', 130, 340, 200, 500, 250, 350]
+                                                ['x', '2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04', '2013-01-05', '2013-01-06'],
+                                                ['data1', 30, 200, 100, 400, 150, 250],
+                                                ['data2', 130, 340, 200, 500, 250, 350]
                                                 ]
                                             },
                                             axis: {
@@ -263,6 +262,8 @@
                                                         text: 'In percent',
                                                         position: 'outer-middle'
                                                     },
+                                                    max:99,
+                                                    min:0,
                                                 }
                                             },
                                             bar: {
@@ -308,11 +309,14 @@
                                          * Load PFS-Pie-Chart function.
                                          */
 
-                                        $("#loadPFS").click(function ()
-                                        {
+                                         $("#loadPFS").click(function ()
+                                         {
+                                            globalChartNumber = 1;
+                                            $('#previouschart').hide();
+                                            $('#nextchart').show();
                                             // Load data from the server using a HTTP GET request
                                             // jquery.get is a equivalent to $.ajax({....
-                                            jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/overview", function (response) {
+                                                jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/overview", function (response) {
                                                 // Check if start and end values of the slieder are the same
                                                 var start = dateSlider.noUiSlider.get();
                                                 if (start[0] != start[1]) {
@@ -362,57 +366,60 @@
 
                                                     // calc the increase or decline in percent
 
-                                                    var totalFirst = response[beginning].pfsEnabled + response[beginning].pfsDisabled;
+                                                    var totalFirst = response[beginning].total;
                                                     var pfs1Percent1 = ((response[beginning].pfsEnabled / totalFirst) * 100).toFixed(2);
-                                                    var pfs1Percent2 = ((response[beginning].pfsDisabled / totalFirst) * 100).toFixed(2);
 
-                                                    // alert(pfs1Percent1 + " " + pfs1Percent2);
-
-                                                    var totalSecond = response[ending].pfsEnabled + response[ending].pfsDisabled;
+                                                    var totalSecond = response[ending].total;
                                                     pfs2Percent1 = ((response[ending].pfsEnabled / totalSecond) * 100).toFixed(2);
-                                                    pfs2Percent2 = ((response[ending].pfsDisabled / totalSecond) * 100).toFixed(2);
 
-                                                    // alert(pfs2Percent1 + " " + pfs2Percent2);
-
-
-
-                                                    chart.load({
-                                                        columns: [
+                                                    chart = c3.generate({
+                                                        bindto: '#chart',
+                                                        data: {
+                                                            x: 'x',
+                                                            columns: [
                                                             months,
-                                                            pfsEnabled,
-                                                            pfsDisabled,
-                                                            ['change', pfs2Percent1 - pfs1Percent1, pfs2Percent2 - pfs1Percent2],
-                                                        ],
-                                                        types: {
-                                                            change: 'line',
+                                                            ['PFS_Support',  pfs1Percent1, pfs2Percent1]],
+                                                            colors: {
+                                                            PFS_Support: '#2CA02C', // green
                                                         },
-                                                        axes: {
-                                                            'change': 'y2',
-                                                            'x': 'x'
-                                                        },
-                                                         colors: {
-                                                            pfsEnabled: '#2CA02C', // green
-                                                            pfsDisabled: '#D62728', // red
-                                                        },
-                                                        type: 'line',
-                                                        unload: chart.columns,
-                                                    });
-                                                } else {
-                                                    chart.load({
+                                                    },
+                                                    type: 'line',
+                                                    unload: chart.columns,
+                                                    axis:{
+                                                     x: {
+                                                       type: 'category',
+                                                   },
+                                                   y:{
+                                                    label: {
+                                                        text: 'In percent',
+                                                        position: 'outer-middle'
+                                                    },
+                                                    min:0,
+                                                    max:99,
+                                                }
+                                            },
+                                            subchart: {
+                                                show: true
+                                            }
+                                        });
+                                                      //
+                                                  } else {
+                                                     var latestelement = response[getLatestElementIndex(response)];
+                                                     chart.load({
                                                         // json format [{ .... }]
-                                                        json: [response[response.length - 1]],
+                                                        json: [latestelement],
                                                         keys: {
                                                             value: ['pfsEnabled', 'pfsDisabled']
                                                         },
                                                         type: 'pie',
                                                         unload: chart.columns,
-                                                         colors: {
+                                                        colors: {
                                                             pfsEnabled: '#2CA02C', // green
                                                             pfsDisabled: '#D62728', // red
                                                         },
                                                     });
-                                                }
-                                            }).error(function () {
+                                                 }
+                                             }).error(function () {
                                                 alert("Error Loading JSON");
                                                 chart.load({
                                                     json: test_array_JSONs,
@@ -445,12 +452,13 @@
                                          * Load DHE-Parameter-Chart function with one Y-Axis.
                                          */
 
-                                        $("#loadDHEParameter").click(function ()
-                                        {
+                                         $("#loadDHEParameter").click(function ()
+                                         {
+                                            globalChartNumber=2;
 
                                             // Load data from the server using a HTTP GET request
                                             // jquery.get is a equivalent to $.ajax({....
-                                            jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
+                                                jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
                                                 // remove ECDHE data
                                                 var latestElement = response[response.length - 1].distribution;
                                                 for (var i = latestElement.length - 1; i >= 0; i--) {
@@ -460,27 +468,45 @@
                                                     ;
                                                 }
 
-                                                chart.load({
-                                                    type: 'bar',
-                                                    json: response[response.length - 1].distribution,
-                                                    keys: {
+                                                chart = c3.generate({
+                                                    bindto: '#chart',
+                                                    data: {
+                                                      json: response[response.length - 1].distribution,
+                                                      keys: {
                                                         x: 'kxStrength',
                                                         value: ['count']
                                                     },
-                                                    unload: chart.columns,
-                                                });
-                                            }).error(function () {
-                                                alert("Error Loading JSON");
-                                                chart.load({
                                                     type: 'bar',
-                                                    json: testdaten.dhe,
-                                                    keys: {
-                                                        x: 'keysize',
-                                                        value: ['size']
-                                                    },
-                                                    unload: chart.columns,
-                                                });
-                                            });
+                                                },
+
+                                                axis:{
+                                                 x: {
+                                                   type: 'category',
+                                               },
+                                               y:{
+                                                label: {
+                                                    text: 'Total Count',
+                                                    position: 'outer-middle'
+                                                },
+
+                                            }
+                                        },
+
+                                    });
+
+
+}).error(function () {
+    alert("Error Loading JSON");
+    chart.load({
+        type: 'bar',
+        json: testdaten.dhe,
+        keys: {
+            x: 'keysize',
+            value: ['size']
+        },
+        unload: chart.columns,
+    });
+});
 
                                             // takes the dynamic div tag out of the DOM
                                             $("#dynamic").empty();
@@ -488,17 +514,17 @@
                                         }
                                         );
 
-
                                         /*
                                          * Load DHE-Parameter-Chart function with one Y-Axis.
                                          */
 
-                                        $("#loadECDHEParameter").click(function ()
-                                        {
+                                         $("#loadECDHEParameter").click(function ()
+                                         {
+                                            globalChartNumber=3;
 
                                             // Load data from the server using a HTTP GET request
                                             // jquery.get is a equivalent to $.ajax({....
-                                            jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
+                                                jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
                                                 // remove ECDHE data
                                                 var latestElement = response[response.length - 1].distribution;
                                                 for (var i = latestElement.length - 1; i >= 0; i--) {
@@ -508,27 +534,44 @@
                                                     ;
                                                 }
 
-                                                chart.load({
-                                                    type: 'bar',
-                                                    json: response[response.length - 1].distribution,
-                                                    keys: {
+                                                chart = c3.generate({
+                                                    bindto: '#chart',
+                                                    data: {
+                                                     json: response[response.length - 1].distribution,
+                                                     keys: {
                                                         x: 'kxStrength',
                                                         value: ['count']
                                                     },
-                                                    unload: chart.columns,
-                                                });
-                                            }).error(function () {
-                                                alert("Error Loading JSON");
-                                                chart.load({
                                                     type: 'bar',
-                                                    json: testdaten.dhe,
-                                                    keys: {
-                                                        x: 'keysize',
-                                                        value: ['size']
-                                                    },
-                                                    unload: chart.columns,
-                                                });
-                                            });
+
+                                                },
+                                                axis:{
+                                                 x: {
+                                                   type: 'category',
+                                               },
+                                               y:{
+                                                label: {
+                                                    text: 'Total Count',
+                                                    position: 'outer-middle'
+                                                },
+
+                                            }
+                                        },
+
+                                    });
+
+}).error(function () {
+    alert("Error Loading JSON");
+    chart.load({
+        type: 'bar',
+        json: testdaten.dhe,
+        keys: {
+            x: 'keysize',
+            value: ['size']
+        },
+        unload: chart.columns,
+    });
+});
 
                                             // takes the dynamic div tag out of the DOM
                                             $("#dynamic").empty();
@@ -540,8 +583,9 @@
                                          * Load Cipher Suites Chart
                                          */
 
-                                        $("#ciphersuites").click(function ()
-                                        {
+                                         $("#ciphersuites").click(function ()
+                                         {
+                                            globalChartNumber=4;
                                             chart.load({
                                                 unload: chart.columns,
                                             });
@@ -551,7 +595,7 @@
                                         }
                                         );
 
-                                        function filterResponseByTimespan(response, start, end) {
+                                         function filterResponseByTimespan(response, start, end) {
                                             var filtered = [];
                                             var date = new Date(start.getFullYear(), start.getMonth());
                                             var end = new Date(end.getFullYear(), end.getMonth());
@@ -578,14 +622,17 @@
                                          * Load Logjam Graph
                                          */
 
-                                        $("#loadlogjam").click(function ()
-                                        {
+                                         $("#loadlogjam").click(function ()
+                                         {
+                                            globalChartNumber=5;
+                                            $('#previouschart').show();
+                                            $('#nextchart').hide();
                                             // Load data from the server using a HTTP GET request
                                             // jquery.get is a equivalent to $.ajax({....
-                                            jQuery.get("http://tls.thejetlag.de:1337/api/v0/exp/overview", function (response) {
+                                                jQuery.get("http://tls.thejetlag.de:1337/api/v0/exp/overview", function (response) {
 
-                                                var start = dateSlider.noUiSlider.get();
-                                                if (start[0] != start[1]) {
+                                                    var start = dateSlider.noUiSlider.get();
+                                                    if (start[0] != start[1]) {
 
                                                     // filter response Array by timespan
                                                     filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
@@ -598,7 +645,7 @@
                                                         },
                                                         type: 'line',
                                                         unload: chart.columns,
-                                                         colors: {
+                                                        colors: {
                                                             expEnabled: '#D62728', //green
                                                             expDisabled: '#2CA02C', // red
                                                         },
@@ -615,7 +662,7 @@
                                                             value: ['expEnabled', 'expDisabled']
                                                         },
                                                         unload: chart.columns,
-                                                            colors: {
+                                                        colors: {
                                                             expEnabled: '#D62728', //green
                                                             expDisabled: '#2CA02C', // red
                                                         },
@@ -642,69 +689,69 @@
 
 
 
-                                        function loadChartbyNumber(number) {
-                                            switch (number) {
-                                                case 1:
-                                                    $("#loadPFS").trigger("click");
-                                                    globalChartNumber = 1;
-                                                    $('#previouschart').hide();
-                                                    window.location = '#PFS';
-                                                    break;
-                                                case 2:
-                                                    $("#loadDHEParameter").trigger("click");
-                                                    globalChartNumber = 2;
-                                                    window.location = '#DHEkeygroups';
-                                                    break;
-                                                case 3:
-                                                    $("#loadECDHEParameter").trigger("click");
-                                                    globalChartNumber = 3;
-                                                    window.location = '#ECDHEParameter';
-                                                    break;
-                                                case 4:
-                                                    $("#ciphersuites").trigger("click");
-                                                    globalChartNumber = 4;
-                                                    window.location = '#CipherSuites';
-                                                    break;
-                                                case 5:
-                                                    $("#loadlogjam").trigger("click");
-                                                    globalChartNumber = 5;
-                                                    $('#nextchart').hide();
-                                                    window.location = '#logjam';
-                                                    break;
-                                                default:
-                                                    alert("Problem with loading Chart");
+function loadChartbyNumber(number) {
+    switch (number) {
+        case 1:
+        $("#loadPFS").trigger("click");
+        globalChartNumber = 1;
+        $('#previouschart').hide();
+        window.location = '#PFS';
+        break;
+        case 2:
+        $("#loadDHEParameter").trigger("click");
+        globalChartNumber = 2;
+        window.location = '#DHEkeygroups';
+        break;
+        case 3:
+        $("#loadECDHEParameter").trigger("click");
+        globalChartNumber = 3;
+        window.location = '#ECDHEParameter';
+        break;
+        case 4:
+        $("#ciphersuites").trigger("click");
+        globalChartNumber = 4;
+        window.location = '#CipherSuites';
+        break;
+        case 5:
+        $("#loadlogjam").trigger("click");
+        globalChartNumber = 5;
+        $('#nextchart').hide();
+        window.location = '#logjam';
+        break;
+        default:
+        alert("Problem with loading Chart");
 
-                                            }
-                                        }
+    }
+}
 
-                                        var hash = window.location.hash.substring(1);
+var hash = window.location.hash.substring(1);
 
-                                        switch (hash) {
-                                            case 'PFS':
-                                                loadChartbyNumber(1);
-                                                break;
-                                            case 'DHEkeygroups':
-                                                loadChartbyNumber(2);
-                                                break;
-                                            case 'CipherSuites':
-                                                loadChartbyNumber(4);
-                                                break;
-                                            case 'ECDHEParameter':
-                                                loadChartbyNumber(3);
-                                            case 'logjam':
-                                                loadChartbyNumber(5);
-                                                break;
-                                            default:
-                                                var random = Math.floor((Math.random() * numberOfCharts) + 1);
-                                                loadChartbyNumber(random);
-                                        }
+switch (hash) {
+    case 'PFS':
+    loadChartbyNumber(1);
+    break;
+    case 'DHEkeygroups':
+    loadChartbyNumber(2);
+    break;
+    case 'CipherSuites':
+    loadChartbyNumber(4);
+    break;
+    case 'ECDHEParameter':
+    loadChartbyNumber(3);
+    case 'logjam':
+    loadChartbyNumber(5);
+    break;
+    default:
+    var random = Math.floor((Math.random() * numberOfCharts) + 1);
+    loadChartbyNumber(random);
+}
 
                                         /*
                                          * Select previous or next chart by decreasing or increasing the globalnumber
                                          */
 
-                                        $("#previouschart").click(function ()
-                                        {
+                                         $("#previouschart").click(function ()
+                                         {
                                             globalChartNumber--;
                                             $('#nextchart').show();
                                             if (globalChartNumber <= 1) {
@@ -718,8 +765,8 @@
                                         }
                                         );
 
-                                        $("#nextchart").click(function ()
-                                        {
+                                         $("#nextchart").click(function ()
+                                         {
                                             globalChartNumber++;
                                             $('#previouschart').show();
                                             if (globalChartNumber >= numberOfCharts) {
@@ -734,8 +781,8 @@
                                         }
                                         );
 
-                                    };
-        </script>
-        
-    </body>
-</html>
+                                     };
+                                     </script>
+
+                                 </body>
+                                 </html>
