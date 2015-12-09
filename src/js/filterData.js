@@ -168,7 +168,7 @@ function parseResponse(response, protocol, cipherString) {
     monthBody.forEach(function (outer) {
         outer.match(/{(.*?)}/g).forEach(function (inner) {
             if (protocol !== "") {
-                if (inner.match(protocol) !== null && inner.match("\"" + cipherString + "\"") !== null) {
+                if (inner.match("\"" + protocol + "\"") !== null && inner.match("\"" + cipherString + "\"") !== null) {
                     var count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
                     if (inner.indexOf("preferred") > -1) {
                         hostsPreferring.push(parseInt(count));

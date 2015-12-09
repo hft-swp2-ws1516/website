@@ -383,13 +383,15 @@
                         var result = null;
                         var tryCount = 0;
                         $("#filterApply").click(function () {
+                            manageFilterSelection();
                             result = applyFilters();
                             if (result !== null) {
                                 tryCount = 0;
                                 var filteredChartGeneral = c3.generate({
                                     bindto: '#filteredChartGeneral',
                                     legend: {
-                                        show: true
+                                        show: true,
+                                        position: 'right'
                                     },
                                     size: {
                                         width: 640
@@ -413,26 +415,52 @@
                                         }
                                     }
                                 });
-                                var filteredChartLastMonth = c3.generate({
-                                    bindto: '#filteredChartLastMonth',
-                                    legend: {
-                                        show: true
-                                    },
-                                    size: {
-                                        width: 640
-                                    },
-                                    json: [
-                                        {"Total hosts": 80, "Hosts Accepting": 20}
-                                    ],
-                                    keys: {
-                                        value: ['totalHosts', 'hostsAccepting']
-                                    },
-                                    type: 'pie',
-                                    colors: {
-                                        totalHosts: '#D62728',
-                                        hostsAccepting: '#2CA02C'
-                                    }
-                                });
+                                if (result.months.length > 1) {
+                                    var totalHostsKey = result.totalHosts[0];
+                                    var totalHostsValue = result.totalHosts[result.totalHosts.length - 1];
+                                    var hostsAcceptingKey = result.hostsAccepting[0];
+                                    var hostsAcceptingValue = result.hostsAccepting[result.hostsAccepting.length - 1];
+                                    var hostsPreferringKey = result.hostsPreferring[0];
+                                    var hostsPreferringValue = result.hostsPreferring[result.hostsPreferring.length - 1];
+                                    var percentageAccepting = Math.round((hostsAcceptingValue / totalHostsValue * 100) * 100) / 100;
+                                    var percentagePreferring = Math.round((hostsPreferringValue / totalHostsValue * 100) * 100) / 100;
+                                    var filteredChartLastMonth = c3.generate({
+                                        bindto: '#filteredChartLastMonth',
+                                        legend: {
+                                            show: true,
+                                            position: 'right'
+                                        },
+                                        size: {
+                                            width: 640,
+                                            height: 200
+                                        },
+                                        padding: {
+                                            top: 80
+                                        },
+                                        gauge: {
+                                            label: {
+                                                show: false,
+                                                format: function (value, ratio) {
+                                                    return "";
+                                                }
+                                            }
+                                        },
+                                        color: {
+                                            pattern: ['#60B044', '#F97600', '#326BE5'],
+                                            threshold: {
+                                                values: [percentagePreferring + 0.01, percentageAccepting + 0.01, 100]
+                                            }
+                                        },
+                                        data: {
+                                            columns: [
+                                                [totalHostsKey, 100],
+                                                [hostsAcceptingKey, percentageAccepting],
+                                                [hostsPreferringKey, percentagePreferring]
+                                            ],
+                                            type: 'gauge'
+                                        }
+                                    });
+                                }
                             } else {
                                 if (tryCount < 2) {
                                     console.log("Try again!");
