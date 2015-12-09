@@ -78,7 +78,8 @@
                                 <div id="charts">
                                     <!-- The charts are displayed here -->
                                     <div id="chart"></div>
-                                    <div id="filteredChart"></div>
+                                    <div id="filteredChartGeneral"></div>
+                                    <div id="filteredChartLastMonth"></div>
                                     <!-- display next or previous chart -->
                                     <nav>
                                         <ul class="pager">
@@ -549,183 +550,182 @@
                                         );
 
 
-                                        function filterResponseByTimespan(response, start, end) {
 
-                                            function filterResponseByTimespan(response, start, end) {
-                                                var filtered = [];
-                                                var date = new Date(start.getFullYear(), start.getMonth());
-                                                var end = new Date(end.getFullYear(), end.getMonth());
-                                                while (date.getTime() <= end.getTime()) {
-                                                    for (var i = 0; i < response.length; i++) {
-                                                        if (response[i].month == formatDate2(date)) {
-                                                            filtered.push(response[i]);
-                                                            break;
-                                                        }
-                                                        ;
+                                        function filterResponseByTimespan(response, start, end) {
+                                            var filtered = [];
+                                            var date = new Date(start.getFullYear(), start.getMonth());
+                                            var end = new Date(end.getFullYear(), end.getMonth());
+                                            while (date.getTime() <= end.getTime()) {
+                                                for (var i = 0; i < response.length; i++) {
+                                                    if (response[i].month == formatDate2(date)) {
+                                                        filtered.push(response[i]);
+                                                        break;
                                                     }
                                                     ;
-                                                    // if value is 12, then the first month of the next year will be set
-                                                    date.setMonth(date.getMonth() + 1);
                                                 }
                                                 ;
-                                                return filtered;
+                                                // if value is 12, then the first month of the next year will be set
+                                                date.setMonth(date.getMonth() + 1);
                                             }
+                                            ;
+                                            return filtered;
+                                        }
 
 
 
-                                            /*
-                                             * Load Logjam Graph
-                                             */
+                                        /*
+                                         * Load Logjam Graph
+                                         */
 
-                                            $("#loadlogjam").click(function ()
-                                            {
-                                                globalChartNumber = 5;
-                                                $('#previouschart').show();
-                                                $('#nextchart').hide();
-                                                // Load data from the server using a HTTP GET request
-                                                // jquery.get is a equivalent to $.ajax({....
-                                                jQuery.get("http://tls.thejetlag.de:1337/api/v0/exp/overview", function (response) {
+                                        $("#loadlogjam").click(function ()
+                                        {
+                                            globalChartNumber = 5;
+                                            $('#previouschart').show();
+                                            $('#nextchart').hide();
+                                            // Load data from the server using a HTTP GET request
+                                            // jquery.get is a equivalent to $.ajax({....
+                                            jQuery.get("http://tls.thejetlag.de:1337/api/v0/exp/overview", function (response) {
 
-                                                    var start = dateSlider.noUiSlider.get();
-                                                    if (start[0] != start[1]) {
+                                                var start = dateSlider.noUiSlider.get();
+                                                if (start[0] != start[1]) {
 
-                                                        // filter response Array by timespan
-                                                        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
-                                                        chart.load({
-                                                            json: filtered,
-                                                            keys: {
-                                                                x: 'month',
-                                                                value: ['expEnabled', 'expDisabled']
-                                                            },
-                                                            type: 'line',
-                                                            unload: chart.columns,
-                                                            colors: {
-                                                                expEnabled: '#D62728', //green
-                                                                expDisabled: '#2CA02C', // red
-                                                            },
-                                                        });
-                                                    } else {
-                                                        // index of latest element in response array
-                                                        var latestElement = response[getLatestElementIndex(response)];
-                                                        var totalcount = latestElement.total;
-                                                        chart.load({
-                                                            type: 'pie',
-                                                            json: [latestElement],
-                                                            keys: {
-                                                                value: ['expEnabled', 'expDisabled']
-                                                            },
-                                                            unload: chart.columns,
-                                                            colors: {
-                                                                expEnabled: '#D62728', //green
-                                                                expDisabled: '#2CA02C', // red
-                                                            },
-                                                        });
-                                                    }
-                                                }).error(function () {
-                                                    alert("Error Loading JSON");
+                                                    // filter response Array by timespan
+                                                    filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
                                                     chart.load({
-                                                        type: 'bar',
-                                                        json: testdaten.dhe,
+                                                        json: filtered,
                                                         keys: {
-                                                            x: 'keysize',
-                                                            value: ['size']
+                                                            x: 'month',
+                                                            value: ['expEnabled', 'expDisabled']
+                                                        },
+                                                        type: 'line',
+                                                        unload: chart.columns,
+                                                        colors: {
+                                                            expEnabled: '#D62728', //green
+                                                            expDisabled: '#2CA02C', // red
+                                                        },
+                                                    });
+                                                } else {
+                                                    // index of latest element in response array
+                                                    var latestElement = response[getLatestElementIndex(response)];
+                                                    var totalcount = latestElement.total;
+                                                    chart.load({
+                                                        type: 'pie',
+                                                        json: [latestElement],
+                                                        keys: {
+                                                            value: ['expEnabled', 'expDisabled']
                                                         },
                                                         unload: chart.columns,
+                                                        colors: {
+                                                            expEnabled: '#D62728', //green
+                                                            expDisabled: '#2CA02C', // red
+                                                        },
                                                     });
-                                                });
-                                                $("#dynamic").empty();
-                                                $("#dropdownMenu1").html('Logjam Attack <span class="caret"></span>');
-                                            }
-                                            );
-                                            function loadChartbyNumber(number) {
-                                                switch (number) {
-                                                    case 1:
-                                                        $("#loadPFS").trigger("click");
-                                                        globalChartNumber = 1;
-                                                        $('#previouschart').hide();
-                                                        window.location = '#PFS';
-                                                        break;
-                                                    case 2:
-                                                        $("#loadDHEParameter").trigger("click");
-                                                        globalChartNumber = 2;
-                                                        window.location = '#DHEkeygroups';
-                                                        break;
-                                                    case 3:
-                                                        $("#loadECDHEParameter").trigger("click");
-                                                        globalChartNumber = 3;
-                                                        window.location = '#ECDHEParameter';
-                                                        break;
-                                                    case 4:
-                                                        $("#ciphersuites").trigger("click");
-                                                        globalChartNumber = 4;
-                                                        window.location = '#CipherSuites';
-                                                        break;
-                                                    case 5:
-                                                        $("#loadlogjam").trigger("click");
-                                                        globalChartNumber = 5;
-                                                        $('#nextchart').hide();
-                                                        window.location = '#logjam';
-                                                        break;
-                                                    default:
-                                                        alert("Problem with loading Chart");
                                                 }
-                                            }
-
-                                            var hash = window.location.hash.substring(1);
-                                            switch (hash) {
-                                                case 'PFS':
-                                                    loadChartbyNumber(1);
+                                            }).error(function () {
+                                                alert("Error Loading JSON");
+                                                chart.load({
+                                                    type: 'bar',
+                                                    json: testdaten.dhe,
+                                                    keys: {
+                                                        x: 'keysize',
+                                                        value: ['size']
+                                                    },
+                                                    unload: chart.columns,
+                                                });
+                                            });
+                                            $("#dynamic").empty();
+                                            $("#dropdownMenu1").html('Logjam Attack <span class="caret"></span>');
+                                        }
+                                        );
+                                        function loadChartbyNumber(number) {
+                                            switch (number) {
+                                                case 1:
+                                                    $("#loadPFS").trigger("click");
+                                                    globalChartNumber = 1;
+                                                    $('#previouschart').hide();
+                                                    window.location = '#PFS';
                                                     break;
-                                                case 'DHEkeygroups':
-                                                    loadChartbyNumber(2);
+                                                case 2:
+                                                    $("#loadDHEParameter").trigger("click");
+                                                    globalChartNumber = 2;
+                                                    window.location = '#DHEkeygroups';
                                                     break;
-                                                case 'CipherSuites':
-                                                    loadChartbyNumber(4);
+                                                case 3:
+                                                    $("#loadECDHEParameter").trigger("click");
+                                                    globalChartNumber = 3;
+                                                    window.location = '#ECDHEParameter';
                                                     break;
-                                                case 'ECDHEParameter':
-                                                    loadChartbyNumber(3);
-                                                case 'logjam':
-                                                    loadChartbyNumber(5);
+                                                case 4:
+                                                    $("#ciphersuites").trigger("click");
+                                                    globalChartNumber = 4;
+                                                    window.location = '#CipherSuites';
+                                                    break;
+                                                case 5:
+                                                    $("#loadlogjam").trigger("click");
+                                                    globalChartNumber = 5;
+                                                    $('#nextchart').hide();
+                                                    window.location = '#logjam';
                                                     break;
                                                 default:
-                                                    var random = Math.floor((Math.random() * numberOfCharts) + 1);
-                                                    loadChartbyNumber(random);
+                                                    alert("Problem with loading Chart");
                                             }
-
-                                            /*
-                                             * Select previous or next chart by decreasing or increasing the globalnumber
-                                             */
-
-                                            $("#previouschart").click(function ()
-                                            {
-                                                globalChartNumber--;
-                                                $('#nextchart').show();
-                                                if (globalChartNumber <= 1) {
-                                                    loadChartbyNumber(1);
-                                                    globalChartNumber = 1;
-                                                    return;
-                                                }
-                                                ;
-                                                loadChartbyNumber(globalChartNumber);
-                                            }
-                                            );
-                                            $("#nextchart").click(function ()
-                                            {
-                                                globalChartNumber++;
-                                                $('#previouschart').show();
-                                                if (globalChartNumber >= numberOfCharts) {
-                                                    globalChartNumber = numberOfCharts;
-                                                    $('#nextchart').hide();
-                                                    loadChartbyNumber(numberOfCharts);
-                                                    return;
-                                                }
-                                                ;
-                                                loadChartbyNumber(globalChartNumber);
-                                            }
-                                            );
                                         }
-                                        ;
+
+                                        var hash = window.location.hash.substring(1);
+                                        switch (hash) {
+                                            case 'PFS':
+                                                loadChartbyNumber(1);
+                                                break;
+                                            case 'DHEkeygroups':
+                                                loadChartbyNumber(2);
+                                                break;
+                                            case 'CipherSuites':
+                                                loadChartbyNumber(4);
+                                                break;
+                                            case 'ECDHEParameter':
+                                                loadChartbyNumber(3);
+                                            case 'logjam':
+                                                loadChartbyNumber(5);
+                                                break;
+                                            default:
+                                                var random = Math.floor((Math.random() * numberOfCharts) + 1);
+                                                loadChartbyNumber(random);
+                                        }
+
+                                        /*
+                                         * Select previous or next chart by decreasing or increasing the globalnumber
+                                         */
+
+                                        $("#previouschart").click(function ()
+                                        {
+                                            globalChartNumber--;
+                                            $('#nextchart').show();
+                                            if (globalChartNumber <= 1) {
+                                                loadChartbyNumber(1);
+                                                globalChartNumber = 1;
+                                                return;
+                                            }
+                                            ;
+                                            loadChartbyNumber(globalChartNumber);
+                                        }
+                                        );
+                                        $("#nextchart").click(function ()
+                                        {
+                                            globalChartNumber++;
+                                            $('#previouschart').show();
+                                            if (globalChartNumber >= numberOfCharts) {
+                                                globalChartNumber = numberOfCharts;
+                                                $('#nextchart').hide();
+                                                loadChartbyNumber(numberOfCharts);
+                                                return;
+                                            }
+                                            ;
+                                            loadChartbyNumber(globalChartNumber);
+                                        }
+                                        );
                                     }
+                                    ;
+
         </script>
 
     </body>

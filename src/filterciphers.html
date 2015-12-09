@@ -10,7 +10,7 @@
                 <fieldset>
                     <fieldset>
                         <legend>Top Level Domain</legend>
-                        <input id="filterTLD" list="tl_domains" placeholder="Type something to get started!">
+                        <input id="filterTLD" list="tl_domains" placeholder="Type here to get started!">
                         <datalist id="tl_domains">
                             <option value=".com">
                             <option value=".org">
@@ -381,11 +381,13 @@
                     </fieldset>
                     <script>
                         var result = null;
+                        var tryCount = 0;
                         $("#filterApply").click(function () {
                             result = applyFilters();
                             if (result !== null) {
-                                c3.generate({
-                                    bindto: '#filteredChart',
+                                tryCount = 0;
+                                var filteredChartGeneral = c3.generate({
+                                    bindto: '#filteredChartGeneral',
                                     legend: {
                                         show: true
                                     },
@@ -411,11 +413,37 @@
                                         }
                                     }
                                 });
+                                var filteredChartLastMonth = c3.generate({
+                                    bindto: '#filteredChartLastMonth',
+                                    legend: {
+                                        show: true
+                                    },
+                                    size: {
+                                        width: 640
+                                    },
+                                    json: [
+                                        {"Total hosts": 80, "Hosts Accepting": 20}
+                                    ],
+                                    keys: {
+                                        value: ['totalHosts', 'hostsAccepting']
+                                    },
+                                    type: 'pie',
+                                    colors: {
+                                        totalHosts: '#D62728',
+                                        hostsAccepting: '#2CA02C'
+                                    }
+                                });
                             } else {
-                                console.log("Try again!");
-                                setTimeout(function () {
-                                    $("#filterApply").click();
-                                }, 1000);
+                                if (tryCount < 2) {
+                                    console.log("Try again!");
+                                    tryCount++;
+                                    setTimeout(function () {
+                                        $("#filterApply").click();
+                                    }, 1000);
+                                } else {
+                                    tryCount = 0;
+                                    alert("Currently unable to establish a database connection. Please verify your Internet connectivity.");
+                                }
                             }
                         });
                     </script>
