@@ -77,22 +77,27 @@
 
                                 <div id="charts">
                                     <!-- The charts are displayed here -->
-                                    <div id="chart"></div>
-
-                                    <!-- display next or previous chart -->
-                                    <nav>
-                                        <ul class="pager">
-                                            <button id="previouschart" type="button" class="btn btn-default btn-lg">
-                                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                            </button>
-                                            <button id="nextchart" type="button" class="btn btn-default btn-lg">
-                                                <span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                            </button>
-                                        </ul>
-                                    </nav>
+                                    <div id="generic">
+                                        <div id="chart"></div>
+                                        <!-- display next or previous chart -->
+                                        <nav>
+                                            <ul class="pager" id="switchChart">
+                                                <button id="previouschart" type="button" class="btn btn-default btn-lg">
+                                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                                </button>
+                                                <button id="nextchart" type="button" class="btn btn-default btn-lg">
+                                                    <span  class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                </button>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div id="detailed">
+                                        <div id="filteredChartGeneral"></div>
+                                        <div id="filteredChartLastMonth"></div>
+                                    </div>
                                 </div>
-                                <div id="filteredChartGeneral"></div>
-                                <div id="filteredChartLastMonth"></div>
+
+
                             </div>
                         </div>
 
@@ -137,6 +142,7 @@
                                         function timestamp(str) {
                                             return new Date(str).getTime();
                                         }
+
 
                                         // noUiSlider -> for selecting a timespan for displaying changes
                                         var dateSlider = document.getElementById('slider-date');
@@ -298,6 +304,8 @@
                                         $("#loadPFS").click(function ()
                                         {
                                             globalChartNumber = 1;
+                                            $("#generic").show();
+                                            $("#detailed").hide();
                                             $('#previouschart').hide();
                                             $('#nextchart').show();
                                             // Load data from the server using a HTTP GET request
@@ -426,6 +434,8 @@
                                         $("#loadDHEParameter").click(function ()
                                         {
                                             globalChartNumber = 2;
+                                            $("#generic").show();
+                                            $("#detailed").hide();
                                             // Load data from the server using a HTTP GET request
                                             // jquery.get is a equivalent to $.ajax({....
                                             jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
@@ -484,6 +494,8 @@
                                         $("#loadECDHEParameter").click(function ()
                                         {
                                             globalChartNumber = 3;
+                                            $("#generic").show();
+                                            $("#detailed").hide();
                                             // Load data from the server using a HTTP GET request
                                             // jquery.get is a equivalent to $.ajax({....
                                             jQuery.get("http://tls.thejetlag.de:1337/api/v0/pfs/distribution", function (response) {
@@ -545,6 +557,9 @@
                                             chart.load({
                                                 unload: chart.columns
                                             });
+                                            
+                                            $("#generic").hide();
+                                            $("#detailed").show();
                                             $("#dynamic").load("filterciphers.html");
                                             $("#dropdownMenu1").html('Cipher Suites <span class="caret"></span>');
                                         }
@@ -580,7 +595,10 @@
 
                                         $("#loadlogjam").click(function ()
                                         {
+                                            
                                             globalChartNumber = 5;
+                                            $("#generic").show();
+                                            $("#detailed").hide();
                                             $('#previouschart').show();
                                             $('#nextchart').hide();
                                             // Load data from the server using a HTTP GET request
@@ -631,7 +649,7 @@
                                                         x: 'keysize',
                                                         value: ['size']
                                                     },
-                                                    unload: chart.columns,
+                                                    unload: chart.columns
                                                 });
                                             });
                                             $("#dynamic").empty();
@@ -639,6 +657,14 @@
                                         }
                                         );
                                         function loadChartbyNumber(number) {
+                                            if (number === 4) {
+                                                $("#generic").hide();
+                                                $("#detailed").show();
+                                            } else {
+                                                $("#generic").show();
+                                                $("#detailed").hide();
+                                            }
+
                                             switch (number) {
                                                 case 1:
                                                     $("#loadPFS").trigger("click");

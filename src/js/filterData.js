@@ -114,6 +114,9 @@ function resetFilters() {
     document.getElementById("msgAuth").innerHTML = getMsgAuth("all");
 
     document.getElementById("displayFilterSelection").innerHTML = "[none]";
+
+    document.getElementById("filteredChartGeneral").innerHTML = "";
+    document.getElementById("filteredChartLastMonth").innerHTML = "";
 }
 
 
