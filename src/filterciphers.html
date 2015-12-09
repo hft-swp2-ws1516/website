@@ -5,7 +5,7 @@
     </div>
     <div class="panel-body">
         <div>
-            <form id="filterBox" name="filterBox" action="js/filterData.js" method="POST" onsubmit="return applyFilters();" 
+            <form id="filterBox" name="filterBox" 
                   onmouseover="initFilters()">
                 <fieldset>
                     <fieldset>
@@ -375,10 +375,50 @@
                     </fieldset>
                     <fieldset>
                         <div id="filterButtons">
-                            <input id="filterApply" type="submit" value="Apply Filter">
+                            <input id="filterApply" type="button" value="Apply Filter">
                             <input id="filterReset" type="reset" value="Reset Filter" onClick="resetFilters()">
                         </div>
                     </fieldset>
+                    <script>
+                        var result = null;
+                        $("#filterApply").click(function () {
+                            result = applyFilters();
+                            if (result !== null) {
+                                c3.generate({
+                                    bindto: '#filteredChart',
+                                    legend: {
+                                        show: true
+                                    },
+                                    size: {
+                                        width: 640
+                                    },
+                                    data: {
+                                        x: 'x',
+                                        columns: [
+                                            result.months,
+                                            result.totalHosts,
+                                            result.hostsAccepting,
+                                            result.hostsPreferring
+                                        ]
+                                    },
+                                    axis: {
+                                        x: {
+                                            type: 'timeseries',
+                                            tick: {
+                                                culling: false,
+                                                format: '%m-%Y'
+                                            }
+                                        }
+                                    }
+                                });
+                            } else {
+                                console.log("Try again!");
+                                setTimeout(function () {
+                                    $("#filterApply").click();
+                                }, 1000);
+                            }
+                        });
+                    </script>
                 </fieldset>
             </form>
         </div>

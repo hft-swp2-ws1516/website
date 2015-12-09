@@ -78,6 +78,7 @@
                                 <div id="charts">
                                     <!-- The charts are displayed here -->
                                     <div id="chart"></div>
+                                    <div id="filteredChart"></div>
                                     <!-- display next or previous chart -->
                                     <nav>
                                         <ul class="pager">
@@ -535,13 +536,14 @@
                                         $("#ciphersuites").click(function ()
                                         {
                                             chart.load({
-                                                unload: chart.columns,
+                                                unload: chart.columns
                                             });
                                             $("#dynamic").load("filterciphers.html");
                                             $("#dropdownMenu1").html('Cipher Suites <span class="caret"></span>');
 
                                         }
                                         );
+
 
                                         function filterResponseByTimespan(response, start, end) {
                                             var filtered = [];
@@ -719,7 +721,8 @@
                                         );
 
                                     };
+
         </script>
-        
+
     </body>
 </html>

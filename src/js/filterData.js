@@ -1,10 +1,24 @@
+/*
+ var HttpClient = function () {
+ this.get = function (url, callback, protocol, cipherString) {
+ var httpRequest = new XMLHttpRequest();
+ httpRequest.onreadystatechange = function () {
+ if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+ callback(httpRequest.responseText, protocol, cipherString);
+ }
+ };
+ httpRequest.open("GET", url, true);
+ httpRequest.send(null);
+ };
+ };
+ */
 
 var HttpClient = function () {
-    this.get = function (url, callback, protocol, cipherString) {
+    this.get = function (url, callback) {
         var httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = function () {
             if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-                callback(httpRequest.responseText, protocol, cipherString);
+                callback(httpRequest.responseText);
             }
         };
         httpRequest.open("GET", url, true);
@@ -12,11 +26,24 @@ var HttpClient = function () {
     };
 };
 
+var httpResponse;
 var months = [];
 var totalHosts = [];
 var monthBody = [];
 var hostsAccepting = [];
 var hostsPreferring = [];
+
+function setHttpResponse(response) {
+    console.log("Called by: " + arguments.callee.caller.toString());
+    if (response === null) {
+        console.log("Response was set to null!");
+    } else {
+        console.log("Response was set!");
+    }
+
+    httpResponse = response;
+}
+
 
 function initFilters() {
 
@@ -89,12 +116,10 @@ function resetFilters() {
     document.getElementById("displayFilterSelection").innerHTML = "[none]";
 }
 
+
 function applyFilters() {
 
-    months = [];
-    totalHosts = [];
-    hostsAccepting = [];
-    hostsPreferring = [];
+    resetResults();
 
     var url = "http://tls.thejetlag.de:1337/api/v0/ciphers/summary";
     var tldSelection = document.getElementById("filterTLD").value;
@@ -108,15 +133,27 @@ function applyFilters() {
     var cipherString = document.getElementById("displayFilterSelection").innerHTML;
     var httpClient = new HttpClient();
 
-    httpClient.get(url, parseResponse, protocol, cipherString);
+    if (httpResponse === undefined || httpResponse === null) {
+        httpClient.get(url, setHttpResponse);
+    }
 
-    displayGraphs(months, totalHosts, hostsAccepting, hostsPreferring);
+    return parseResponse(httpResponse, protocol, cipherString);
 
-    return false;
+
 
 }
 
 function parseResponse(response, protocol, cipherString) {
+
+    months.push('x');
+    totalHosts.push('Total Hosts');
+    hostsAccepting.push('Hosts Accepting');
+    hostsPreferring.push('Hosts Preferring');
+
+    if (response === undefined || response === null) {
+        console.log("Invalid response!");
+        return null;
+    }
 
     response.match(/month.:.(\d*).(\d*)/g).forEach(function (month) {
         months.push(month.split(":")[1].replace('"', ''));
@@ -126,25 +163,67 @@ function parseResponse(response, protocol, cipherString) {
         totalHosts.push(number.split(":")[1]);
     });
 
+    var loops = 0;
     monthBody = response.match(/\[[^\[\]]*\]/g);
     monthBody.forEach(function (outer) {
         outer.match(/{(.*?)}/g).forEach(function (inner) {
-            if (inner.match(protocol) !== null && inner.match("\"" + cipherString + "\"") !== null) {
-                var count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
-                if (inner.indexOf("preferred") > -1) {
-                    hostsPreferring.push(count);
-                } else {
-                    hostsAccepting.push(count);
+            if (protocol !== "") {
+                if (inner.match(protocol) !== null && inner.match("\"" + cipherString + "\"") !== null) {
+                    var count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
+                    if (inner.indexOf("preferred") > -1) {
+                        hostsPreferring.push(parseInt(count));
+                    } else {
+                        hostsAccepting.push(parseInt(count));
+                    }
+                }
+            } else {
+                if (inner.match("\"" + cipherString + "\"") !== null) {
+                    var count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
+                    writeToHosts(loops + 1, inner, count);
                 }
             }
         });
+        loops++;
     });
+
+    for (var i = 1; i < months.length; i++) {
+        var tmp = months[i].replace('_', '-');
+        months[i] = tmp + "-01";
+    }
+
+    setHttpResponse(null);
+
+    return {
+        months: months,
+        totalHosts: totalHosts,
+        hostsAccepting: hostsAccepting,
+        hostsPreferring: hostsPreferring
+    };
 
 }
 
-function displayGraphs(months, totalHosts, hostsAccepting, hostsPreferring) {
-    
-    
+function writeToHosts(currentMonth, match, count) {
+    if (match.indexOf("preferred") > -1) {
+        if (hostsPreferring.length < 2 || hostsPreferring.length === currentMonth) {
+            hostsPreferring.push(parseInt(count));
+        } else {
+            hostsPreferring[currentMonth] += parseInt(count);
+        }
+    } else {
+        if (hostsAccepting.length < 2 || hostsAccepting.length === currentMonth) {
+            hostsAccepting.push(parseInt(count));
+        } else {
+            hostsAccepting[currentMonth] += parseInt(count);
+        }
+    }
+}
+
+function resetResults() {
+
+    months = [];
+    totalHosts = [];
+    hostsAccepting = [];
+    hostsPreferring = [];
 
 }
 
