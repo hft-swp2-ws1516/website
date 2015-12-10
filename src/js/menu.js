@@ -33,7 +33,7 @@ document.getElementById("footer").innerHTML =
 
 // open Subscribe Modal and this modal will open the subscriber count modal on subscribtion.php file after the use press on save button
 document.getElementById("subscribe").innerHTML =
-    "<form method='post' action='subscribtion.php'>"+
+    "<form method='post' action='subscribe.php'>"+
     "<div class='container'>"+
     "<div class='modal fade' id='subscribtion' role='dialog'>"+
     "   <div class='modal-dialog'>"+
