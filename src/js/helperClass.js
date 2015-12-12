@@ -1,7 +1,8 @@
+
 function formatDate2(date) {
 	var string = date.getFullYear() + "_" + (date.getMonth() + 1);
 	return string;
-}
+};
 
 function filterResponseByTimespan(response, start, end) {
 	var filtered = [];

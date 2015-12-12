@@ -1,5 +1,6 @@
 <script type="text/javascript" src="js/helperClass.js"></script>
 
+<div id='error-message'></div>
 <div id="dheChart"></div>
 
 
@@ -9,7 +10,6 @@
  // Load data from the server using a HTTP GET request
  // jquery.get is a equivalent to $.ajax({....
  	jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/pfs/distribution", function (response) {
-
           // remove ECDHE data
           var latestElement = response[response.length - 1].distribution;
           for (var i = latestElement.length - 1; i >= 0; i--) {
@@ -42,6 +42,6 @@
           	},
           });
       }).error(function () {
-      	alert("Error Loading JSON");
+        $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
       });
       </script>

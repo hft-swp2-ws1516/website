@@ -1,5 +1,6 @@
 <script type="text/javascript" src="js/helperClass.js"></script>
 
+<div id='error-message'></div>
 <div id="logjam"></div>
 
 
@@ -67,6 +68,6 @@
 		});
     	}
     }).error(function () {
-    	alert("Error Loading JSON");
+    $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
     });
     </script>

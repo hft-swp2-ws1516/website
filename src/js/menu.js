@@ -3,8 +3,6 @@
  */
 
 
-
-
 // for new menu items just add thuse below by adding or acting as shown
 document.getElementById("nav01").innerHTML =
 "<nav class='navbar navbar-default'>"+

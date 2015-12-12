@@ -1,7 +1,7 @@
+<div>
 <script type="text/javascript" src="js/helperClass.js"></script>
-
+<div id='error-message'></div>
 <div id="pfsChart"></div>
-
 <script>
 // Formatting date because of Datefield  e.g. 2015_11 field in the api
 
@@ -65,26 +65,21 @@
             		bindto: '#pfsChart',
             		data: {
             			json: [
-            			 latestelement
-            			],
-            			keys: {
+                        latestelement
+                        ],
+                        keys: {
 						//x: 'name', // it's possible to specify 'x' when category axis
 						value: ['monthlyPfsEnabled', 'monthlyPfsDisabled'],
 					},
-				type: 'pie',
+                    type: 'pie',
 
-				},
+                },
 
-			});
+            });
             }
         }).error(function () {
-        	alert("Error Loading JSON");
-        	chart.load({
-        		columns: [
-        		['data1', 130, 120, 150, 140, 160, 150],
-        		['data4', 30, 20, 50, 40, 60, 50],
-        		],
-        		unload: ['data2', 'data3'],
-        	});
-        });
+         $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+     });
         </script>
+
+    </div>
