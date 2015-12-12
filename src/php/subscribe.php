@@ -25,7 +25,7 @@ if(isset($_POST['name']))
     ));
 
     /** path should be adjusted later on the server */
-    header("Location: /src/subscribtion.php");
+    header("Location: /src/subscribe.php");
 }
 
 /** @var  $cursor : dealing with the result. But i am not using it for now. Maybe it would be useful later. */
