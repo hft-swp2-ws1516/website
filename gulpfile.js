@@ -60,7 +60,7 @@ gulp.task('archive:zip', function (done) {
 gulp.task('clean', function (done) {
     require('del')([
         dirs.archive,
-        //dirs.dist
+        dirs.dist + '/**/*'
     ], done);
 });
 
@@ -70,7 +70,7 @@ gulp.task('copy', [
     'copy:jquery',
     'copy:license',
     'copy:main.css',
-    'copy:misc',
+    //'copy:misc',
     'copy:normalize'
 ]);
 
@@ -162,7 +162,8 @@ gulp.task('archive', function (done) {
 
 gulp.task('build', function (done) {
     runSequence(
-        ['clean', 'lint:js'],
+        //['clean', 'lint:js'],
+        'clean',
         'copy',
         done);
 });
