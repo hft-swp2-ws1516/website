@@ -4,7 +4,6 @@ body {
     font-size: 16px;
     background-color: dimgrey;
     color: #696969;
-    padding: 3px;
 }
 
 
@@ -45,9 +44,7 @@ ul#menu li a:hover {
     color: #696969;
     background-color: #f1f1f1;
 }
-.content-wrapper{
-    padding-top: 70px;
-}
+
 /* Timeslider only visible for mobile devices */
 @media (min-width:768px) {
     #timeslider {
@@ -63,4 +60,11 @@ ul#menu li a:hover {
 
 .ui-datepicker-calendar {
     display: none;
+}
+
+/* The dropdown menu will automatically open when on hover */
+@media (min-width: 979px) {
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+  }
 }

@@ -1,0 +1,72 @@
+<script type="text/javascript" src="js/helperClass.js"></script>
+
+<div id="logjam"></div>
+
+
+<script>
+ // Load data from the server using a HTTP GET request
+// jquery.get is a equivalent to $.ajax({....
+	jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/exp/overview", function (response) {
+
+		var start = dateSlider.noUiSlider.get();
+		if (start[0] != start[1]) {
+
+        // filter response Array by timespan
+        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
+        chart = c3.generate({
+        	bindto: '#logjam',
+        	data: {
+        		json: filtered,
+        		keys: {
+        			x: 'month',
+        			value: ['expDisabled', 'expEnabled']
+        		},
+        		type: 'line',
+        		colors: {
+			        expEnabled: '#D62728', //green
+			        expDisabled: '#2CA02C', // red
+			    },
+
+			},
+			axis: {
+				x: {
+					type: 'category',
+				},
+				y: {
+					label: {
+						text: 'Total Count',
+						position: 'outer-middle'
+					},
+				}
+			},
+
+		});
+
+
+    } else {
+    	 // index of latest element in response array
+    	 var latestElement = response[getLatestElementIndex(response)];
+    	 var totalcount = latestElement.total;
+    	      chart = c3.generate({
+        	bindto: '#logjam',
+        	data: {
+        		json: filtered,
+        		keys: {
+        			x: 'month',
+        			value: ['expDisabled', 'expEnabled']
+        		},
+        		type: 'pie',
+        		colors: {
+			        expEnabled: '#D62728', //green
+			        expDisabled: '#2CA02C', // red
+			    },
+
+			},
+
+		});
+    	}
+    }).error(function () {
+    	alert("Error Loading JSON");
+    });
+    </script>

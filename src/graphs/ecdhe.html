@@ -1,0 +1,45 @@
+<script type="text/javascript" src="js/helperClass.js"></script>
+
+<div id="dheChart"></div>
+
+
+<script>
+// Formatting date because of Datefield  e.g. 2015_11 field in the api
+
+// Load data from the server using a HTTP GET request
+// jquery.get is a equivalent to $.ajax({....
+	jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/pfs/distribution", function (response) {
+        // remove ECDHE data
+        var latestElement = response[response.length - 1].distribution;
+        for (var i = latestElement.length - 1; i >= 0; i--) {
+        	if (latestElement[i].kx == "DH") {
+        		latestElement.splice(i, 1);
+        	}
+        	;
+        }
+        chart = c3.generate({
+        	bindto: '#dheChart',
+        	data: {
+        		json: response[response.length - 1].distribution,
+        		keys: {
+        			x: 'kxStrength',
+        			value: ['count']
+        		},
+        		type: 'bar',
+        	},
+        	axis: {
+        		x: {
+        			type: 'category',
+        		},
+        		y: {
+        			label: {
+        				text: 'Total Count',
+        				position: 'outer-middle'
+        			},
+        		}
+        	},
+        });
+    }).error(function () {
+    	alert("Error Loading JSON");
+    });
+    </script>

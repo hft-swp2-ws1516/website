@@ -1,0 +1,90 @@
+<script type="text/javascript" src="js/helperClass.js"></script>
+
+<div id="pfsChart"></div>
+
+<script>
+// Formatting date because of Datefield  e.g. 2015_11 field in the api
+
+ // Load data from the server using a HTTP GET request
+ // jquery.get is a equivalent to $.ajax({....
+ 	jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/pfs/overview", function (response) {
+            //alert(JSON.stringify(response));
+            // Check if start and end values of the slieder are the same
+            var start = dateSlider.noUiSlider.get();
+            if (start[0] != start[1]) {
+
+            	var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
+                // filling the x axis with dates
+                var months = ['x'];
+                for (var i = 0; i < filtered.length; i++) {
+                	months.push(filtered[i].month);
+                }
+                ;
+
+                // filling data about pfs enabled
+                var pfsEnabled = ['PFS_Support'];
+                for (var i = 0; i < filtered.length; i++) {
+                	pfsEnabled.push(((filtered[i].monthlyPfsEnabled / filtered[i].monthlyTotalHosts) * 100).toFixed(2))
+                }
+                ;
+
+                chart = c3.generate({
+                	bindto: '#pfsChart',
+                	data: {
+                		x: 'x',
+                		columns: [
+                		months,
+                		pfsEnabled,],
+                		colors: {
+                            PFS_Support: '#2CA02C', // green
+                        },
+                    },
+                    type: 'line',
+                    unload: chart.columns,
+                    axis: {
+                    	x: {
+                    		type: 'category',
+                    	},
+                    	y: {
+                    		label: {
+                    			text: 'In percent',
+                    			position: 'outer-middle'
+                    		},
+                    		min: 0,
+                    		max: 99,
+                    	}
+                    },
+                    subchart: {
+                    	show: true
+                    }
+                });
+            } else {
+            	var latestelement = response[getLatestElementIndex(response)];
+            	chart = c3.generate({
+            		bindto: '#pfsChart',
+            		data: {
+            			json: [
+            			 latestelement
+            			],
+            			keys: {
+						//x: 'name', // it's possible to specify 'x' when category axis
+						value: ['monthlyPfsEnabled', 'monthlyPfsDisabled'],
+					},
+				type: 'pie',
+
+				},
+
+			});
+            }
+        }).error(function () {
+        	alert("Error Loading JSON");
+        	chart.load({
+        		columns: [
+        		['data1', 130, 120, 150, 140, 160, 150],
+        		['data4', 30, 20, 50, 40, 60, 50],
+        		],
+        		unload: ['data2', 'data3'],
+        	});
+        });
+        </script>
