@@ -31,51 +31,60 @@
                     <!-- The charts are displayed here -->
                     <div id="generic">
                         <div id="chart"></div>
-                        <!-- display next or previous chart -->
                     </div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Select Timespan (Slider)</h3>
-                        </div>
-                        <div class="panel-body">
-                            <!-- noUIslider -->
-                            Timespan:
-                            <div  id="slider-date"></div>
-                            <br>
-                            Start: <span id="event-start"></span><br>
-                            End: <span id="event-end"></span> <br><br>
-                            <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
-                        </div>
-                    </div>                              
-                </div>
 
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Select Timespan (Slider)</h3>
+                                </div>
+                                <div class="panel-body">
+
+                                    <!-- noUIslider -->
+                                    Timespan:
+                                    <div  id="slider-date"></div>
+                                    <br>
+                                    Start: <span id="event-start"></span><br>
+                                    End: <span id="event-end"></span> <br><br>
+                                    <button class="btn btn-default" onclick="applytimespan()" id="applytimespan">Apply Timespan</button>
+                                </div>
+                            </div> </div>
+                            <div class="col-md-8"></div>
+                        </div>
+
+
+
+
+                    </div>
+
+                </div>
             </div>
+
         </div>
 
-    </div>
+        <footer id="footer"></footer>
+        <div id="subscribe"></div>
+        <!-- Skripts are located in the end of the Body tag for faster Page Loading -->
+        <!-- Load d3.js and c3.js -->
+        <script src="js/c3-0.4.10/d3.min.js" charset="utf-8"></script>
+        <script src="js/c3-0.4.10/c3.min.js"></script>
+        <!-- JQuery CDN -->
+        <script src="js/jquery-1.11.3.min.js"></script>
+        <!-- Filter Menu -->
+        <script type="text/javascript" src="js/filterData.js"></script>
+        <!-- noUislider -->
+        <script type="text/javascript" src="js/timeslider/nouislider.min.js"></script>
+        <script type="text/javascript" src="js/timeslider/timeslider.js"></script>
+        <!-- Bootstrap -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- for the menu -->
+        <script src="js/menu.js"></script>
+        <script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
 
-    <footer id="footer"></footer>
-    <div id="subscribe"></div>
-    <!-- Skripts are located in the end of the Body tag for faster Page Loading -->
-    <!-- Load d3.js and c3.js -->
-    <script src="js/c3-0.4.10/d3.min.js" charset="utf-8"></script>
-    <script src="js/c3-0.4.10/c3.min.js"></script>
-    <!-- JQuery CDN -->
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <!-- Filter Menu -->
-    <script type="text/javascript" src="js/filterData.js"></script>
-    <!-- noUislider -->
-    <script type="text/javascript" src="js/timeslider/nouislider.min.js"></script>
-    <script type="text/javascript" src="js/timeslider/timeslider.js"></script>
-    <!-- Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- for the menu -->
-    <script src="js/menu.js"></script>
-    <script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
-
-    <script type="text/javascript" src="js/helperClass.js"></script>
-    <script>
+        <script type="text/javascript" src="js/helperClass.js"></script>
+        <script>
                                 // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
                                 window.onload = function () {
 
@@ -161,11 +170,11 @@
                                     }
                                     );
 
-                            }
-                            ;
+                                 }
+                                 ;
 
-                            </script>
+                                 </script>
 
-                        </body>
-                        </html>
+                             </body>
+                             </html>
 
