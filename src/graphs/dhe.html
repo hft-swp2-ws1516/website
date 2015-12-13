@@ -10,6 +10,27 @@
  // Load data from the server using a HTTP GET request
  // jquery.get is a equivalent to $.ajax({....
  	jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/pfs/distribution", function (response) {
+     var start = [];
+            // Check which of the datepickers are visible
+            if ($('#timeslider').is(":visible") ) {
+              start = dateSlider.noUiSlider.get();
+            }
+            else{
+              time1 =  new Date($('#filterDateStart').datepicker('getDate').getTime());
+              time2 = new Date($('#filterDateEnd').datepicker('getDate').getTime());
+
+              start[0] = (new Date(time1.getFullYear(), time1.getMonth())).getTime();
+              start[1] =  (new Date(time2.getFullYear(), time2.getMonth())).getTime();
+               // alert("Datepicker: Time1:"+start[0] + "Time2:" + start[1]);
+             }
+
+             if (start[0] != start[1]) {
+
+              
+             };
+
+
+
           // remove ECDHE data
           var latestElement = response[response.length - 1].distribution;
           for (var i = latestElement.length - 1; i >= 0; i--) {
@@ -41,7 +62,10 @@
           		}
           	},
           });
-      }).error(function () {
-        $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
-      });
-      </script>
+        }).error(function () {
+          $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+          $("#loader").css("display","none");
+        }).done(function() {
+         $("#loader").css("display","none");
+       });
+        </script>

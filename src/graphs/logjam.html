@@ -8,7 +8,7 @@
  // Load data from the server using a HTTP GET request
 // jquery.get is a equivalent to $.ajax({....
 	jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/exp/overview", function (response) {
-     var start = [];
+       var start = [];
             // Check which of the datepickers are visible
             if ($('#timeslider').is(":visible") ) {
                 start = dateSlider.noUiSlider.get();
@@ -60,16 +60,16 @@
     	 // index of latest element in response array
     	 var latestElement = response[getLatestElementIndex(response)];
     	 var totalcount = latestElement.total;
-      chart = c3.generate({
-       bindto: '#logjam',
-       data: {
+       chart = c3.generate({
+         bindto: '#logjam',
+         data: {
           json: filtered,
           keys: {
-             x: 'month',
-             value: ['expDisabled', 'expEnabled']
-         },
-         type: 'pie',
-         colors: {
+           x: 'month',
+           value: ['expDisabled', 'expEnabled']
+       },
+       type: 'pie',
+       colors: {
 			        expEnabled: '#D62728', //green
 			        expDisabled: '#2CA02C', // red
 			    },
@@ -77,8 +77,12 @@
 			},
 
 		});
-  }
+   }
 }).error(function () {
     $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+    $("#loader").css("display","none");
+}).done(function() {
+   $("#loader").css("display","none");
+
 });
 </script>

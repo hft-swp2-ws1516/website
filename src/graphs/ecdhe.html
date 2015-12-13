@@ -42,5 +42,8 @@
         });
     }).error(function () {
     	 $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
-    });
+         $("#loader").css("display","none");
+    }).done(function() {
+         $("#loader").css("display","none");
+     });
     </script>

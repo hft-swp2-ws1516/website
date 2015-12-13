@@ -40,7 +40,7 @@
                     <div class="col-md-4">
 
                         <div class="panel panel-default">
-                          <div class="panel-heading">Panel heading without title</div>
+                          <div class="panel-heading">Select Timespan</div>
                           <div class="panel-body">
                             <!-- noUIslider -->
                             <div  id="slider-date"></div>
@@ -60,36 +60,36 @@
 
 
                 <div class="panel panel-default">
-                  <div class="panel-heading">Panel heading without title</div>
+                  <div class="panel-heading">Select Timespan</div>
                   <div class="panel-body">
 
                     <form>  
-                       <fieldset>   
-                          <div id="filterDateStart" class="input-group date">
-                            <input required type="text" class="form-control">
-                            <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-th"></i>
-                            </span>
-                        </div>
-                        <br>
-                        <div id="filterDateEnd" class="input-group date">
-                            <input required type="text" class="form-control">
-                            <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-th"></i>
-                            </span>
-                        </div>
-                    </fieldset>
+                     <fieldset>   
+                      <div id="filterDateStart" class="input-group date">
+                        <input required type="text" class="form-control">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-th"></i>
+                        </span>
+                    </div>
                     <br>
+                    <div id="filterDateEnd" class="input-group date">
+                        <input required type="text" class="form-control">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-th"></i>
+                        </span>
+                    </div>
+                </fieldset>
+                <br>
 
-                    <fieldset> 
-                        <button class="btn btn-default applytimespan" >Apply Timespan</button>
+                <fieldset> 
+                    <button class="btn btn-default applytimespan" >Apply Timespan</button>
 
-                    </fieldset>
-                </form>
-            </div>
+                </fieldset>
+            </form>
         </div>
-
     </div>
+
+</div>
 </div>                   
 
 <div class="col-md-8"></div>
@@ -141,14 +141,12 @@
                                         $("#loader").css("display","block");
                                     }).ajaxSuccess(function() {
                                         // hide loader on success
-                                        $("#loader").css("display","none");
-
 
                                     });
 
                                     function loadChartByHash(hash){
 
-                                       switch (hash) {
+                                     switch (hash) {
                                         case 'PFS':
                                         $("#chart").load("graphs/pfs.html");
                                         break;
@@ -164,6 +162,8 @@
                                         default:
                                     }
 
+                                    
+
                                 }
 
                                 loadChartByHash(window.location.hash.substring(1));
@@ -173,6 +173,7 @@
                                         {
                                         // the called function depends of the hash value in the URL
                                         loadChartByHash(window.location.hash.substring(1));
+
                                     }
                                     );
 
@@ -182,9 +183,9 @@
 
                                      $("#loadPFS").click(function ()
                                      {
-                                       $("#chart").load("graphs/pfs.html");
-                                   }
-                                   );
+                                         $("#chart").load("graphs/pfs.html");
+                                     }
+                                     );
 
 
                                     /*
@@ -193,10 +194,10 @@
 
                                      $("#loadDHE").click(function ()
                                      {
-                                         $("#chart").load("graphs/dhe.html");
+                                       $("#chart").load("graphs/dhe.html");
 
-                                     }
-                                     );
+                                   }
+                                   );
                                     /*
                                      * Load DHE-Parameter-Chart function with one Y-Axis.
                                      */
@@ -234,18 +235,18 @@
                                     // default end date, this syntax is weird but it worked
                                     $('#filterDateEnd').datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth()));
 
-                                   $('#filterDateStart').datepicker({
-                                    format: "yyyy_mm",
-                                    viewMode: "months", 
-                                    minViewMode: "months",
-                                    autoclose: true,
-                                    startDate: new Date(2015,10),
-                                    endDate: new Date(),
-                                }).on('changeDate', function (e) {
-                                    var month = e.date.getMonth();
-                                    var year = e.date.getFullYear();
-                                    var startDate = new Date(year, month);
-                                    $('#filterDateEnd').datepicker('setStartDate', startDate);
+                                    $('#filterDateStart').datepicker({
+                                        format: "yyyy_mm",
+                                        viewMode: "months", 
+                                        minViewMode: "months",
+                                        autoclose: true,
+                                        startDate: new Date(2015,10),
+                                        endDate: new Date(),
+                                    }).on('changeDate', function (e) {
+                                        var month = e.date.getMonth();
+                                        var year = e.date.getFullYear();
+                                        var startDate = new Date(year, month);
+                                        $('#filterDateEnd').datepicker('setStartDate', startDate);
                                          //$('#filterDateEnd').datepicker('setDate',  startDate);
                                      });
 
