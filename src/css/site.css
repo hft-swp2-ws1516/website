@@ -52,7 +52,7 @@ ul#menu li a:hover {
     }
 }
 
-@media (max-height: :768px) {
+@media (max-width:768px) {
     #datepicker {
         display: none;
     }

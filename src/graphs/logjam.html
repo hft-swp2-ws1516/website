@@ -8,9 +8,20 @@
  // Load data from the server using a HTTP GET request
 // jquery.get is a equivalent to $.ajax({....
 	jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/exp/overview", function (response) {
+     var start = [];
+            // Check which of the datepickers are visible
+            if ($('#timeslider').is(":visible") ) {
+                start = dateSlider.noUiSlider.get();
+            }
+            else{
+                time1 =  new Date($('#filterDateStart').datepicker('getDate').getTime());
+                time2 = new Date($('#filterDateEnd').datepicker('getDate').getTime());
 
-		var start = dateSlider.noUiSlider.get();
-		if (start[0] != start[1]) {
+                start[0] = (new Date(time1.getFullYear(), time1.getMonth())).getTime();
+                start[1] =  (new Date(time2.getFullYear(), time2.getMonth())).getTime();
+               // alert("Datepicker: Time1:"+start[0] + "Time2:" + start[1]);
+           }
+           if (start[0] != start[1]) {
 
         // filter response Array by timespan
         filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
@@ -49,16 +60,16 @@
     	 // index of latest element in response array
     	 var latestElement = response[getLatestElementIndex(response)];
     	 var totalcount = latestElement.total;
-    	      chart = c3.generate({
-        	bindto: '#logjam',
-        	data: {
-        		json: filtered,
-        		keys: {
-        			x: 'month',
-        			value: ['expDisabled', 'expEnabled']
-        		},
-        		type: 'pie',
-        		colors: {
+      chart = c3.generate({
+       bindto: '#logjam',
+       data: {
+          json: filtered,
+          keys: {
+             x: 'month',
+             value: ['expDisabled', 'expEnabled']
+         },
+         type: 'pie',
+         colors: {
 			        expEnabled: '#D62728', //green
 			        expDisabled: '#2CA02C', // red
 			    },
@@ -66,8 +77,8 @@
 			},
 
 		});
-    	}
-    }).error(function () {
+  }
+}).error(function () {
     $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
-    });
-    </script>
+});
+</script>

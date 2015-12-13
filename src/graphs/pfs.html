@@ -1,18 +1,25 @@
 <div>
-<script type="text/javascript" src="js/helperClass.js"></script>
-<div id='error-message'></div>
-<div id="pfsChart"></div>
-<script>
-
-
-// Formatting date because of Datefield  e.g. 2015_11 field in the api
-
+    <script type="text/javascript" src="js/helperClass.js"></script>
+    <div id='error-message'></div>
+    <div id="pfsChart"></div>
+    <script>
  // Load data from the server using a HTTP GET request
  // jquery.get is a equivalent to $.ajax({....
  	jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/pfs/overview", function (response) {
-            //alert(JSON.stringify(response));
+        var start = [];
+            // Check which of the datepickers are visible
+            if ($('#timeslider').is(":visible") ) {
+                start = dateSlider.noUiSlider.get();
+            }
+            else{
+                time1 =  new Date($('#filterDateStart').datepicker('getDate').getTime());
+                time2 = new Date($('#filterDateEnd').datepicker('getDate').getTime());
+
+                start[0] = (new Date(time1.getFullYear(), time1.getMonth())).getTime();
+                start[1] =  (new Date(time2.getFullYear(), time2.getMonth())).getTime();
+               // alert("Datepicker: Time1:"+start[0] + "Time2:" + start[1]);
+           }
             // Check if start and end values of the slieder are the same
-            var start = dateSlider.noUiSlider.get();
             if (start[0] != start[1]) {
 
             	var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
@@ -59,7 +66,8 @@
                     },
                     subchart: {
                     	show: true
-                    }
+                    },
+                    
                 });
             } else {
             	var latestelement = response[getLatestElementIndex(response)];
@@ -82,6 +90,7 @@
         }).error(function () {
          $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
      });
-        </script>
 
+        
+        </script>
     </div>
