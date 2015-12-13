@@ -64,32 +64,32 @@
                   <div class="panel-body">
 
                     <form>  
-                     <fieldset>   
-                      <div id="filterDateStart" class="input-group date">
-                        <input required type="text" class="form-control">
-                        <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-th"></i>
-                        </span>
-                    </div>
+                       <fieldset>   
+                          <div id="filterDateStart" class="input-group date">
+                            <input required type="text" class="form-control">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-th"></i>
+                            </span>
+                        </div>
+                        <br>
+                        <div id="filterDateEnd" class="input-group date">
+                            <input required type="text" class="form-control">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-th"></i>
+                            </span>
+                        </div>
+                    </fieldset>
                     <br>
-                    <div id="filterDateEnd" class="input-group date">
-                        <input required type="text" class="form-control">
-                        <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-th"></i>
-                        </span>
-                    </div>
-                </fieldset>
-                <br>
 
-                <fieldset> 
-                    <button class="btn btn-default applytimespan" >Apply Timespan</button>
+                    <fieldset> 
+                        <button class="btn btn-default applytimespan" >Apply Timespan</button>
 
-                </fieldset>
-            </form>
+                    </fieldset>
+                </form>
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
 </div>                   
 
 <div class="col-md-8"></div>
@@ -146,7 +146,7 @@
 
                                     function loadChartByHash(hash){
 
-                                     switch (hash) {
+                                       switch (hash) {
                                         case 'PFS':
                                         $("#chart").load("graphs/pfs.html");
                                         break;
@@ -159,10 +159,13 @@
                                         case 'logjam':
                                         $("#chart").load("graphs/logjam.html");
                                         break;
+                                        case 'MAC':
+                                        $("#chart").load("graphs/mac.html");
+                                        break;
                                         default:
                                     }
 
-                                    
+
 
                                 }
 
@@ -183,9 +186,9 @@
 
                                      $("#loadPFS").click(function ()
                                      {
-                                         $("#chart").load("graphs/pfs.html");
-                                     }
-                                     );
+                                       $("#chart").load("graphs/pfs.html");
+                                   }
+                                   );
 
 
                                     /*
@@ -194,10 +197,10 @@
 
                                      $("#loadDHE").click(function ()
                                      {
-                                       $("#chart").load("graphs/dhe.html");
+                                         $("#chart").load("graphs/dhe.html");
 
-                                   }
-                                   );
+                                     }
+                                     );
                                     /*
                                      * Load DHE-Parameter-Chart function with one Y-Axis.
                                      */
@@ -217,6 +220,13 @@
                                      $("#loadlogjam").click(function ()
                                      {
                                         $("#chart").load("graphs/logjam.html");
+                                    }
+                                    );
+
+
+                                     $("#loadMAC").click(function ()
+                                     { 
+                                        $("#chart").load("graphs/mac.html");
                                     }
                                     );
 
