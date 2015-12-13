@@ -1,49 +1,118 @@
 <script type="text/javascript" src="js/helperClass.js"></script>
 
 <div id='error-message'></div>
-<div id="dheChart"></div>
-
+<div id="ecdheChart"></div>
 
 <script>
-// Formatting date because of Datefield  e.g. 2015_11 field in the api
-
 // Load data from the server using a HTTP GET request
 // jquery.get is a equivalent to $.ajax({....
 	jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/pfs/distribution", function (response) {
-        // remove ECDHE data
-        var latestElement = response[response.length - 1].distribution;
-        for (var i = latestElement.length - 1; i >= 0; i--) {
-        	if (latestElement[i].kx == "DH") {
-        		latestElement.splice(i, 1);
-        	}
-        	;
+     var start = [];
+                // Check which of the datepickers are visible
+                if ($('#timeslider').is(":visible") ) {
+                  start = dateSlider.noUiSlider.get();
+              }
+              else{
+                  time1 =  new Date($('#filterDateStart').datepicker('getDate').getTime());
+                  time2 = new Date($('#filterDateEnd').datepicker('getDate').getTime());
+
+                  start[0] = (new Date(time1.getFullYear(), time1.getMonth())).getTime();
+                  start[1] =  (new Date(time2.getFullYear(), time2.getMonth())).getTime();
+              }
+
+
+              if (start[0] != start[1]) {
+
+               // filter response Array by timespan
+               filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
+               var months = [];
+               for (var i = 0; i < filtered.length; i++) {
+                months.push(filtered[i].month);
+            }
+            ;
+              // Convert the response in syntax like : { '512': [323,3234], '1024': [421,3424]}
+              var json = {};
+
+              for (var i = 0; i < filtered.length; i++) {
+                // get distribution array
+                var distribution = filtered[i].distribution;
+                for (var j = 0; j < distribution.length; j++) {
+                  // only take ecdh keygroups
+                  if (distribution[j].kx == "ECDH") {
+                   if (!(Array.isArray(json[distribution[j].kxStrength]))) {
+                    json[distribution[j].kxStrength] = [];
+                };  
+                        // if there is ja new key and the previous elements in the array are null, then c3 will not work
+                        if (i >= 1 && !json[distribution[j].kxStrength][i-1]) {
+                            json[distribution[j].kxStrength][i-1]=0;
+                        };
+                        json[distribution[j].kxStrength].push( distribution[j].count);
+
+                    };
+
+                };
+            };
+
+            chart = c3.generate({
+                bindto: '#ecdheChart',
+                data: {
+                  json: json,
+              },
+              axis: {
+                  x: {
+                    type: 'category',
+                    categories: months,
+                },
+                y: {
+                    label: {
+                      text: 'Total Count',
+                      position: 'outer-middle'
+                  },
+              }
+          },
+
+      });
+        } else{
+
+          var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
+                   // remove ECDHE data
+                   var filteredElement = filtered[0].distribution;
+
+                   for (var i = filteredElement.length - 1; i >= 0; i--) {
+                    if (filteredElement[i].kx == "DH") {
+                      filteredElement.splice(i, 1);
+                  }
+                  ;
+              }
+              chart = c3.generate({
+                 bindto: '#ecdheChart',
+                 data: {
+                  json: filteredElement,
+                  keys: {
+                   x: 'kxStrength',
+                   value: ['count']
+               },
+               type: 'bar',
+           },
+           axis: {
+              x: {
+               type: 'category',
+           },
+           y: {
+               label: {
+                text: 'Total Count',
+                position: 'outer-middle'
+            },
         }
-        chart = c3.generate({
-        	bindto: '#dheChart',
-        	data: {
-        		json: response[response.length - 1].distribution,
-        		keys: {
-        			x: 'kxStrength',
-        			value: ['count']
-        		},
-        		type: 'bar',
-        	},
-        	axis: {
-        		x: {
-        			type: 'category',
-        		},
-        		y: {
-        			label: {
-        				text: 'Total Count',
-        				position: 'outer-middle'
-        			},
-        		}
-        	},
-        });
-    }).error(function () {
-    	 $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
-         $("#loader").css("display","none");
-    }).done(function() {
+    },
+});
+          }
+      }).error(function () {
+          $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+          $("#loader").css("display","none");
+      }).done(function() {
          $("#loader").css("display","none");
      });
-    </script>
+      </script>
