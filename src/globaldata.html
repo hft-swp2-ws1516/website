@@ -23,13 +23,13 @@
     <div id="nav01"></div>
 
     <div class="container">
-
         <!-- Graphs -->
         <div class="panel panel-default">
             <div class="panel-body">
                 <div id="charts">
                     <!-- The charts are displayed here -->
                     <div id="generic">
+                        <div id="loader"><img src="img/ajax-loader.gif"></div>
                         <div id="chart"></div>
                     </div>
 
@@ -95,9 +95,17 @@
                                         timeout: 3000
                                     });
 
+                                    $(document).ajaxStart(function() {
+                                        // show loader on start
+                                        $("#loader").css("display","block");
+                                    }).ajaxSuccess(function() {
+                                        // hide loader on success
+                                        $("#loader").css("display","none");
+                                    });
+
                                     function loadChartByHash(hash){
 
-                                       switch (hash) {
+                                     switch (hash) {
                                         case 'PFS':
                                         $("#chart").load("graphs/pfs.html");
                                         break;
@@ -133,9 +141,9 @@
 
                                      $("#loadPFS").click(function ()
                                      {
-                                       $("#chart").load("graphs/pfs.html");
-                                   }
-                                   );
+                                         $("#chart").load("graphs/pfs.html");
+                                     }
+                                     );
 
 
                                     /*
@@ -144,10 +152,10 @@
 
                                      $("#loadDHE").click(function ()
                                      {
-                                         $("#chart").load("graphs/dhe.html");
+                                       $("#chart").load("graphs/dhe.html");
 
-                                     }
-                                     );
+                                   }
+                                   );
                                     /*
                                      * Load DHE-Parameter-Chart function with one Y-Axis.
                                      */

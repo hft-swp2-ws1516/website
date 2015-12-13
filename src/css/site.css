@@ -66,5 +66,15 @@ ul#menu li a:hover {
 @media (min-width: 979px) {
   ul.nav li.dropdown:hover > ul.dropdown-menu {
     display: block;
-  }
+}
+}
+
+#loader{
+   position:absolute; 
+   top: 50%;
+   left: 50%;
+}
+
+#generic{
+    position: relative;
 }
