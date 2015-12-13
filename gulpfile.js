@@ -70,7 +70,7 @@ gulp.task('copy', [
     'copy:jquery',
     'copy:license',
     'copy:main.css',
-    //'copy:misc',
+    'copy:misc',
     'copy:normalize'
 ]);
 

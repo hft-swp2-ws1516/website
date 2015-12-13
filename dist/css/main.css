@@ -11,9 +11,15 @@
    ========================================================================== */
 
 html {
+    margin: 0 auto;
+    height: 100%;
     color: #222;
     font-size: 1em;
     line-height: 1.4;
+}
+
+body {
+    margin: 0 auto;
 }
 
 /*
@@ -80,6 +86,91 @@ textarea {
     resize: vertical;
 }
 
+.header{
+    background: transparent -webkit-linear-gradient(#292929, #252525) repeat scroll 0% 0%;
+    background: transparent linear-gradient(#292929, #252525) repeat scroll 0% 0%;
+    margin: 0 auto; left:0px; right:0px;
+    padding: 0;
+    height: 52px;
+    text-align: center;
+    position: fixed;
+    z-index: 500;
+}
+
+
+.menu, .menu ul , .menu li ,menu a{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
+.menu {
+    display: inline-block;
+    cursor: default;
+    z-index: 500;
+    border-collapse: collapse;
+    margin: 0 auto; left:0px; right:0px;
+}
+.menu li{
+    list-style: none;
+}
+.menu a{
+    text-decoration: none;
+}
+
+
+.menu li {
+    background: #504949;
+    background: -webkit-linear-gradient(#292929, #252525);
+    background: linear-gradient(#292929, #252525);
+    /*border-bottom: 2px solid #2e2e2e;
+    border-top: 2px solid #303030;*/
+    min-width: 160px;
+    text-align: center;
+
+}
+
+.menu > li {
+    display: block;
+    float:left ;
+}
+.menu > li > a {
+    position: relative;
+    display: block;
+    z-index: 510;
+    height: 52px;
+    padding: 0 20px;
+    line-height: 54px;
+
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    color: #fcfcfc;
+    text-shadow: 0 0 1px rgba(0,0,0,.35);
+
+    background: transparent -webkit-linear-gradient(#292929, #252525) repeat scroll 0% 0%;
+
+    background: transparent linear-gradient(#292929, #252525) repeat scroll 0% 0%;
+
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.menu > li:hover > a {
+    background: #4b4441;
+}
+.menu a {
+    border-left: 3px solid rgba(0, 0, 0, 0);
+    color: #808080;
+    display: block;
+    font-family: 'Lucida Console';
+    font-size: 18px;
+    line-height: 54px;
+    padding: 0 25px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
 /* ==========================================================================
    Browser Upgrade Prompt
    ========================================================================== */
@@ -199,7 +290,7 @@ textarea {
         background: transparent !important;
         color: #000 !important;
         /* Black prints faster:
-                                          http://www.sanbeiji.com/archives/953 */
+        http://www.sanbeiji.com/archives/953 */
         box-shadow: none !important;
         text-shadow: none !important;
     }
@@ -260,4 +351,6 @@ textarea {
     h3 {
         page-break-after: avoid;
     }
+
+
 }
