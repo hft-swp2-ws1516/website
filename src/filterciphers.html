@@ -598,11 +598,7 @@
                                                     result.totalCiphers,
                                                     result.hostsAccepting,
                                                     result.hostsPreferring
-                                                ],
-                                                types: {
-                                                    'Hosts Accepting': 'step',
-                                                    'Hosts Preferring': 'area-step'
-                                                }
+                                                ]
                                             },
                                             axis: {
                                                 x: {
@@ -614,6 +610,52 @@
                                                 }
                                             }
                                         });
+                                        if (result.months.length > 1) {
+                                            var totalCiphersKey = result.totalCiphers[0];
+                                            var totalCiphersValue = result.totalCiphers[result.totalCiphers.length - 1];
+                                            var hostsAcceptingKey = result.hostsAccepting[0];
+                                            var hostsAcceptingValue = result.hostsAccepting[result.hostsAccepting.length - 1];
+                                            var hostsPreferringKey = result.hostsPreferring[0];
+                                            var hostsPreferringValue = result.hostsPreferring[result.hostsPreferring.length - 1];
+                                            var percentageAccepting = Math.round((hostsAcceptingValue / totalCiphersValue * 100) * 100) / 100;
+                                            var percentagePreferring = Math.round((hostsPreferringValue / totalCiphersValue * 100) * 100) / 100;
+                                            var filteredChartLastMonth = c3.generate({
+                                                bindto: '#filteredChartLastMonth',
+                                                legend: {
+                                                    show: true,
+                                                    position: 'right'
+                                                },
+                                                size: {
+                                                    width: 640,
+                                                    height: 200
+                                                },
+                                                padding: {
+                                                    top: 80
+                                                },
+                                                gauge: {
+                                                    label: {
+                                                        show: false,
+                                                        format: function (value, ratio) {
+                                                            return "";
+                                                        }
+                                                    }
+                                                },
+                                                color: {
+                                                    pattern: ['#60B044', '#F97600', '#326BE5'],
+                                                    threshold: {
+                                                        values: [percentagePreferring + 0.01, percentageAccepting + 0.01, 100]
+                                                    }
+                                                },
+                                                data: {
+                                                    columns: [
+                                                        [totalCiphersKey, 100],
+                                                        [hostsAcceptingKey, percentageAccepting],
+                                                        [hostsPreferringKey, percentagePreferring]
+                                                    ],
+                                                    type: 'gauge'
+                                                }
+                                            });
+                                        }
                                     }
 
                                 }
