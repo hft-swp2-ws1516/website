@@ -95,7 +95,7 @@ function displayFilter() {
 
         var cipherString = [keyExAndAuth, bulkCipher, keyLen, msgAuth].join("");
         if (document.getElementById("matchingKindAsPart").checked) {
-            cipherString = cipherString.replace('-', ' ');
+            cipherString = cipherString.replace(/-/g, ' ');
         }
 
 
@@ -200,9 +200,12 @@ function parseResponse(response, protocol, cipherString) {
                     writeToTotalCiphers(loops + 1, count);
                 }
                 if (inner.match(cipherString) !== null || (!matchLiterally && testIfPartsMatch(inner, cipherString))) {
-                    protocol = ("" + inner.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) + "").split(":")[1].replace('"', '');
-                    count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
-                    writeToHostsByProtocol(loops + 1, protocol, inner, count);
+                    if (inner.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) !== null) {
+                        protocol = ("" + inner.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) + "").split(":")[1].replace('"', '');
+                        count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
+                        writeToHostsByProtocol(loops + 1, protocol, inner, count);
+                    }
+
                 }
             }
         });
@@ -408,7 +411,7 @@ function resetResults() {
     hostsPreferringTLS11 = [];
     hostsAcceptingTLS12 = [];
     hostsPreferringTLS12 = [];
-    
+
     totalCiphers = [];
 
 }
