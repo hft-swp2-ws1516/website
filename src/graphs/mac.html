@@ -40,7 +40,7 @@
                 var distribution = filtered[i].distribution;
                 for (var j = 0; j < distribution.length; j++) {
                   // only take dh keygorups
-                   if (!(Array.isArray(json[distribution[j].mac]))) {
+                  if (!(Array.isArray(json[distribution[j].mac]))) {
                     json[distribution[j].mac] = [];
                   };  
                   // if there is ja new key and the previous elements in the array are null, then c3 will not work
@@ -50,20 +50,45 @@
                   json[distribution[j].mac][i] = distribution[j].count;
 
 
+                };
               };
-            };
 
-            alert(JSON.stringify(json));
+              chart = c3.generate({
+                bindto: '#macChart',
+                data: {
+                  json: json,
+                },
+                axis: {
+                  x: {
+                    type: 'category',
+                    categories: months,
+                  },
+                  y: {
+                    label: {
+                      text: 'Total Count',
+                      position: 'outer-middle'
+                    },
+                  }
+                },
 
-            chart = c3.generate({
+              });
+
+            }
+            else{
+             var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+             chart = c3.generate({
               bindto: '#macChart',
               data: {
-                json: json,
+                json: filtered[0].distribution,
+                keys: {
+                  x: 'mac',
+                  value: ['count']
+                },
+                type: 'bar',
               },
               axis: {
                 x: {
                   type: 'category',
-                  categories: months,
                 },
                 y: {
                   label: {
@@ -72,41 +97,13 @@
                   },
                 }
               },
-
             });
 
-          }
-          else{
-           var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
-
-           alert(JSON.stringify(filtered[0].distribution));
-           chart = c3.generate({
-            bindto: '#macChart',
-            data: {
-              json: filtered[0].distribution,
-              keys: {
-                x: 'mac',
-                value: ['count']
-              },
-              type: 'bar',
-            },
-            axis: {
-              x: {
-                type: 'category',
-              },
-              y: {
-                label: {
-                  text: 'Total Count',
-                  position: 'outer-middle'
-                },
-              }
-            },
-          });
-         }
-       }).error(function () {
-        $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
-        $("#loader").css("display","none");
-      }).done(function() {
-       $("#loader").css("display","none");
-     });
-      </script>
+           }
+         }).error(function () {
+          $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+          $("#loader").css("display","none");
+        }).done(function() {
+         $("#loader").css("display","none");
+       });
+        </script>

@@ -1,0 +1,119 @@
+<script type="text/javascript" src="js/helperClass.js"></script>
+<div id='error-message'></div>
+<div id="macChart"></div>
+<script>
+
+// Load data from the server using a HTTP GET request
+// jquery.get is a equivalent to $.ajax({....
+  jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/ciphers/summary", function (response) {
+
+    var start = getTimespan();
+    if (start[0] != start[1]) {
+        // filter response Array by timespan
+        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
+        var months = [];
+        for (var i = 0; i < filtered.length; i++) {
+          months.push(filtered[i].month);
+        }
+        ;
+
+          // Convert the response in syntax like
+          //var json = { 'AES128': [324234,312332], 'DES': [22234,312332]};
+          var json = {};
+
+          for (var i = 0; i < filtered.length; i++) {
+            // get ciphers array
+            var ciphers = filtered[i].summary;
+            ciphers = mergeDoubleEntrys(ciphers);
+            sortResults(ciphers, 'count', false);
+            ciphers = ciphers.splice(0,20);
+
+            for (var j = 0; j < ciphers.length; j++) {
+              //check if array is initialized
+              if (!(Array.isArray(json[ciphers[j].cipher]))) {
+                json[ciphers[j].cipher] = [];
+              }; 
+
+             // if there is ja new key and the previous elements in the array are null, then c3 will not work
+             if (i >= 1 && !json[ciphers[j].cipher][i-1]) {
+               json[ciphers[j].cipher][i-1]=0;
+             };
+             json[ciphers[j].cipher][i] = ciphers[j].count;
+
+           };
+         };
+
+         chart = c3.generate({
+          bindto: '#macChart',
+          data: {
+            json: json,
+          },
+          axis: {
+            x: {
+              type: 'category',
+              categories: months,
+            },
+            y: {
+              label: {
+                text: 'Total Count',
+                position: 'outer-middle'
+              },
+            }
+          },
+
+        });
+
+       }
+       else{
+         var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+         var ciphers = filtered[0].summary;
+
+         var summarizedArray = mergeDoubleEntrys(ciphers);
+    // result array by property count in descending order
+    sortResults(summarizedArray, 'count', false);
+
+    // Only Top 20 most frequent Cipher suites
+    var summarizedArray = summarizedArray.splice(0,20);
+    
+    /* Other way to display 
+    var finalJson = [];
+    for (var i = 0; i < summarizedArray.length; i++) {
+      var json = {};
+      json.count = summarizedArray[i].count;
+      json.cipher = summarizedArray[i].cipher;
+      finalJson[i] =  json;
+    };
+    */
+
+    var finalJson = {};
+    for (var i = 0; i < summarizedArray.length; i++) {
+      finalJson[summarizedArray[i].cipher] =  summarizedArray[i].count;
+    };
+
+    chart = c3.generate({
+      bindto: '#macChart',
+      data: {
+        json: finalJson,
+        type: 'bar',
+      },
+      axis: {
+        x: {
+          type: 'category',
+        },
+        y: {
+          label: {
+            text: 'Total Count',
+            position: 'outer-middle'
+          },
+        }
+      },
+    });
+  }
+}).error(function () {
+  $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+  $("#loader").css("display","none");
+}).done(function() {
+ $("#loader").css("display","none");
+});
+</script>

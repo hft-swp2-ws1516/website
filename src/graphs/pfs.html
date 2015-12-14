@@ -69,13 +69,13 @@
                     },
                     
                 });
-            } else {
-                var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
-            	chart = c3.generate({
-            		bindto: '#pfsChart',
-            		data: {
-            			json: filtered,
-                        keys: {
+} else {
+    var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+    chart = c3.generate({
+      bindto: '#pfsChart',
+      data: {
+         json: filtered,
+         keys: {
 						//x: 'name', // it's possible to specify 'x' when category axis
 						value: ['monthlyPfsEnabled', 'monthlyPfsDisabled'],
 					},
@@ -84,15 +84,15 @@
                 },
 
             });
-            }
-        }).error(function () {
-         $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
-         $("#loader").css("display","none");
-     }).done(function() {
-         $("#loader").css("display","none");
+}
+}).error(function () {
+   $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+   $("#loader").css("display","none");
+}).done(function() {
+   $("#loader").css("display","none");
 
-     });
+});
 
 
-     </script>
- </div>
+</script>
+</div>

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>TLS analyser</title>
-    <!-- CSS Stylesheets -->
-    <link rel="stylesheet" href="css/statistics.css">
-    <link href="css/site.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/toggle.css">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Load c3.css -->
-    <link href="css/c3/c3.css" rel="stylesheet" type="text/css">
-    <!-- noUISlider c3.css -->
-    <link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
-    <!-- jquery ui css -->
-    <link rel="stylesheet" type="text/css" media="screen" href="css/datepicker/bootstrap-datepicker3.css">
+  <meta charset="UTF-8">
+  <title>TLS analyser</title>
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/statistics.css">
+  <link href="css/site.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/toggle.css">
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Load c3.css -->
+  <link href="css/c3/c3.css" rel="stylesheet" type="text/css">
+  <!-- noUISlider c3.css -->
+  <link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
+  <!-- jquery ui css -->
+  <link rel="stylesheet" type="text/css" media="screen" href="css/datepicker/bootstrap-datepicker3.css">
 </head>
 <body>
     <!-- Use this for the new menuitems. If they are any changes just remember you should change the menu.js file into js-folder
@@ -22,108 +22,108 @@
     <div id="nav01"></div>
 
     <div class="container">
-        <!-- Graphs -->
+      <!-- Graphs -->
 
-        <div id="charts">
-            <!-- The charts are displayed here -->
-            <div id="generic">
-                <div id="loader"><img src="img/ajax-loader.gif"></div>
-                <div id="chart"></div>
-            </div>
-
-
-
-            <div class="row">
-
-                <!-- Timeslider is shown if window width is smaller than 768px -->
-                <div id='timeslider'>
-                    <div class="col-md-4">
-
-                        <div class="panel panel-default">
-                          <div class="panel-heading">Select Timespan</div>
-                          <div class="panel-body">
-                            <!-- noUIslider -->
-                            <div  id="slider-date"></div>
-                            <br>
-                            Start: <span id="event-start"></span><br>
-                            End: <span id="event-end"></span> <br><br>
-                            <button class="btn btn-default applytimespan" >Apply Timespan</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Datepicker is shown if window width is higher than 768px -->
-            <div id='datepicker'>
-              <div class="col-md-4">
-
-
-                <div class="panel panel-default">
-                  <div class="panel-heading">Select Timespan</div>
-                  <div class="panel-body">
-
-                    <form>  
-                       <fieldset>   
-                          <div id="filterDateStart" class="input-group date">
-                            <input required type="text" class="form-control">
-                            <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-th"></i>
-                            </span>
-                        </div>
-                        <br>
-                        <div id="filterDateEnd" class="input-group date">
-                            <input required type="text" class="form-control">
-                            <span class="input-group-addon">
-                                <i class="glyphicon glyphicon-th"></i>
-                            </span>
-                        </div>
-                    </fieldset>
-                    <br>
-
-                    <fieldset> 
-                        <button class="btn btn-default applytimespan" >Apply Timespan</button>
-
-                    </fieldset>
-                </form>
-            </div>
+      <div id="charts">
+        <!-- The charts are displayed here -->
+        <div id="generic">
+          <div id="loader"><img src="img/ajax-loader.gif"></div>
+          <div id="chart"></div>
         </div>
 
+
+
+        <div class="row">
+
+          <!-- Timeslider is shown if window width is smaller than 768px -->
+          <div id='timeslider'>
+            <div class="col-md-4">
+
+              <div class="panel panel-default">
+                <div class="panel-heading">Select Timespan</div>
+                <div class="panel-body">
+                  <!-- noUIslider -->
+                  <div  id="slider-date"></div>
+                  <br>
+                  Start: <span id="event-start"></span><br>
+                  End: <span id="event-end"></span> <br><br>
+                  <button class="btn btn-default applytimespan" >Apply Timespan</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Datepicker is shown if window width is higher than 768px -->
+          <div id='datepicker'>
+            <div class="col-md-4">
+
+
+              <div class="panel panel-default">
+                <div class="panel-heading">Select Timespan</div>
+                <div class="panel-body">
+
+                  <form>  
+                   <fieldset>   
+                    <div id="filterDateStart" class="input-group date">
+                      <input required type="text" class="form-control">
+                      <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-th"></i>
+                      </span>
+                    </div>
+                    <br>
+                    <div id="filterDateEnd" class="input-group date">
+                      <input required type="text" class="form-control">
+                      <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-th"></i>
+                      </span>
+                    </div>
+                  </fieldset>
+                  <br>
+
+                  <fieldset> 
+                    <button class="btn btn-default applytimespan" >Apply Timespan</button>
+
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>                   
+
+        <div class="col-md-8"></div>
+      </div>
+
+
+
+
     </div>
-</div>                   
-
-<div class="col-md-8"></div>
-</div>
 
 
+  </div>
 
+  <footer id="footer"></footer>
+  <div id="subscribe"></div>
+  <!-- Skripts are located in the end of the Body tag for faster Page Loading -->
+  <!-- Load d3.js and c3.js -->
+  <script src="js/c3/d3.min.js" charset="utf-8"></script>
+  <script src="js/c3/c3.min.js"></script>
+  <!-- JQuery CDN -->
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <!-- Filter Menu -->
+  <script type="text/javascript" src="js/filterData.js"></script>
+  <!-- noUislider -->
+  <script type="text/javascript" src="js/timeslider/nouislider.min.js"></script>
+  <script type="text/javascript" src="js/timeslider/timeslider.js"></script>
+  <!-- Bootstrap -->
+  <script src="js/bootstrap.min.js"></script>
+  <!-- for the menu -->
+  <script src="js/menu.js"></script>
+  <script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
 
-</div>
-
-
-</div>
-
-<footer id="footer"></footer>
-<div id="subscribe"></div>
-<!-- Skripts are located in the end of the Body tag for faster Page Loading -->
-<!-- Load d3.js and c3.js -->
-<script src="js/c3/d3.min.js" charset="utf-8"></script>
-<script src="js/c3/c3.min.js"></script>
-<!-- JQuery CDN -->
-<script src="js/jquery-1.11.3.min.js"></script>
-<!-- Filter Menu -->
-<script type="text/javascript" src="js/filterData.js"></script>
-<!-- noUislider -->
-<script type="text/javascript" src="js/timeslider/nouislider.min.js"></script>
-<script type="text/javascript" src="js/timeslider/timeslider.js"></script>
-<!-- Bootstrap -->
-<script src="js/bootstrap.min.js"></script>
-<!-- for the menu -->
-<script src="js/menu.js"></script>
-<script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
-
-<script type="text/javascript" src="js/helperClass.js"></script>
-<script>
+  <script type="text/javascript" src="js/helperClass.js"></script>
+  <script>
                                 // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
                                 window.onload = function () {
 
@@ -131,7 +131,7 @@
                                     // Timeout setup for ajax
                                     // If the API is not responding within 3 seconds, the hard coded charts will be loaded
                                     $.ajaxSetup({
-                                        timeout: 3000
+                                      timeout: 3000
                                     });
 
 
@@ -139,12 +139,12 @@
                                     $(document).ajaxStart(function() {
                                         // show loader on start
                                         $("#loader").css("display","block");
-                                    }).ajaxSuccess(function() {
+                                      }).ajaxSuccess(function() {
                                         // hide loader on success
 
-                                    });
+                                      });
 
-                                    function loadChartByHash(hash){
+                                      function loadChartByHash(hash){
 
                                        switch (hash) {
                                         case 'PFS':
@@ -159,17 +159,17 @@
                                         case 'logjam':
                                         $("#chart").load("graphs/logjam.html");
                                         break;
+                                        case 'Ciphers':
+                                        $("#chart").load("graphs/ciphers.html");
+                                        break;
                                         case 'MAC':
                                         $("#chart").load("graphs/mac.html");
                                         break;
                                         default:
+                                      }
                                     }
 
-
-
-                                }
-
-                                loadChartByHash(window.location.hash.substring(1));
+                                    loadChartByHash(window.location.hash.substring(1));
 
                                         // This is called when the reload button is clicked!
                                         $("button.applytimespan").click(function ()
@@ -177,98 +177,83 @@
                                         // the called function depends of the hash value in the URL
                                         loadChartByHash(window.location.hash.substring(1));
 
-                                    }
-                                    );
+                                      }
+                                      );
 
-                                    /*
-                                     * Load PFS-Pie-Chart function.
-                                     */
+                                        $("#loadPFS").click(function ()
+                                        {
+                                         $("#chart").load("graphs/pfs.html");
+                                       }
+                                       );
 
-                                     $("#loadPFS").click(function ()
-                                     {
-                                       $("#chart").load("graphs/pfs.html");
-                                   }
-                                   );
-
-
-                                    /*
-                                     * Load DHE-Parameter-Chart function with one Y-Axis.
-                                     */
-
-                                     $("#loadDHE").click(function ()
-                                     {
+                                        $("#loadDHE").click(function ()
+                                        {
                                          $("#chart").load("graphs/dhe.html");
 
-                                     }
-                                     );
-                                    /*
-                                     * Load DHE-Parameter-Chart function with one Y-Axis.
-                                     */
+                                       }
+                                       );
 
-                                     $("#loadECDHE").click(function ()
-                                     {
-                                      $("#chart").load("graphs/ecdhe.html");
-                                  }
-                                  );
+                                        $("#loadECDHE").click(function ()
+                                        {
+                                          $("#chart").load("graphs/ecdhe.html");
+                                        }
+                                        );
 
-
-
-                                    /*
-                                     * Load Logjam Graph
-                                     */
-
-                                     $("#loadlogjam").click(function ()
-                                     {
-                                        $("#chart").load("graphs/logjam.html");
-                                    }
-                                    );
-
-
-                                     $("#loadMAC").click(function ()
-                                     { 
-                                        $("#chart").load("graphs/mac.html");
-                                    }
-                                    );
+                                        $("#loadlogjam").click(function ()
+                                        {
+                                          $("#chart").load("graphs/logjam.html");
+                                        }
+                                        );
+                                        $("#loadCiphers").click(function ()
+                                        {
+                                          $("#chart").load("graphs/ciphers.html");
+                                        }
+                                        );
+                                        $("#loadMAC").click(function ()
+                                        { 
+                                          $("#chart").load("graphs/mac.html");
+                                        }
+                                        );
 
 
 
-                                     $('#filterDateEnd').datepicker({
-                                        format: "yyyy_mm",
-                                        startView: 1,
-                                        minViewMode: 1,
-                                        autoclose: true,
+                                        $('#filterDateEnd').datepicker({
+                                          format: "yyyy_mm",
+                                          startView: 1,
+                                          minViewMode: 1,
+                                          autoclose: true,
                                         //setDate: new Date(2015,11),
                                         startDate: new Date(2015,10),
                                         endDate: new Date(),
-                                    });
+                                      });
 
                                     // default end date, this syntax is weird but it worked
                                     $('#filterDateEnd').datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth()));
 
                                     $('#filterDateStart').datepicker({
-                                        format: "yyyy_mm",
-                                        viewMode: "months", 
-                                        minViewMode: "months",
-                                        autoclose: true,
-                                        startDate: new Date(2015,10),
-                                        endDate: new Date(),
+                                      format: "yyyy_mm",
+                                      viewMode: "months", 
+                                      minViewMode: "months",
+                                      autoclose: true,
+                                      startDate: new Date(2015,10),
+                                      endDate: new Date(),
                                     }).on('changeDate', function (e) {
-                                        var month = e.date.getMonth();
-                                        var year = e.date.getFullYear();
-                                        var startDate = new Date(year, month);
-                                        $('#filterDateEnd').datepicker('setStartDate', startDate);
+                                      var month = e.date.getMonth();
+                                      var year = e.date.getFullYear();
+                                      var startDate = new Date(year, month);
+                                      $('#filterDateEnd').datepicker('setStartDate', startDate);
                                          //$('#filterDateEnd').datepicker('setDate',  startDate);
-                                     });
+                                       });
 
 
                                     // set default Beginn date
                                     $('#filterDateStart').datepicker('setDate', new Date(2015,10));
 
 
-                                }
-                                ;
+                                  }
+                                  ;
 
-                                </script>
+                                  </script>
 
-                            </body>
-                            </html>
+                                </body>
+                                </html>
