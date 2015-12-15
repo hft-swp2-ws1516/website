@@ -60,6 +60,7 @@
               }
           },
       });
+             drawTable(["month","distribution"], filtered, ["kxStrength", "count"] );
         } else{
 
           var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
@@ -95,6 +96,7 @@
         }
     },
 });
+               drawTable(["kxStrength","count"], filteredElement );
           }
       }).error(function () {
           $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');

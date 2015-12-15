@@ -64,6 +64,8 @@
 
         });
 
+         drawTable(["month","summary"], filtered, ["cipher", "count"]);
+
        }
        else{
          var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
@@ -109,6 +111,9 @@
         }
       },
     });
+
+       alert(JSON.stringify(summarizedArray));
+       drawTable(["cipher","count"], summarizedArray);
   }
 }).error(function () {
   $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');

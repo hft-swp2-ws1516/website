@@ -78,3 +78,7 @@ ul#menu li a:hover {
 #generic{
     position: relative;
 }
+
+table th {
+    cursor: pointer;
+}

@@ -62,6 +62,8 @@
 
               });
 
+              drawTable(["month","distribution"], filtered, ["mac", "count"]);
+
             }
             else{
              var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
@@ -87,7 +89,7 @@
                 }
               },
             });
-
+              drawTable(["mac", "count"], filtered[0].distribution);
            }
          }).error(function () {
           $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');

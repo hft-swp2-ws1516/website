@@ -1,13 +1,13 @@
-    <script type="text/javascript" src="js/helperClass.js"></script>
     <div id='error-message'></div>
     <div id="pfsChart"></div>
     <script>
+
  // Load data from the server using a HTTP GET request
  // jquery.get is a equivalent to $.ajax({....
  	jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/pfs/overview", function (response) {
-           var start = getTimespan();
-       
-            // Check if start and end values of the slieder are the same
+       var start = getTimespan();
+
+            // Check if start and end values of the slider are the same
             if (start[0] != start[1]) {
 
             	var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
@@ -55,31 +55,27 @@
                     subchart: {
                     	show: true
                     },
-                    
                 });
-} else {
-    var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
-    chart = c3.generate({
-      bindto: '#pfsChart',
-      data: {
-         json: filtered,
-         keys: {
-						//x: 'name', // it's possible to specify 'x' when category axis
-						value: ['monthlyPfsEnabled', 'monthlyPfsDisabled'],
-					},
-                    type: 'pie',
+                 drawTable(["month","monthlyPfsEnabled", "monthlyPfsDisabled", "monthlyTotalHosts"], filtered);
+            } else {
+                var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+                chart = c3.generate({
+                  bindto: '#pfsChart',
+                  data: {
+                     json: filtered,
+                     keys: {
+                      value: ['monthlyPfsEnabled', 'monthlyPfsDisabled'],
+                  },
+                  type: 'pie',
+              },
+          });
+                drawTable(["month","monthlyPfsEnabled", "monthlyPfsDisabled", "monthlyTotalHosts"], filtered);
+            }
+        }).error(function () {
+           $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+           $("#loader").css("display","none");
+       }).done(function() {
 
-                },
-
-            });
-}
-}).error(function () {
-   $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
-   $("#loader").css("display","none");
-}).done(function() {
-   $("#loader").css("display","none");
-
-});
-
-
-</script>
+        $("#loader").css("display","none");
+    });
+       </script>

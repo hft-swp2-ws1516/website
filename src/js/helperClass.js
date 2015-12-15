@@ -1,3 +1,64 @@
+    var globalJson;
+    var globalThead;
+    var globalInnerKeys;
+    var asc = true;
+
+    function drawTable(theadArray, json, innerArrayKeys){
+      // for sorting and drawing again
+     globalJson = json;
+     globalThead = theadArray;
+     globalInnerKeys = innerArrayKeys;
+
+        // Create Table Heading first
+        var html = '';
+        html += "<table class='table'><thead id='headings'><tr>";
+        for(var heading in theadArray){
+          html += "<th onclick='sortTable(this)' id='"+ theadArray[heading]+"'>"+ theadArray[heading] + "</th>";
+        }
+        html += "</tr></thead><tbody>";
+        // for  the tbody iterate over the json, and get the value of the keys in the theadArray
+        for (var e in json){
+          html +=  "<tr>";
+          for(var heading in theadArray){
+
+            var value = json[e][theadArray[heading]];
+            // If a value is an array, then create an inner table within the td tag
+            if (Array.isArray(value)) {
+              html += "<td>"+"<table class='table'>"
+              html += "<tr>";
+              //Heading for innerTable
+              for(var innerKey in innerArrayKeys){
+                    html += "<th>"+ innerArrayKeys[innerKey]+ "</th>";
+              }
+              html += "</tr>"
+              for(var innerArrayIndex in value){
+                html += "<tr>"
+                for(var innerKey in innerArrayKeys){
+                  html+= "<td>"+  value[innerArrayIndex][innerArrayKeys[innerKey]] + "</td>";
+                }
+                html+= "</tr>";
+              } 
+              html += "</table></td>"; 
+            }else{
+              html += "<td>"+ value + "</td>" 
+            };
+          }
+          html += "</tr>";
+        }
+        html += "</tbody></table>";
+
+        $('#table-data').html(html); 
+      }
+
+      function sortTable(element){
+        var id = element.id;
+          //var asc = element.getAttribute('asc'); // switch the order, true if not set
+          asc = asc ? false : true;
+          sortResults(globalJson, id, asc);
+          drawTable(globalThead, globalJson, globalInnerKeys);
+        }
+
+
 /* Get Timespan from Datepicker or Timeslider, depending which of them is visible
    return : array with first element 1st datetime in ms and second 2nd datetime in ms
    */
@@ -78,27 +139,27 @@ function filterResponseByTimespan(response, start, end) {
 		;
         // if value is 12, then the first month of the next year will be set
         date.setMonth(date.getMonth() + 1);
+      }
+      ;
+      return filtered;
+    }
+
+    function getLatestElementIndex(response)
+    {
+     var latestElement = 0;
+     for (var i = 0; i < response.length; i++) {
+      var split = response[i].month.split('_');
+      var comparedate = new Date(split[0], split[1] - 1);
+      for (var j = i + 1; j < response.length; j++) {
+       var split2 = response[j].month.split('_');
+       if (comparedate.getTime() < new Date(split2[0], split2[1] - 1).getTime())
+       {
+        latestElement = j;
+      }
+      ;
     }
     ;
-    return filtered;
-}
-
-function getLatestElementIndex(response)
-{
-	var latestElement = 0;
-	for (var i = 0; i < response.length; i++) {
-		var split = response[i].month.split('_');
-		var comparedate = new Date(split[0], split[1] - 1);
-		for (var j = i + 1; j < response.length; j++) {
-			var split2 = response[j].month.split('_');
-			if (comparedate.getTime() < new Date(split2[0], split2[1] - 1).getTime())
-			{
-				latestElement = j;
-			}
-			;
-		}
-		;
-	}
-	;
-	return latestElement;
+  }
+  ;
+  return latestElement;
 }
