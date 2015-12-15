@@ -30,15 +30,14 @@ This Projekt was created with Webstorm. It uses [Gulp](https://github.com/gulpjs
 $ npm install --global gulp
 $ npm install
 ```
-Install 
-```
 
-```
 If you have Gulp installed, you can run gulp build in your website directory.
 
 ``` 
 $ gulp build
 ```
+
+Open localhost/hotcat/website/dist and you should see the website.
 
 Now you could change the root directory in the config */etc/apache2/sites-enabled/yourconfig.conf and add a reference to the dist folder
 
