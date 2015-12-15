@@ -16,6 +16,8 @@
   <!-- jquery ui css -->
   <link rel="stylesheet" type="text/css" media="screen" href="css/datepicker/bootstrap-datepicker3.css">
 </head>
+<script type="text/javascript">
+</script>
 <body>
     <!-- Use this for the new menuitems. If they are any changes just remember you should change the menu.js file into js-folder
     and the menu item will display dynamicly -->
@@ -65,15 +67,15 @@
 
                   <form>  
                    <fieldset>   
-                    <div id="filterDateStart" class="input-group date">
-                      <input required type="text" class="form-control">
+                    <div  id="filterDateStart" class="input-group date">
+                      <input id="filterDateStartInput" required type="text" class="form-control">
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-th"></i>
                       </span>
                     </div>
                     <br>
                     <div id="filterDateEnd" class="input-group date">
-                      <input required type="text" class="form-control">
+                      <input id="filterDateEndInput" required type="text" class="form-control">
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-th"></i>
                       </span>
@@ -131,8 +133,10 @@
 
   <script type="text/javascript" src="js/helperClass.js"></script>
   <script>
+
                                 // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
                                 window.onload = function () {
+
 
 
                                     // Timeout setup for ajax
@@ -186,6 +190,14 @@
 
                                       }
                                       );
+                                        $( "#filterDateStartInput" ).change(function() {
+                                           loadChartByHash(window.location.hash.substring(1));
+                                        });
+
+                                        $( "#filterDateEndInput" ).change(function() {
+                                           loadChartByHash(window.location.hash.substring(1));
+                                        });
+
 
                                         $("#loadPFS").click(function ()
                                         {
@@ -221,16 +233,6 @@
                                           $("#chart").load("graphs/mac.html");
                                         }
                                         );
-
-                                        $("#headings th").click(function(){
-                                          alert('heading clicked!');
-
-
-
-                                        });
-
-
-
 
 
                                         $('#filterDateEnd').datepicker({
