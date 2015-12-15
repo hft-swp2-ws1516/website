@@ -1,17 +1,3 @@
-/*
- var HttpClient = function () {
- this.get = function (url, callback, protocol, cipherString) {
- var httpRequest = new XMLHttpRequest();
- httpRequest.onreadystatechange = function () {
- if (httpRequest.readyState === 4 && httpRequest.status === 200) {
- callback(httpRequest.responseText, protocol, cipherString);
- }
- };
- httpRequest.open("GET", url, true);
- httpRequest.send(null);
- };
- };
- */
 
 var HttpClient = function () {
     this.get = function (url, callback) {
@@ -43,6 +29,8 @@ var hostsAcceptingTLS11 = [];
 var hostsPreferringTLS11 = [];
 var hostsAcceptingTLS12 = [];
 var hostsPreferringTLS12 = [];
+
+var totalCiphers = [];
 
 
 function setHttpResponse(response) {
@@ -105,9 +93,13 @@ function displayFilter() {
             keyLen += "-";
         }
 
+        var cipherString = [keyExAndAuth, bulkCipher, keyLen, msgAuth].join("");
+        if (document.getElementById("matchingKindAsPart").checked) {
+            cipherString = cipherString.replace(/-/g, ' ');
+        }
 
-        document.getElementById("displayFilterSelection").innerHTML =
-                [keyExAndAuth, bulkCipher, keyLen, msgAuth].join("");
+
+        document.getElementById("displayFilterSelection").innerHTML = cipherString;
     }
 }
 
@@ -156,12 +148,18 @@ function applyFilters() {
 function parseResponse(response, protocol, cipherString) {
 
     months.push('x');
-    totalHosts.push('Total Hosts');
+    totalHosts.push('Total Number of Hosts');
     hostsAccepting.push('Hosts Accepting');
     hostsPreferring.push('Hosts Preferring');
 
     if (response === undefined || response === null) {
         return null;
+    }
+
+    var matchLiterally = false;
+    if (document.getElementById("matchingKindLiteral").checked) {
+        cipherString = "\"" + cipherString + "\"";
+        matchLiterally = true;
     }
 
     response.match(/month.:.(\d*).(\d*)/g).forEach(function (month) {
@@ -173,27 +171,45 @@ function parseResponse(response, protocol, cipherString) {
     });
 
     var count = 0;
+    var loops = 0;
     var manualProtocolAggregation = protocol === "" ? true : false;
     monthBody = response.match(/\[[^\[\]]*\]/g);
     monthBody.forEach(function (outer) {
         outer.match(/{(.*?)}/g).forEach(function (inner) {
             if (!manualProtocolAggregation) {
-                if (inner.match("\"" + protocol + "\"") !== null && inner.match("\"" + cipherString + "\"") !== null) {
+                if (matchLiterally) {
+                    if (inner.match("\"" + protocol + "\"") !== null && inner.match(cipherString) !== null) {
+                        count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
+                        if (inner.indexOf("preferred") > -1) {
+                            hostsPreferring.push(parseInt(count));
+                        } else {
+                            hostsAccepting.push(parseInt(count));
+                        }
+                    }
+                } else {
                     count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
-                    if (inner.indexOf("preferred") > -1) {
-                        hostsPreferring.push(parseInt(count));
-                    } else {
-                        hostsAccepting.push(parseInt(count));
+                    writeToTotalCiphers(loops + 1, count);
+                    if (inner.match("\"" + protocol + "\"") !== null && testIfPartsMatch(inner, cipherString)) {
+                        count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
+                        writeToHosts(loops + 1, inner, count);
                     }
                 }
             } else {
-                if (inner.match("\"" + cipherString + "\"") !== null) {
-                    protocol = ("" + inner.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) + "").split(":")[1].replace('"', '');
+                if (!matchLiterally) {
                     count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
-                    writeToHosts(protocol, inner, parseInt(count));
+                    writeToTotalCiphers(loops + 1, count);
+                }
+                if (inner.match(cipherString) !== null || (!matchLiterally && testIfPartsMatch(inner, cipherString))) {
+                    if (inner.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) !== null) {
+                        protocol = ("" + inner.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) + "").split(":")[1].replace('"', '');
+                        count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
+                        writeToHostsByProtocol(loops + 1, protocol, inner, count);
+                    }
+
                 }
             }
         });
+        loops++;
     });
 
     for (var i = 1; i < months.length; i++) {
@@ -218,13 +234,54 @@ function parseResponse(response, protocol, cipherString) {
         hostsAcceptingTLS11: hostsAcceptingTLS11,
         hostsPreferringTLS11: hostsPreferringTLS11,
         hostsAcceptingTLS12: hostsAcceptingTLS12,
-        hostsPreferringTLS12: hostsPreferringTLS12
+        hostsPreferringTLS12: hostsPreferringTLS12,
+        totalCiphers: totalCiphers
     };
 
 }
 
-function writeToHosts(protocol, match, count) {
-    console.log("Writing to host: " + protocol + ", " + count);
+function testIfPartsMatch(match, cipherString) {
+    match = ("" + match.match(/cipher.:.(.*,)/g) + "").split(":")[1];
+    var cipherParts = cipherString.split(" ");
+    for (var i = 0; i < cipherParts.length; i++) {
+        if (match.match(cipherParts[i]) === null) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function writeToTotalCiphers(currentMonth, count) {
+    count = parseInt(count);
+    if (totalCiphers.length === 0) {
+        totalCiphers.push("Total Number of Cipher Suites");
+    }
+    if (totalCiphers.length < 2 || totalCiphers.length === currentMonth) {
+        totalCiphers.push(count);
+    } else {
+        totalCiphers[currentMonth] += count;
+    }
+}
+
+function writeToHosts(currentMonth, match, count) {
+    count = parseInt(count);
+    if (match.indexOf("preferred") > -1) {
+        if (hostsPreferring.length < 2 || hostsPreferring.length === currentMonth) {
+            hostsPreferring.push(count);
+        } else {
+            hostsPreferring[currentMonth] += count;
+        }
+    } else {
+        if (hostsAccepting.length < 2 || hostsAccepting.length === currentMonth) {
+            hostsAccepting.push(count);
+        } else {
+            hostsAccepting[currentMonth] += count;
+        }
+    }
+}
+
+function writeToHostsByProtocol(currentMonth, protocol, match, count) {
+    count = parseInt(count);
     switch (protocol) {
         case "SSLv2":
             if (hostsPreferringSSL2.length === 0) {
@@ -234,9 +291,17 @@ function writeToHosts(protocol, match, count) {
                 hostsAcceptingSSL2.push("Hosts Accepting (SSLv2)");
             }
             if (match.indexOf("preferred") > -1) {
-                hostsPreferringSSL2.push(count);
+                if (hostsPreferringSSL2.length < 2 || hostsPreferringSSL2.length === currentMonth) {
+                    hostsPreferringSSL2.push(count);
+                } else {
+                    hostsPreferringSSL2[currentMonth] += count;
+                }
             } else {
-                hostsAcceptingSSL2.push(count);
+                if (hostsAcceptingSSL2.length < 2 || hostsAcceptingSSL2.length === currentMonth) {
+                    hostsAcceptingSSL2.push(count);
+                } else {
+                    hostsAcceptingSSL2[currentMonth] += count;
+                }
             }
             break;
         case "SSLv3":
@@ -247,9 +312,17 @@ function writeToHosts(protocol, match, count) {
                 hostsAcceptingSSL3.push("Hosts Accepting (SSLv3)");
             }
             if (match.indexOf("preferred") > -1) {
-                hostsPreferringSSL3.push(count);
+                if (hostsPreferringSSL3.length < 2 || hostsPreferringSSL3.length === currentMonth) {
+                    hostsPreferringSSL3.push(count);
+                } else {
+                    hostsPreferringSSL3[currentMonth] += count;
+                }
             } else {
-                hostsAcceptingSSL3.push(count);
+                if (hostsAcceptingSSL3.length < 2 || hostsAcceptingSSL3.length === currentMonth) {
+                    hostsAcceptingSSL3.push(count);
+                } else {
+                    hostsAcceptingSSL3[currentMonth] += count;
+                }
             }
             break;
         case "TLSv1.0":
@@ -260,9 +333,17 @@ function writeToHosts(protocol, match, count) {
                 hostsAcceptingTLS1.push("Hosts Accepting (TLSv1.0)");
             }
             if (match.indexOf("preferred") > -1) {
-                hostsPreferringTLS1.push(count);
+                if (hostsPreferringTLS1.length < 2 || hostsPreferringTLS1.length === currentMonth) {
+                    hostsPreferringTLS1.push(count);
+                } else {
+                    hostsPreferringTLS1[currentMonth] += count;
+                }
             } else {
-                hostsAcceptingTLS1.push(count);
+                if (hostsAcceptingTLS1.length < 2 || hostsAcceptingTLS1.length === currentMonth) {
+                    hostsAcceptingTLS1.push(count);
+                } else {
+                    hostsAcceptingTLS1[currentMonth] += count;
+                }
             }
             break;
         case "TLSv1.1":
@@ -273,9 +354,17 @@ function writeToHosts(protocol, match, count) {
                 hostsAcceptingTLS11.push("Hosts Accepting (TLSv1.1)");
             }
             if (match.indexOf("preferred") > -1) {
-                hostsPreferringTLS11.push(count);
+                if (hostsPreferringTLS11.length < 2 || hostsPreferringTLS11.length === currentMonth) {
+                    hostsPreferringTLS11.push(count);
+                } else {
+                    hostsPreferringTLS11[currentMonth] += count;
+                }
             } else {
-                hostsAcceptingTLS11.push(count);
+                if (hostsAcceptingTLS11.length < 2 || hostsAcceptingTLS11.length === currentMonth) {
+                    hostsAcceptingTLS11.push(count);
+                } else {
+                    hostsAcceptingTLS11[currentMonth] += count;
+                }
             }
             break;
         case "TLSv1.2":
@@ -286,9 +375,17 @@ function writeToHosts(protocol, match, count) {
                 hostsAcceptingTLS12.push("Hosts Accepting (TLSv1.2)");
             }
             if (match.indexOf("preferred") > -1) {
-                hostsPreferringTLS12.push(count);
+                if (hostsPreferringTLS12.length < 2 || hostsPreferringTLS12.length === currentMonth) {
+                    hostsPreferringTLS12.push(count);
+                } else {
+                    hostsPreferringTLS12[currentMonth] += count;
+                }
             } else {
-                hostsAcceptingTLS12.push(count);
+                if (hostsAcceptingTLS12.length < 2 || hostsAcceptingTLS12.length === currentMonth) {
+                    hostsAcceptingTLS12.push(count);
+                } else {
+                    hostsAcceptingTLS12[currentMonth] += count;
+                }
             }
             break;
         default:
@@ -314,6 +411,8 @@ function resetResults() {
     hostsPreferringTLS11 = [];
     hostsAcceptingTLS12 = [];
     hostsPreferringTLS12 = [];
+
+    totalCiphers = [];
 
 }
 
