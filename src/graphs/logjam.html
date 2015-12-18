@@ -15,6 +15,14 @@
         // filter response Array by timespan
         filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
+        drawTable(["month","expDisabled", "expEnabled", "total"], filtered);
+        
+        // percentual line
+        for (var i = 0; i < filtered.length; i++) {
+          filtered[i].expEnabled = ((filtered[i].expEnabled / filtered[i].total) * 100).toFixed(2);
+          filtered[i].expDisabled = ((filtered[i].expDisabled / filtered[i].total) * 100).toFixed(2);
+        };
+
         chart = c3.generate({
         	bindto: '#logjam',
         	data: {
@@ -37,14 +45,13 @@
          },
          y: {
            label: {
-            text: 'Total Count',
+            text: 'In Percent',
             position: 'outer-middle'
           },
         }
       },
 
     });
-        drawTable(["month","expDisabled", "expEnabled", "total"], filtered);
       } else {
        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 

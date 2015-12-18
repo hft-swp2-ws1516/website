@@ -5,9 +5,9 @@
 
     function drawTable(theadArray, json, innerArrayKeys){
       // for sorting and drawing again
-     globalJson = json;
-     globalThead = theadArray;
-     globalInnerKeys = innerArrayKeys;
+      globalJson = json;
+      globalThead = theadArray;
+      globalInnerKeys = innerArrayKeys;
 
         // Create Table Heading first
         var html = '';
@@ -28,7 +28,7 @@
               html += "<tr>";
               //Heading for innerTable
               for(var innerKey in innerArrayKeys){
-                    html += "<th>"+ innerArrayKeys[innerKey]+ "</th>";
+                html += "<th>"+ innerArrayKeys[innerKey]+ "</th>";
               }
               html += "</tr>"
               for(var innerArrayIndex in value){
@@ -86,29 +86,38 @@
    returns summarized array
    */
 
-   function mergeDoubleEntrys(json){
+   function mergeDoubleEntrys(json, tlsVersion){
      var summarized = [];
      for (var i = 0; i < json.length; i++) {
       var doubleEntry = false;
       // get a object from the summary
       var obj = json[i];
-      // iterate over summarized array and check for double entry
-      for (var j = 0; j < summarized.length; j++) {
-      // if entry found, add increase the count number of the first entry
-      if (obj['cipher'] == summarized[j].cipher ) {
-        doubleEntry = true;
-        summarized[j].count += obj['count'];
+      // if TLS version is given
+      if (tlsVersion) {
+        if (obj['protocol'] == tlsVersion) {
+          summarized.push(obj);
+        };
+      } else{
+        // iterate over summarized array and check for double entry
+        for (var j = 0; j < summarized.length; j++) {
+        // if entry found, add increase the count number of the first entry
+        if (obj['cipher'] == summarized[j].cipher ) {
+          doubleEntry = true;
+          summarized[j].count += obj['count'];
+        };
       };
-    };
        // if no double entry found, push the obj normally to the summarized arra
        if (!doubleEntry) {
         summarized.push(obj);
       };
       doubleEntry = false;
-    };
 
-    return summarized;
-  }
+    }
+
+  };
+
+  return summarized;
+}
 
 
  // Compare function for sorting Array of JSONs 

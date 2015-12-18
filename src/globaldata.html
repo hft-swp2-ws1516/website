@@ -82,6 +82,17 @@
                     </div>
                   </fieldset>
                   <br>
+                  <div id="" class="input-group"> <input id="filterTLSProtocol" list="ssl_tls" class="form-control" onblur="manageFilterSelection()">   <span class="input-group-addon">
+                    TLS Protocol
+                  </span> </div>
+
+                  <datalist id="ssl_tls">
+                    <option value="SSLv2"></option>
+                    <option value="SSLv3"></option>
+                    <option value="TLSv1.0"></option>
+                    <option value="TLSv1.1"></option>
+                    <option value="TLSv1.2"></option>
+                  </datalist>
 
                   <fieldset> 
                     <button class="btn btn-default applytimespan" >Apply Timespan</button>
@@ -191,12 +202,12 @@
                                       }
                                       );
                                         $( "#filterDateStartInput" ).change(function() {
-                                           loadChartByHash(window.location.hash.substring(1));
-                                        });
+                                         loadChartByHash(window.location.hash.substring(1));
+                                       });
 
                                         $( "#filterDateEndInput" ).change(function() {
-                                           loadChartByHash(window.location.hash.substring(1));
-                                        });
+                                         loadChartByHash(window.location.hash.substring(1));
+                                       });
 
 
                                         $("#loadPFS").click(function ()

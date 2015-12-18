@@ -1,6 +1,8 @@
 <script type="text/javascript" src="js/helperClass.js"></script>
 <div id='error-message'></div>
+
 <div id="macChart"></div>
+
 <script>
 
 // Load data from the server using a HTTP GET request
@@ -18,6 +20,8 @@
         }
         ;
 
+         var tlsFilter = $('#filterTLSProtocol').val();
+
           // Convert the response in syntax like
           //var json = { 'AES128': [324234,312332], 'DES': [22234,312332]};
           var json = {};
@@ -25,7 +29,7 @@
           for (var i = 0; i < filtered.length; i++) {
             // get ciphers array
             var ciphers = filtered[i].summary;
-            ciphers = mergeDoubleEntrys(ciphers);
+            ciphers = mergeDoubleEntrys(ciphers, tlsFilter);
             sortResults(ciphers, 'count', false);
             ciphers = ciphers.splice(0,20);
 

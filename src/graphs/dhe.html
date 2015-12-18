@@ -15,19 +15,21 @@
                // filter response Array by timespan
                filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
-
                var months = [];
                for (var i = 0; i < filtered.length; i++) {
                 months.push(filtered[i].month);
               }
               ;
 
+              //alert(JSON.stringify(filtered));
+
               // Convert the response in syntax like : { '512': [323,3234], '1024': [421,3424]}
               var json = {};
-
+              // iterate over all months
               for (var i = 0; i < filtered.length; i++) {
                 // get distribution array
                 var distribution = filtered[i].distribution;
+                // iterate over the distribution of one month
                 for (var j = 0; j < distribution.length; j++) {
                   // only take dh keygorups
                   if (distribution[j].kx == "DH") {
@@ -44,6 +46,8 @@
 
               };
             };
+
+            
 
             chart = c3.generate({
               bindto: '#dheChart',
@@ -63,8 +67,8 @@
                 }
               },
 
-            });
-
+            }); 
+             // draw Table and say which keys should be printed,
              drawTable(["month","distribution"], filtered, ["kxStrength", "count"] );
 
           }
