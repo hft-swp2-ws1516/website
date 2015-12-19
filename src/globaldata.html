@@ -24,102 +24,84 @@
     <div id="nav01"></div>
 
     <div class="container">
-      <!-- Graphs -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Graph</a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-      <div id="charts">
-        <!-- The charts are displayed here -->
-        <div id="generic">
-          <div id="loader"><img src="img/ajax-loader.gif"></div>
-          <div id="chart"></div>
-        </div>
+            <form class="navbar-form navbar-left" role="search">
 
-
-
-        <div class="row">
-
-          <!-- Timeslider is shown if window width is smaller than 768px -->
-          <div id='timeslider'>
-            <div class="col-md-4">
-
-              <div class="panel panel-default">
-                <div class="panel-heading">Select Timespan</div>
-                <div class="panel-body">
-                  <!-- noUIslider -->
-                  <div  id="slider-date"></div>
-                  <br>
-                  Start: <span id="event-start"></span><br>
-                  End: <span id="event-end"></span> <br><br>
-                  <button class="btn btn-default applytimespan" >Apply Timespan</button>
+             <!-- Datepicker is shown if window width is higher than 768px -->
+             <span id='datepicker'>
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon3">From:</span>
+                <div  id="filterDateStart" class="input-group date">
+                  <input id="filterDateStartInput" required type="text" class="form-control">
+                  <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                  </span>
                 </div>
               </div>
-
-            </div>
-          </div>
-
-          <!-- Datepicker is shown if window width is higher than 768px -->
-          <div id='datepicker'>
-            <div class="col-md-4">
-
-
-              <div class="panel panel-default">
-                <div class="panel-heading">Select Timespan</div>
-                <div class="panel-body">
-
-                  <form>  
-                   <fieldset>   
-                    <div  id="filterDateStart" class="input-group date">
-                      <input id="filterDateStartInput" required type="text" class="form-control">
-                      <span class="input-group-addon">
-                        <i class="glyphicon glyphicon-calendar"></i>
-                      </span>
-                    </div>
-                    <br>
-                    <div id="filterDateEnd" class="input-group date">
-                      <input id="filterDateEndInput" required type="text" class="form-control">
-                      <span class="input-group-addon">
-                        <i class="glyphicon glyphicon-calendar"></i>
-                      </span>
-                    </div>
-                  </fieldset>
-                  <br>
-                  <div id="" class="input-group"> <input id="filterTLSProtocol" list="ssl_tls" class="form-control" onblur="manageFilterSelection()">   <span class="input-group-addon">
-                    TLS Protocol
-                  </span> </div>
-
-                  <datalist id="ssl_tls">
-                    <option value="SSLv2"></option>
-                    <option value="SSLv3"></option>
-                    <option value="TLSv1.0"></option>
-                    <option value="TLSv1.1"></option>
-                    <option value="TLSv1.2"></option>
-                  </datalist>
-
-                  <fieldset> 
-                    <button class="btn btn-default applytimespan" >Apply Timespan</button>
-
-                  </fieldset>
-                </form>
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon3">To:</span>
+                <div id="filterDateEnd" class="input-group date">
+                  <input id="filterDateEndInput" required type="text" class="form-control">
+                  <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                  </span>
+                </div>
               </div>
+            </span>
+
+            <!-- Timeslider is shown if window width is smaller than 768px -->
+            <span id='timeslider'>
+
+              <!-- noUIslider -->
+              <div  id="slider-date"></div>
+
+              Start: <span id="event-start"></span>
+              End: <span id="event-end"></span> 
+
+            </span>
+
+            <div id="filterTLS" class="input-group">
+              <span class="input-group-addon">TLS Protocol:</span>
+              <input id="filterTLSProtocol" list="ssl_tls" class="form-control" onblur="manageFilterSelection()">
             </div>
+            <datalist id="ssl_tls">
+              <option value="SSLv2"></option>
+              <option value="SSLv3"></option>
+              <option value="TLSv1.0"></option>
+              <option value="TLSv1.1"></option>
+              <option value="TLSv1.2"></option>
+            </datalist>
+            <button type="submit" class="btn btn-default applytimespan">Submit</button>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!-- Graphs -->
 
-          </div>
-        </div>                   
-
-        <div class="col-md-8">
-          <div id="table-data">
-
-
-
-          </div>
-
-        </div>
+    <div id="charts">
+      <!-- The charts are displayed here -->
+      <div id="generic">
+        <div id="loader"><img src="img/ajax-loader.gif"></div>
+        <div id="chart"></div>
       </div>
 
-
-
+      <div id="table-data"></div>
 
     </div>
-
 
   </div>
 
@@ -188,9 +170,10 @@
                                         $("#chart").load("graphs/mac.html");
                                         break;
                                         default:
+                                        $("#chart").load("graphs/pfs.html");
                                       }
                                     }
-
+                                    $("#filterTLS").hide();
                                     loadChartByHash(window.location.hash.substring(1));
 
                                         // This is called when the reload button is clicked!
@@ -212,38 +195,43 @@
 
                                         $("#loadPFS").click(function ()
                                         {
-                                         $("#chart").load("graphs/pfs.html");
-                                       }
-                                       );
+                                          $("#filterTLS").hide();
+                                          $("#chart").load("graphs/pfs.html");
+                                        }
+                                        );
 
                                         $("#loadDHE").click(function ()
                                         {
                                          $("#chart").load("graphs/dhe.html");
-
+                                         $("#filterTLS").hide();
                                        }
                                        );
 
                                         $("#loadECDHE").click(function ()
                                         {
-                                          $("#chart").load("graphs/ecdhe.html");
-                                        }
-                                        );
+                                         $("#filterTLS").hide();
+                                         $("#chart").load("graphs/ecdhe.html");
+                                       }
+                                       );
 
                                         $("#loadlogjam").click(function ()
                                         {
-                                          $("#chart").load("graphs/logjam.html");
-                                        }
-                                        );
+                                         $("#filterTLS").hide();
+                                         $("#chart").load("graphs/logjam.html");
+                                       }
+                                       );
                                         $("#loadCiphers").click(function ()
                                         {
-                                          $("#chart").load("graphs/ciphers.html");
-                                        }
-                                        );
+                                         $("#filterTLS").show();
+                                         $("#chart").load("graphs/ciphers.html");
+                                       }
+                                       );
                                         $("#loadMAC").click(function ()
                                         { 
-                                          $("#chart").load("graphs/mac.html");
-                                        }
-                                        );
+                                         $("#filterTLS").hide();
+                                         $("#chart").load("graphs/mac.html");
+                                       }
+                                       );
 
 
                                         $('#filterDateEnd').datepicker({

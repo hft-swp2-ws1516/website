@@ -25,7 +25,7 @@ document.getElementById("nav01").innerHTML =
 "<li><a href='worldmap.html'>Worldmap</a></li>" +
 "<li><a href='analyze-me.html'>Analyse Me</a></li>" +
 "</ul></div>"+
-"<div class='col-md-4 '>Scanner: ON</div>"+
+"<div class='col-md-4 '></div>"+
 "</div>"+
 "</div>"+
 "</nav>";
