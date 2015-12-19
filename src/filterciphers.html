@@ -475,18 +475,22 @@
                                                     result.hostsAcceptingTLS11,
                                                     result.hostsPreferringTLS11,
                                                     result.hostsAcceptingTLS12,
-                                                    result.hostsPreferringTLS12
+                                                    result.hostsPreferringTLS12,
+                                                    result.hostsAccepting,
+                                                    result.hostsPreferring
                                                 ],
                                                 type: 'bar',
                                                 types: {
                                                     'Total Number of Cipher Suites': 'spline'
                                                 },
                                                 groups: [
+                                                    ['Total Number of Cipher Suites'],
                                                     ['Hosts Preferring (SSLv2)', 'Hosts Accepting (SSLv2)'],
                                                     ['Hosts Preferring (SSLv3)', 'Hosts Accepting (SSLv3)'],
                                                     ['Hosts Preferring (TLSv1.0)', 'Hosts Accepting (TLSv1.0)'],
                                                     ['Hosts Preferring (TLSv1.1)', 'Hosts Accepting (TLSv1.1)'],
-                                                    ['Hosts Preferring (TLSv1.2)', 'Hosts Accepting (TLSv1.2)']
+                                                    ['Hosts Preferring (TLSv1.2)', 'Hosts Accepting (TLSv1.2)'],
+                                                    ['Hosts Preferring (All Protocols)', 'Hosts Accepting (All Protocols)']
                                                 ]
                                             },
                                             axis: {

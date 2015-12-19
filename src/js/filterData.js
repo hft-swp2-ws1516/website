@@ -149,8 +149,6 @@ function parseResponse(response, protocol, cipherString) {
 
     months.push('x');
     totalHosts.push('Total Number of Hosts');
-    hostsAccepting.push('Hosts Accepting');
-    hostsPreferring.push('Hosts Preferring');
 
     if (response === undefined || response === null) {
         return null;
@@ -180,30 +178,27 @@ function parseResponse(response, protocol, cipherString) {
                 if (matchLiterally) {
                     if (inner.match("\"" + protocol + "\"") !== null && inner.match(cipherString) !== null) {
                         count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
-                        if (inner.indexOf("preferred") > -1) {
-                            hostsPreferring.push(parseInt(count));
-                        } else {
-                            hostsAccepting.push(parseInt(count));
-                        }
+                        writeToHosts(loops + 1, inner, count, matchLiterally);
                     }
                 } else {
                     count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
                     writeToTotalCiphers(loops + 1, count);
                     if (inner.match("\"" + protocol + "\"") !== null && testIfPartsMatch(inner, cipherString)) {
                         count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
-                        writeToHosts(loops + 1, inner, count);
+                        writeToHosts(loops + 1, inner, count, matchLiterally);
                     }
                 }
             } else {
                 if (!matchLiterally) {
                     count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
-                    writeToTotalCiphers(loops + 1, count);
+                    writeToTotalCiphers(loops + 1, count); 
                 }
                 if (inner.match(cipherString) !== null || (!matchLiterally && testIfPartsMatch(inner, cipherString))) {
                     if (inner.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) !== null) {
                         protocol = ("" + inner.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) + "").split(":")[1].replace('"', '');
                         count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
                         writeToHostsByProtocol(loops + 1, protocol, inner, count);
+                        writeToHosts(loops + 1, inner, count, matchLiterally);
                     }
 
                 }
@@ -263,8 +258,14 @@ function writeToTotalCiphers(currentMonth, count) {
     }
 }
 
-function writeToHosts(currentMonth, match, count) {
+function writeToHosts(currentMonth, match, count, matchLiterally) {
     count = parseInt(count);
+    if (hostsPreferring.length === 0) {
+        hostsPreferring.push(matchLiterally ? 'Hosts Preferring' : 'Hosts Preferring (All Protocols)');
+    }
+    if (hostsAccepting.length === 0) {
+        hostsAccepting.push(matchLiterally ? 'Hosts Accepting' : 'Hosts Accepting (All Protocols)');
+    }
     if (match.indexOf("preferred") > -1) {
         if (hostsPreferring.length < 2 || hostsPreferring.length === currentMonth) {
             hostsPreferring.push(count);
