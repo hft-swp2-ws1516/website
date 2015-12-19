@@ -4,13 +4,26 @@
 <div id="dheChart"></div>
 
 
+
+
 <script>
+
+var totalHosts;
+
+jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
+  totalHosts = response;
+}).error(function () {
+  $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+  $("#loader").css("display","none");
+}).done(function() {
+});
+
  // Load data from the server using a HTTP GET request
  // jquery.get is a equivalent to $.ajax({....
  	jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/pfs/distribution", function (response) {
-       var start = getTimespan();
+     var start = getTimespan();
 
-             if (start[0] != start[1]) {
+     if (start[0] != start[1]) {
 
                // filter response Array by timespan
                filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
@@ -21,7 +34,21 @@
               }
               ;
 
-              //alert(JSON.stringify(filtered));
+               // draw Table and say which keys should be printed,
+               drawTable(["month","distribution"], filtered, ["kxStrength", "count"] );
+
+               // filter hostcount endpoint by given timespan
+               filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
+
+              // percentual line
+              for (var i = 0; i < filtered.length; i++) {
+                var distribution = filtered[i].distribution;
+                for (var j = 0; j < distribution.length; j++) {
+                  distribution[j].count = ((distribution[j].count / filteredTotalHosts[i].hostCount) * 100).toFixed(2);
+                };
+              };
+
 
               // Convert the response in syntax like : { '512': [323,3234], '1024': [421,3424]}
               var json = {};
@@ -47,7 +74,7 @@
               };
             };
 
-            
+
 
             chart = c3.generate({
               bindto: '#dheChart',
@@ -61,15 +88,16 @@
                 },
                 y: {
                   label: {
-                    text: 'Total Count',
+                    text: 'In Percent',
                     position: 'outer-middle'
                   },
+                  min: 0,
+                  max: 99,
                 }
               },
 
             }); 
-             // draw Table and say which keys should be printed,
-             drawTable(["month","distribution"], filtered, ["kxStrength", "count"] );
+
 
           }
           else{
@@ -106,7 +134,7 @@
                   }
                 },
               });
-                drawTable(["kxStrength","count"], filteredElement);
+              drawTable(["kxStrength","count"], filteredElement);
             }
           }).error(function () {
             $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
