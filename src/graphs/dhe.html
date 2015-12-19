@@ -3,9 +3,6 @@
 <div id='error-message'></div>
 <div id="dheChart"></div>
 
-
-
-
 <script>
 
 var totalHosts;
@@ -16,14 +13,13 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
   $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
   $("#loader").css("display","none");
 }).done(function() {
-});
 
  // Load data from the server using a HTTP GET request
  // jquery.get is a equivalent to $.ajax({....
- 	jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/pfs/distribution", function (response) {
-     var start = getTimespan();
+  jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/pfs/distribution", function (response) {
+   var start = getTimespan();
 
-     if (start[0] != start[1]) {
+   if (start[0] != start[1]) {
 
                // filter response Array by timespan
                filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
@@ -142,4 +138,10 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
           }).done(function() {
            $("#loader").css("display","none");
          });
-          </script>
+
+
+          
+        });
+
+
+</script>

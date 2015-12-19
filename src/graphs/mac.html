@@ -5,7 +5,6 @@
 
 <script>
 
-
 var totalHosts;
 
 jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
@@ -18,12 +17,10 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
   $("#loader").css("display","none");
 }).done(function() {
 
-});
-
 
  // Load data from the server using a HTTP GET request
  // jquery.get is a equivalent to $.ajax({....
- 	jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/mac/distribution", function (response) {
+  jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/mac/distribution", function (response) {
     var start = getTimespan();
 
 
@@ -129,4 +126,8 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
         }).done(function() {
          $("#loader").css("display","none");
        });
+
+});
+
+
         </script>

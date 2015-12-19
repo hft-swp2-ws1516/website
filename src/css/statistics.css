@@ -30,6 +30,6 @@ hr{
 
 #chart{
     margin: 0 auto;
-    height: 330px;
+    min-height: 330px;
 }
 

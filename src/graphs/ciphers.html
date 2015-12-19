@@ -13,7 +13,6 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
   $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
   $("#loader").css("display","none");
 }).done(function() {
-});
 
 // Load data from the server using a HTTP GET request
 // jquery.get is a equivalent to $.ajax({....
@@ -150,4 +149,8 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
 }).done(function() {
  $("#loader").css("display","none");
 });
+
+  
+});
+
 </script>

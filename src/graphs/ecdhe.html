@@ -13,11 +13,10 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
   $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
   $("#loader").css("display","none");
 }).done(function() {
-});
 
 // Load data from the server using a HTTP GET request
 // jquery.get is a equivalent to $.ajax({....
-	jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/pfs/distribution", function (response) {
+  jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/pfs/distribution", function (response) {
    var start = getTimespan();
 
    if (start[0] != start[1]) {
@@ -126,7 +125,7 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
                 }
               },
             });
-              drawTable(["kxStrength","count"], filteredElement);
+                  drawTable(["kxStrength","count"], filteredElement);
                 }
               }).error(function () {
                 $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
@@ -134,4 +133,8 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
               }).done(function() {
                $("#loader").css("display","none");
              });
-              </script>
+              
+            });
+
+
+</script>
