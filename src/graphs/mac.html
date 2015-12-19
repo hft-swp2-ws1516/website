@@ -41,7 +41,7 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
               // filter hostcount endpoint by given timespan
               filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
               
-              // draw Table before chaning the values in %
+              // draw Table before changing the values in %
               drawTable(["month","distribution"], filtered, ["mac", "count"]);
 
               // percentual line

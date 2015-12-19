@@ -86,7 +86,7 @@
    returns summarized array
    */
 
-   function mergeDoubleEntrys(json, tlsVersion){
+   function mergeDoubleEntrys(json, tlsVersion, totalHosts){
      var summarized = [];
      for (var i = 0; i < json.length; i++) {
       var doubleEntry = false;
@@ -95,28 +95,32 @@
       // if TLS version is given
       if (tlsVersion) {
         if (obj['protocol'] == tlsVersion) {
+          obj.count = parseFloat(((obj.count / totalHosts ) * 100).toFixed(2));
           summarized.push(obj);
         };
       } else{
+
         // iterate over summarized array and check for double entry
         for (var j = 0; j < summarized.length; j++) {
         // if entry found, add increase the count number of the first entry
-        if (obj['cipher'] == summarized[j].cipher ) {
+        if (obj['cipher'] === summarized[j].cipher ) {
           doubleEntry = true;
           summarized[j].count += obj['count'];
         };
       };
        // if no double entry found, push the obj normally to the summarized arra
        if (!doubleEntry) {
-        summarized.push(obj);
-      };
-      doubleEntry = false;
 
-    }
+       summarized.push(obj);
+     };
+     doubleEntry = false;
 
-  };
+   }
 
-  return summarized;
+
+ };
+
+ return summarized;
 }
 
 

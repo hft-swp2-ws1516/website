@@ -5,6 +5,16 @@
 
 <script>
 
+var totalHosts;
+
+jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
+  totalHosts = response;
+}).error(function () {
+  $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+  $("#loader").css("display","none");
+}).done(function() {
+});
+
 // Load data from the server using a HTTP GET request
 // jquery.get is a equivalent to $.ajax({....
   jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/ciphers/summary", function (response) {
@@ -20,20 +30,35 @@
         }
         ;
 
+         // filter hostcount endpoint by given timespan
+         filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
          var tlsFilter = $('#filterTLSProtocol').val();
 
           // Convert the response in syntax like
           //var json = { 'AES128': [324234,312332], 'DES': [22234,312332]};
           var json = {};
 
+          var test = [];
+
           for (var i = 0; i < filtered.length; i++) {
             // get ciphers array
             var ciphers = filtered[i].summary;
-            ciphers = mergeDoubleEntrys(ciphers, tlsFilter);
-            sortResults(ciphers, 'count', false);
-            ciphers = ciphers.splice(0,20);
+            ciphers = mergeDoubleEntrys(ciphers, tlsFilter, filteredTotalHosts[i].hostCount);
 
-            for (var j = 0; j < ciphers.length; j++) {
+            sortResults(ciphers, 'count', false);
+
+           // For drawing the table
+           test[i] = {};
+           test[i]['month'] = filtered[i].month;
+           // deep copy of array by value, not by reference! 
+           test[i]['summary']   = $.extend(true, [], ciphers);
+
+
+
+           ciphers = ciphers.splice(0,20);
+
+           for (var j = 0; j < ciphers.length; j++) {
               //check if array is initialized
               if (!(Array.isArray(json[ciphers[j].cipher]))) {
                 json[ciphers[j].cipher] = [];
@@ -47,6 +72,7 @@
 
            };
          };
+
 
          chart = c3.generate({
           bindto: '#macChart',
@@ -68,7 +94,7 @@
 
         });
 
-         drawTable(["month","summary"], filtered, ["cipher", "count"]);
+         drawTable(["month","summary"], test, ["cipher", "count"]);
 
        }
        else{
@@ -116,7 +142,7 @@
       },
     });
 
-       drawTable(["cipher","count"], summarizedArray);
+    drawTable(["cipher","count"], summarizedArray);
   }
 }).error(function () {
   $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
