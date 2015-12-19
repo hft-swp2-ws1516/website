@@ -7,7 +7,7 @@
 
 var totalHosts;
 
-jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
+jQuery.get("http://hotcat.de:1337/api/v0/pfs/overview", function (response) {
   totalHosts = response;
 }).error(function () {
   $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
@@ -16,7 +16,7 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
 
  // Load data from the server using a HTTP GET request
  // jquery.get is a equivalent to $.ajax({....
-  jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/pfs/distribution", function (response) {
+  jQuery.get("http://hotcat.de:1337/api/v0/pfs/distribution", function (response) {
    var start = getTimespan();
 
    if (start[0] != start[1]) {
@@ -30,7 +30,6 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
               }
               ;
 
-
                // filter hostcount endpoint by given timespan
                filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
@@ -38,11 +37,12 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
               // percentual line
               for (var i = 0; i < filtered.length; i++) {
                 var distribution = filtered[i].distribution;
-                for (var j = 0; j < distribution.length; j++) {
-                  distribution[j].percent = ((distribution[j].count / filteredTotalHosts[i].hostCount) * 100).toFixed(2);
+                filtered[i].totalHosts = filteredTotalHosts[i].monthlyPfsEnabled;
+                for (var j = distribution.length - 1; j >= 0; j--) {
+                  distribution[j].percent = ((distribution[j].count / filteredTotalHosts[i].monthlyPfsEnabled) * 100).toFixed(2);
+
                 };
               };
-
 
               // Convert the response in syntax like : { '512': [323,3234], '1024': [421,3424]}
               var json = {};
@@ -50,42 +50,36 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
               for (var i = 0; i < filtered.length; i++) {
                 // get distribution array
                 var distribution = filtered[i].distribution;
+                // this array is for table, graph differs from the table
+                var tempArray = [];
                 // iterate over the distribution of one month
-                 var tempArray = [];
                 for (var j = 0; j < distribution.length; j++) {
                   // only take dh keygorups
                   if (distribution[j].kx == "DH") {
                     tempArray.push(distribution[j]);
-                   if (!(Array.isArray(json[distribution[j].kxStrength]))) {
-                    json[distribution[j].kxStrength] = [];
-                  };  
+                    // fields with the value 0 should not be drawn
+                    if ( distribution[j].percent != 0) {
+                      if (!(Array.isArray(json[distribution[j].kxStrength]))) {
+                        json[distribution[j].kxStrength] = [];
+                      };  
                   // if there is ja new key and the previous elements in the array are null, then c3 will not work
                   if (i >= 1 && !json[distribution[j].kxStrength][i-1]) {
                     json[distribution[j].kxStrength][i-1]=0;
                   };
                   json[distribution[j].kxStrength][i] = distribution[j].percent;
-
                 };
 
+
               };
-              filtered[i].distribution = tempArray;
 
             };
+            filtered[i].distribution = tempArray;
 
-         
-            for (var i = 0; i < filtered.length; i++) {
-              var distribution = filtered[i].distribution;
-              for (var i = 0; i < distribution.length; i++) {
-                if (distribution[i].kx == "DH") {
+          };
 
-
-
-                };
-              };
-            };
 
               // draw Table and say which keys should be printed,
-              drawTable(["month","distribution"], filtered, ["kxStrength", "count", "percent"] );
+              drawTable(["month","distribution", "totalHosts"], filtered, ["kxStrength", "count", "percent"] );
 
               chart = c3.generate({
                 bindto: '#dheChart',
@@ -113,16 +107,21 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
             }
             else{
              var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+               // filter hostcount endpoint by given timespan
+               filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
 
                // remove ECDHE data
                var filteredElement = filtered[0].distribution;
 
                for (var i = filteredElement.length - 1; i >= 0; i--) {
+                filteredElement[i].totalHosts =  filteredTotalHosts[0].monthlyPfsEnabled;
                 if (filteredElement[i].kx == "ECDH") {
                   filteredElement.splice(i, 1);
-                }
-                ;
+                };
+
               }
+
               chart = c3.generate({
                 bindto: '#dheChart',
                 data: {
@@ -145,7 +144,7 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
                   }
                 },
               });
-              drawTable(["kxStrength","count"], filteredElement);
+              drawTable(["kxStrength","count", "totalHosts"], filteredElement);
             }
           }).error(function () {
             $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');

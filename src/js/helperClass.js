@@ -39,7 +39,8 @@
                 html+= "</tr>";
               } 
               html += "</table></td>"; 
-            }else{
+            }
+            else{
               html += "<td>"+ value + "</td>" 
             };
           }

@@ -34,12 +34,12 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
 
          var tlsFilter = $('#filterTLSProtocol').val();
 
-          // Convert the response in syntax like
-          //var json = { 'AES128': [324234,312332], 'DES': [22234,312332]};
-          var json = {};
 
-          var test = [];
+         var json = {};
 
+         var test = [];
+
+          // iterate over all months
           for (var i = 0; i < filtered.length; i++) {
             // get ciphers array
             var ciphers = filtered[i].summary;
@@ -51,10 +51,12 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
            test[i] = {};
            test[i]['month'] = filtered[i].month;
            // deep copy of array by value, not by reference! 
-           test[i]['summary']   = $.extend(true, [], ciphers);
-
+           test[i]['summary'] = $.extend(true, [], ciphers);
+           // show only top 20 used cipher suites
            ciphers = ciphers.splice(0,20);
 
+           // Convert the response in syntax like
+           //var json = { 'AES128': [324234,312332], 'DES': [22234,312332]};
            for (var j = 0; j < ciphers.length; j++) {
               //check if array is initialized
               if (!(Array.isArray(json[ciphers[j].cipher]))) {
@@ -65,11 +67,16 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
              if (i >= 1 && !json[ciphers[j].cipher][i-1]) {
                json[ciphers[j].cipher][i-1]=0;
              };
-             json[ciphers[j].cipher][i] = ciphers[j].percent;
+             // choose either percent either count as value 
+             if (ciphers[j].percent == undefined) {
+               json[ciphers[j].cipher][i] = ciphers[j].count;
+             } 
+             else{
+               json[ciphers[j].cipher][i] = ciphers[j].percent;
+             };
 
            };
          };
-
 
          chart = c3.generate({
           bindto: '#macChart',
@@ -99,56 +106,46 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
          var ciphers = filtered[0].summary;
 
          var summarizedArray = mergeDoubleEntrys(ciphers);
-    // result array by property count in descending order
-    sortResults(summarizedArray, 'count', false);
+         // result array by property count in descending order
+         sortResults(summarizedArray, 'count', false);
 
-    // Only Top 20 most frequent Cipher suites
-    var summarizedArray = summarizedArray.splice(0,20);
-    
-    /* Other way to display 
-    var finalJson = [];
-    for (var i = 0; i < summarizedArray.length; i++) {
-      var json = {};
-      json.count = summarizedArray[i].count;
-      json.cipher = summarizedArray[i].cipher;
-      finalJson[i] =  json;
-    };
-    */
+         // Only Top 20 most frequent Cipher suites
+         var summarizedArray = summarizedArray.splice(0,20);
+         
+         var finalJson = {};
+         for (var i = 0; i < summarizedArray.length; i++) {
+          finalJson[summarizedArray[i].cipher] =  summarizedArray[i].count;
+        };
 
-    var finalJson = {};
-    for (var i = 0; i < summarizedArray.length; i++) {
-      finalJson[summarizedArray[i].cipher] =  summarizedArray[i].count;
-    };
-
-    chart = c3.generate({
-      bindto: '#macChart',
-      data: {
-        json: finalJson,
-        type: 'bar',
-      },
-      axis: {
-        x: {
-          type: 'category',
-        },
-        y: {
-          label: {
-            text: 'Total Count',
-            position: 'outer-middle'
+        chart = c3.generate({
+          bindto: '#macChart',
+          data: {
+            json: finalJson,
+            type: 'bar',
           },
-        }
-      },
-    });
+          axis: {
+            x: {
+              type: 'category',
+            },
+            y: {
+              label: {
+                text: 'Total Count',
+                position: 'outer-middle'
+              },
+            }
+          },
+        });
 
-    drawTable(["cipher","count"], summarizedArray);
-  }
-}).error(function () {
-  $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
-  $("#loader").css("display","none");
-}).done(function() {
- $("#loader").css("display","none");
-});
+        drawTable(["cipher","count"], summarizedArray);
+      }
+    }).error(function () {
+      $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+      $("#loader").css("display","none");
+    }).done(function() {
+     $("#loader").css("display","none");
+   });
 
 
-});
+  });
 
 </script>
