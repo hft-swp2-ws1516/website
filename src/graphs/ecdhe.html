@@ -31,11 +31,6 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
               ;
 
 
-              var filteredTable = filtered.slice();
-              drawTable(["month","distribution"], filteredTable, ["kxStrength", "count"] );
-
-
-
                // filter hostcount endpoint by given timespan
                filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
@@ -44,7 +39,7 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
               for (var i = 0; i < filtered.length; i++) {
                 var distribution = filtered[i].distribution;
                 for (var j = 0; j < distribution.length; j++) {
-                  distribution[j].count = ((distribution[j].count / filteredTotalHosts[i].hostCount) * 100).toFixed(2);
+                  distribution[j].percent = ((distribution[j].count / filteredTotalHosts[i].hostCount) * 100).toFixed(2);
                 };
               };
               // Convert the response in syntax like : { '512': [323,3234], '1024': [421,3424]}
@@ -53,9 +48,11 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
               for (var i = 0; i < filtered.length; i++) {
                 // get distribution array
                 var distribution = filtered[i].distribution;
+                var tempArray = [];
                 for (var j = 0; j < distribution.length; j++) {
                   // only take ecdh keygroups
                   if (distribution[j].kx == "ECDH") {
+                    tempArray.push(distribution[j]);
                    if (!(Array.isArray(json[distribution[j].kxStrength]))) {
                     json[distribution[j].kxStrength] = [];
                   };  
@@ -63,12 +60,15 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
                         if (i >= 1 && !json[distribution[j].kxStrength][i-1]) {
                           json[distribution[j].kxStrength][i-1]=0;
                         };
-                        json[distribution[j].kxStrength].push( distribution[j].count);
+                        json[distribution[j].kxStrength].push( distribution[j].percent);
 
                       };
 
                     };
+                    filtered[i].distribution = tempArray;
                   };
+
+                  drawTable(["month","distribution"], filtered, ["kxStrength", "count", "percent"] );
 
                   chart = c3.generate({
                     bindto: '#ecdheChart',
@@ -133,7 +133,7 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
               }).done(function() {
                $("#loader").css("display","none");
              });
-              
+
             });
 
 

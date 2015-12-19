@@ -95,7 +95,7 @@
       // if TLS version is given
       if (tlsVersion) {
         if (obj['protocol'] == tlsVersion) {
-          obj.count = parseFloat(((obj.count / totalHosts ) * 100).toFixed(2));
+          obj.percent = parseFloat(((obj.count / totalHosts ) * 100).toFixed(2));
           summarized.push(obj);
         };
       } else{

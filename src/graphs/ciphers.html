@@ -53,8 +53,6 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
            // deep copy of array by value, not by reference! 
            test[i]['summary']   = $.extend(true, [], ciphers);
 
-
-
            ciphers = ciphers.splice(0,20);
 
            for (var j = 0; j < ciphers.length; j++) {
@@ -67,7 +65,7 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
              if (i >= 1 && !json[ciphers[j].cipher][i-1]) {
                json[ciphers[j].cipher][i-1]=0;
              };
-             json[ciphers[j].cipher][i] = ciphers[j].count;
+             json[ciphers[j].cipher][i] = ciphers[j].percent;
 
            };
          };
@@ -93,7 +91,7 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
 
         });
 
-         drawTable(["month","summary"], test, ["cipher", "count"]);
+         drawTable(["month","summary"], test, ["cipher", "count", "percent"]);
 
        }
        else{
@@ -150,7 +148,7 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
  $("#loader").css("display","none");
 });
 
-  
+
 });
 
 </script>

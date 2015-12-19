@@ -30,8 +30,6 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
               }
               ;
 
-               // draw Table and say which keys should be printed,
-               drawTable(["month","distribution"], filtered, ["kxStrength", "count"] );
 
                // filter hostcount endpoint by given timespan
                filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
@@ -41,7 +39,7 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
               for (var i = 0; i < filtered.length; i++) {
                 var distribution = filtered[i].distribution;
                 for (var j = 0; j < distribution.length; j++) {
-                  distribution[j].count = ((distribution[j].count / filteredTotalHosts[i].hostCount) * 100).toFixed(2);
+                  distribution[j].percent = ((distribution[j].count / filteredTotalHosts[i].hostCount) * 100).toFixed(2);
                 };
               };
 
@@ -53,9 +51,11 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
                 // get distribution array
                 var distribution = filtered[i].distribution;
                 // iterate over the distribution of one month
+                 var tempArray = [];
                 for (var j = 0; j < distribution.length; j++) {
                   // only take dh keygorups
                   if (distribution[j].kx == "DH") {
+                    tempArray.push(distribution[j]);
                    if (!(Array.isArray(json[distribution[j].kxStrength]))) {
                     json[distribution[j].kxStrength] = [];
                   };  
@@ -63,41 +63,56 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
                   if (i >= 1 && !json[distribution[j].kxStrength][i-1]) {
                     json[distribution[j].kxStrength][i-1]=0;
                   };
-                  json[distribution[j].kxStrength][i] = distribution[j].count;
+                  json[distribution[j].kxStrength][i] = distribution[j].percent;
 
                 };
 
               };
+              filtered[i].distribution = tempArray;
+
             };
 
+         
+            for (var i = 0; i < filtered.length; i++) {
+              var distribution = filtered[i].distribution;
+              for (var i = 0; i < distribution.length; i++) {
+                if (distribution[i].kx == "DH") {
 
 
-            chart = c3.generate({
-              bindto: '#dheChart',
-              data: {
-                json: json,
-              },
-              axis: {
-                x: {
-                  type: 'category',
-                  categories: months,
+
+                };
+              };
+            };
+
+              // draw Table and say which keys should be printed,
+              drawTable(["month","distribution"], filtered, ["kxStrength", "count", "percent"] );
+
+              chart = c3.generate({
+                bindto: '#dheChart',
+                data: {
+                  json: json,
                 },
-                y: {
-                  label: {
-                    text: 'In Percent',
-                    position: 'outer-middle'
+                axis: {
+                  x: {
+                    type: 'category',
+                    categories: months,
                   },
-                  min: 0,
-                  max: 99,
-                }
-              },
+                  y: {
+                    label: {
+                      text: 'In Percent',
+                      position: 'outer-middle'
+                    },
+                    min: 0,
+                    max: 99,
+                  }
+                },
 
-            }); 
+              }); 
 
 
-          }
-          else{
-           var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+            }
+            else{
+             var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
                // remove ECDHE data
                var filteredElement = filtered[0].distribution;
@@ -140,7 +155,7 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
          });
 
 
-          
+
         });
 
 

@@ -19,9 +19,11 @@
         
         // percentual line
         for (var i = 0; i < filtered.length; i++) {
-          filtered[i].expEnabled = ((filtered[i].expEnabled / filtered[i].total) * 100).toFixed(2);
-          filtered[i].expDisabled = ((filtered[i].expDisabled / filtered[i].total) * 100).toFixed(2);
+          filtered[i].expEnabledPercent = ((filtered[i].expEnabled / filtered[i].total) * 100).toFixed(2);
+          filtered[i].expDisabledPercent = ((filtered[i].expDisabled / filtered[i].total) * 100).toFixed(2);
         };
+
+        
 
         chart = c3.generate({
         	bindto: '#logjam',
@@ -29,7 +31,7 @@
         		json: filtered,
         		keys: {
         			x: 'month',
-        			value: ['expDisabled', 'expEnabled']
+        			value: ['expDisabledPercent', 'expEnabledPercent']
         		},
         		type: 'line',
         		colors: {
