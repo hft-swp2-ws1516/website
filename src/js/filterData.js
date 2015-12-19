@@ -191,14 +191,14 @@ function parseResponse(response, protocol, cipherString) {
             } else {
                 if (!matchLiterally) {
                     count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
-                    writeToTotalCiphers(loops + 1, count);
-                    writeToHosts(loops + 1, inner, count, matchLiterally);
+                    writeToTotalCiphers(loops + 1, count); 
                 }
                 if (inner.match(cipherString) !== null || (!matchLiterally && testIfPartsMatch(inner, cipherString))) {
                     if (inner.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) !== null) {
                         protocol = ("" + inner.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) + "").split(":")[1].replace('"', '');
                         count = ("" + inner.match(/.count.:(\d*)/g) + "").split(":")[1];
                         writeToHostsByProtocol(loops + 1, protocol, inner, count);
+                        writeToHosts(loops + 1, inner, count, matchLiterally);
                     }
 
                 }
