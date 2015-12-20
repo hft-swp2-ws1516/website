@@ -1,8 +1,6 @@
 <script type="text/javascript" src="js/helperClass.js"></script>
-
 <div id='error-message'></div>
 <div id="macChart"></div>
-
 <script>
 
 var totalHosts;
@@ -12,7 +10,6 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount?tld="+tld, function (response
 
   totalHosts = response;
 
-
 }).error(function () {
   $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
   $("#loader").css("display","none");
@@ -20,7 +17,7 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount?tld="+tld, function (response
 
  // Load data from the server using a HTTP GET request
  // jquery.get is a equivalent to $.ajax({....
-  jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/mac/distribution", function (response) {
+  jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/mac/distribution?tld="+tld, function (response) {
     var start = getTimespan();
 
     if (start[0] != start[1]) {
@@ -43,8 +40,13 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount?tld="+tld, function (response
                 filtered[i].totalHosts = filteredTotalHosts[i].hostCount;
                 var distribution = filtered[i].distribution;
                 for (var j = 0; j < distribution.length; j++) {
-                  // if TLD is given 
-                  distribution[j].percent = ((distribution[j].count / filtered[i].totalHosts) * 100).toFixed(2);
+                  // if TLD is given match the total host correctly
+                  if (tld) {
+                    distribution[j].percent = ((distribution[j].count / filteredTotalHosts[i].hostCount) * 100).toFixed(2);
+                  }
+                  else{
+                    distribution[j].percent = ((distribution[j].count / filtered[i].totalHosts) * 100).toFixed(2);
+                  };
                 };
               };
 
@@ -96,9 +98,8 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount?tld="+tld, function (response
 
 
             }
-            else{
+            else {
              var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
-
               // filter hostcount endpoint by given timespan
               filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
@@ -107,7 +108,6 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount?tld="+tld, function (response
               for (var i = 0; i < distribution.length; i++) {
                 // if tld is given set the total number of hosts correctly
                 distribution[i].totalHosts = filteredTotalHosts[0].hostCount;
-
               };
 
               chart = c3.generate({
