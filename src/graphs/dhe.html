@@ -14,9 +14,13 @@ jQuery.get("http://hotcat.de:1337/api/v0/pfs/overview", function (response) {
   $("#loader").css("display","none");
 }).done(function() {
 
+ var tld = $('#filterTLD').val().replace('.', '');
+ tld = tld;
+
  // Load data from the server using a HTTP GET request
  // jquery.get is a equivalent to $.ajax({....
-  jQuery.get("http://hotcat.de:1337/api/v0/pfs/distribution", function (response) {
+  jQuery.get("http://hotcat.de:1337/api/v0/pfs/distribution?tld="+tld, function (response) {
+
    var start = getTimespan();
 
    if (start[0] != start[1]) {
@@ -24,25 +28,32 @@ jQuery.get("http://hotcat.de:1337/api/v0/pfs/overview", function (response) {
                // filter response Array by timespan
                filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
+               // fill months for x-axis
                var months = [];
                for (var i = 0; i < filtered.length; i++) {
                 months.push(filtered[i].month);
-              }
-              ;
+              };
 
                // filter hostcount endpoint by given timespan
                filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
 
-              // percentual line
+              //  calc percentual line
               for (var i = 0; i < filtered.length; i++) {
                 var distribution = filtered[i].distribution;
-                filtered[i].totalHosts = filteredTotalHosts[i].monthlyPfsEnabled;
-                for (var j = distribution.length - 1; j >= 0; j--) {
+                if (!tld) {
+                 filtered[i].totalHosts = filteredTotalHosts[i].monthlyPfsEnabled;
+               };
+               for (var j = distribution.length - 1; j >= 0; j--) {
+                if (tld) {
+                  distribution[j].percent = ((distribution[j].count / filtered[i].totalHosts) * 100).toFixed(2);
+                }
+                else{
                   distribution[j].percent = ((distribution[j].count / filteredTotalHosts[i].monthlyPfsEnabled) * 100).toFixed(2);
-
                 };
+
               };
+            };
 
               // Convert the response in syntax like : { '512': [323,3234], '1024': [421,3424]}
               var json = {};
@@ -115,7 +126,13 @@ jQuery.get("http://hotcat.de:1337/api/v0/pfs/overview", function (response) {
                var filteredElement = filtered[0].distribution;
 
                for (var i = filteredElement.length - 1; i >= 0; i--) {
-                filteredElement[i].totalHosts =  filteredTotalHosts[0].monthlyPfsEnabled;
+                if (tld) {
+                  filteredElement[i].totalHosts =  filtered[0].totalHosts;
+                }else{
+                  filteredElement[i].totalHosts =  filteredTotalHosts[0].monthlyPfsEnabled;
+
+                };
+
                 if (filteredElement[i].kx == "ECDH") {
                   filteredElement.splice(i, 1);
                 };

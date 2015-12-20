@@ -10,16 +10,7 @@ document.getElementById("nav01").innerHTML =
 "<div class='row'>"+
 "<div class='col-md-8'><ul class='nav navbar-nav'>" +
 "<li><a href='index.html'>Home</a></li>" +
-"<li id='openGlobaldata' class='dropdown'><a href='globaldata.html' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Universal Summary<span class='caret'></span></a>" +
-"<ul class='dropdown-menu'>"+
-"<li id='loadPFS'><a href='globaldata.html#PFS'>Perfect Forward Secrecy Support</a></li>"+
-"<li id='loadDHE'><a href='globaldata.html#DHE'>Diffie Hellman Keygroups</a></li>"+
-"<li id='loadECDHE'><a href='globaldata.html#ECDHE'>Elliptic Curve Diffie Hellman</a></li>"+
-"<li id='loadCiphers'><a href='globaldata.html#Ciphers'>Cipher Suites</a></li>"+
-"<li id='loadMAC'><a href='globaldata.html#MAC'>MAC Distribution</a></li>"+
-"<li role='separator' class='divider'></li>"+
-"<li id='loadlogjam'><a href='globaldata.html#logjam'>Logjam Attack</a></li>"+
-"</ul>"+
+"<li class='dropdown'><a href='globaldata.html' role='button'>Universal Summary</a>" +
 "</li>"+
 "<li><a href='filtering.html'>Detailed Filter</a></li>" +
 "<li><a href='worldmap.html'>Worldmap</a></li>" +
@@ -29,7 +20,6 @@ document.getElementById("nav01").innerHTML =
 "</div>"+
 "</div>"+
 "</nav>";
-
 
 
 // for footer menu

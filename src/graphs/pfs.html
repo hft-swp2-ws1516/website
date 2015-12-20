@@ -5,7 +5,10 @@
  // Load data from the server using a HTTP GET request
  // jquery.get is a equivalent to $.ajax({....
  	jQuery.get("http://hotcat.de:1337/api/v0/pfs/overview", function (response) {
+       // Get Timespan, in this case two elements with start and end time
        var start = getTimespan();
+       // get TLD 
+       var tld = $('#filterTLD').val().replace('.', '');
 
             // Check if start and end values of the slider are the same
             if (start[0] != start[1]) {
@@ -16,15 +19,35 @@
                 var months = ['x'];
                 for (var i = 0; i < filtered.length; i++) {
                 	months.push(filtered[i].month);
-                }
-                ;
+                };
+
+                // if tld is given
+                if (tld) {
+                var tldOverview = [];
+
+                  for (var j = 0; j < months.length-1; j++) {
+                    var overview = filtered[j].overviews;
+                    for (var i = 0; i < overview.length; i++) {
+                      if(overview[i].tld === tld){
+                        overview[i].monthlyPfsEnabled = overview[i].pfsEnabled;
+                        overview[i].monthlyPfsDisabled = overview[i].pfsDisabled;
+                        overview[i].monthlyTotalHosts = overview[i].totalHosts;
+                        tldOverview.push(overview[i]);
+                      };
+                    };
+                  };
+
+                  filtered = tldOverview;
+
+                };
+
+
 
                 // filling data about pfs enabled
                 var pfsEnabled = ['PFS_Support'];
                 for (var i = 0; i < filtered.length; i++) {
                 	pfsEnabled.push(((filtered[i].monthlyPfsEnabled / filtered[i].monthlyTotalHosts) * 100).toFixed(2))
-                }
-                ;
+                };
 
                 chart = c3.generate({
                 	bindto: '#pfsChart',
@@ -35,47 +58,61 @@
                 		pfsEnabled,],
                 		colors: {
                             PFS_Support: '#2CA02C', // green
+                          },
                         },
-                    },
-                    type: 'line',
-                    unload: chart.columns,
-                    axis: {
-                    	x: {
-                    		type: 'category',
-                    	},
-                    	y: {
-                    		label: {
-                    			text: 'In percent',
-                    			position: 'outer-middle'
-                    		},
-                    		min: 0,
-                    		max: 99,
-                    	}
-                    },
-                    subchart: {
-                    	show: true
-                    },
-                });
-                 drawTable(["month","monthlyPfsEnabled", "monthlyPfsDisabled", "monthlyTotalHosts"], filtered);
-            } else {
+                        type: 'line',
+                        unload: chart.columns,
+                        axis: {
+                         x: {
+                          type: 'category',
+                        },
+                        y: {
+                          label: {
+                           text: 'In percent',
+                           position: 'outer-middle'
+                         },
+                         min: 0,
+                         max: 99,
+                       }
+                     },
+                     subchart: {
+                       show: true
+                     },
+                   });
+                drawTable(["month","monthlyPfsEnabled", "monthlyPfsDisabled", "monthlyTotalHosts"], filtered);
+              } else {
                 var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+                // if tld is given
+                if (tld) {
+                  var overview = filtered[0].overviews;
+                  for (var i = 0; i < overview.length; i++) {
+                    if(overview[i].tld === tld){
+                      filtered = [];
+                      overview[i].monthlyPfsEnabled = overview[i].pfsEnabled;
+                      overview[i].monthlyPfsDisabled = overview[i].pfsDisabled;
+                      overview[i].monthlyTotalHosts = overview[i].totalHosts;
+                      filtered.push(overview[i]);
+                    };
+                  };
+                };
+
                 chart = c3.generate({
                   bindto: '#pfsChart',
                   data: {
-                     json: filtered,
-                     keys: {
-                      value: ['monthlyPfsEnabled', 'monthlyPfsDisabled'],
+                   json: filtered,
+                   keys: {
+                    value: ['monthlyPfsEnabled', 'monthlyPfsDisabled'],
                   },
                   type: 'pie',
-              },
-          });
+                },
+              });
                 drawTable(["month","monthlyPfsEnabled", "monthlyPfsDisabled", "monthlyTotalHosts"], filtered);
-            }
-        }).error(function () {
-           $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
-           $("#loader").css("display","none");
-       }).done(function() {
+              }
+            }).error(function () {
+             $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+             $("#loader").css("display","none");
+           }).done(function() {
 
-        $("#loader").css("display","none");
-    });
-       </script>
+            $("#loader").css("display","none");
+          });
+           </script>

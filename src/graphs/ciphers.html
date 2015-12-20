@@ -14,9 +14,11 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
   $("#loader").css("display","none");
 }).done(function() {
 
+  var tld = $('#filterTLD').val().replace('.', '');
+
 // Load data from the server using a HTTP GET request
 // jquery.get is a equivalent to $.ajax({....
-  jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/ciphers/summary", function (response) {
+  jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/ciphers/summary?tld="+tld, function (response) {
 
     var start = getTimespan();
     if (start[0] != start[1]) {
@@ -34,16 +36,23 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
 
          var tlsFilter = $('#filterTLSProtocol').val();
 
-
+         // json for graph
          var json = {};
 
+         // array for table 
          var test = [];
 
           // iterate over all months
           for (var i = 0; i < filtered.length; i++) {
             // get ciphers array
             var ciphers = filtered[i].summary;
-            ciphers = mergeDoubleEntrys(ciphers, tlsFilter, filteredTotalHosts[i].hostCount);
+            if (tld) {
+              ciphers = mergeDoubleEntrys(ciphers, tlsFilter, filtered[i].totalHosts);
+            } 
+            else {
+              ciphers = mergeDoubleEntrys(ciphers, tlsFilter, filteredTotalHosts[i].hostCount);
+
+            };
 
             sortResults(ciphers, 'count', false);
 
@@ -52,6 +61,13 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
            test[i]['month'] = filtered[i].month;
            // deep copy of array by value, not by reference! 
            test[i]['summary'] = $.extend(true, [], ciphers);
+           // if tld is given match the total hosts correctly
+           if (tld) {
+             test[i]['totalHosts'] = filtered[i].totalHosts;
+           }
+           else {
+            test[i]['totalHosts'] = filteredTotalHosts[i].hostCount;
+          };
            // show only top 20 used cipher suites
            ciphers = ciphers.splice(0,20);
 
@@ -98,7 +114,7 @@ jQuery.get("http://hotcat.de:1337/api/v0/hostcount", function (response) {
 
         });
 
-         drawTable(["month","summary"], test, ["cipher", "count", "percent"]);
+         drawTable(["month","summary", "totalHosts"], test, ["cipher", "count", "percent"]);
 
        }
        else{
