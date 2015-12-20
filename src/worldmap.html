@@ -155,7 +155,9 @@
 
     });
     function objectFindByKey(array, key, value) {
-
+        if (value=='gb'){
+            value='uk';
+        }
         for (var i = 0; i < array.length; i++) {
             if (array[i][key] === value) {
                 console.log(array[i]);
