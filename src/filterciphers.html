@@ -450,7 +450,6 @@
                                             }
                                         });
                                     } else {
-                                        var typeKeyTotalCiphersAccepted = result.totalCiphersAccepting[0];
                                         var noCipherSuites_Accepted = c3.generate({
                                             bindto: '#noCipherSuites_Accepted',
                                             legend: {
@@ -868,6 +867,10 @@
                     </script>
                 </fieldset>
             </form>
+        </div>
+        <div id="warningMessage" style="text-align: center; display: none">
+            <img src="img/warning.png" title="Neat warning message here.">
+            <p>Unable to calculate total number of hosts. Displaying total number of cipher suites instead.</p>
         </div>
     </div>
 </div>

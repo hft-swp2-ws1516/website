@@ -55,6 +55,7 @@ function initFilters() {
         document.getElementById("msgAuth").innerHTML = getMsgAuth("all");
         document.getElementById("displayFilterSelection").innerHTML = "[none]";
     }
+    
 
 }
 
@@ -104,6 +105,16 @@ function displayFilter() {
     }
 }
 
+function displayWarning() {
+
+    if (document.getElementById("matchingKindAsPart").checked) {
+        document.getElementById("warningMessage").style = "text-align: center; display: block; padding-top: 30px";
+    }else{
+        document.getElementById("warningMessage").style = "text-align: center; display: none";
+    }
+
+}
+
 
 
 
@@ -128,6 +139,7 @@ function applyFilters() {
         httpClient.get(url, setHttpResponse);
     }
 
+    displayWarning();
     return parseResponse(httpResponse, protocol, cipherString);
 
 }
@@ -155,12 +167,12 @@ function parseResponse(response, protocol, cipherString) {
         totalHosts.push(number.split(":")[1]);
     });
 
-    
+
 
     var count = 0;
     var loops = 0;
     var manualProtocolAggregation = protocol === "" ? true : false;
-    
+
     initResultArrays(months.length, matchLiterally, manualProtocolAggregation);
     monthBody = response.match(/\[[^\[\]]*\]/g);
     monthBody.forEach(function (outer) {
@@ -242,9 +254,9 @@ function initResultArrays(months, matchLiterally, manualProtocolAggregation) {
         totalCiphersPreferring.push(0);
     }
 
-    hostsAccepting[0] = matchLiterally ? 'Hosts Accepting' : 
+    hostsAccepting[0] = matchLiterally ? 'Hosts Accepting' :
             (manualProtocolAggregation ? 'Matching: Cipher Suites Accepted (All Protocols)' : 'Cipher Suites Accepted');
-    hostsPreferring[0] = matchLiterally ? 'Hosts Preferring' : 
+    hostsPreferring[0] = matchLiterally ? 'Hosts Preferring' :
             (manualProtocolAggregation ? 'Matching: Cipher Suites Preferred (All Protocols)' : 'Cipher Suites Preferred');
     hostsPreferringSSL2[0] = matchLiterally ? 'Hosts Preferring (SSLv2)' : 'Preferred (SSLv2)';
     hostsAcceptingSSL2[0] = matchLiterally ? 'Hosts Accepting (SSLv2)' : 'Accepted (SSLv2)';
