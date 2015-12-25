@@ -346,8 +346,7 @@
                                     }
                                     var startDate = new Date(year, month, day);
                                     $('#filterDateEnd').datepicker('setStartDate', startDate);
-                                });
-                            </script>
+                                });</script>
                         </fieldset>
                         <br>
                         <fieldset>
@@ -364,8 +363,7 @@
                                     minViewMode: 1,
                                     autoclose: true,
                                     startDate: "01.2016"
-                                });
-                            </script>
+                                });</script>
                         </fieldset>
                         <br>
                     </fieldset>
@@ -452,6 +450,7 @@
                                             }
                                         });
                                     } else {
+                                        var typeKeyTotalCiphersAccepted = result.totalCiphersAccepting[0];
                                         var noCipherSuites_Accepted = c3.generate({
                                             bindto: '#noCipherSuites_Accepted',
                                             legend: {
@@ -539,6 +538,86 @@
                                                 }
                                             }
                                         });
+                                        var totalCiphersAcceptedKey = result.totalCiphersAccepting[0];
+                                        var totalCiphersAcceptedValue = result.totalCiphersAccepting[result.totalCiphersAccepting.length - 1];
+                                        var hostsAcceptingKey = result.hostsAccepting[0];
+                                        var hostsAcceptingValue = result.hostsAccepting[result.hostsAccepting.length - 1];
+                                        var percentageTotalCiphersAccepting = Math.round((hostsAcceptingValue / totalCiphersAcceptedValue * 100) * 100) / 100;
+                                        var totalCiphersPreferredKey = result.totalCiphersPreferring[0];
+                                        var totalCiphersPreferredValue = result.totalCiphersPreferring[result.totalCiphersPreferring.length - 1];
+                                        var hostsPreferringKey = result.hostsPreferring[0];
+                                        var hostsPreferringValue = result.hostsPreferring[result.hostsPreferring.length - 1];
+                                        var percentageTotalCiphersPreferring = Math.round((hostsPreferringValue / totalCiphersPreferredValue * 100) * 100) / 100;
+                                        var lastMonth_Accepted = c3.generate({
+                                            bindto: '#lastMonth_Accepted',
+                                            legend: {
+                                                show: true,
+                                                position: 'right'
+                                            },
+                                            size: {
+                                                width: 640,
+                                                height: 200
+                                            },
+                                            padding: {
+                                                top: 80
+                                            },
+                                            gauge: {
+                                                label: {
+                                                    show: false,
+                                                    format: function (value, ratio) {
+                                                        return "";
+                                                    }
+                                                }
+                                            },
+                                            color: {
+                                                pattern: ['#E5AC32', '#326BE5'],
+                                                threshold: {
+                                                    values: [percentageTotalCiphersAccepting + 0.01, 100]
+                                                }
+                                            },
+                                            data: {
+                                                columns: [
+                                                    [totalCiphersAcceptedKey, 100],
+                                                    [hostsAcceptingKey, percentageTotalCiphersAccepting]
+                                                ],
+                                                type: 'gauge'
+                                            }
+                                        });
+                                        var lastMonth_Preferred = c3.generate({
+                                            bindto: '#lastMonth_Preferred',
+                                            legend: {
+                                                show: true,
+                                                position: 'right'
+                                            },
+                                            size: {
+                                                width: 640,
+                                                height: 200
+                                            },
+                                            padding: {
+                                                top: 80
+                                            },
+                                            gauge: {
+                                                label: {
+                                                    show: false,
+                                                    format: function (value, ratio) {
+                                                        return "";
+                                                    }
+                                                }
+                                            },
+                                            color: {
+                                                pattern: ['#E5AC32', '#326BE5'],
+                                                threshold: {
+                                                    values: [percentageTotalCiphersPreferring + 0.01, 100]
+                                                }
+                                            },
+                                            data: {
+                                                columns: [
+                                                    [totalCiphersPreferredKey, 100],
+                                                    [hostsPreferringKey, percentageTotalCiphersPreferring]
+                                                ],
+                                                type: 'gauge'
+                                            }
+                                        });
                                     }
                                 } else {
                                     if (document.getElementById("matchingKindLiteral").checked) {
@@ -558,7 +637,12 @@
                                                     result.totalHosts,
                                                     result.hostsAccepting,
                                                     result.hostsPreferring
-                                                ]
+                                                ],
+                                                types: {
+                                                    'Total Number of Hosts': 'spline',
+                                                    'Hosts Accepting': 'spline',
+                                                    'Hosts Preferring': 'spline'
+                                                }
                                             },
                                             axis: {
                                                 x: {
@@ -632,7 +716,11 @@
                                                     result.months,
                                                     result.totalCiphersAccepting,
                                                     result.hostsAccepting
-                                                ]
+                                                ],
+                                                types: {
+                                                    'Total: Cipher Suites Accepted': 'spline',
+                                                    'Cipher Suites Accepted': 'spline'
+                                                }
                                             },
                                             axis: {
                                                 x: {
@@ -662,7 +750,11 @@
                                                     result.months,
                                                     result.totalCiphersPreferring,
                                                     result.hostsPreferring
-                                                ]
+                                                ],
+                                                types: {
+                                                    'Total: Cipher Suites Preferred': 'spline',
+                                                    'Cipher Suites Preferred': 'spline'
+                                                }
                                             },
                                             axis: {
                                                 x: {
@@ -679,7 +771,7 @@
                                             var totalCiphersAcceptedValue = result.totalCiphersAccepting[result.totalCiphersAccepting.length - 1];
                                             var totalCiphersPreferredKey = result.totalCiphersPreferring[0];
                                             var totalCiphersPreferredValue = result.totalCiphersPreferring[result.totalCiphersPreferring.length - 1];
-                                            var percentageTotalCiphersPreferring = Math.round(totalCiphersPreferredValue / totalCiphersAcceptedValue * 100);
+                                            var percentageTotalCiphersPreferring = Math.round((totalCiphersPreferredValue / totalCiphersAcceptedValue * 100) * 100) / 100;
                                             var hostsAcceptingKey = result.hostsAccepting[0];
                                             var hostsAcceptingValue = result.hostsAccepting[result.hostsAccepting.length - 1];
                                             var hostsPreferringKey = result.hostsPreferring[0];
