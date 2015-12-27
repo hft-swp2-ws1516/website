@@ -56,14 +56,14 @@ document.getElementById("subscribe").innerHTML =
     "           </div>"+
     "           <div class='modal-body'>"+
     "               <div class='form-group'>"+
-    "                   <label for='name'>Name & Surname:</label>"+
-    "                   <input type='text' class='form-control' name='name' id='name' placeholder='Your Name' onblur='checkUserName()'>" +
+    "                   <label for='name'>Full Name:</label>"+
+    "                   <input type='text' class='form-control' name='name' id='name' placeholder='Your Name' required>" +
     "                   <span id='usernamestatus'></span>" +
     "               </div>"+
     "               <div class='input-group input-group-lg'>"+
     "                   <span class='input-group-addon' id='sizing-addon1'>@</span>"+
     "                   <label for='email'></label>" +
-    "                   <input type='email' class='form-control' name='email' placeholder='Email' aria-describedby='sizing-addon1'>"+
+    "                   <input type='email' class='form-control' name='email' id='email' placeholder='Email' aria-describedby='sizing-addon1' required>"+
     "                   <span id='emailstatus'></span>" +
     "               </div><br><hr>"+
     "               <div>"+
@@ -110,12 +110,30 @@ document.getElementById("subscribe").innerHTML =
     "</form>";
 <!--End of Modal-Window-->
 
-// disabling/enable the save button
-//$("#save").attr('disabled','disable'); // disable the Subscribe by default
+
+// enable the Subscribe
 $("#t-c").click(function(){
     $("#save").removeAttr("disabled");
-    $("#unsubscribe").removeAttr("disabled");
 });
-// end Subscribe part
 
-// Check Username
+
+// Validate
+/* form validation */
+$(document).ready(function(){
+    $("#name").keyup(function(){
+        if(/^[a-zA-Z ]+$/.test($(this).val()) && $(this).val().trim() !== "")
+        {
+            $(this).css("border-color", "#0F0");
+        } else {
+            $(this).css("border-color", "#F00");
+        }
+    });
+    $("#email").keyup(function(){
+        if(/^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/.test($(this).val()) && $(this).val().trim() !== "")
+        {
+            $(this).css("border-color", "#0F0");
+        } else {
+            $(this).css("border-color", "#F00");
+        }
+    });
+});
