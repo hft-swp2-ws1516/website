@@ -16,51 +16,76 @@
         <!-- jquery ui css -->
         <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
         <link rel="stylesheet" type="text/css" media="screen" href="css/datepicker/bootstrap-datepicker3.css">
+        <link rel="stylesheet" type="text/css" href="css/graphcomparison.css">
     </head>
 
+    <body id="detailedFilterBody">
 
-
-    <body>
         <div id="nav01"></div>
-        <div class="container">
+
+        <div  class="container">
+
             <div class="row">
                 <!-- Left Bar -->
                 <div class="col-md-4">
                     <div id="dynamic"></div>
                 </div>
                 <!-- Right bar -->
-                <div class="col-md-8">
-                    <!--
-                    <div id="warningMessage" style="text-align: center; display: none">
-                            <img src="img/warning.png" title="Neat warning message here.">
-                            <p>Unable to calculate total number of hosts. Displaying total number of cipher suites instead.</p>
-                    </div>
-                    -->
-                    <div class="panel panel-default">                        
+                <div id="detailedFilterColumn" class="col-md-8">
+                    <div class="panel panel-default">
                         <div class="panel-body">
-                            <div id="detailed">
+                            <div id="detailed" style="text-align: center">
                                 <div id="general"></div>
+                                <input id="rememberGeneral" type="button"
+                                       value="Remember Graph" style="display: none" 
+                                       onclick="rememberGraph(forComparison_General, this)"/>
+
                                 <div id="lastMonth_General"></div>
+                                <input id="rememberLastMonth_General" type="button" 
+                                       value="Remember Graph" style="display: none" 
+                                       onclick="rememberGraph(forComparison_LastMonthGeneral, this)"/>
+
                                 <div id="noCipherSuites_Accepted"></div>
+                                <input id="rememberNoCipherSuites_Accepted" type="button" 
+                                       value="Remember Graph" style="display: none" 
+                                       onclick="rememberGraph(forComparison_NoCipherSuitesAccepted, this)"/>
+
                                 <div id="lastMonth_Accepted"></div>
+                                <input id="rememberLastMonth_Accepted" type="button" 
+                                       value="Remember Graph" style="display: none" 
+                                       onclick="rememberGraph(forComparison_LastMonthAccepted, this)"/>
+
                                 <div id="noCipherSuites_Preferred"></div>
+                                <input id="rememberNoCipherSuites_Preferred" type="button" 
+                                       value="Remember Graph" style="display: none" 
+                                       onclick="rememberGraph(forComparison_NoCipherSuitesPreferred, this)"/>
+
                                 <div id="lastMonth_Preferred"></div>
+                                <input id="rememberLastMonth_Preferred" type="button" 
+                                       value="Remember Graph" style="display: none" 
+                                       onclick="rememberGraph(forComparison_LastMonthPreferred, this)"/>
                             </div>
                             <div id="displayFilteredData"></div>
                         </div>
                     </div>
-
+                </div>
+                <div id="displayGraphComparison" style="display: none; z-index: -100">
+                    <iframe id="graphComparison" src="graphcomparison.html" allowtransparency="false" ></iframe>
                 </div>
             </div>
         </div>
+
     </body>
 
 
     <script>
         window.onload = function () {
             $("#dynamic").load("filterciphers.html");
-        }
+            enableButtons();
+        };
+        enableButtons();
     </script>
+
 
     <footer id="footer"></footer>
     <div id="subscribe"></div>

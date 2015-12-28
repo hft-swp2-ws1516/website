@@ -1,0 +1,28 @@
+
+#displayGraphComparison, #graphComparison {
+    width: 1280px;
+    height: 1024px;
+    position: absolute;
+    top: 50px;
+}
+
+#graphComparison {
+    border: none;
+    z-index: 100;
+}
+
+#compareButtons {
+    text-align: center;
+}
+
+#comparisonBody {
+    text-align: center;
+    margin: 0 auto;
+    top: 5%;
+    background-color: #a0a0a0;
+}
+
+#closeButton {
+    margin-top: 10%;
+    margin-bottom: 5%;
+}

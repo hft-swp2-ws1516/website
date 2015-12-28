@@ -33,6 +33,8 @@ var hostsPreferringTLS12 = [];
 var totalCiphersAccepting = [];
 var totalCiphersPreferring = [];
 
+var graphsToRemember = [];
+
 
 function setHttpResponse(response) {
     httpResponse = response;
@@ -55,7 +57,7 @@ function initFilters() {
         document.getElementById("msgAuth").innerHTML = getMsgAuth("all");
         document.getElementById("displayFilterSelection").innerHTML = "[none]";
     }
-    
+
 
 }
 
@@ -109,13 +111,19 @@ function displayWarning() {
 
     if (document.getElementById("matchingKindAsPart").checked) {
         document.getElementById("warningMessage").style = "text-align: center; display: block; padding-top: 30px";
-    }else{
+    } else {
         document.getElementById("warningMessage").style = "text-align: center; display: none";
     }
 
 }
 
-
+function displayWarningNoGraphs(makeVisibile){
+    if(makeVisibile){
+        document.getElementById("warningMessageNoGraphs").style = "text-align: center; display: block; padding-top: 30px";
+    }else{
+        document.getElementById("warningMessageNoGraphs").style.display = "none";
+    }
+}
 
 
 function applyFilters() {
@@ -123,7 +131,7 @@ function applyFilters() {
     resetResults();
     resetGraphs();
 
-    var url = "http://h2511680.stratoserver.net:1337/api/v0/ciphers/summary";
+    var url = "https://hotcat.de:1337/api/v0/ciphers/summary";
     var tldSelection = document.getElementById("filterTLD").value;
 
     if (tldSelection !== "") {
@@ -140,6 +148,7 @@ function applyFilters() {
     }
 
     displayWarning();
+    enableButtons();
     return parseResponse(httpResponse, protocol, cipherString);
 
 }
@@ -197,7 +206,6 @@ function parseResponse(response, protocol, cipherString) {
                         writeToHostsByProtocol(loops, inner);
                         writeToHosts(loops, inner, matchLiterally);
                     }
-
                 }
             }
         });
@@ -527,6 +535,43 @@ function writeToHostsByProtocol(currentMonth, match) {
 }
 
 
+function rememberGraph(graph, button) {
+    graphsToRemember.push(graph);
+    displayWarningNoGraphs(false);
+    button.disabled = true;
+}
+
+function getRememberedGraphs() {
+    return graphsToRemember;
+}
+
+function forgetGraphs(){
+    graphsToRemember = [];
+    enableButtons();
+}
+
+function manageElementVisibility(makeVisible) {
+    if (makeVisible) {
+        document.getElementById("detailedFilterColumn").style.display = "block";
+        document.getElementById("nav01").style.display = "block";
+        document.getElementById("filterBoxPanel").style.display = "block";
+        document.getElementById("graphComparisonButtonPanel").style.display = "block";
+        document.getElementById("footer").style.display = "block";
+        document.getElementById("detailedFilterBody").style = "background-color: #ffffff";
+        document.getElementById("displayGraphComparison").style = "display: none; z-index: -100";
+    } else {
+        document.getElementById("detailedFilterColumn").style.display = "none";
+        document.getElementById("nav01").style.display = "none";
+        document.getElementById("filterBoxPanel").style.display = "none";
+        document.getElementById("graphComparisonButtonPanel").style.display = "none";
+        document.getElementById("footer").style.display = "none";
+        document.getElementById("detailedFilterBody").style = "background-color: #a0a0a0";
+        document.getElementById("displayGraphComparison").style = "display: block;";
+    }
+}
+
+
+
 function resetResults() {
 
     months = [];
@@ -560,6 +605,7 @@ function resetFilters() {
     document.getElementById("displayFilterSelection").innerHTML = "[none]";
 
     resetGraphs();
+    enableButtons();
 
 }
 
@@ -572,6 +618,26 @@ function resetGraphs() {
     document.getElementById("noCipherSuites_Preferred").innerHTML = "";
     document.getElementById("lastMonth_Preferred").innerHTML = "";
 
+    resetButtons();
+
+}
+
+function resetButtons() {
+    document.getElementById("rememberGeneral").style.display = "none";
+    document.getElementById("rememberLastMonth_General").style.display = "none";
+    document.getElementById("rememberNoCipherSuites_Accepted").style.display = "none";
+    document.getElementById("rememberLastMonth_Accepted").style.display = "none";
+    document.getElementById("rememberNoCipherSuites_Preferred").style.display = "none";
+    document.getElementById("rememberLastMonth_Preferred").style.display = "none";
+}
+
+function enableButtons(){
+    document.getElementById("rememberGeneral").disabled = false;
+    document.getElementById("rememberLastMonth_General").disabled = false;
+    document.getElementById("rememberNoCipherSuites_Accepted").disabled = false;
+    document.getElementById("rememberLastMonth_Accepted").disabled = false;
+    document.getElementById("rememberNoCipherSuites_Preferred").disabled = false;
+    document.getElementById("rememberLastMonth_Preferred").disabled = false;
 }
 
 function getKeyAndAuth(protocolSelection) {
