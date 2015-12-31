@@ -58,7 +58,6 @@ function initFilters() {
         document.getElementById("displayFilterSelection").innerHTML = "[none]";
     }
 
-
 }
 
 function manageFilterSelection() {
@@ -102,9 +101,21 @@ function displayFilter() {
             cipherString = cipherString.replace(/-/g, ' ');
         }
 
+        cipherString = cipherString.replace(/[^\w\s||.||-]/gi, '');
 
         document.getElementById("displayFilterSelection").innerHTML = cipherString;
     }
+}
+
+function removeSpecialChars(textbox) {
+
+    if (textbox === document.getElementById("filterKeyLen")) {
+        textbox.value = textbox.value.replace(/[^\d]/g, '');
+    } else {
+        textbox.value = textbox.value.replace(/[^\w\s||.||-]/gi, '');
+    }
+
+
 }
 
 function displayWarning() {
@@ -117,10 +128,10 @@ function displayWarning() {
 
 }
 
-function displayWarningNoGraphs(makeVisibile){
-    if(makeVisibile){
+function displayWarningNoGraphs(makeVisibile) {
+    if (makeVisibile) {
         document.getElementById("warningMessageNoGraphs").style = "text-align: center; display: block; padding-top: 30px";
-    }else{
+    } else {
         document.getElementById("warningMessageNoGraphs").style.display = "none";
     }
 }
@@ -545,7 +556,7 @@ function getRememberedGraphs() {
     return graphsToRemember;
 }
 
-function forgetGraphs(){
+function forgetGraphs() {
     graphsToRemember = [];
     enableButtons();
 }
@@ -631,7 +642,7 @@ function resetButtons() {
     document.getElementById("rememberLastMonth_Preferred").style.display = "none";
 }
 
-function enableButtons(){
+function enableButtons() {
     document.getElementById("rememberGeneral").disabled = false;
     document.getElementById("rememberLastMonth_General").disabled = false;
     document.getElementById("rememberNoCipherSuites_Accepted").disabled = false;

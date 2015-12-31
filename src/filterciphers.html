@@ -5,12 +5,11 @@
     </div>
     <div class="panel-body">
         <div>
-            <form id="filterBox" name="filterBox" 
-                  onmouseover="initFilters()">
+            <form id="filterBox" name="filterBox">
                 <fieldset>
                     <fieldset>
                         <legend>Top Level Domain</legend>
-                        <input id="filterTLD" list="tl_domains" placeholder="Type here to get started!">
+                        <input id="filterTLD" list="tl_domains" placeholder="Type here to get started!" onblur="removeSpecialChars(this)">
                         <datalist id="tl_domains">
                             <option value=".com">
                             <option value=".org">
@@ -279,7 +278,8 @@
                     </fieldset>
                     <fieldset>
                         <legend>SSL / TLS Version</legend>
-                        <input id="filterProtocol" list="ssl_tls" onblur="manageFilterSelection()">
+                        <input id="filterProtocol" list="ssl_tls" 
+                               onblur="displayFilter(); removeSpecialChars(this)">
                         <datalist id="ssl_tls">
                             <option value="SSLv2"></option>
                             <option value="SSLv3"></option>
@@ -291,18 +291,18 @@
                     <fieldset>
                         <legend>Key Exchange and Authentication</legend>
                         <input id="filterKeyExAndAuth" list="keyExAuth"
-                               onblur="manageFilterSelection()">
+                               onblur="displayFilter(); removeSpecialChars(this)">
                         <datalist id="keyExAuth">
                         </datalist>
                     </fieldset>
                     <fieldset>
                         <legend>Bulk Cipher and Key Length (in bits)</legend>
                         <input id="filterCipher" list="cipher" 
-                               onblur="manageFilterSelection()">
+                               onblur="displayFilter(); removeSpecialChars(this)">
                         <datalist id="cipher">
                         </datalist>
                         <input id="filterKeyLen" list="keyLen"
-                               onblur="manageFilterSelection()">
+                               onblur="displayFilter(); removeSpecialChars(this);">
                         <datalist id="keyLen">
                             <option value="40"></option>
                             <option value="56"></option>
@@ -314,7 +314,7 @@
                     <fieldset>
                         <legend>Message Authenticity</legend>
                         <input id="filterMsgAuth" list="msgAuth"
-                               onblur="manageFilterSelection()">
+                               onblur="displayFilter(); removeSpecialChars(this)">
                         <datalist id="msgAuth">
                         </datalist>
                     </fieldset>
@@ -369,11 +369,11 @@
                     </fieldset>
                     <fieldset data-role="controlgroup">
                         <input checked type="radio" name="matching" id="matchingKindLiteral" value="literal" 
-                               onchange="manageFilterSelection()">
+                               onchange="displayFilter()">
                         <label for="matchingKindLiteral">Match literally</label>
                         <br>
                         <input type="radio" name="matching" id="matchingKindAsPart" value="asPart"
-                               onchange="manageFilterSelection()">
+                               onchange="displayFilter()">
                         <label for="matchingKindAsPart">Match as part of a cipher string</label>
                     </fieldset>
                     <br>
@@ -391,7 +391,7 @@
                         var result = null;
                         var tryCount = 0;
                         $("#filterApply").click(function () {
-                            manageFilterSelection();
+                            initFilters();
                             result = applyFilters();
                             if (result !== null) {
                                 tryCount = 0;
@@ -1276,7 +1276,6 @@
                                 }
                             } else {
                                 if (tryCount < 2) {
-                                    console.log("Try again!");
                                     tryCount++;
                                     setTimeout(function () {
                                         $("#filterApply").click();
