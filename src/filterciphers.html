@@ -9,16 +9,16 @@
                 <fieldset>
                     <fieldset>
                         <legend>Top Level Domain</legend>
-                        <input id="filterTLD" list="tl_domains" placeholder="Type here to get started!" onblur="removeSpecialChars(this)">
+                        <input id="filterTLD" list="tl_domains" placeholder="Type here to get started!" onblur="removeSpecialChars(this)" />
                         <datalist id="tl_domains">
-                            <option value=".com">
-                            <option value=".org">
-                            <option value=".net">
-                            <option value=".int">
-                            <option value=".edu">
-                            <option value=".gov">
-                            <option value=".mil">
-                            <option value=".arpa">
+                            <option value=".com"></option>
+                            <option value=".org"></option>
+                            <option value=".net"></option>
+                            <option value=".int"></option>
+                            <option value=".edu"></option>
+                            <option value=".gov"></option>
+                            <option value=".mil"></option>
+                            <option value=".arpa"></option>
                             <option value=".ac">Ascension Island (.ac)</option>
                             <option value=".ad">Andorra (.ad)</option>
                             <option value=".ae">United Arab Emirates (.ae)</option>
@@ -279,7 +279,7 @@
                     <fieldset>
                         <legend>SSL / TLS Version</legend>
                         <input id="filterProtocol" list="ssl_tls" 
-                               onblur="displayFilter(); removeSpecialChars(this)">
+                               onblur="displayFilter(); removeSpecialChars(this)" />
                         <datalist id="ssl_tls">
                             <option value="SSLv2"></option>
                             <option value="SSLv3"></option>
@@ -291,7 +291,7 @@
                     <fieldset>
                         <legend>Key Exchange and Authentication</legend>
                         <input id="filterKeyExAndAuth" list="keyExAuth"
-                               onblur="displayFilter(); removeSpecialChars(this)">
+                               onblur="displayFilter(); removeSpecialChars(this)" />
                         <datalist id="keyExAuth">
                             <option value="AECDH"></option>
                             <option value="RSA"></option>
@@ -320,7 +320,7 @@
                     <fieldset>
                         <legend>Bulk Cipher and Key Length (in bits)</legend>
                         <input id="filterCipher" list="cipher" 
-                               onblur="displayFilter(); removeSpecialChars(this)">
+                               onblur="displayFilter(); removeSpecialChars(this)" />
                         <datalist id="cipher">
                             <option value="AES"></option>
                             <option value="AES-GCM"></option>
@@ -341,7 +341,7 @@
                             <option value="RC4"></option>
                         </datalist>
                         <input id="filterKeyLen" list="keyLen"
-                               onblur="displayFilter(); removeSpecialChars(this);">
+                               onblur="displayFilter(); removeSpecialChars(this)" />
                         <datalist id="keyLen">
                             <option value="40"></option>
                             <option value="56"></option>
@@ -353,23 +353,23 @@
                     <fieldset>
                         <legend>Message Authenticity</legend>
                         <input id="filterMsgAuth" list="msgAuth"
-                               onblur="displayFilter(); removeSpecialChars(this)">
+                               onblur="displayFilter(); removeSpecialChars(this)" />
                         <datalist id="msgAuth">
-                            <option value="MD5">
-                            <option value="SHA">
-                            <option value="SHA1">
-                            <option value="SHA256">
-                            <option value="SHA384">
-                            <option value="AEAD">
-                            <option value="GOST-28147-89-IMIT">
-                            <option value="GOST-R34.11-94">
+                            <option value="MD5"></option>
+                            <option value="SHA"></option>
+                            <option value="SHA1"></option>
+                            <option value="SHA256"></option>
+                            <option value="SHA384"></option>
+                            <option value="AEAD"></option>
+                            <option value="GOST-28147-89-IMIT"></option>
+                            <option value="GOST-R34.11-94"></option>
                         </datalist>
                     </fieldset>
                     <fieldset>
                         <legend>Time Span</legend>
                         <fieldset>
                             <div id="filterDateStart" class="input-group date">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" />
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-th"></i>
                                 </span>
@@ -395,10 +395,10 @@
                                     $('#filterDateEnd').datepicker('setStartDate', startDate);
                                 });</script>
                         </fieldset>
-                        <br>
+                        <br/>
                         <fieldset>
                             <div id="filterDateEnd" class="input-group date">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" />
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-th"></i>
                                 </span>
@@ -412,33 +412,32 @@
                                     startDate: "01.2016"
                                 });</script>
                         </fieldset>
-                        <br>
+                        <br/>
                     </fieldset>
                     <fieldset data-role="controlgroup">
-                        <input checked type="radio" name="matching" id="matchingKindLiteral" value="literal" 
-                               onchange="displayFilter()">
+                        <input checked="checked" type="radio" name="matching" id="matchingKindLiteral" value="literal" 
+                               onchange="displayFilter()" />
                         <label for="matchingKindLiteral">Match literally</label>
-                        <br>
+                        <br/>
                         <input type="radio" name="matching" id="matchingKindAsPart" value="asPart"
-                               onchange="displayFilter()">
+                               onchange="displayFilter()" />
                         <label for="matchingKindAsPart">Match as part of a cipher string</label>
                     </fieldset>
-                    <br>
+                    <br/>
                     <fieldset>
                         <p align="center">Current cipher string to search for:</p>
                         <p id="displayFilterSelection" align="center"></p>
                     </fieldset>
                     <fieldset>
                         <div id="filterButtons">
-                            <input id="filterApply" type="button" value="Apply Filter">
-                            <input id="filterReset" type="reset" value="Reset Filter" onClick="resetFilters()">
+                            <input id="filterApply" type="button" value="Apply Filter" />
+                            <input id="filterReset" type="reset" value="Reset Filter" onClick="resetFilters()" />
                         </div>
                     </fieldset>
                     <script>
                         var result = null;
                         var tryCount = 0;
                         $("#filterApply").click(function () {
-                            initFilters();
                             result = applyFilters();
                             if (result !== null) {
                                 tryCount = 0;
@@ -642,9 +641,6 @@
                                             size: {
                                                 width: 640
                                             },
-                                            padding: {
-                                                top: 80
-                                            },
                                             data: {
                                                 x: 'x',
                                                 columns: [
@@ -685,9 +681,6 @@
                                             },
                                             size: {
                                                 width: 640
-                                            },
-                                            padding: {
-                                                top: 80
                                             },
                                             data: {
                                                 x: 'x',
@@ -744,8 +737,7 @@
                                                 height: 200
                                             },
                                             padding: {
-                                                top: 80,
-                                                buttom: 40
+                                                bottom: 20
                                             },
                                             gauge: {
                                                 label: {
@@ -779,8 +771,7 @@
                                                 height: 200
                                             },
                                             padding: {
-                                                top: 80,
-                                                buttom: 40
+                                                bottom: 20
                                             },
                                             gauge: {
                                                 label: {
@@ -816,8 +807,7 @@
                                                 height: 200
                                             },
                                             padding: {
-                                                top: 80,
-                                                buttom: 40
+                                                bottom: 20
                                             },
                                             gauge: {
                                                 label: {
@@ -851,8 +841,7 @@
                                                 height: 200
                                             },
                                             padding: {
-                                                top: 80,
-                                                buttom: 40
+                                                bottom: 20
                                             },
                                             gauge: {
                                                 label: {
@@ -966,8 +955,7 @@
                                                     height: 200
                                                 },
                                                 padding: {
-                                                    top: 80,
-                                                    buttom: 40
+                                                    bottom: 20
                                                 },
                                                 gauge: {
                                                     label: {
@@ -1002,8 +990,7 @@
                                                     height: 200
                                                 },
                                                 padding: {
-                                                    top: 80,
-                                                    buttom: 40
+                                                    bottom: 20
                                                 },
                                                 gauge: {
                                                     label: {
@@ -1102,9 +1089,6 @@
                                             size: {
                                                 width: 640
                                             },
-                                            padding: {
-                                                top: 80
-                                            },
                                             data: {
                                                 x: 'x',
                                                 columns: [
@@ -1134,9 +1118,6 @@
                                             },
                                             size: {
                                                 width: 640
-                                            },
-                                            padding: {
-                                                top: 80
                                             },
                                             data: {
                                                 x: 'x',
@@ -1184,8 +1165,7 @@
                                                     height: 200
                                                 },
                                                 padding: {
-                                                    top: 80,
-                                                    buttom: 40
+                                                    bottom: 20
                                                 },
                                                 gauge: {
                                                     label: {
@@ -1219,8 +1199,7 @@
                                                     height: 200
                                                 },
                                                 padding: {
-                                                    top: 80,
-                                                    buttom: 40
+                                                    bottom: 20
                                                 },
                                                 gauge: {
                                                     label: {
@@ -1256,8 +1235,7 @@
                                                     height: 200
                                                 },
                                                 padding: {
-                                                    top: 80,
-                                                    buttom: 40
+                                                    bottom: 20
                                                 },
                                                 gauge: {
                                                     label: {
@@ -1291,8 +1269,7 @@
                                                     height: 200
                                                 },
                                                 padding: {
-                                                    top: 80,
-                                                    buttom: 40
+                                                    bottom: 20
                                                 },
                                                 gauge: {
                                                     label: {
@@ -1321,6 +1298,7 @@
                                     }
 
                                 }
+                                displayDescriptions();
                             } else {
                                 if (tryCount < 2) {
                                     tryCount++;
@@ -1353,18 +1331,18 @@
         <form>
             <fieldset>
                 <div id="compareButtons">
-                    <input id="comparisonShow" type="button" value="Show Graphs">
-                    <input id="comparisonClear" type="reset" value="Clear Graphs" onClick="forgetGraphs()">
+                    <input id="comparisonShow" type="button" value="Show Graphs" />
+                    <input id="comparisonClear" type="reset" value="Clear Graphs" onClick="forgetGraphs()" />
                 </div>
             </fieldset>
             <script>
                 $('#comparisonShow').click(function () {
-                    if (getRememberedGraphs().length === 0) {
+                    if (getRememberedElements().graphs.length === 0) {
                         displayWarningNoGraphs(true);
                     } else {
                         manageElementVisibility(false);
                         displayWarningNoGraphs(false);
-                        document.getElementById("graphComparison").contentWindow.displayGraphs(getRememberedGraphs());
+                        document.getElementById("graphComparison").contentWindow.displayGraphs(getRememberedElements());
                     }
 
                 });

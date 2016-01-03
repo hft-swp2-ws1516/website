@@ -45,7 +45,7 @@
     <!-- JQuery CDN -->
     <script src="js/jquery-1.11.3.min.js"></script>
     <!-- Filter Menu -->
-    <script type="text/javascript" src="js/filterData.js"></script>
+    <script type="text/javascript" src="js/main/filterData.js"></script>
     <!-- noUislider -->
     <script type="text/javascript" src="js/timeslider/nouislider.min.js"></script>
     <!-- Bootstrap -->
@@ -54,11 +54,14 @@
     <script src="js/menu.js"></script>
     <script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
     <script>
-        function displayGraphs(graphs) {
+        function displayGraphs(elementContainer) {
+            var labels = elementContainer.labels;
+            var graphs = elementContainer.graphs;
             if (graphs.length !== 0) {
                 var innerHtml = "";
                 document.getElementById("closeButton").value = "Close & Back";
                 for (var i = 0; i < graphs.length; i++) {
+                    innerHtml = innerHtml.concat("<label class='graphDescription'>").concat(labels[i]).concat("</label>");
                     innerHtml = innerHtml.concat("<div id='").concat("chart").concat(i).concat("'></div>");
                 }
                 document.getElementById("comparison").innerHTML = innerHtml;

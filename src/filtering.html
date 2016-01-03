@@ -35,35 +35,36 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div id="detailed" style="text-align: center">
+                                <label class="graphDescription" id="descriptionGeneral" style="display: none"></label>
                                 <div id="general"></div>
                                 <input id="rememberGeneral" type="button"
                                        value="Remember Graph" style="display: none" 
-                                       onclick="rememberGraph(forComparison_General, this)"/>
-
+                                       onclick="rememberGraph(document.getElementById('descriptionGeneral').innerHTML, forComparison_General, this)"/>
+                                <label class="graphDescription" id="descriptionLastMonth_General" style="display: none"></label>
                                 <div id="lastMonth_General"></div>
                                 <input id="rememberLastMonth_General" type="button" 
                                        value="Remember Graph" style="display: none" 
-                                       onclick="rememberGraph(forComparison_LastMonthGeneral, this)"/>
-
+                                       onclick="rememberGraph(document.getElementById('descriptionLastMonth_General').innerHTML, forComparison_LastMonthGeneral, this)"/>
+                                <label class="graphDescription" id="descriptionNoCipherSuites_Accepted" style="display: none"></label>
                                 <div id="noCipherSuites_Accepted"></div>
                                 <input id="rememberNoCipherSuites_Accepted" type="button" 
                                        value="Remember Graph" style="display: none" 
-                                       onclick="rememberGraph(forComparison_NoCipherSuitesAccepted, this)"/>
-
+                                       onclick="rememberGraph(document.getElementById('descriptionNoCipherSuites_Accepted').innerHTML, forComparison_NoCipherSuitesAccepted, this)"/>
+                                <label class="graphDescription" id="descriptionLastMonth_Accepted" style="display: none"></label>
                                 <div id="lastMonth_Accepted"></div>
                                 <input id="rememberLastMonth_Accepted" type="button" 
                                        value="Remember Graph" style="display: none" 
-                                       onclick="rememberGraph(forComparison_LastMonthAccepted, this)"/>
-
+                                       onclick="rememberGraph(document.getElementById('descriptionLastMonth_Accepted').innerHTML, forComparison_LastMonthAccepted, this)"/>
+                                <label class="graphDescription" id="descriptionNoCipherSuites_Preferred" style="display: none"></label>
                                 <div id="noCipherSuites_Preferred"></div>
                                 <input id="rememberNoCipherSuites_Preferred" type="button" 
                                        value="Remember Graph" style="display: none" 
-                                       onclick="rememberGraph(forComparison_NoCipherSuitesPreferred, this)"/>
-
+                                       onclick="rememberGraph(document.getElementById('descriptionNoCipherSuites_Preferred').innerHTML, forComparison_NoCipherSuitesPreferred, this)"/>
+                                <label class="graphDescription" id="descriptionLastMonth_Preferred" style="display: none"></label>
                                 <div id="lastMonth_Preferred"></div>
                                 <input id="rememberLastMonth_Preferred" type="button" 
                                        value="Remember Graph" style="display: none" 
-                                       onclick="rememberGraph(forComparison_LastMonthPreferred, this)"/>
+                                       onclick="rememberGraph(document.getElementById('descriptionLastMonth_Preferred').innerHTML, forComparison_LastMonthPreferred, this)"/>
                             </div>
                             <div id="displayFilteredData"></div>
                         </div>
@@ -78,15 +79,6 @@
     </body>
 
 
-    <script>
-        window.onload = function () {
-            $("#dynamic").load("filterciphers.html");
-            enableButtons();
-        };
-        enableButtons();
-    </script>
-
-
     <footer id="footer"></footer>
     <div id="subscribe"></div>
     <!-- Skripts are located in the end of the Body tag for faster Page Loading -->
@@ -96,12 +88,19 @@
     <!-- JQuery CDN -->
     <script src="js/jquery-1.11.3.min.js"></script>
     <!-- Filter Menu -->
-    <script type="text/javascript" src="js/filterData.js"></script>
+    <script type="text/javascript" src="js/main/filterData.js"></script>
     <!-- noUislider -->
     <script type="text/javascript" src="js/timeslider/nouislider.min.js"></script>
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
     <!-- for the menu -->
-    <script src="js/menu.js"></script>
+    <script src="js/main/menu.js"></script>
     <script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
+    <script>
+        window.onload = function () {
+            $("#dynamic").load("filterciphers.html");
+            enableButtons();
+        };
+        enableButtons();
+    </script>
 </html>

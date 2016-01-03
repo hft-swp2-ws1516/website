@@ -34,45 +34,14 @@ var hostsPreferringTLS12 = [];
 var totalCiphersAccepting = [];
 var totalCiphersPreferring = [];
 
+var labelsToRemember = [];
 var graphsToRemember = [];
+
 
 
 function setHttpResponse(response) {
     httpResponse = response;
 }
-
-
-function initFilters() {
-
-    var protocol = document.getElementById("filterProtocol").value;
-    var keyExAndAuth = document.getElementById("filterKeyExAndAuth").value;
-    var bulkCipher = document.getElementById("filterCipher").value;
-    var keyLen = document.getElementById("filterKeyLen").value;
-    var msgAuth = document.getElementById("filterMsgAuth").value;
-
-    if (protocol === "" && keyExAndAuth === "" && bulkCipher === "" && keyLen === ""&& msgAuth === "") {
-        document.getElementById("keyExAuth").innerHTML = getKeyAndAuth("all");
-        document.getElementById("cipher").innerHTML = getCiphers("all");
-        document.getElementById("keyLen").innerHTML = getKeyLengths("all", "all");
-        document.getElementById("msgAuth").innerHTML = getMsgAuth("all");
-        document.getElementById("displayFilterSelection").innerHTML = "[none]";
-    }
-
-}
-
-//function manageFilterSelection() {
-//
-//    var cipherSelection = document.getElementById("filterCipher").value;
-//    var protocolSelection = document.getElementById("filterProtocol").value;
-//
-//    document.getElementById("keyExAuth").innerHTML = getKeyAndAuth(protocolSelection);
-//    document.getElementById("cipher").innerHTML = getCiphers(protocolSelection);
-//    document.getElementById("keyLen").innerHTML = getKeyLengths(protocolSelection, cipherSelection);
-//    document.getElementById("msgAuth").innerHTML = getMsgAuth(protocolSelection);
-//
-//    displayFilter();
-//
-//}
 
 function displayFilter() {
 
@@ -80,7 +49,7 @@ function displayFilter() {
     removeSpecialChars(document.getElementById("filterCipher"));
     removeSpecialChars(document.getElementById("filterKeyLen"));
     removeSpecialChars(document.getElementById("filterMsgAuth"));
-    
+
     var keyExAndAuth = document.getElementById("filterKeyExAndAuth").value;
     var bulkCipher = document.getElementById("filterCipher").value;
     var keyLen = document.getElementById("filterKeyLen").value;
@@ -139,6 +108,66 @@ function displayWarningNoGraphs(makeVisibile) {
     } else {
         document.getElementById("warningMessageNoGraphs").style.display = "none";
     }
+}
+
+function displayDescriptions() {
+
+    var tld = "";
+    var protocol = "";
+
+    if (document.getElementById("filterTLD").value !== "") {
+        tld = document.getElementById("filterTLD").value;
+        tld = tld.concat(", ");
+    }
+    if (document.getElementById("filterProtocol").value !== "") {
+        protocol = document.getElementById("filterProtocol").value;
+        protocol = protocol.concat(", ");
+    }
+
+    var cipherString = document.getElementById("displayFilterSelection").innerHTML;
+
+    if (document.getElementById("matchingKindLiteral").checked) {
+        cipherString = cipherString.concat(" (matched literally)");
+    } else {
+        cipherString = cipherString.concat(" (matched as part of a larger cipher string)");
+    }
+
+    var description = tld.concat(protocol).concat(cipherString);
+    if (document.getElementById("general").innerHTML !== "") {
+        document.getElementById("descriptionGeneral").innerHTML = description;
+        document.getElementById("descriptionGeneral").style.display = "block";
+    }
+    if(document.getElementById("lastMonth_General").innerHTML !== ""){
+        document.getElementById("descriptionLastMonth_General").innerHTML = description.concat(" - Percentage View");
+        document.getElementById("descriptionLastMonth_General").style.display = "block";
+    }
+    if(document.getElementById("noCipherSuites_Accepted").innerHTML !== ""){
+        document.getElementById("descriptionNoCipherSuites_Accepted").innerHTML = description.concat(" - Accepted");
+        document.getElementById("descriptionNoCipherSuites_Accepted").style.display = "block";
+    }
+    if(document.getElementById("lastMonth_Accepted").innerHTML !== ""){
+        document.getElementById("descriptionLastMonth_Accepted").innerHTML = description.concat(" - Percentage View - Accepted");
+        document.getElementById("descriptionLastMonth_Accepted").style.display = "block";
+    }
+    if(document.getElementById("noCipherSuites_Preferred").innerHTML !== ""){
+        document.getElementById("descriptionNoCipherSuites_Preferred").innerHTML = description.concat(" - Preferred");
+        document.getElementById("descriptionNoCipherSuites_Preferred").style.display = "block";
+    }
+    if(document.getElementById("lastMonth_Preferred").innerHTML !== ""){
+        document.getElementById("descriptionLastMonth_Preferred").innerHTML = description.concat(" - Percentage View - Preferred");
+        document.getElementById("descriptionLastMonth_Preferred").style.display = "block";
+    }
+
+}
+
+function hideDescriptions() {
+    
+    document.getElementById("descriptionGeneral").style.display = "none";
+    document.getElementById("descriptionLastMonth_General").style.display = "none";
+    document.getElementById("descriptionNoCipherSuites_Accepted").style.display = "none";
+    document.getElementById("descriptionLastMonth_Accepted").style.display = "none";
+    document.getElementById("descriptionNoCipherSuites_Preferred").style.display = "none";
+    document.getElementById("descriptionLastMonth_Preferred").style.display = "none";
 }
 
 
@@ -551,17 +580,22 @@ function writeToHostsByProtocol(currentMonth, match) {
 }
 
 
-function rememberGraph(graph, button) {
+function rememberGraph(labelText, graph, button) {
+    labelsToRemember.push(labelText);
     graphsToRemember.push(graph);
     displayWarningNoGraphs(false);
     button.disabled = true;
 }
 
-function getRememberedGraphs() {
-    return graphsToRemember;
+function getRememberedElements() {
+    return {
+        labels: labelsToRemember,
+        graphs: graphsToRemember
+    };
 }
 
 function forgetGraphs() {
+    labelsToRemember = [];
     graphsToRemember = [];
     enableButtons();
 }
@@ -613,15 +647,13 @@ function resetResults() {
 
 function resetFilters() {
 
-    document.getElementById("keyExAuth").innerHTML = getKeyAndAuth("all");
-    document.getElementById("cipher").innerHTML = getCiphers("all");
-    document.getElementById("keyLen").innerHTML = getKeyLengths("all");
-    document.getElementById("msgAuth").innerHTML = getMsgAuth("all");
-
     document.getElementById("displayFilterSelection").innerHTML = "[none]";
 
     resetGraphs();
     enableButtons();
+    document.getElementById("matchingKindLiteral").checked = true;
+    document.getElementById("matchingKindAsPart").checked = false;
+    displayWarning();
 
 }
 
@@ -635,6 +667,7 @@ function resetGraphs() {
     document.getElementById("lastMonth_Preferred").innerHTML = "";
 
     resetButtons();
+    hideDescriptions();
 
 }
 
@@ -656,213 +689,4 @@ function enableButtons() {
     document.getElementById("rememberLastMonth_Preferred").disabled = false;
 }
 
-//function getKeyAndAuth(protocolSelection) {
-//
-//    if (protocolSelection === "SSLv2") {
-//        return "<option value=\"EXP\"></option>\n\
-//                <option value=\"RSA\"></option>";
-//    } else if (protocolSelection === "SSLv3") {
-//        return "<option value=\"EXP\"></option>\n\
-//                      <option value=\"RSA\"></option>\n\
-//                      <option value=\"DH-DSS\"></option>\n\
-//                      <option value=\"DH-RSA\"></option>\n\
-//                      <option value=\"DHE-DSS\"></option>\n\
-//                      <option value=\"DHE-RSA\"></option>\n\
-//                      <option value=\"DH-anon\"></option>\n\
-//                      <option value=\"DH-anon-EXP\"></option>\n\
-//                      <option value=\"ECDHE-RSA\"></option>";
-//    } else if (protocolSelection === "TLSv1.0" || protocolSelection === "TLSv1.1"
-//            || protocolSelection === "TLSv1.2") {
-//        return "<option value=\"AECDH\"></option>\n\
-//                    <option value=\"RSA\"></option>\n\
-//                     <option value=\"DH-RSA\"></option>\n\
-//                     <option value=\"DHE-RSA\"></option>\n\
-//                     <option value=\"ECDH-RSA\"></option>\n\
-//                     <option value=\"ECDHE-RSA\"></option>\n\
-//                     <option value=\"EDH-RSA\"></option>\n\
-//                     <option value=\"DH-DSS\"></option>\n\
-//                     <option value=\"DHE-DSS\"></option>\n\
-//                     <option value=\"ECDH-ECDSA\"></option>\n\
-//                     <option value=\"ECDHE-ECDSA\"></option>\n\
-//                     <option value=\"PSK\"></option>\n\
-//                     <option value=\"PSK-RSA\"></option>\n\
-//                     <option value=\"DHE-PSK\"></option>\n\
-//                     <option value=\"ECDHE-PSK\"></option>\n\
-//                     <option value=\"SRP\"></option>\n\
-//                     <option value=\"SRP-DSS\"></option>\n\
-//                     <option value=\"SRP-RSA\"></option>\n\
-//                     <option value=\"KERBEROS\"></option>\n\
-//                     <option value=\"DH-ANON\"></option>\n\
-//                     <option value=\"ECDH-ANON\"></option>\n\
-//                     <option value=\"GOST\"></option>";
-//    } else {
-//        return "<option value=\"AECDH\"></option>\n\
-//                     <option value=\"RSA\"></option>\n\
-//                     <option value=\"DH-RSA\"></option>\n\
-//                     <option value=\"DHE-RSA\"></option>\n\
-//                     <option value=\"ECDH-RSA\"></option>\n\
-//                     <option value=\"ECDHE-RSA\"></option>\n\
-//                     <option value=\"EDH-RSA\"></option>\n\
-//                     <option value=\"DH-DSS\"></option>\n\
-//                     <option value=\"DHE-DSS\"></option>\n\
-//                     <option value=\"ECDH-ECDSA\"></option>\n\
-//                     <option value=\"ECDHE-ECDSA\"></option>\n\
-//                     <option value=\"PSK\"></option>\n\
-//                     <option value=\"PSK-RSA\"></option>\n\
-//                     <option value=\"DHE-PSK\"></option>\n\
-//                     <option value=\"ECDHE-PSK\"></option>\n\
-//                     <option value=\"SRP\"></option>\n\
-//                     <option value=\"SRP-DSS\"></option>\n\
-//                     <option value=\"SRP-RSA\"></option>\n\
-//                     <option value=\"KERBEROS\"></option>\n\
-//                     <option value=\"DH-ANON\"></option>\n\
-//                     <option value=\"ECDH-ANON\"></option>\n\
-//                     <option value=\"GOST\"></option>";
-//    }
-//}
-//
-//function getCiphers(protocolSelection) {
-//
-//    if (protocolSelection === "SSLv2") {
-//        return "<option value=\"DES-CBC3\"></option>\n\
-//                        <option value=\"IDEA-CBC\"></option>\n\
-//                        <option value=\"DES-CBC\"></option>\n\
-//                        <option value=\"RC2-CBC\"></option>\n\
-//                        <option value=\"RC4\"></option>";
-//    } else if (protocolSelection === "SSLv3") {
-//        return "<option value=\"AES\"></option>\n\
-//                        <option value=\"DES-CBC3\"></option>\n\
-//                        <option value=\"IDEA-CBC\"></option>\n\
-//                        <option value=\"DES-CBC\"></option>\n\
-//                        <option value=\"RC2-CBC\"></option>\n\
-//                        <option value=\"RC4\"></option>\n\
-//                        <option value=\"none\"></option>";
-//    } else if (protocolSelection === "TLSv1.0") {
-//        return "<option value=\"AES\"></option>\n\
-//                                <option value=\"AES-CBC\">\n\
-//                                <option value=\"CAMELLIA-CBC\"></option>\n\
-//                                <option value=\"ARIA-CBC\"></option>\n\
-//                                <option value=\"SEED-CBC\"></option>\n\
-//                                <option value=\"DES-CBC3\"></option>\n\
-//                                <option value=\"GOST-28147-89-CNT\"></option>\n\
-//                                <option value=\"IDEA-CBC\"></option>\n\
-//                                <option value=\"DES-CBC\"></option>\n\
-//                                <option value=\"RC2-CBC\"></option>\n\
-//                                <option value=\"RC4\"></option>\n\
-//                                <option value=\"none\"></option>";
-//    } else if (protocolSelection === "TLSv1.1") {
-//        return "<option value=\"AES\"></option>\n\
-//                                <option value=\"AES-CBC\">\n\
-//                                <option value=\"CAMELLIA\"></option>\n\
-//                                <option value=\"CAMELLIA-CBC\"></option>\n\
-//                                <option value=\"ARIA-CBC\"></option>\n\
-//                                <option value=\"SEED-CBC\"></option>\n\
-//                                <option value=\"DES-CBC3\"></option>\n\
-//                                <option value=\"GOST-28147-89-CNT\"></option>\n\
-//                                <option value=\"IDEA-CBC\"></option>\n\
-//                                <option value=\"DES-CBC\"></option>\n\
-//                                <option value=\"RC4\"></option>\n\
-//                                <option value=\"none\"></option>";
-//    } else if (protocolSelection === "TLSv1.2") {
-//        return "<option value=\"AES\"></option>\n\
-//                                <option value=\"AES-GCM\"></option>\n\
-//                                <option value=\"AES-CCM\"></option>\n\
-//                                <option value=\"AES-CBC\"></option>\n\
-//                                <option value=\"CAMELLIA\"></option>\n\
-//                                <option value=\"CAMELLIA-GCM\"></option>\n\
-//                                <option value=\"CAMELLIA-CBC\"></option>\n\
-//                                <option value=\"ARIA-GCM\"></option>\n\
-//                                <option value=\"ARIA-CBC\"></option>\n\
-//                                <option value=\"SEED-CBC\"></option>\n\
-//                                <option value=\"DES-CBC3\"></option>\n\
-//                                <option value=\"GOST-28147-89-CNT\"></option>\n\
-//                                <option value=\"ChaCha-20-POLY1305\"></option>\n\
-//                                <option value=\"RC4\"></option>\n\
-//                                <option value=\"none\"></option>";
-//    } else {
-//        return "<option value=\"AES\"></option>\n\
-//                                <option value=\"AES-GCM\"></option>\n\
-//                                <option value=\"AES-CCM\"></option>\n\
-//                                <option value=\"AES-CBC\"></option>\n\
-//                                <option value=\"CAMELLIA\"></option>\n\
-//                                <option value=\"CAMELLIA-GCM\"></option>\n\
-//                                <option value=\"CAMELLIA-CBC\"></option>\n\
-//                                <option value=\"ARIA-GCM\"></option>\n\
-//                                <option value=\"ARIA-CBC\"></option>\n\
-//                                <option value=\"SEED-CBC\"></option>\n\
-//                                <option value=\"DES-CBC3\"></option>\n\
-//                                <option value=\"GOST-28147-89-CNT\"></option>\n\
-//                                <option value=\"IDEA-CBC\"></option>\n\
-//                                <option value=\"DES-CBC\"></option>\n\
-//                                <option value=\"RC2-CBC\"></option>\n\
-//                                <option value=\"ChaCha-20-POLY1305\"></option>\n\
-//                                <option value=\"RC4\"></option>\n\
-//                                <option value=\"none\"></option>";
-//    }
-//}
-//
-//function getKeyLengths(protocolSelection, cipherSelection) {
-//
-//    if (cipherSelection === "AES" || cipherSelection === "AES-GCM" || cipherSelection === "AES-CCM"
-//            || cipherSelection === "AES-CBC" || cipherSelection === "CAMELLIA"
-//            || cipherSelection === "CAMELLIA-GCM" || cipherSelection === "CAMELLIA-CBC"
-//            || cipherSelection === "ARIA-GCM" || cipherSelection === "ARIA-CBC") {
-//        return "<option value=\"128\">\n\
-//                <option value=\"256\">";
-//    } else if (cipherSelection === "SEED-CBC" || cipherSelection === "IDEA-CBC") {
-//        return "<option value=\"128\">";
-//    } else if (cipherSelection === "DES-CBC3") {
-//        return "<option value=\"112\">";
-//    } else if (cipherSelection === "GOST-28147-89-CNT") {
-//        return "<option value=\"256\">";
-//    } else if (cipherSelection === "DES-CBC") {
-//        if (protocolSelection === "TLSv1.1") {
-//            return "<option value=\"56\">";
-//        } else {
-//            return "<option value=\"40\">\n\
-//                <option value=\"56\">";
-//        }
-//    } else if (cipherSelection === "RC2-CBC") {
-//        return "<option value=\"40\">";
-//    } else if (cipherSelection === "ChaCha-20-POLY1305") {
-//        return "<option value=\"256\">";
-//    } else if (cipherSelection === "RC4") {
-//        if (protocolSelection === "TLSv1.1" || protocolSelection === "TLSv1.2") {
-//            return "<option value=\"128\">";
-//        } else {
-//            return "option value=\"40\">\n\
-//                    option value=\"128\">";
-//        }
-//    } else {
-//        return "<option value=\"40\">\n\
-//                <option value=\"56\">\n\
-//                <option value=\"112\">\n\
-//                <option value=\"128\">\n\
-//                <option value=\"256\">";
-//    }
-//
-//}
-//
-//function getMsgAuth(protocolSelection) {
-//
-//    if (protocolSelection === "SSLv2") {
-//        return "<option value=\"MD5\">";
-//    } else if (protocolSelection === "SSLv3" || protocolSelection === "TLSv1.0"
-//            || protocolSelection === "TLSv1.1") {
-//        return "<option value=\"MD5\">\n\
-//                <option value=\"SHA\">\n\
-//                <option value=\"SHA1\">\n\
-//                <option value=\"GOST-28147-89-IMIT\">\n\
-//                <option value=\"GOST-R34.11-94\">";
-//    } else {
-//        return "<option value=\"MD5\">\n\
-//                <option value=\"SHA\">\n\
-//                <option value=\"SHA1\">\n\
-//                <option value=\"SHA256\">\n\
-//                <option value=\"SHA384\">\n\
-//                <option value=\"AEAD\">\n\
-//                <option value=\"GOST-28147-89-IMIT\">\n\
-//                <option value=\"GOST-R34.11-94\">";
-//    }
-//
-//}
+

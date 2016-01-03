@@ -22,7 +22,13 @@
     background-color: #a0a0a0;
 }
 
+.graphDescription{
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
 #closeButton {
     margin-top: 10%;
     margin-bottom: 5%;
 }
+
