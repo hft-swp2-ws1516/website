@@ -19,17 +19,17 @@
 </html>
 
 <body>
-<div id="nav01"></div>
-<div class="container">
-    <div class="col-md-12 col-xs-12 col-lg-12" align="center" >
-        <div id="map" style="width: 100%; height: 500px; "></div>
-        <div id="results" style=" width: 160px;
-                    height: 160px;
-                    position: absolute;
-                    left: 0;
-                    top: 300px;
-                    border: 3px solid #fff;
-                    opacity: 0.9;">
+    <div id="nav01"></div>
+    <div class="container">
+        <div class="col-md-12 col-xs-12 col-lg-12" align="center" >
+            <div id="map" style="width: 100%; height: 500px; "></div>
+            <div id="results" style=" width: 160px;
+            height: 160px;
+            position: absolute;
+            left: 0;
+            top: 300px;
+            border: 3px solid #fff;
+            opacity: 0.9;">
             <p> Land: <b id='land'> </b> </p>
             <p> TLD: <b id='resultTld'> </b> </p>
             <p> PFS Enabled: <b id='resultPFSen'> </b></p>
@@ -52,9 +52,10 @@
 <!-- Filter Menu -->
 <script type="text/javascript" src="js/filterData.js"></script>
 <!-- Bootstrap -->
-<script src="js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <!-- for the menu -->
-<script src="js/menu.js"></script>
+<script src="js/main/menu.js"></script>
 <script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
 <!--
         This map was created using Pixel Map Generator by amCharts and is licensed under the Creative Commons Attribution 4.0 International License.
@@ -65,12 +66,12 @@
         To do so, visit amCharts Online Store: http://www.amcharts.com/online-store/
     -->
 
-<!-- amCharts javascript sources -->
-<script type="text/javascript" src="js/ammap/ammap.js"></script>
-<script type="text/javascript" src="js/ammap/maps/js/worldLow.js"></script>
+    <!-- amCharts javascript sources -->
+    <script type="text/javascript" src="js/ammap/ammap.js"></script>
+    <script type="text/javascript" src="js/ammap/maps/js/worldLow.js"></script>
 
-<!-- amCharts javascript code -->
-<script type="text/javascript">
+    <!-- amCharts javascript code -->
+    <script type="text/javascript">
     var map =AmCharts.makeChart("map", {
         "type": "map",
         "pathToImages": "js/ammap/images/",
@@ -83,13 +84,13 @@
             "map": "worldLow",
             "getAreasFromMap": true,
             "images": [
-                {
-                    "top": 40,
-                    "left": 60,
-                    "width": 80,
-                    "height": 40,
-                    "pixelMapperLogo": true,
-                }
+            {
+                "top": 40,
+                "left": 60,
+                "width": 80,
+                "height": 40,
+                "pixelMapperLogo": true,
+            }
             ]
         },
         "balloon": {
@@ -139,34 +140,34 @@
             "buttonCornerRadius": 2
         }
     });
-    var dateObj= new Date();
-    var month=dateObj.getUTCMonth()+1;
-    var year=dateObj.getUTCFullYear();
-    var dateFormat=year+"_"+month;
-    console.log(dateFormat+" what");
-    var jsonRespond;
-    var jsonOnDate;
-    var PFSLand=jQuery.get("https://www.hotcat.de:1337/api/v0/pfs/overview", function (response) {
-        jsonRespond=response;
-        jsonOnDate=jsonRespond.filter(function(a){return a._id ==dateFormat})[0].overviews;
+var dateObj= new Date();
+var month=dateObj.getUTCMonth()+1;
+var year=dateObj.getUTCFullYear();
+var dateFormat=year+"_"+month;
+console.log(dateFormat+" what");
+var jsonRespond;
+var jsonOnDate;
+var PFSLand=jQuery.get("https://www.hotcat.de:1337/api/v0/pfs/overview", function (response) {
+    jsonRespond=response;
+    jsonOnDate=jsonRespond.filter(function(a){return a._id ==dateFormat})[0].overviews;
 
-        console.log(jsonOnDate);
+    console.log(jsonOnDate);
 
 
-    });
-    function objectFindByKey(array, key, value) {
-        if (value=='gb'){
-            value='uk';
+});
+function objectFindByKey(array, key, value) {
+    if (value=='gb'){
+        value='uk';
+    }
+    for (var i = 0; i < array.length; i++) {
+        if (array[i][key] === value) {
+            console.log(array[i]);
+            return array[i];
         }
-        for (var i = 0; i < array.length; i++) {
-            if (array[i][key] === value) {
-                console.log(array[i]);
-                return array[i];
-            }
-        }
-        return null;
+    }
+    return null;
 
-    };
+};
     //    var chart=c3.generate({
     //        bindto:'result',
     //        data:{
@@ -183,13 +184,13 @@
      div.innerHTML=elements.pfsEnabled+'<br />'+elements.pfsDisabled+'<br />'
      +elements.totalHosts+'<br />';
      document.body.appendChild(div);
-     };*/
+ };*/
     /*
      array[i].forEach(function(elements){
      arrayElement(elements);
      });
-     */
-    map.addListener("clickMapObject",function(event){
+*/
+map.addListener("clickMapObject",function(event){
         //event.mapObject.title
         function toLower(str){
             return str.toLowerCase();

@@ -1,3 +1,4 @@
+'use strict';
 var globalJson;
 var globalThead;
 var globalInnerKeys;
@@ -19,29 +20,29 @@ function drawTable(theadArray, json, innerArrayKeys) {
   // for  the tbody iterate over the json, and get the value of the keys in the theadArray
   for (var e in json) {
     html += "<tr>";
-    for (var heading in theadArray) {
+    for (heading in theadArray) {
 
       var value = json[e][theadArray[heading]];
       // If a value is an array, then create an inner table within the td tag
       if (Array.isArray(value)) {
-        html += "<td>" + "<table class='table'>"
+        html += "<td>" + "<table class='table'>";
         html += "<tr>";
         //Heading for innerTable
         for (var innerKey in innerArrayKeys) {
           html += "<th>" + innerArrayKeys[innerKey] + "</th>";
         }
-        html += "</tr>"
+        html += "</tr>";
         for (var innerArrayIndex in value) {
-          html += "<tr>"
-          for (var innerKey in innerArrayKeys) {
+          html += "<tr>";
+          for (innerKey in innerArrayKeys) {
             html += "<td>" + value[innerArrayIndex][innerArrayKeys[innerKey]] + "</td>";
           }
           html += "</tr>";
         }
         html += "</table></td>";
       } else {
-        html += "<td>" + value + "</td>"
-      };
+        html += "<td>" + value + "</td>";
+      }
     }
     html += "</tr>";
   }
@@ -64,7 +65,7 @@ function sortTable(element) {
    */
 
 function getTimespan() {
-  timespan = [];
+  var timespan = [];
   // Check which of the datepickers are visible
   if ($('#timeslider').is(":visible")) {
     timespan = dateSlider.noUiSlider.get();
@@ -93,31 +94,31 @@ function mergeDoubleEntrys(json, tlsVersion, totalHosts) {
     var obj = json[i];
     // if TLS version is given
     if (tlsVersion) {
-      if (obj['protocol'] == tlsVersion) {
+      if (obj.protocol === tlsVersion) {
         obj.percent = parseFloat(((obj.count / totalHosts) * 100).toFixed(2));
         summarized.push(obj);
-      };
+      }
     } else {
 
       // iterate over summarized array and check for double entry
       for (var j = 0; j < summarized.length; j++) {
         // if entry found, add increase the count number of the first entry
-        if (obj['cipher'] === summarized[j].cipher) {
+        if (obj.cipher === summarized[j].cipher) {
           doubleEntry = true;
-          summarized[j].count += obj['count'];
-        };
-      };
+          summarized[j].count += obj.count;
+        }
+      }
       // if no double entry found, push the obj normally to the summarized arra
       if (!doubleEntry) {
 
         summarized.push(obj);
-      };
+      }
       doubleEntry = false;
 
     }
 
 
-  };
+  }
 
   return summarized;
 }
@@ -126,15 +127,18 @@ function mergeDoubleEntrys(json, tlsVersion, totalHosts) {
 // Compare function for sorting Array of JSONs 
 function sortResults(arr, prop, asc) {
   arr = arr.sort(function(a, b) {
-    if (asc) return (a[prop] > b[prop]);
-    else return (b[prop] > a[prop]);
+    if (asc) {
+      return (a[prop] > b[prop]);
+    } else {
+      return (b[prop] > a[prop]);
+    }
   });
 }
 
 function formatDate2(date) {
   var string = date.getFullYear() + "_" + (date.getMonth() + 1);
   return string;
-};
+}
 
 function filterResponseByTimespan(response, start, end) {
   var filtered = [];
@@ -142,14 +146,14 @@ function filterResponseByTimespan(response, start, end) {
   var end = new Date(end.getFullYear(), end.getMonth());
   while (date.getTime() <= end.getTime()) {
     for (var i = 0; i < response.length; i++) {
-      if (response[i].month == formatDate2(date)) {
+      if (response[i].month === formatDate2(date)) {
         filtered.push(response[i]);
         break;
-      };
-    };
+      }
+    }
     // if value is 12, then the first month of the next year will be set
     date.setMonth(date.getMonth() + 1);
-  };
+  }
   return filtered;
 }
 
@@ -162,8 +166,8 @@ function getLatestElementIndex(response) {
       var split2 = response[j].month.split('_');
       if (comparedate.getTime() < new Date(split2[0], split2[1] - 1).getTime()) {
         latestElement = j;
-      };
-    };
-  };
+      }
+    }
+  }
   return latestElement;
 }
