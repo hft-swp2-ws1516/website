@@ -89,7 +89,6 @@ function removeSpecialChars(textbox) {
         textbox.value = textbox.value.replace(/[^\w\s||.||-]/gi, '');
     }
 
-
 }
 
 function displayWarning() {
@@ -137,23 +136,23 @@ function displayDescriptions() {
         document.getElementById("descriptionGeneral").innerHTML = description;
         document.getElementById("descriptionGeneral").style.display = "block";
     }
-    if(document.getElementById("lastMonth_General").innerHTML !== ""){
+    if (document.getElementById("lastMonth_General").innerHTML !== "") {
         document.getElementById("descriptionLastMonth_General").innerHTML = description.concat(" - Percentage View");
         document.getElementById("descriptionLastMonth_General").style.display = "block";
     }
-    if(document.getElementById("noCipherSuites_Accepted").innerHTML !== ""){
+    if (document.getElementById("noCipherSuites_Accepted").innerHTML !== "") {
         document.getElementById("descriptionNoCipherSuites_Accepted").innerHTML = description.concat(" - Accepted");
         document.getElementById("descriptionNoCipherSuites_Accepted").style.display = "block";
     }
-    if(document.getElementById("lastMonth_Accepted").innerHTML !== ""){
+    if (document.getElementById("lastMonth_Accepted").innerHTML !== "") {
         document.getElementById("descriptionLastMonth_Accepted").innerHTML = description.concat(" - Percentage View - Accepted");
         document.getElementById("descriptionLastMonth_Accepted").style.display = "block";
     }
-    if(document.getElementById("noCipherSuites_Preferred").innerHTML !== ""){
+    if (document.getElementById("noCipherSuites_Preferred").innerHTML !== "") {
         document.getElementById("descriptionNoCipherSuites_Preferred").innerHTML = description.concat(" - Preferred");
         document.getElementById("descriptionNoCipherSuites_Preferred").style.display = "block";
     }
-    if(document.getElementById("lastMonth_Preferred").innerHTML !== ""){
+    if (document.getElementById("lastMonth_Preferred").innerHTML !== "") {
         document.getElementById("descriptionLastMonth_Preferred").innerHTML = description.concat(" - Percentage View - Preferred");
         document.getElementById("descriptionLastMonth_Preferred").style.display = "block";
     }
@@ -161,7 +160,7 @@ function displayDescriptions() {
 }
 
 function hideDescriptions() {
-    
+
     document.getElementById("descriptionGeneral").style.display = "none";
     document.getElementById("descriptionLastMonth_General").style.display = "none";
     document.getElementById("descriptionNoCipherSuites_Accepted").style.display = "none";
@@ -214,48 +213,75 @@ function parseResponse(response, protocol, cipherString) {
         matchLiterally = true;
     }
 
-    response.match(/month.:.(\d*).(\d*)/g).forEach(function (month) {
-        months.push(month.split(":")[1].replace('"', ''));
-    });
+    var startDate;
+    var endDate;
 
+    if (document.getElementById("startDate").value !== "") {
+        startDate = new Date(getInternalDate(document.getElementById("startDate").value));
+    }
+    if (document.getElementById("endDate").value !== "") {
+        endDate = new Date(getInternalDate(document.getElementById("endDate").value));
+    }
 
-    response.match(/totalHosts.:.(\d*)/g).forEach(function (number) {
-        totalHosts.push(number.split(":")[1]);
-    });
-
-    var count = 0;
-    var loops = 0;
-    var manualProtocolAggregation = protocol === "" ? true : false;
-
-    initResultArrays(months.length, matchLiterally, manualProtocolAggregation);
-    monthBody = response.match(/\[[^\[\]]*\]/g);
-    monthBody.forEach(function (outer) {
-        outer.match(/{(.*?)}/g).forEach(function (inner) {
-            if (!manualProtocolAggregation) {
-                if (matchLiterally) {
-                    if (inner.match("\"" + protocol + "\"") !== null && inner.match(cipherString) !== null) {
-                        writeToHosts(loops, inner, matchLiterally);
-                    }
-                } else {
-                    writeToTotalCiphers(loops, inner);
-                    if (inner.match("\"" + protocol + "\"") !== null && testIfPartsMatch(inner, cipherString)) {
-                        writeToHosts(loops, inner, matchLiterally);
-                    }
-                }
-            } else {
-                if (!matchLiterally) {
-                    writeToTotalCiphers(loops, inner);
-                }
-                if (inner.match(cipherString) !== null || (!matchLiterally && testIfPartsMatch(inner, cipherString))) {
-                    if (inner.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) !== null) {
-                        writeToHostsByProtocol(loops, inner);
-                        writeToHosts(loops, inner, matchLiterally);
-                    }
-                }
+    var allMonths = response.match(/month.:.(\d*).(\d*)/g);
+    var inInterval = false;
+    var startIndex = 1;
+    var endIndex = allMonths.length;
+    for (var i = 0; i < allMonths.length; i++) {
+        var month = allMonths[i];
+        var primitiveMonthCandidate = month.split(":")[1].replace('"', '');
+        var monthCandidate = new Date(getInternalDate(primitiveMonthCandidate));
+        if ((startDate !== undefined && Date.parse(startDate) <= Date.parse(monthCandidate)) || startDate === undefined) {
+            if (!inInterval) {
+                startIndex = i + 1;
             }
-        });
-        loops++;
-    });
+            inInterval = true;
+            months.push(primitiveMonthCandidate);
+        }
+        if (endDate !== undefined && Date.parse(monthCandidate) >= Date.parse(endDate) && inInterval) {
+            endIndex = i + 1;
+            break;
+        }
+    }
+    inInterval = false;
+
+    var allTotalHosts = response.match(/totalHosts.:.(\d*)/g);
+    for (var i = 0; i < allTotalHosts.length; i++) {
+        var number = allTotalHosts[i].split(":")[1];
+        if ((startDate !== undefined && startIndex <= i + 1) || startDate === undefined) {
+            if (!inInterval) {
+                inInterval = true;
+            }
+            totalHosts.push(number);
+        }
+        if (endDate !== undefined && i + 1 === endIndex && inInterval) {
+            break;
+        }
+    }
+
+    inInterval = false;
+    var manualProtocolAggregation = protocol === "" ? true : false;
+    initResultArrays(months.length, matchLiterally, manualProtocolAggregation);
+    var monthSkipped = true;
+
+    var loops = 0;
+    var allOuterEntries = response.match(/\[[^\[\]]*\]/g);
+    for (var i = 0; i < allOuterEntries.length; i++) {
+        var outer = allOuterEntries[i];
+        if (startDate !== undefined && startIndex <= i + 1 || startDate === undefined) {
+            if (!inInterval) {
+                inInterval = true;
+                monthSkipped = false;
+            }
+            doEntryInsertion(outer, manualProtocolAggregation, matchLiterally, protocol, cipherString, loops);
+        }
+        if (endDate !== undefined && i + 1 === endIndex && inInterval) {
+            break;
+        }
+        if(!monthSkipped){
+            loops++;
+        }
+    }
 
     for (var i = 1; i < months.length; i++) {
         var tmp = months[i].replace('_', '-');
@@ -286,6 +312,52 @@ function parseResponse(response, protocol, cipherString) {
         totalCiphersPreferring: totalCiphersPreferring
     };
 
+}
+
+function doEntryInsertion(outer, manualProtocolAggregation, matchLiterally, protocol, cipherString, loops, monthSkipped) {
+
+    loops++;    
+    outer.match(/{(.*?)}/g).forEach(function (inner) {
+        if (!manualProtocolAggregation) {
+            if (matchLiterally) {
+                if (inner.match("\"" + protocol + "\"") !== null && inner.match(cipherString) !== null) {
+                    writeToHosts(loops, inner, matchLiterally);
+                }
+            } else {
+                writeToTotalCiphers(loops, inner);
+                if (inner.match("\"" + protocol + "\"") !== null && testIfPartsMatch(inner, cipherString)) {
+                    writeToHosts(loops, inner, matchLiterally);
+                }
+            }
+        } else {
+            if (!matchLiterally) {
+                writeToTotalCiphers(loops, inner);
+            }
+            if (inner.match(cipherString) !== null || (!matchLiterally && testIfPartsMatch(inner, cipherString))) {
+                if (inner.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) !== null) {
+                    writeToHostsByProtocol(loops, inner);
+                    writeToHosts(loops, inner, matchLiterally);
+                }
+            }
+        }
+    });
+
+}
+
+function getInternalDate(date) {
+
+    var tmpMonth;
+    var tmpYear;
+
+    if (date.indexOf("_") > -1) {
+        tmpMonth = date.split("_")[1];
+        tmpYear = date.split("_")[0];
+    } else {
+        tmpMonth = date.split("-")[0];
+        tmpYear = date.split("-")[1];
+    }
+
+    return tmpYear.concat("-").concat(tmpMonth);
 }
 
 function initResultArrays(months, matchLiterally, manualProtocolAggregation) {
@@ -510,8 +582,8 @@ function testIfPartsMatch(match, cipherString) {
 }
 
 function writeToTotalCiphers(currentMonth, match) {
-    currentMonth = parseInt(currentMonth);
-    currentMonth++;
+    //currentMonth = parseInt(currentMonth);
+    //currentMonth++;
     var count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
     if (match.indexOf("preferred") > -1) {
         totalCiphersPreferring[currentMonth] += count;
@@ -522,8 +594,8 @@ function writeToTotalCiphers(currentMonth, match) {
 }
 
 function writeToHosts(currentMonth, match, matchLiterally) {
-    currentMonth = parseInt(currentMonth);
-    currentMonth++;
+    //currentMonth = parseInt(currentMonth);
+    //currentMonth++;
     var count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
     if (match.indexOf("preferred") > -1) {
         hostsPreferring[currentMonth] += count;
@@ -533,8 +605,8 @@ function writeToHosts(currentMonth, match, matchLiterally) {
 }
 
 function writeToHostsByProtocol(currentMonth, match) {
-    currentMonth = parseInt(currentMonth);
-    currentMonth++;
+    //currentMonth = parseInt(currentMonth);
+    //currentMonth++;
     var count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
     var protocol = ("" + match.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) + "").split(":")[1].replace('"', '');
     switch (protocol) {

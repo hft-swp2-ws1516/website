@@ -369,18 +369,18 @@
                         <legend>Time Span</legend>
                         <fieldset>
                             <div id="filterDateStart" class="input-group date">
-                                <input type="text" class="form-control" />
+                                <input id="startDate" type="text" class="form-control" />
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-th"></i>
                                 </span>
                             </div>
                             <script type="text/javascript">
                                 $('#filterDateStart').datepicker({
-                                    format: "mm/yyyy",
+                                    format: "mm-yyyy",
                                     startView: 1,
                                     minViewMode: 1,
                                     autoclose: true,
-                                    startDate: "12.2015"
+                                    startDate: "09.2015"
                                 }).on('changeDate', function (e) {
                                     var day = 0;
                                     var month = e.date.getMonth();
@@ -393,24 +393,36 @@
                                     }
                                     var startDate = new Date(year, month, day);
                                     $('#filterDateEnd').datepicker('setStartDate', startDate);
-                                });</script>
+                                });
+                            </script>
                         </fieldset>
                         <br/>
                         <fieldset>
                             <div id="filterDateEnd" class="input-group date">
-                                <input type="text" class="form-control" />
+                                <input id="endDate" type="text" class="form-control" />
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-th"></i>
                                 </span>
                             </div>
                             <script type="text/javascript">
                                 $('#filterDateEnd').datepicker({
-                                    format: "mm/yyyy",
+                                    format: "mm-yyyy",
                                     startView: 1,
                                     minViewMode: 1,
                                     autoclose: true,
-                                    startDate: "01.2016"
-                                });</script>
+                                    startDate: "10.2015"
+                                }).on('changeDate', function (e) {
+                                    var day = 0;
+                                    var month = e.date.getMonth();
+                                    var year = e.date.getFullYear();
+                                    if (month === 01) {
+                                        month = 11;
+                                        year--;
+                                    }
+                                    var endDate = new Date(year, month, day);
+                                    $('#filterDateStart').datepicker('setEndDate', endDate);
+                                });
+                            </script>
                         </fieldset>
                         <br/>
                     </fieldset>
