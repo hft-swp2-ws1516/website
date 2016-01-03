@@ -378,6 +378,7 @@
                         <!-- The charts are displayed here -->
                         <div id="generic">
                           <div id="loader"><img src="img/ajax-loader.gif"></div>
+                          <div id='error-message'></div>
                           <div id="chart"></div>
                         </div>
 
@@ -390,6 +391,7 @@
                     <footer id="footer"></footer>
                     <div id="subscribe"></div>
                     <!-- Skripts are located in the end of the Body tag for faster Page Loading -->
+                    <script type="text/javascript" src="js/globaldata.js"></script>
                     <!-- Load d3.js and c3.js -->
                     <script src="js/c3/d3.min.js" charset="utf-8"></script>
                     <script src="js/c3/c3.min.js"></script>
@@ -405,156 +407,8 @@
                     <!-- for the menu -->
                     <script src="js/menu.js"></script>
                     <script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
-
                     <script type="text/javascript" src="js/helperClass.js"></script>
-                    <script>
-
-                                // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
-                                window.onload = function () {
-
-                                    // Timeout setup for ajax
-                                    // If the API is not responding within 3 seconds, the hard coded charts will be loaded
-                                    $.ajaxSetup({
-                                      timeout: 3000
-                                    });
-
-                                    // loading icon
-                                    $(document).ajaxStart(function() {
-                                        // show loader on start
-                                        $("#loader").css("display","block");
-                                      }).ajaxSuccess(function() {
-                                        // hide loader on success
-
-                                      });
-
-                                      function loadChartByHash(hash){
-                                        switch (hash) {
-                                          case 'PFS':
-                                          $("#chart").load("graphs/pfs.html");
-                                          break;
-                                          case 'DHE':
-                                          $("#chart").load("graphs/dhe.html");
-                                          break;
-                                          case 'ECDHE':
-                                          $("#chart").load("graphs/ecdhe.html");
-                                          break;
-                                          case 'logjam':
-                                          $("#chart").load("graphs/logjam.html");
-                                          break;
-                                          case 'Ciphers':
-                                          $("#filterTLS").show();
-                                          $("#chart").load("graphs/ciphers.html");
-                                          break;
-                                          case 'MAC':
-                                          $("#chart").load("graphs/mac.html");
-                                          break;
-                                          default:
-                                          $("#chart").load("graphs/pfs.html");
-                                          window.location.hash= "PFS";
-                                          break;
-                                        };
-                                      };
-
-                                      $("#filterTLS").hide();
-                                      loadChartByHash(window.location.hash.substring(1));
-
-                                        // This is called when the reload button is clicked!
-                                        $("button.applytimespan").click(function ()
-                                        {
-                                        // the called function depends of the hash value in the URL
-                                        loadChartByHash(window.location.hash.substring(1));
-
-                                      }
-                                      );
 
 
-                                        $( "#filterDateStartInput" ).change(function() {
-                                         loadChartByHash(window.location.hash.substring(1));
-                                       });
-
-                                        $( "#filterDateEndInput" ).change(function() {
-                                         loadChartByHash(window.location.hash.substring(1));
-                                       });
-
-
-                                        $("#loadPFS").click(function ()
-                                        {
-                                          $("#filterTLS").hide();
-                                          $("#chart").load("graphs/pfs.html");
-                                        }
-                                        );
-
-                                        $("#loadDHE").click(function ()
-                                        {
-                                         $("#chart").load("graphs/dhe.html");
-                                         $("#filterTLS").hide();
-                                       }
-                                       );
-
-                                        $("#loadECDHE").click(function ()
-                                        {
-                                         $("#filterTLS").hide();
-                                         $("#chart").load("graphs/ecdhe.html");
-                                       }
-                                       );
-
-                                        $("#loadlogjam").click(function ()
-                                        {
-                                         $("#filterTLS").hide();
-                                         $("#chart").load("graphs/logjam.html");
-                                       }
-                                       );
-                                        $("#loadCiphers").click(function ()
-                                        {
-                                         $("#filterTLS").show();
-                                         $("#chart").load("graphs/ciphers.html");
-                                       }
-                                       );
-                                        $("#loadMAC").click(function ()
-                                        { 
-                                         $("#filterTLS").hide();
-                                         $("#chart").load("graphs/mac.html");
-                                       }
-                                       );
-
-
-                                        $('#filterDateEnd').datepicker({
-                                          format: "yyyy_mm",
-                                          startView: 1,
-                                          minViewMode: 1,
-                                          autoclose: true,
-                                        //setDate: new Date(2015,11),
-                                        startDate: new Date(2015,10),
-                                        endDate: new Date(),
-                                      });
-
-                                    // default end date, this syntax is weird but it worked
-                                    $('#filterDateEnd').datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth()));
-
-                                    $('#filterDateStart').datepicker({
-                                      format: "yyyy_mm",
-                                      viewMode: "months", 
-                                      minViewMode: "months",
-                                      autoclose: true,
-                                      startDate: new Date(2015,10),
-                                      endDate: new Date(),
-                                    }).on('changeDate', function (e) {
-                                      var month = e.date.getMonth();
-                                      var year = e.date.getFullYear();
-                                      var startDate = new Date(year, month);
-                                      $('#filterDateEnd').datepicker('setStartDate', startDate);
-                                         //$('#filterDateEnd').datepicker('setDate',  startDate);
-                                       });
-
-
-                                    // set default Beginn date
-                                    $('#filterDateStart').datepicker('setDate', new Date(2015,10));
-
-
-                                  }
-                                  ;
-
-                                  </script>
-
-                                </body>
-                                </html>
+                  </body>
+                  </html>
