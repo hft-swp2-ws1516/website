@@ -1,5 +1,5 @@
 /*jslint browser: true*/
-/*global getTimespan, filterResponseByTimespan, drawTable */
+/*global getTimespan, filterResponseByTimespan, drawTable, sortResults, mergeDoubleEntrys */
 'use strict';
 
 // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
@@ -327,14 +327,14 @@ function loadCiphers() {
 
           // For drawing the table
           test[i] = {};
-          test[i]['month'] = filtered[i].month;
+          test[i].month = filtered[i].month;
           // deep copy of array by value, not by reference! 
-          test[i]['summary'] = $.extend(true, [], ciphers);
+          test[i].summary = $.extend(true, [], ciphers);
           // if tld is given match the total hosts correctly
           if (tld) {
-            test[i]['totalHosts'] = filtered[i].totalHosts;
+            test[i].totalHosts = filtered[i].totalHosts;
           } else {
-            test[i]['totalHosts'] = filteredTotalHosts[i].hostCount;
+            test[i].totalHosts = filteredTotalHosts[i].hostCount;
           }
           // show only top 20 used cipher suites
           ciphers = ciphers.splice(0, 20);
