@@ -1,4 +1,4 @@
-
+'use strict';
      d3.csv("population.csv", function (err, data) {
 
          var config = {
@@ -121,14 +121,14 @@
     var quantize = d3.scale.quantize()
         .domain([0, 1.0])
         .range(d3.range(COLOR_COUNTS).map(function (i) {
-            return i
+            return i;
         }));
 
     quantize.domain([d3.min(data, function (d) {
-        return (+d[MAP_VALUE])
+        return (+d[MAP_VALUE]);
     }),
         d3.max(data, function (d) {
-            return (+d[MAP_VALUE])
+            return (+d[MAP_VALUE]);
         })]);
 
     d3.json("https://s3-us-west-2.amazonaws.com/vida-public/geo/world-topo-min.json", function (error, world) {

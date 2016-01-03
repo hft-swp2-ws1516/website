@@ -89,6 +89,7 @@
         "require": true,
         "$"      : false,
         "jQuery" : false,
-        "c3"     : false
+        "c3"     : false,
+        "d3"     : false
     }
 }

@@ -1,3 +1,5 @@
+/*jslint browser: true*/
+'use strict';
 /**
  * Created by ermaldo on 25.11.15.
  */
@@ -108,8 +110,6 @@ document.getElementById("subscribe").innerHTML =
     "</div>"+
     "</div>"+
     "</form>";
-<!--End of Modal-Window-->
-
 
 // enable the Subscribe
 $("#t-c").click(function(){

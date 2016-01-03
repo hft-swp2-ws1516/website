@@ -1,4 +1,5 @@
-
+/*jslint browser: true*/
+'use strict';
 var HttpClient = function () {
     this.get = function (url, callback) {
         var httpRequest = new XMLHttpRequest();
@@ -49,8 +50,7 @@ function initFilters() {
     var keyLen = document.getElementById("filterKeyLen").value;
     var msgAuth = document.getElementById("filterMsgAuth").value;
 
-    if (protocol === "" && keyExAndAuth === "" && bulkCipher === "" && keyLen === ""
-            && msgAuth === "") {
+    if (protocol === "" && keyExAndAuth === "" && bulkCipher === "" && keyLen === ""&& msgAuth === "") {
         document.getElementById("keyExAuth").innerHTML = getKeyAndAuth("all");
         document.getElementById("cipher").innerHTML = getCiphers("all");
         document.getElementById("keyLen").innerHTML = getKeyLengths("all", "all");
@@ -483,7 +483,7 @@ function testIfPartsMatch(match, cipherString) {
 function writeToTotalCiphers(currentMonth, match) {
     currentMonth = parseInt(currentMonth);
     currentMonth++;
-    count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
+    var count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
     if (match.indexOf("preferred") > -1) {
         totalCiphersPreferring[currentMonth] += count;
     } else {
@@ -495,7 +495,7 @@ function writeToTotalCiphers(currentMonth, match) {
 function writeToHosts(currentMonth, match, matchLiterally) {
     currentMonth = parseInt(currentMonth);
     currentMonth++;
-    count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
+    var count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
     if (match.indexOf("preferred") > -1) {
         hostsPreferring[currentMonth] += count;
     } else {
@@ -506,8 +506,8 @@ function writeToHosts(currentMonth, match, matchLiterally) {
 function writeToHostsByProtocol(currentMonth, match) {
     currentMonth = parseInt(currentMonth);
     currentMonth++;
-    count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
-    protocol = ("" + match.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) + "").split(":")[1].replace('"', '');
+    var count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
+    var protocol = ("" + match.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) + "").split(":")[1].replace('"', '');
     switch (protocol) {
         case "SSLv2":
             if (match.indexOf("preferred") > -1) {

@@ -146,7 +146,7 @@
     console.log(dateFormat+" what");
     var jsonRespond;
     var jsonOnDate;
-    var PFSLand=jQuery.get("http://h2511680.stratoserver.net:1337/api/v0/pfs/overview", function (response) {
+    var PFSLand=jQuery.get("https://www.hotcat.de:1337/api/v0/pfs/overview", function (response) {
         jsonRespond=response;
         jsonOnDate=jsonRespond.filter(function(a){return a._id ==dateFormat})[0].overviews;
 
