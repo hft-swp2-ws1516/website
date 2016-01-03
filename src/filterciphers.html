@@ -8,7 +8,7 @@
             <form id="filterBox" name="filterBox">
                 <fieldset>
                     <fieldset>
-                        <legend>Top Level Domain</legend>
+                        <legend class="filterBoxLegend">Top Level Domain</legend>
                         <input id="filterTLD" list="tl_domains" placeholder="Type here to get started!" onblur="removeSpecialChars(this)" />
                         <datalist id="tl_domains">
                             <option value=".com"></option>
@@ -277,7 +277,7 @@
                         </datalist>
                     </fieldset>
                     <fieldset>
-                        <legend>SSL / TLS Version</legend>
+                        <legend class="filterBoxLegend">SSL / TLS Version</legend>
                         <input id="filterProtocol" list="ssl_tls" 
                                onblur="displayFilter(); removeSpecialChars(this)" />
                         <datalist id="ssl_tls">
@@ -289,7 +289,7 @@
                         </datalist>
                     </fieldset>
                     <fieldset>
-                        <legend>Key Exchange and Authentication</legend>
+                        <legend class="filterBoxLegend">Key Exchange and Authentication</legend>
                         <input id="filterKeyExAndAuth" list="keyExAuth"
                                onblur="displayFilter(); removeSpecialChars(this)" />
                         <datalist id="keyExAuth">
@@ -318,7 +318,7 @@
                         </datalist>
                     </fieldset>
                     <fieldset>
-                        <legend>Bulk Cipher and Key Length (in bits)</legend>
+                        <legend class="filterBoxLegend">Bulk Cipher and Key Length (in bits)</legend>
                         <input id="filterCipher" list="cipher" 
                                onblur="displayFilter(); removeSpecialChars(this)" />
                         <datalist id="cipher">
@@ -351,7 +351,7 @@
                         </datalist>
                     </fieldset>
                     <fieldset>
-                        <legend>Message Authenticity</legend>
+                        <legend class="filterBoxLegend">Message Authenticity</legend>
                         <input id="filterMsgAuth" list="msgAuth"
                                onblur="displayFilter(); removeSpecialChars(this)" />
                         <datalist id="msgAuth">
@@ -366,7 +366,7 @@
                         </datalist>
                     </fieldset>
                     <fieldset>
-                        <legend>Time Span</legend>
+                        <legend class="filterBoxLegend">Start and End Date</legend>
                         <fieldset>
                             <div id="filterDateStart" class="input-group date">
                                 <input id="startDate" type="text" class="form-control" />

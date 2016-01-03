@@ -19,6 +19,12 @@ hr{
     border: none;
 }
 
+.filterBoxLegend{
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
 #filterButtons{
     text-align: center;
 }

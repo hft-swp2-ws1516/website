@@ -582,8 +582,6 @@ function testIfPartsMatch(match, cipherString) {
 }
 
 function writeToTotalCiphers(currentMonth, match) {
-    //currentMonth = parseInt(currentMonth);
-    //currentMonth++;
     var count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
     if (match.indexOf("preferred") > -1) {
         totalCiphersPreferring[currentMonth] += count;
@@ -594,8 +592,6 @@ function writeToTotalCiphers(currentMonth, match) {
 }
 
 function writeToHosts(currentMonth, match, matchLiterally) {
-    //currentMonth = parseInt(currentMonth);
-    //currentMonth++;
     var count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
     if (match.indexOf("preferred") > -1) {
         hostsPreferring[currentMonth] += count;
@@ -605,8 +601,6 @@ function writeToHosts(currentMonth, match, matchLiterally) {
 }
 
 function writeToHostsByProtocol(currentMonth, match) {
-    //currentMonth = parseInt(currentMonth);
-    //currentMonth++;
     var count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
     var protocol = ("" + match.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) + "").split(":")[1].replace('"', '');
     switch (protocol) {
