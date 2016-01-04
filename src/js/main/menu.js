@@ -203,8 +203,6 @@ else {
         var date = monthNames[parts[1] - 1] + ", " + parts[0];
 
         $('#lastScan').html(date);
-        // save the latest Date in the local storage
-
     });
 
 }

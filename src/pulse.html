@@ -1,0 +1,528 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- Load c3.css -->
+<link href="css/c3/c3.css" rel="stylesheet" type="text/css">
+<!-- Load d3.js and c3.js -->
+<script src="js/c3/d3.min.js" charset="utf-8"></script>
+<script src="js/c3/c3.min.js"></script>
+<!--Helper class -->
+<script type="text/javascript" src="js/main/helperClass.js"></script>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<script>
+'use strict';
+/*global google, filterResponseByTimespan */
+google.load('visualization', '1', {packages: ['corechart', 'bar']});
+
+// hostcount
+var totalHosts;
+
+jQuery.get("https://hotcat.de:1337/api/v0/pfs/overview", function(response) {
+	totalHosts = response;
+
+}).error(function() {
+	//$('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+	//$("#loader").css("display", "none");
+}).done(function() {
+	jQuery.get("https://hotcat.de:1337/api/v0/pfs/distribution?", function(response) {
+
+		var filtered = filterResponseByTimespan(response, new Date(2015,11), new Date(2015,11));
+
+		//alert(JSON.stringify(response));
+
+		var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(2015,11), new Date(2015,11));
+
+             // remove ECDHE data
+             var filteredElement = filtered[0].distribution;
+
+             for (var i = filteredElement.length - 1; i >= 0; i--) {
+
+             	filteredElement[i].totalHosts = filteredTotalHosts[0].monthlyPfsEnabled;
+             	
+                // remove ECDHE elements
+                if (filteredElement[i].kx === "ECDH" || filteredElement[i].count < 1000) {
+                	filteredElement.splice(i, 1);
+                }
+
+            
+
+
+
+            }
+
+            // alert(JSON.stringify(filteredTotalHosts));
+
+            var datas = [];
+
+            datas[0] = ['Keysize', 'Count', { role: 'style' }, {type: 'string', role: 'tooltip',  'p': {'html': true}}];
+
+            for (var i = 0; i < filteredElement.length; i++) {
+
+            	var inner = [];
+
+            	var text = '<b>'+  filteredElement[i].count +'</b><br> <b> ('+ ((filteredElement[i].count/filteredElement[i].totalHosts)*100).toFixed(1) +'% </b> of all Sites who enabled PFS ) <br> total Hosts: '+ filteredElement[i].totalHosts;
+
+            	datas[i+1] = [filteredElement[i].kxStrength, filteredElement[i].count, 'silver', text ];
+            }
+
+
+             //alert(datas[0]);
+
+             google.setOnLoadCallback(drawAxisTickColors(datas, 'dhe'));
+
+
+         });
+	//alert(JSON.stringify(totalHosts));
+});
+
+
+function drawAxisTickColors(datas, type) {
+	var data = google.visualization.arrayToDataTable(datas);
+
+
+	var options = {
+		title: 'Distribution of DHE Parameters',
+		subtitle: 'Keysize, Count, and test',
+		focusTarget: 'category',
+		legend: { position: "none" },
+		tooltip: { isHtml: true },
+        //width: 620,
+        hAxis: {
+        	title: 'Key Strength',
+        	viewWindow: {
+        		min: [7, 30, 0],
+        		max: [17, 30, 0]
+        	},
+        	textStyle: {
+        		fontSize: 12,
+        		color: '#053061',
+        		bold: true,
+        		italic: false
+        	},
+        	titleTextStyle: {
+        		fontSize: 18,
+        		color: '#053061',
+        		bold: true,
+        		italic: false
+        	}
+        },
+        vAxis: {
+        	title: 'Count',
+        	textStyle: {
+        		fontSize: 12,
+        		color: '#000000',
+        		bold: false,
+        		italic: false
+        	},
+        	titleTextStyle: {
+        		fontSize: 12,
+        		color: '#000000',
+        		bold: true,
+        		italic: false
+        	}
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('dhe'));
+    chart.draw(data, options);
+}
+
+
+/**** ECHDE **/
+
+jQuery.get("https://hotcat.de:1337/api/v0/pfs/overview", function(response) {
+	totalHosts = response;
+
+}).error(function() {
+	//$('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+	//$("#loader").css("display", "none");
+}).done(function() {
+	jQuery.get("https://hotcat.de:1337/api/v0/pfs/distribution?", function(response) {
+
+		var filtered = filterResponseByTimespan(response, new Date(2015,11), new Date(2015,11));
+
+		//alert(JSON.stringify(response));
+
+		var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(2015,11), new Date(2015,11));
+
+             // remove ECDHE data
+             var filteredElement = filtered[0].distribution;
+
+             for (var i = filteredElement.length - 1; i >= 0; i--) {
+
+             	filteredElement[i].totalHosts = filteredTotalHosts[0].monthlyPfsEnabled;
+             	
+                // remove ECDHE elements
+                if (filteredElement[i].kx === "DH" || filteredElement[i].count < 1000) {
+                	filteredElement.splice(i, 1);
+                }
+
+            
+
+
+
+            }
+
+            // alert(JSON.stringify(filteredTotalHosts));
+
+            var datas = [];
+
+            datas[0] = ['Keysize', 'Count', { role: 'style' }, {type: 'string', role: 'tooltip',  'p': {'html': true}}];
+
+            for (var i = 0; i < filteredElement.length; i++) {
+
+            	var inner = [];
+
+            	var text = '<b>'+  filteredElement[i].count +'</b><br> <b> ('+ ((filteredElement[i].count/filteredElement[i].totalHosts)*100).toFixed(1) +'% </b> of all Sites who enabled PFS ) <br> total Hosts: '+ filteredElement[i].totalHosts;
+
+            	datas[i+1] = [filteredElement[i].kxStrength, filteredElement[i].count, 'silver', text ];
+            }
+
+
+             //alert(datas[0]);
+
+             google.setOnLoadCallback(drawAxisTickColors2(datas));
+
+
+         });
+	//alert(JSON.stringify(totalHosts));
+});
+
+
+
+function drawAxisTickColors2(datas, type) {
+	var data = google.visualization.arrayToDataTable(datas);
+
+
+	var options = {
+		title: 'Distribution of ECDHE Parameters',
+		subtitle: 'Keysize, Count, and test',
+		focusTarget: 'category',
+		legend: { position: "none" },
+		tooltip: { isHtml: true },
+        //width: 620,
+        hAxis: {
+        	title: 'Key Strength',
+        	viewWindow: {
+        		min: [7, 30, 0],
+        		max: [17, 30, 0]
+        	},
+        	textStyle: {
+        		fontSize: 12,
+        		color: '#053061',
+        		bold: true,
+        		italic: false
+        	},
+        	titleTextStyle: {
+        		fontSize: 18,
+        		color: '#053061',
+        		bold: true,
+        		italic: false
+        	}
+        },
+        vAxis: {
+        	title: 'Count',
+        	textStyle: {
+        		fontSize: 12,
+        		color: '#000000',
+        		bold: false,
+        		italic: false
+        	},
+        	titleTextStyle: {
+        		fontSize: 12,
+        		color: '#000000',
+        		bold: true,
+        		italic: false
+        	}
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('ecdhe'));
+    chart.draw(data, options);
+}
+
+/** MAC ***/
+
+jQuery.get("https://hotcat.de:1337/api/v0/pfs/overview", function(response) {
+	totalHosts = response;
+
+}).error(function() {
+	//$('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+	//$("#loader").css("display", "none");
+}).done(function() {
+	jQuery.get("https://hotcat.de:1337/api/v0/pfs/distribution?", function(response) {
+
+		var filtered = filterResponseByTimespan(response, new Date(2015,11), new Date(2015,11));
+
+		//alert(JSON.stringify(response));
+
+		var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(2015,11), new Date(2015,11));
+
+             // remove ECDHE data
+             var filteredElement = filtered[0].distribution;
+
+             for (var i = filteredElement.length - 1; i >= 0; i--) {
+
+             	filteredElement[i].totalHosts = filteredTotalHosts[0].monthlyPfsEnabled;
+             	
+                // remove ECDHE elements
+                if (filteredElement[i].kx === "DH" || filteredElement[i].count < 1000) {
+                	filteredElement.splice(i, 1);
+                }
+
+
+
+
+
+            }
+
+            // alert(JSON.stringify(filteredTotalHosts));
+
+            var datas = [];
+
+            datas[0] = ['Keysize', 'Count', { role: 'style' }, {type: 'string', role: 'tooltip',  'p': {'html': true}}];
+
+            for (var i = 0; i < filteredElement.length; i++) {
+
+            	var inner = [];
+
+            	var text = '<b>'+  filteredElement[i].count +'</b><br> <b> ('+ ((filteredElement[i].count/filteredElement[i].totalHosts)*100).toFixed(1) +'% </b> of all Sites who enabled PFS ) <br> total Hosts: '+ filteredElement[i].totalHosts;
+
+            	datas[i+1] = [filteredElement[i].kxStrength, filteredElement[i].count, 'silver', text ];
+            }
+
+
+             //alert(datas[0]);
+
+             google.setOnLoadCallback(drawAxisTickColors3(datas));
+
+
+         });
+	//alert(JSON.stringify(totalHosts));
+});
+
+
+function drawAxisTickColors3(datas) {
+	var data = google.visualization.arrayToDataTable(datas);
+
+
+	var options = {
+		title: 'Distribution of ECDHE Parameters',
+		subtitle: 'Keysize, Count, and test',
+		focusTarget: 'category',
+		legend: { position: "none" },
+		tooltip: { isHtml: true },
+        //width: 620,
+        hAxis: {
+        	title: 'Key Strength',
+        	viewWindow: {
+        		min: [7, 30, 0],
+        		max: [17, 30, 0]
+        	},
+        	textStyle: {
+        		fontSize: 12,
+        		color: '#053061',
+        		bold: true,
+        		italic: false
+        	},
+        	titleTextStyle: {
+        		fontSize: 18,
+        		color: '#053061',
+        		bold: true,
+        		italic: false
+        	}
+        },
+        vAxis: {
+        	title: 'Count',
+        	textStyle: {
+        		fontSize: 12,
+        		color: '#000000',
+        		bold: false,
+        		italic: false
+        	},
+        	titleTextStyle: {
+        		fontSize: 12,
+        		color: '#000000',
+        		bold: true,
+        		italic: false
+        	}
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('mac'));
+    chart.draw(data, options);
+}
+
+
+
+
+
+
+</script>
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">PFS Summary</div>
+				<div class="panel-body">
+					<div id="pfs">	</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">Cipher Summary</div>
+				<div class="panel-body">
+					<div id="cipher"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">DHE Summary</div>
+				<div class="panel-body">
+					<div id="dhe">	</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">ECDHE Summary</div>
+				<div class="panel-body">
+					<div id="ecdhe"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">Mac Summary</div>
+				<div class="panel-body">
+					<div id="mac">	</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">Logjam Summary</div>
+				<div class="panel-body">
+					<div id="logjam"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<script>
+'use strict';
+/*global filterResponseByTimespan*/
+
+var totalHosts;
+var hostcount;
+jQuery.get("https://hotcat.de:1337/api/v0/hostcount", function(response) {
+	totalHosts = response;
+	totalHosts = filterResponseByTimespan(totalHosts, new Date(2015,11), new Date(2015,11));
+	hostcount = totalHosts[0].hostCount;
+}).error(function() {
+    //$('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+    //$("#loader").css("display", "none");
+}).done(function() {
+	jQuery.get("https://hotcat.de:1337/api/v0/pfs/overview", function(response) {
+
+		var filtered = filterResponseByTimespan(response, new Date(2015,11), new Date(2015,11));
+
+	//alert(JSON.stringify(filtered));
+	//alert(filtered.length);
+
+	var chart = c3.generate({
+		bindto: '#pfs',
+		data: {
+			json: filtered,
+			keys: {
+				value: ['monthlyPfsEnabled', 'monthlyPfsDisabled'],
+			},
+			type : 'donut',
+		},
+		donut: {
+			
+		}
+	});
+
+	$("#pfs").append( "<div id='pfsTitle' class = 'donut-text'><span class='percentage'>"+(filtered[0].monthlyPfsEnabled/ filtered[0].monthlyTotalHosts *100).toFixed(1) +" % </span> <br> Sites enable PFS</div>" );
+
+
+});
+
+	jQuery.get("https://hotcat.de:1337/api/v0/exp/overview", function(response) {
+
+		var filtered = filterResponseByTimespan(response, new Date(2015,11), new Date(2015,11));
+
+		filtered[0].expDisabled = totalHosts[0].hostCount - filtered[0].expEnabled;
+
+	//alert(JSON.stringify(filtered));
+	//alert(filtered.length);
+
+	var chart = c3.generate({
+		bindto: '#logjam',
+		data: {
+			json: filtered,
+			keys: {
+				value: [ 'expDisabled' , 'expEnabled']
+			},
+			type: 'donut',
+			colors: {
+            expEnabled: '#D62728', //green
+            expDisabled: '#2CA02C', // red
+        },
+
+    },
+    donut: {
+
+    }
+});
+
+	$("#logjam").append( "<div id='pfsTitle' class = 'donut-text'><span class='percentage'>"+(filtered[0].expDisabled/ totalHosts[0].hostCount *100).toFixed(1) +" % </span> <br> Sites disable EXP</div>" );
+
+
+});
+
+
+
+});
+
+
+
+
+
+</script>
+
+<style type="text/css">
+
+.donut-text{
+	position: absolute;
+	top: 35%;
+	left: 30%;
+	right: 70%;
+	width: 150px;
+	font-size: 1.2em;
+	text-align: center;
+
+}
+
+.percentage{
+	font-weight:bold;
+	font-size: 1.5em;
+}
+
+</style>
