@@ -38,7 +38,7 @@ var n = new Date();
 var d = n.getFullYear(); // dynamic Date
 document.getElementById("footer").innerHTML =
     "<div class='container'>"+
-    " &copy; 2015 -"+d+" "+
+    " &copy; 2015 - "+d+" "+
     " HfT Stuttgart "+
     " &#124;<a href='#subscribtion' id='sub' data-toggle='modal'> Subscribe </a> "+
     "</div>";
