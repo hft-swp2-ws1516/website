@@ -14,6 +14,9 @@ document.getElementById("nav01").innerHTML =
     "<li id='loadDHE'><a href='globaldata.html#DHE'>Diffie Hellman Keygroups</a></li>" +
     "<li id='loadECDHE'><a href='globaldata.html#ECDHE'>Elliptic Curve Diffie Hellman</a></li>" +
     "<li id='loadCiphers'><a href='globaldata.html#Ciphers'>Cipher Suites</a></li>" +
+    "<li id='loadKx'><a href='globaldata.html#Kx'>Key Exchange</a></li>" +
+    "<li id='loadAuth'><a href='globaldata.html#Auth'>Authentification Methods</a></li>" +
+    "<li id='loadEnc'><a href='globaldata.html#Enc'>Bulk Encryption</a></li>" +
     "<li id='loadMAC'><a href='globaldata.html#MAC'>MAC Distribution</a></li>" +
     "<li role='separator' class='divider'></li>" +
     "<li id='loadlogjam'><a href='globaldata.html#logjam'>Logjam Attack</a></li>" +

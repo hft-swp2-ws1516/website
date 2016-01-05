@@ -146,7 +146,7 @@ function filterResponseByTimespan(response, start, end) {
   var end = new Date(end.getFullYear(), end.getMonth());
   while (date.getTime() <= end.getTime()) {
     for (var i = 0; i < response.length; i++) {
-      if (response[i].month === formatDate2(date)) {
+      if (response[i].month === formatDate2(date) || response[i]._id === formatDate2(date)) {
         filtered.push(response[i]);
         break;
       }
@@ -170,4 +170,11 @@ function getLatestElementIndex(response) {
     }
   }
   return latestElement;
+}
+
+
+function getLatestDate(response){
+
+
+
 }
