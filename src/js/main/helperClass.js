@@ -172,9 +172,3 @@ function getLatestElementIndex(response) {
   return latestElement;
 }
 
-
-function getLatestDate(response){
-
-
-
-}

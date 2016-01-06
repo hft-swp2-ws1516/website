@@ -4,7 +4,6 @@
 
 // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
 window.onload = function() {
-
   // Timeout setup for ajax
   // If the API is not responding within 3 seconds, the hard coded charts will be loaded
   $.ajaxSetup({
@@ -155,7 +154,7 @@ window.onload = function() {
 
 function loadEnc() {
 
-   var totalHosts;
+  var totalHosts, filteredTotalHosts, filtered, chart, distribution;
   var tld = $('#filterTLD').val().replace('.', '');
 
   jQuery.get("https://hotcat.de:1337/api/v0/hostcount?tld=" + tld, function(response) {
@@ -184,12 +183,12 @@ function loadEnc() {
         }
 
         // filter hostcount endpoint by given timespan
-        var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
         // percentual line
         for (var i = 0; i < filtered.length; i++) {
           filtered[i].totalHosts = filteredTotalHosts[i].hostCount;
-          var distribution = filtered[i].encs;
+          distribution = filtered[i].encs;
           for (var j = 0; j < distribution.length; j++) {
             // if TLD is given match the total host correctly
             if (tld) {
@@ -206,7 +205,7 @@ function loadEnc() {
 
         for (var i = 0; i < filtered.length; i++) {
           // get distribution array
-          var distribution = filtered[i].encs;
+          distribution = filtered[i].encs;
           for (var j = 0; j < distribution.length; j++) {
             // only take dh keygorups
             if (!(Array.isArray(json[distribution[j].enc]))) {
@@ -249,16 +248,16 @@ function loadEnc() {
 
 
       } else {
-        var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
         // filter hostcount endpoint by given timespan
         filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
-        
-        var distribution = filtered[0].encs;
+
+        distribution = filtered[0].encs;
         // add total hosts number fo each value
         for (var i = 0; i < distribution.length; i++) {
           // if tld is given set the total number of hosts correctly
           if (distribution[i].enc === null) {
-                distribution[i].enc = "unkown";
+            distribution[i].enc = "unkown";
           }
           distribution[i].totalHosts = filteredTotalHosts[0].hostCount;
         }
@@ -302,7 +301,7 @@ function loadEnc() {
 
 function loadKx() {
 
-   var totalHosts;
+  var totalHosts, filteredTotalHosts, filtered, chart, distribution;
   var tld = $('#filterTLD').val().replace('.', '');
 
   jQuery.get("https://hotcat.de:1337/api/v0/hostcount?tld=" + tld, function(response) {
@@ -331,12 +330,12 @@ function loadKx() {
         }
 
         // filter hostcount endpoint by given timespan
-        var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
         // percentual line
         for (var i = 0; i < filtered.length; i++) {
           filtered[i].totalHosts = filteredTotalHosts[i].hostCount;
-          var distribution = filtered[i].kxs;
+          distribution = filtered[i].kxs;
           for (var j = 0; j < distribution.length; j++) {
             // if TLD is given match the total host correctly
             if (tld) {
@@ -353,7 +352,7 @@ function loadKx() {
 
         for (var i = 0; i < filtered.length; i++) {
           // get distribution array
-          var distribution = filtered[i].kxs;
+          distribution = filtered[i].kxs;
           for (var j = 0; j < distribution.length; j++) {
             // only take dh keygorups
             if (!(Array.isArray(json[distribution[j].kx]))) {
@@ -396,16 +395,16 @@ function loadKx() {
 
 
       } else {
-        var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
         // filter hostcount endpoint by given timespan
         filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
-        
-        var distribution = filtered[0].kxs;
+
+        distribution = filtered[0].kxs;
         // add total hosts number fo each value
         for (var i = 0; i < distribution.length; i++) {
           // if tld is given set the total number of hosts correctly
           if (distribution[i].kx === null) {
-                distribution[i].kx = "unkown";
+            distribution[i].kx = "unkown";
           }
           distribution[i].totalHosts = filteredTotalHosts[0].hostCount;
         }
@@ -447,7 +446,7 @@ function loadKx() {
 
 function loadAuth() {
 
-  var totalHosts;
+  var totalHosts, filteredTotalHosts, filtered, chart, distribution;
   var tld = $('#filterTLD').val().replace('.', '');
 
   jQuery.get("https://hotcat.de:1337/api/v0/hostcount?tld=" + tld, function(response) {
@@ -476,12 +475,12 @@ function loadAuth() {
         }
 
         // filter hostcount endpoint by given timespan
-        var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
         // percentual line
         for (var i = 0; i < filtered.length; i++) {
           filtered[i].totalHosts = filteredTotalHosts[i].hostCount;
-          var distribution = filtered[i].auths;
+          distribution = filtered[i].auths;
           for (var j = 0; j < distribution.length; j++) {
             // if TLD is given match the total host correctly
             if (tld) {
@@ -498,7 +497,7 @@ function loadAuth() {
 
         for (var i = 0; i < filtered.length; i++) {
           // get distribution array
-          var distribution = filtered[i].auths;
+          distribution = filtered[i].auths;
           for (var j = 0; j < distribution.length; j++) {
             // only take dh keygorups
             if (!(Array.isArray(json[distribution[j].auth]))) {
@@ -541,16 +540,16 @@ function loadAuth() {
 
 
       } else {
-        var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
         // filter hostcount endpoint by given timespan
         filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
-        
-        var distribution = filtered[0].auths;
+
+        distribution = filtered[0].auths;
         // add total hosts number fo each value
         for (var i = 0; i < distribution.length; i++) {
           // if tld is given set the total number of hosts correctly
           if (distribution[i].auth === null) {
-                distribution[i].auth = "unkown";
+            distribution[i].auth = "unkown";
           }
           distribution[i].totalHosts = filteredTotalHosts[0].hostCount;
         }
@@ -593,7 +592,7 @@ function loadAuth() {
 
 function loadMac() {
 
-  var totalHosts;
+  var totalHosts, filteredTotalHosts, filtered, chart, distribution;
   var tld = $('#filterTLD').val().replace('.', '');
 
   jQuery.get("https://hotcat.de:1337/api/v0/hostcount?tld=" + tld, function(response) {
@@ -622,12 +621,12 @@ function loadMac() {
         }
 
         // filter hostcount endpoint by given timespan
-        var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
         // percentual line
         for (var i = 0; i < filtered.length; i++) {
           filtered[i].totalHosts = filteredTotalHosts[i].hostCount;
-          var distribution = filtered[i].distribution;
+          distribution = filtered[i].distribution;
           for (var j = 0; j < distribution.length; j++) {
             // if TLD is given match the total host correctly
             if (tld) {
@@ -643,7 +642,7 @@ function loadMac() {
 
         for (var i = 0; i < filtered.length; i++) {
           // get distribution array
-          var distribution = filtered[i].distribution;
+          distribution = filtered[i].distribution;
           for (var j = 0; j < distribution.length; j++) {
             // only take dh keygorups
             if (!(Array.isArray(json[distribution[j].mac]))) {
@@ -686,11 +685,11 @@ function loadMac() {
 
 
       } else {
-        var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
         // filter hostcount endpoint by given timespan
         filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
-        var distribution = filtered[0].distribution;
+        distribution = filtered[0].distribution;
         // add total hosts number fo each value
         for (var i = 0; i < distribution.length; i++) {
           // if tld is given set the total number of hosts correctly
@@ -735,7 +734,7 @@ function loadMac() {
 
 function loadCiphers() {
 
-  var totalHosts;
+  var totalHosts, filteredTotalHosts, filtered, chart, ciphers;
 
   jQuery.get("https://hotcat.de:1337/api/v0/hostcount", function(response) {
     totalHosts = response;
@@ -775,7 +774,7 @@ function loadCiphers() {
         // iterate over all months
         for (var i = 0; i < filtered.length; i++) {
           // get ciphers array
-          var ciphers = filtered[i].summary;
+          ciphers = filtered[i].summary;
           if (tld) {
             ciphers = mergeDoubleEntrys(ciphers, tlsFilter, filtered[i].totalHosts);
           } else {
@@ -844,15 +843,15 @@ function loadCiphers() {
         drawTable(["month", "summary", "totalHosts"], test, ["cipher", "count", "percent"]);
 
       } else {
-        var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
-        var ciphers = filtered[0].summary;
+        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        ciphers = filtered[0].summary;
 
         var summarizedArray = mergeDoubleEntrys(ciphers);
         // result array by property count in descending order
         sortResults(summarizedArray, 'count', false);
 
         // Only Top 20 most frequent Cipher suites
-        var summarizedArray = summarizedArray.splice(0, 20);
+        summarizedArray = summarizedArray.splice(0, 20);
 
         var finalJson = {};
         for (var i = 0; i < summarizedArray.length; i++) {
@@ -893,92 +892,121 @@ function loadCiphers() {
 }
 
 function loadLogjam() {
+  var totalHosts, filteredTotalHosts;
+  var tld = $('#filterTLD').val().replace('.', '');
 
-  // Load data from the server using a HTTP GET request
-  // jquery.get is a equivalent to $.ajax({....
-  jQuery.get("https://hotcat.de:1337/api/v0/exp/overview", function(response) {
-    var filtered;
-    var start = getTimespan();
+  jQuery.get("https://hotcat.de:1337/api/v0/hostcount?tld=" + tld, function(response) {
 
-    if (start[0] !== start[1]) {
+    totalHosts = response;
 
-      // filter response Array by timespan
-      filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
-
-      drawTable(["month", "expDisabled", "expEnabled", "total"], filtered);
-
-      // percentual line
-      for (var i = 0; i < filtered.length; i++) {
-        filtered[i].expEnabledPercent = ((filtered[i].expEnabled / filtered[i].total) * 100).toFixed(2);
-        filtered[i].expDisabledPercent = ((filtered[i].expDisabled / filtered[i].total) * 100).toFixed(2);
-      }
-
-
-
-      chart = c3.generate({
-        bindto: '#chart',
-        data: {
-          json: filtered,
-          keys: {
-            x: 'month',
-            value: ['expDisabledPercent', 'expEnabledPercent']
-          },
-          type: 'line',
-          colors: {
-            expEnabled: '#D62728', //green
-            expDisabled: '#2CA02C', // red
-          },
-
-        },
-        type: 'line',
-        axis: {
-          x: {
-            type: 'category',
-          },
-          y: {
-            label: {
-              text: 'In Percent',
-              position: 'outer-middle'
-            },
-          }
-        },
-
-      });
-    } else {
-      filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
-
-      chart = c3.generate({
-        bindto: '#chart',
-        data: {
-          json: filtered,
-          keys: {
-            x: 'month',
-            value: ['expDisabled', 'expEnabled']
-          },
-          type: 'pie',
-          colors: {
-            expEnabled: '#D62728', //green
-            expDisabled: '#2CA02C', // red
-          },
-
-        },
-
-      });
-      drawTable(["month", "expDisabled", "expEnabled", "total"], filtered);
-    }
   }).error(function() {
     $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
     $("#loader").css("display", "none");
   }).done(function() {
-    $("#loader").css("display", "none");
+
+    // Load data from the server using a HTTP GET request
+    // jquery.get is a equivalent to $.ajax({....
+    jQuery.get("https://hotcat.de:1337/api/v0/exp/overview?tld=" + tld, function(response) {
+      var filtered, chart;
+      var start = getTimespan();
+
+      if (start[0] !== start[1]) {
+
+       filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        // filter response Array by timespan
+        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
+        var hostcount;
+        for (var i = 0; i < filtered.length; i++) {
+          hostcount = filteredTotalHosts[i].hostCount;
+          filtered[i].total = hostcount;
+          filtered[i].expDisabled = hostcount - filtered[i].expEnabled;
+        }
+
+        drawTable(["month", "expDisabled", "expEnabled", "total"], filtered);
+
+        // percentual line
+        for (var i = 0; i < filtered.length; i++) {
+          filtered[i].expEnabledPercent = ((filtered[i].expEnabled / filteredTotalHosts[i].hostCount) * 100).toFixed(2);
+          filtered[i].expDisabledPercent = ((filtered[i].expDisabled / filteredTotalHosts[i].hostCount) * 100).toFixed(2);
+        }
+
+
+        chart = c3.generate({
+          bindto: '#chart',
+          data: {
+            json: filtered,
+            keys: {
+              x: 'month',
+              value: ['expDisabledPercent', 'expEnabledPercent']
+            },
+            type: 'line',
+            colors: {
+              expEnabled: '#D62728', //green
+              expDisabled: '#2CA02C', // red
+            },
+
+          },
+          type: 'line',
+          axis: {
+            x: {
+              type: 'category',
+            },
+            y: {
+              label: {
+                text: 'In Percent',
+                position: 'outer-middle'
+              },
+            }
+          },
+
+        });
+      } else {
+        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
+       filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        var hostcount = filteredTotalHosts[0].hostCount;
+
+        filtered[0].total = hostcount;
+        filtered[0].expDisabled = hostcount - filtered[0].expEnabled;
+
+        chart = c3.generate({
+          bindto: '#chart',
+          data: {
+            json: filtered,
+            keys: {
+              x: 'month',
+              value: ['expDisabled', 'expEnabled']
+            },
+            type: 'pie',
+            colors: {
+              expEnabled: '#D62728', //green
+              expDisabled: '#2CA02C', // red
+            },
+
+          },
+
+        });
+        drawTable(["month", "expDisabled", "expEnabled", "total"], filtered);
+      }
+    }).error(function() {
+      $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+      $("#loader").css("display", "none");
+    }).done(function() {
+      $("#loader").css("display", "none");
+
+    });
+
 
   });
+
+
 
 }
 
 function loadECDHE() {
 
-  var totalHosts;
+  var totalHosts, filteredTotalHosts, filtered, chart, distribution;
 
   jQuery.get("https://hotcat.de:1337/api/v0/pfs/overview", function(response) {
     totalHosts = response;
@@ -1009,7 +1037,7 @@ function loadECDHE() {
 
         // calc  percentual line
         for (var i = 0; i < filtered.length; i++) {
-          var distribution = filtered[i].distribution;
+          distribution = filtered[i].distribution;
           if (!tld) {
             filtered[i].totalHosts = filteredTotalHosts[i].monthlyPfsEnabled;
           }
@@ -1027,7 +1055,7 @@ function loadECDHE() {
 
         for (var i = 0; i < filtered.length; i++) {
           // get distribution array
-          var distribution = filtered[i].distribution;
+          distribution = filtered[i].distribution;
           var tempArray = [];
           for (var j = 0; j < distribution.length; j++) {
             // only take ecdh keygroups
@@ -1072,9 +1100,9 @@ function loadECDHE() {
         });
       } else {
 
-        var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
         // filter hostcount endpoint by given timespan
-        var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
 
         // remove ECDHE data
@@ -1130,7 +1158,7 @@ function loadECDHE() {
 
 function loadDHE() {
 
-  var totalHosts;
+  var totalHosts, filteredTotalHosts, filtered, chart, distribution;
   // The base is the server which supports pfs (dhe or ecdhe enabled)
   jQuery.get("https://hotcat.de:1337/api/v0/pfs/overview", function(response) {
     totalHosts = response;
@@ -1160,12 +1188,12 @@ function loadDHE() {
         }
 
         // filter hostcount endpoint by given timespan
-        var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
 
         //  calc percentual line
         for (i = 0; i < filtered.length; i++) {
-          var distribution = filtered[i].distribution;
+          distribution = filtered[i].distribution;
           if (!tld) {
             filtered[i].totalHosts = filteredTotalHosts[i].monthlyPfsEnabled;
           }
@@ -1184,7 +1212,7 @@ function loadDHE() {
         // iterate over all months
         for (i = 0; i < filtered.length; i++) {
           // get distribution array
-          var distribution = filtered[i].distribution;
+          distribution = filtered[i].distribution;
           // this array is for table, graph differs from the table
           var tempArray = [];
           // iterate over the distribution of one month
@@ -1240,9 +1268,9 @@ function loadDHE() {
 
 
       } else {
-        var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
         // filter hostcount endpoint by given timespan
-        var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
 
         // remove ECDHE data
@@ -1307,7 +1335,7 @@ function loadPFS() {
   // jquery.get is a equivalent to $.ajax({....
   jQuery.get("https://hotcat.de:1337/api/v0/pfs/overview", function(response) {
     // Get Timespan, in this case two elements with start and end time
-    var filtered, overview;
+    var filtered, overview, chart;
     var start = getTimespan();
     // get TLD 
     var tld = $('#filterTLD').val().replace('.', '');
@@ -1362,7 +1390,6 @@ function loadPFS() {
           },
         },
         type: 'line',
-        unload: chart.columns,
         axis: {
           x: {
             type: 'category',
@@ -1397,10 +1424,11 @@ function loadPFS() {
         }
       }
 
+
       chart = c3.generate({
         bindto: '#chart',
         data: {
-          ljson: filtered,
+          json: filtered,
           keys: {
             value: ['monthlyPfsEnabled', 'monthlyPfsDisabled'],
           },
