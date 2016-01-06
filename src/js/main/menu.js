@@ -35,11 +35,11 @@ document.getElementById("nav01").innerHTML =
 
 
 // for footer menu
-var n = new Date();
-var d = n.getFullYear(); // dynamic Date
+var dateObject = new Date();
+var currentYear = dateObject.getFullYear(); // dynamic Date
 document.getElementById("footer").innerHTML =
     "<div class='container'>" +
-    " &copy; 2015 - " + d + " " +
+    " &copy; 2015 - " + currentYear + " " +
     " HfT Stuttgart " +
     " &#124;<a href='#subscribtion' id='sub' data-toggle='modal'> Subscribe </a> " +
     "</div>";
