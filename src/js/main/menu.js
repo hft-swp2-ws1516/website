@@ -110,30 +110,59 @@ document.getElementById("subscribe").innerHTML =
     "</div>" +
     "</form>";
 
+/*---------------------------------------- START USER-INPUT VALIDATION-------------------------------------------*/
+var name_tocheck = false;
+var email_tocheck = false;
+
 // enable the Subscribe
+$(document).ready(function(){
+    validate();
+    $("#name, #email").change(validate);
+});
 $("#t-c").click(function() {
-    $("#save").removeAttr("disabled");
+    validate();
 });
 
 
 // Validate
-/* form validation */
+/* form validation  that shows the user the correct format of name and email */
 $(document).ready(function() {
     $("#name").keyup(function() {
         if (/^[a-zA-Z ]+$/.test($(this).val()) && $(this).val().trim() !== "") {
+            name_tocheck = true;
             $(this).css("border-color", "#0F0");
         } else {
+            name_tocheck = false;
             $(this).css("border-color", "#F00");
         }
     });
     $("#email").keyup(function() {
         if (/^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/.test($(this).val()) && $(this).val().trim() !== "") {
+            email_tocheck = true;
             $(this).css("border-color", "#0F0");
         } else {
+            email_tocheck = false;
             $(this).css("border-color", "#F00");
         }
     });
 });
+
+function disableBtn() {
+    document.getElementById("save").disabled = true;
+}
+
+function undisableBtn() {
+    document.getElementById("save").disabled = false;
+}
+
+function validate(){
+    if(name_tocheck == true && email_tocheck == true){
+        undisableBtn();
+    }else {
+        disableBtn();
+    }
+}
+/*---------------------------------------- END USER-INPUT VALIDATION-------------------------------------------*/
 
 function getLatestElementIndex(response) {
     var latestElement = 0;
