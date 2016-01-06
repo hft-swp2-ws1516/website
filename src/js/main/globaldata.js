@@ -153,7 +153,148 @@ window.onload = function() {
 };
 
 
-function loadAuth() {
+function loadEnc() {
+
+   var totalHosts;
+  var tld = $('#filterTLD').val().replace('.', '');
+
+  jQuery.get("https://hotcat.de:1337/api/v0/hostcount?tld=" + tld, function(response) {
+
+    totalHosts = response;
+
+  }).error(function() {
+    $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+    $("#loader").css("display", "none");
+  }).done(function() {
+
+    // Load data from the server using a HTTP GET request
+    // jquery.get is a equivalent to $.ajax({....
+    jQuery.get("https://hotcat.de:1337/api/v0/enc/overview?tld=" + tld, function(response) {
+      var start = getTimespan();
+
+      if (start[0] !== start[1]) {
+
+        // filter response Array by timespan
+        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
+        //fill months for x-axis
+        var months = [];
+        for (var i = 0; i < filtered.length; i++) {
+          months.push(filtered[i].month);
+        }
+
+        // filter hostcount endpoint by given timespan
+        var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
+        // percentual line
+        for (var i = 0; i < filtered.length; i++) {
+          filtered[i].totalHosts = filteredTotalHosts[i].hostCount;
+          var distribution = filtered[i].encs;
+          for (var j = 0; j < distribution.length; j++) {
+            // if TLD is given match the total host correctly
+            if (tld) {
+              distribution[j].percent = ((distribution[j].count / filteredTotalHosts[i].hostCount) * 100).toFixed(2);
+            } else {
+              distribution[j].percent = ((distribution[j].count / filtered[i].totalHosts) * 100).toFixed(2);
+            }
+          }
+        }
+
+
+        // Convert the response in syntax like : { '512': [323,3234], '1024': [421,3424]}
+        var json = {};
+
+        for (var i = 0; i < filtered.length; i++) {
+          // get distribution array
+          var distribution = filtered[i].encs;
+          for (var j = 0; j < distribution.length; j++) {
+            // only take dh keygorups
+            if (!(Array.isArray(json[distribution[j].enc]))) {
+              json[distribution[j].enc] = [];
+            }
+            // if there is ja new key and the previous elements in the array are null, then c3 will not work
+            if (i >= 1 && !json[distribution[j].enc][i - 1]) {
+              json[distribution[j].enc][i - 1] = 0;
+            }
+            json[distribution[j].enc][i] = distribution[j].percent;
+
+
+          }
+        }
+
+        // draw Table 
+        drawTable(["month", "encs", "totalHosts"], filtered, ["enc", "count", "percent"]);
+
+        chart = c3.generate({
+          bindto: '#chart',
+          data: {
+            json: json,
+          },
+          axis: {
+            x: {
+              type: 'category',
+              categories: months,
+            },
+            y: {
+              label: {
+                text: 'In Percent',
+                position: 'outer-middle'
+              },
+              min: 0,
+              max: 99,
+            }
+          },
+
+        });
+
+
+      } else {
+        var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        // filter hostcount endpoint by given timespan
+        filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        
+        var distribution = filtered[0].encs;
+        // add total hosts number fo each value
+        for (var i = 0; i < distribution.length; i++) {
+          // if tld is given set the total number of hosts correctly
+          if (distribution[i].enc === null) {
+                distribution[i].enc = "unkown";
+          }
+          distribution[i].totalHosts = filteredTotalHosts[0].hostCount;
+        }
+
+        chart = c3.generate({
+          bindto: '#chart',
+          data: {
+            json: distribution,
+            keys: {
+              x: 'enc',
+              value: ['count']
+            },
+            type: 'bar',
+          },
+          axis: {
+            x: {
+              type: 'category',
+            },
+            y: {
+              label: {
+                text: 'Total Count',
+                position: 'outer-middle'
+              },
+            }
+          },
+        });
+        drawTable(["enc", "count", "totalHosts"], distribution);
+      }
+    }).error(function() {
+      $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+      $("#loader").css("display", "none");
+    }).done(function() {
+      $("#loader").css("display", "none");
+    });
+
+  });
 
 
 }
@@ -161,9 +302,150 @@ function loadAuth() {
 
 function loadKx() {
 
+   var totalHosts;
+  var tld = $('#filterTLD').val().replace('.', '');
+
+  jQuery.get("https://hotcat.de:1337/api/v0/hostcount?tld=" + tld, function(response) {
+
+    totalHosts = response;
+
+  }).error(function() {
+    $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+    $("#loader").css("display", "none");
+  }).done(function() {
+
+    // Load data from the server using a HTTP GET request
+    // jquery.get is a equivalent to $.ajax({....
+    jQuery.get("https://hotcat.de:1337/api/v0/auth/overview?tld=" + tld, function(response) {
+      var start = getTimespan();
+
+      if (start[0] !== start[1]) {
+
+        // filter response Array by timespan
+        filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
+        //fill months for x-axis
+        var months = [];
+        for (var i = 0; i < filtered.length; i++) {
+          months.push(filtered[i]._id);
+        }
+
+        // filter hostcount endpoint by given timespan
+        var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+
+        // percentual line
+        for (var i = 0; i < filtered.length; i++) {
+          filtered[i].totalHosts = filteredTotalHosts[i].hostCount;
+          var distribution = filtered[i].auths;
+          for (var j = 0; j < distribution.length; j++) {
+            // if TLD is given match the total host correctly
+            if (tld) {
+              distribution[j].percent = ((distribution[j].count / filteredTotalHosts[i].hostCount) * 100).toFixed(2);
+            } else {
+              distribution[j].percent = ((distribution[j].count / filtered[i].totalHosts) * 100).toFixed(2);
+            }
+          }
+        }
+
+
+        // Convert the response in syntax like : { '512': [323,3234], '1024': [421,3424]}
+        var json = {};
+
+        for (var i = 0; i < filtered.length; i++) {
+          // get distribution array
+          var distribution = filtered[i].auths;
+          for (var j = 0; j < distribution.length; j++) {
+            // only take dh keygorups
+            if (!(Array.isArray(json[distribution[j].auth]))) {
+              json[distribution[j].auth] = [];
+            }
+            // if there is ja new key and the previous elements in the array are null, then c3 will not work
+            if (i >= 1 && !json[distribution[j].auth][i - 1]) {
+              json[distribution[j].auth][i - 1] = 0;
+            }
+            json[distribution[j].auth][i] = distribution[j].percent;
+
+
+          }
+        }
+
+        // draw Table 
+        drawTable(["month", "auths", "totalHosts"], filtered, ["auth", "count", "percent"]);
+
+        chart = c3.generate({
+          bindto: '#chart',
+          data: {
+            json: json,
+          },
+          axis: {
+            x: {
+              type: 'category',
+              categories: months,
+            },
+            y: {
+              label: {
+                text: 'In Percent',
+                position: 'outer-middle'
+              },
+              min: 0,
+              max: 99,
+            }
+          },
+
+        });
+
+
+      } else {
+        var filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        // filter hostcount endpoint by given timespan
+        filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        
+        var distribution = filtered[0].auths;
+        // add total hosts number fo each value
+        for (var i = 0; i < distribution.length; i++) {
+          // if tld is given set the total number of hosts correctly
+          if (distribution[i].auth === null) {
+                distribution[i].auth = "unkown";
+          }
+          distribution[i].totalHosts = filteredTotalHosts[0].hostCount;
+        }
+
+        chart = c3.generate({
+          bindto: '#chart',
+          data: {
+            json: distribution,
+            keys: {
+              x: 'auth',
+              value: ['count']
+            },
+            type: 'bar',
+          },
+          axis: {
+            x: {
+              type: 'category',
+            },
+            y: {
+              label: {
+                text: 'Total Count',
+                position: 'outer-middle'
+              },
+            }
+          },
+        });
+        drawTable(["auth", "count", "totalHosts"], distribution);
+      }
+    }).error(function() {
+      $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+      $("#loader").css("display", "none");
+    }).done(function() {
+      $("#loader").css("display", "none");
+    });
+
+  });
+
 }
 
-function loadEnc() {
+function loadAuth() {
 
   var totalHosts;
   var tld = $('#filterTLD').val().replace('.', '');
@@ -233,7 +515,7 @@ function loadEnc() {
         }
 
         // draw Table 
-        drawTable(["_id", "auths", "totalHosts"], filtered, ["auth", "count", "percent"]);
+        drawTable(["month", "auths", "totalHosts"], filtered, ["auth", "count", "percent"]);
 
         chart = c3.generate({
           bindto: '#chart',
