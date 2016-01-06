@@ -1,159 +1,814 @@
-<!doctype html>
-<html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Experimental Study on TLS-Handshakes</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Place favicon.ico in the root directory -->
-        <link href="css/site.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/toggle.css">
-        <!-- Section for the description text -->
-        <link rel="stylesheet" type="text/css" href="css/description.css">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-
-    </head>
-    <body>
-        <!--[if lt IE 8]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-            your browser</a> to improve your experience.</p>
-            <![endif]-->
-
-        <div id="nav01"></div>
-
-        <div class="container">
-            <div class="content-wrapper">
-                <h1 id="welcome">Welcome, fellow Internet user!</h1>
-                <hr>
-                <div class="row">
-                    <p>
-                        The fact that you are currently reading this means that you have successfully 
-                        managed to find a website that is certainly not like the others. Congratulations! 
-                        If you are also terribly interested in the neatly visualized results of our
-                        fully-featured SSL/TLS scanner, <b>hotcat.de</b> is your website of choice.
-                    </p>
-                    <p>
-                        Hotcat is the result of a project carried out in scope of one of the lectures of the
-                        Computer Science study programme at the <a href="http://hft-stuttgart.de/">University of Applied Sciences Stuttgart</a>. 
-                        Until now, there might be two questions that have popped up in your mind:    
-                    </p>
-                    <ul>
-                        <li>
-                            What exactly can Hotcat do for me?
-                        </li>
-                        <li>
-                            Why was it named "Hotcat" in the first place? Such a weird name...
-                        </li>
-                    </ul>
-                    <p>
-                        As these are indeed very valid questions, why don't we have a closer look? 
-                        Let us start with the second one. "Hotcat" simply stands for:
-                    </p>
-                    <ul id="hotcatAbbrev">
-                        <li>
-                            <b class="startingLetters">H</b>fT
-                        </li>
-                        <li>
-                            <b class="startingLetters">O</b>pen Source
-                        </li>
-                        <li>
-                            <b class="startingLetters">T</b>ool for
-                        </li>
-                        <li>
-                            <b class="startingLetters">C</b>rawling the
-                        </li>
-                        <li>
-                            <b class="startingLetters">A</b>dvancements in
-                        </li>
-                        <li>
-                            <b class="startingLetters">T</b>LS
-                        </li>
-                    </ul>
-                    <p>
-                        This information also provides a hint concerning your first question: What our
-                        application does is basically to scan the SSL/TLS properties of the one million most visited 
-                        web sites throughout the World Wide Web according to <a href="http://www.alexa.com/">alexa.com</a>.
-                        The acquired results are saved in a huge database and then visualized in various graphs
-                        based on the user's selections (yes, that's you!).
-                    </p>
-                    <p>
-                        The following shall now give you a short overview of the functions and possibilities each menu point at the 
-                        very top of this page provides you with.
-                    </p>
-                    <ul>
-                        <li>
-                            <b>Home:</b> Leads you to the page you are currently viewing. Pretty intuitive, isn't it?
-                        </li>
-                        <li>
-                            <b>Universal Summary:</b> Offers several sub points that give you the possibility to quickly and easily
-                            view high-level graphs based on pre-defined selections. As the different name of the list items suggest, 
-                            each graph covers a certain topic. Give it a try!
-                        </li>
-                        <li>
-                            <b>Detailed Filter:</b> In case the Universal Summary menu point doesn't suit your need 
-                            for details, you should have a look at the Detailed Filter. Essentially, it provides you
-                            with the possibility to search for any combination of an arbitrary cipher string, a top level 
-                            domain and an SSL/TLS protocol. Besides, a built-in comparison function enables you to
-                            save any number of generated graphs in order to save them for later viewing and comparing.
-                        </li>
-                        <li>
-                            <b>World Map:</b> Gives you an overview of the number of hosts offering (or not offering) Perfect
-                            Forward Secrecy in the form of a beautiful grey-and-white world map that is clickable and zoomable.
-                        </li>
-                        <li>
-                            <b>Analyse Me:</b> If you have been wondering for the entirety of your life what the SSL/TLS properties
-                            of your favorite web site are, you will probably enjoy the "Analyse Me" feature. It provides you 
-                            with a text field in which you can enter the URL of that certain web site which is then scanned. Please
-                            keep in mind that it might take a short while to execute the scanning process. If you need an excuse to
-                            take a walk to the coffee machine, there you go!
-                        </li>
-                    </ul>
-                    <p>
-                        Congratulations, friend! You have successfully completed reading this short summary of what Hotcat can do for
-                        you. As a reward, you may now get yourself a cookie!
-                    </p>
-                    <p>
-                        If you are interested in staying up-to-date concerning the advancements of SSL/TLS, please feel free to get a 
-                        Hotcat subscription by clicking the "Subscribe" link below.
-                    </p>
-                </div>
-                <hr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="css/site.css" rel="stylesheet">
+  <!-- Boostrap CDN CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <!-- Load c3.css -->
+  <link href="css/c3/c3.css" rel="stylesheet" type="text/css">
+</head>
+    <!-- Use this for the new menuitems. If they are any changes just remember you should change the menu.js file into js-folder
+    and the menu item will display dynamicly -->
+    <div id="nav01"></div>
+    <div class="container">
+     <div class="row">
+      <div class="col-md-6">
+       <div class="panel panel-default">
+        <div class="panel-heading">PFS Summary</div>
+        <div class="panel-body">
+         <div class="row">
+          <div class="col-md-8">
+           <div id="pfs">	</div>
+       </div>
+       <div class="col-md-4">
+           <div id="pfstext"></div>
+       </div>
+   </div>
+</div>
+</div>
+</div>
+<div class="col-md-6">
+   <div class="panel panel-default">
+    <div class="panel-heading">Bulk Encryption Summary</div>
+    <div class="panel-body">
+     <div id="enc"></div>
+ </div>
+</div>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+   <div class="panel panel-default">
+    <div class="panel-heading">DHE Summary</div>
+    <div class="panel-body">
+     <div id="dhe">	</div>
+ </div>
+</div>
+</div>
+<div class="col-md-6">
+   <div class="panel panel-default">
+    <div class="panel-heading">ECDHE Summary</div>
+    <div class="panel-body">
+     <div id="ecdhe"></div>
+ </div>
+</div>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+   <div class="panel panel-default">
+    <div class="panel-heading">Mac Summary</div>
+    <div class="panel-body">
+     <div id="mac">	</div>
+ </div>
+</div>
+</div>
+<div class="col-md-6">
+   <div class="panel panel-default">
+    <div class="panel-heading">Logjam Summary</div>
+    <div class="panel-body">
+     <div class="row">
+      <div class="col-md-8">
+       <div id="logjam"></div>
+   </div>
+   <div class="col-md-4">
+       <div id="logjamtext"></div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Key Exchange Summary</div>
+            <div class="panel-body">
+                <div id="kx">  </div>
             </div>
         </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Authentification Methods Summary</div>
+            <div class="panel-body">
+                <div class="row">
+                    <div id="auth">  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 
-        <footer id="footer"></footer>
-        <div id="subscribe"></div>
-        <script src="js/main/menu.js"></script>
-        <!--
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/{{JQUERY_VERSION}}/jquery.min.js"></script>
-         <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script>
-         //Dynamic Menu
- 
- 
-         // Google Analytics: change UA-XXXXX-X to be your site's ID.
-         <script>
-         (function (b, o, i, l, e, r) {
-             b.GoogleAnalyticsObject = l;
-             b[l] || (b[l] =
-                 function () {
-                     (b[l].q = b[l].q || []).push(arguments)
-                 });
-             b[l].l = +new Date;
-             e = o.createElement(i);
-             r = o.getElementsByTagName(i)[0];
-             e.src = 'https://www.google-analytics.com/analytics.js';
-             r.parentNode.insertBefore(e, r)
-         }(window, document, 'script', 'ga'));
-         ga('create', 'UA-XXXXX-X', 'auto');
-         ga('send', 'pageview');
-         </script>
- 
-        -->
-    </body>
+<footer id="footer"></footer>
+<div id="subscribe"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!-- Load d3.js and c3.js -->
+<script src="js/c3/d3.min.js" charset="utf-8"></script>
+<script src="js/c3/c3.min.js"></script>
+<!--Helper class -->
+<script type="text/javascript" src="js/main/helperClass.js"></script>
+<!-- Google Chart Library -->
+<script type="text/javascript" src="https://www.google.com/jsapi?autoload= 
+{'modules':[{'name':'visualization','version':'1.1','packages':
+['corechart']}]}"></script>
+
+<!-- for the menu -->
+<script src="js/main/menu.js"></script>
+<script>
+'use strict';
+/*global filterResponseByTimespan, google*/
+
+function drawPFS(datas) {
+	var data = google.visualization.arrayToDataTable(datas);
+	var options = {
+		title: 'Perfect Forward Secrecy Support',
+		tooltip: { isHtml: true },
+		pieHole: 0.4,
+	};
+
+	var chart = new google.visualization.PieChart(document.getElementById('pfs'));
+	chart.draw(data, options);
+}
+
+function drawLogjam(datas) {
+	var data = google.visualization.arrayToDataTable(datas);
+	var options = {
+		title: 'Logjam Vulnerability',
+		tooltip: { isHtml: true },
+		pieHole: 0.4,
+	};
+
+	var chart = new google.visualization.PieChart(document.getElementById('logjam'));
+	chart.draw(data, options);
+}
+
+function drawAuth(datas, type) {
+    var data = google.visualization.arrayToDataTable(datas);
+
+
+    var options = {
+        title: 'Distribution Authentification Methods',
+        subtitle: 'Keysize, Count, and test',
+        focusTarget: 'category',
+        legend: { position: "none" },
+        tooltip: { isHtml: true },
+        //width: 620,
+        hAxis: {
+            title: 'Key Strength',
+            viewWindow: {
+                min: [7, 30, 0],
+                max: [17, 30, 0]
+            },
+            textStyle: {
+                fontSize: 12,
+                color: '#053061',
+                bold: true,
+                italic: false
+            },
+            titleTextStyle: {
+                fontSize: 12,
+                color: '#053061',
+                bold: true,
+                italic: false
+            }
+        },
+        vAxis: {
+            title: 'Count',
+            textStyle: {
+                fontSize: 12,
+                color: '#000000',
+                bold: false,
+                italic: false
+            },
+            titleTextStyle: {
+                fontSize: 12,
+                color: '#000000',
+                bold: true,
+                italic: false
+            }
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('auth'));
+    chart.draw(data, options);
+}
+
+
+function drawKx(datas, type) {
+    var data = google.visualization.arrayToDataTable(datas);
+
+
+    var options = {
+        title: 'Distribution Kx Methods',
+        subtitle: 'Keysize, Count, and test',
+        focusTarget: 'category',
+        legend: { position: "none" },
+        tooltip: { isHtml: true },
+        //width: 620,
+        hAxis: {
+            title: 'Key Strength',
+            viewWindow: {
+                min: [7, 30, 0],
+                max: [17, 30, 0]
+            },
+            textStyle: {
+                fontSize: 12,
+                color: '#053061',
+                bold: true,
+                italic: false
+            },
+            titleTextStyle: {
+                fontSize: 12,
+                color: '#053061',
+                bold: true,
+                italic: false
+            }
+        },
+        vAxis: {
+            title: 'Count',
+            textStyle: {
+                fontSize: 12,
+                color: '#000000',
+                bold: false,
+                italic: false
+            },
+            titleTextStyle: {
+                fontSize: 12,
+                color: '#000000',
+                bold: true,
+                italic: false
+            }
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('kx'));
+    chart.draw(data, options);
+}
+
+function drawEnc(datas, type) {
+    var data = google.visualization.arrayToDataTable(datas);
+
+
+    var options = {
+        title: 'Distribution Bulk Encryptions',
+        subtitle: 'Keysize, Count, and test',
+        focusTarget: 'category',
+        legend: { position: "none" },
+        tooltip: { isHtml: true },
+        //width: 620,
+        hAxis: {
+            title: 'Key Strength',
+            viewWindow: {
+                min: [7, 30, 0],
+                max: [17, 30, 0]
+            },
+            textStyle: {
+                fontSize: 12,
+                color: '#053061',
+                bold: true,
+                italic: false
+            },
+            titleTextStyle: {
+                fontSize: 12,
+                color: '#053061',
+                bold: true,
+                italic: false
+            }
+        },
+        vAxis: {
+            title: 'Count',
+            textStyle: {
+                fontSize: 12,
+                color: '#000000',
+                bold: false,
+                italic: false
+            },
+            titleTextStyle: {
+                fontSize: 12,
+                color: '#000000',
+                bold: true,
+                italic: false
+            }
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('enc'));
+    chart.draw(data, options);
+}
+
+/** PFS Chart **/
+
+var totalHosts2;
+var hostcount;
+jQuery.get("https://hotcat.de:1337/api/v0/hostcount", function(response) {
+	totalHosts2 = response;
+	totalHosts2 = filterResponseByTimespan(totalHosts2, new Date(2015,11), new Date(2015,11));
+	hostcount = totalHosts2[0].hostCount;
+
+}).error(function() {
+    //$('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+    //$("#loader").css("display", "none");
+}).done(function() {
+	
+	jQuery.get("https://hotcat.de:1337/api/v0/pfs/overview", function(response) {
+
+		var filtered = filterResponseByTimespan(response, new Date(2015,11), new Date(2015,11));
+
+		var datas = [];
+
+		datas[0] = ["PFS", "Count", {type: 'string', role: 'tooltip',  'p': {'html': true}}];
+
+		var tooltip = "<span class='header-legend'>"+(filtered[0].monthlyPfsEnabled/ filtered[0].monthlyTotalHosts * 100).toFixed(1)+  "%</span class='header-legend'>  of  Sites supporting PFS<br><span class='header-legend'>"+filtered[0].monthlyPfsEnabled+ "</span><br> Sites enabled PFS";
+		datas[1] = ["PFS Enabled", filtered[0].monthlyPfsEnabled, tooltip];
+
+		tooltip = "<span class='header-legend'>"+(filtered[0].monthlyPfsDisabled/ filtered[0].monthlyTotalHosts * 100).toFixed(1)+  "%</span>  of  Sites supporting PFS<br><span class='header-legend'>"+filtered[0].monthlyPfsDisabled+ "</span><br> Sites disable PFS";
+		datas[2] = ["PFS Disabled", filtered[0].monthlyPfsDisabled, tooltip];
+
+     google.setOnLoadCallback(drawPFS(datas));
+
+
+		//alert(JSON.stringify(filtered));
+
+
+    // Text in the middle of the donut chart
+    //$("#pfs").append( "<div id='pfsTitle' class = 'donut-text'><span class='percentage'>"+(filtered[0].monthlyPfsEnabled/ filtered[0].monthlyTotalHosts *100).toFixed(1) +" % </span> <br> Sites enable PFS</div>" );
+     // legend text for PFS donut chart
+     $("#pfstext").html("<span class='header-legend'>"+ filtered[0].month +":</span> <br><span class='percentage'>" + hostcount +"</span><br>Total sites scanned ");
+
+ });
+
+
+/** Logjam Chart **/
+
+jQuery.get("https://hotcat.de:1337/api/v0/exp/overview", function(response) {
+
+	var filtered = filterResponseByTimespan(response, new Date(2015,11), new Date(2015,11));
+	filtered[0].expDisabled = hostcount - filtered[0].expEnabled;
+
+	var datas = [];
+
+	datas[0] = ["Logjam", "Count", {type: 'string', role: 'tooltip',  'p': {'html': true}}];
+
+	var tooltip = "<span class='header-legend'>"+(filtered[0].expEnabled/ hostcount * 100).toFixed(1)+  " %</span> of Sites supporting Logjam<br><span class='header-legend'>"+filtered[0].expEnabled+ "</span><br> total sites";
+	datas[1] = ["Logjam Enabled", filtered[0].expEnabled, tooltip];
+	tooltip = "<span class='header-legend'>"+(filtered[0].expDisabled/ hostcount * 100).toFixed(1)+  " %</span> of Sites supporting Logjam<br><span class='header-legend'>"+filtered[0].expDisabled+ "</span><br> total sites";
+	datas[2] = ["Logjam Disabled", filtered[0].expDisabled, tooltip];
+
+   google.setOnLoadCallback(drawLogjam(datas));
+
+   $("#logjamtext").append( "<div id='pfsTitle' ><span class='percentage'>"+(filtered[0].expDisabled/hostcount *100).toFixed(1) +" % </span> <br> Sites disable EXP</div>" );
+
+});
+
+
+/** MAC Google Chart **/
+
+jQuery.get("https://hotcat.de:1337/api/v0/mac/distribution", function(response) {
+
+	var filtered = filterResponseByTimespan(response, new Date(2015,11), new Date(2015,11));
+
+		//var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(2015,11), new Date(2015,11));
+
+             // remove ECDHE data
+             var filteredElement = filtered[0].distribution;
+
+             //alert(JSON.stringify(filteredElement));
+
+             var datas = [];
+
+             datas[0] = ['Mac', 'Count', { role: 'style' }, {role: 'annotation'} , {type: 'string', role: 'tooltip',  'p': {'html': true}}];
+
+             for (var i = 0; i < filteredElement.length; i++) {
+
+             	var inner = [];
+
+             	var percent = ((filteredElement[i].count/hostcount)*100).toFixed(1);
+
+             	var text = '<b>'+  filteredElement[i].count +'</b><br> <b> ('+ percent +'% </b> of all scanned Sites  ) <br> total Hosts: '+ hostcount;
+
+             	datas[i+1] = [filteredElement[i].mac, filteredElement[i].count, 'silver', percent + ' %' , text ];
+             }
+
+             google.setOnLoadCallback(drawMac(datas));
+
+
+         });
+
+
+/** Enc Google Chart **/
+
+jQuery.get("https://hotcat.de:1337/api/v0/enc/overview", function(response) {
+
+    var filtered = filterResponseByTimespan(response, new Date(2015,11), new Date(2015,11));
+
+        //var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(2015,11), new Date(2015,11));
+
+             // remove ECDHE data
+             var filteredElement = filtered[0].encs;
+
+             //alert(JSON.stringify(filteredElement));
+
+             var datas = [];
+
+             datas[0] = ['Enc', 'Count', { role: 'style' }, {role: 'annotation'} , {type: 'string', role: 'tooltip',  'p': {'html': true}}];
+
+             for (var i = 0; i < filteredElement.length; i++) {
+
+                var inner = [];
+
+                var percent = ((filteredElement[i].count/hostcount)*100).toFixed(1);
+
+                var text = '<b>'+  filteredElement[i].count +'</b><br> <b> ('+ percent +'% </b> of all scanned Sites  ) <br> total Hosts: '+ hostcount;
+
+                datas[i+1] = [filteredElement[i].enc, filteredElement[i].count, 'silver', percent + ' %' , text ];
+            }
+
+            google.setOnLoadCallback(drawEnc(datas));
+
+
+        });
+
+
+/** Auth Google Chart **/
+
+jQuery.get("https://hotcat.de:1337/api/v0/auth/overview", function(response) {
+
+    var filtered = filterResponseByTimespan(response, new Date(2015,11), new Date(2015,11));
+
+        //var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(2015,11), new Date(2015,11));
+
+             // remove ECDHE data
+             var filteredElement = filtered[0].auths;
+
+             //alert(JSON.stringify(filteredElement));
+
+             var datas = [];
+
+             datas[0] = ['Enc', 'Count', { role: 'style' }, {role: 'annotation'} , {type: 'string', role: 'tooltip',  'p': {'html': true}}];
+
+             for (var i = 0; i < filteredElement.length; i++) {
+
+                var inner = [];
+
+                var percent = ((filteredElement[i].count/hostcount)*100).toFixed(1);
+
+                var text = '<b>'+  filteredElement[i].count +'</b><br> <b> ('+ percent +'% </b> of all scanned Sites  ) <br> total Hosts: '+ hostcount;
+
+                datas[i+1] = [filteredElement[i].auth, filteredElement[i].count, 'silver', percent + ' %' , text ];
+            }
+
+            google.setOnLoadCallback(drawAuth(datas));
+
+
+        });
+
+/** Kx Google Chart **/
+
+jQuery.get("https://hotcat.de:1337/api/v0/kx/overview", function(response) {
+
+    var filtered = filterResponseByTimespan(response, new Date(2015,11), new Date(2015,11));
+
+        //var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(2015,11), new Date(2015,11));
+
+             // remove ECDHE data
+             var filteredElement = filtered[0].kxs;
+
+             //alert(JSON.stringify(filteredElement));
+
+             var datas = [];
+
+             datas[0] = ['Enc', 'Count', { role: 'style' }, {role: 'annotation'} , {type: 'string', role: 'tooltip',  'p': {'html': true}}];
+
+             for (var i = 0; i < filteredElement.length; i++) {
+
+                var inner = [];
+
+                var percent = ((filteredElement[i].count/hostcount)*100).toFixed(1);
+
+                var text = '<b>'+  filteredElement[i].count +'</b><br> <b> ('+ percent +'% </b> of all scanned Sites  ) <br> total Hosts: '+ hostcount;
+
+                datas[i+1] = [filteredElement[i].kx, filteredElement[i].count, 'silver', percent + ' %' , text ];
+            }
+
+            google.setOnLoadCallback(drawKx(datas));
+
+
+        });
+
+
+});
+
+
+
+
+function drawMac(datas) {
+	var data = google.visualization.arrayToDataTable(datas);
+
+
+	var options = {
+		title: 'Distribution of MAC',
+		subtitle: 'Keysize, Count, and test',
+		focusTarget: 'category',
+		legend: { position: "none" },
+		tooltip: { isHtml: true },
+        //width: 620,
+        hAxis: {
+        	title: '',
+        	viewWindow: {
+        		min: [7, 30, 0],
+        		max: [17, 30, 0]
+        	},
+        	textStyle: {
+        		fontSize: 12,
+        		color: '#053061',
+        		bold: true,
+        		italic: false
+        	},
+        	titleTextStyle: {
+        		fontSize: 18,
+        		color: '#053061',
+        		bold: true,
+        		italic: false
+        	}
+        },
+        vAxis: {
+        	title: 'Count',
+        	textStyle: {
+        		fontSize: 12,
+        		color: '#000000',
+        		bold: false,
+        		italic: false
+        	},
+        	titleTextStyle: {
+        		fontSize: 12,
+        		color: '#000000',
+        		bold: true,
+        		italic: false
+        	}
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('mac'));
+    chart.draw(data, options);
+}
+
+
+</script>
+
+<script>
+'use strict';
+/*global google, filterResponseByTimespan */
+
+/**** GOOGLE CHARTS ***/
+
+//google.load('visualization', '1', {packages: ['corechart', 'bar']});
+
+// hostcount
+var totalHosts;
+var hostcount2;
+jQuery.get("https://hotcat.de:1337/api/v0/pfs/overview", function(response) {
+	totalHosts = response;
+}).error(function() {
+	//$('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
+	//$("#loader").css("display", "none");
+}).done(function() {
+
+	/*** DHE Google chart */
+
+	jQuery.get("https://hotcat.de:1337/api/v0/pfs/distribution?", function(response) {
+
+		var filtered = filterResponseByTimespan(response, new Date(2015,11), new Date(2015,11));
+
+		//alert(JSON.stringify(response));
+
+		var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(2015,11), new Date(2015,11));
+
+
+             // remove ECDHE data
+             var filteredElement = filtered[0].distribution;
+
+             for (var i = filteredElement.length - 1; i >= 0; i--) {
+
+             	filteredElement[i].totalHosts = filteredTotalHosts[0].monthlyPfsEnabled;
+             	
+                // remove ECDHE elements
+                if (filteredElement[i].kx === "ECDH" || filteredElement[i].count < 1000) {
+                	filteredElement.splice(i, 1);
+                }
+
+
+
+
+
+            }
+
+             //alert(JSON.stringify(filteredTotalHosts));
+
+             var datas = [];
+
+             datas[0] = ['Keysize', 'Count', { role: 'style' }, { role: 'annotation' }, {type: 'string', role: 'tooltip',  'p': {'html': true}}];
+
+             for (i = 0; i < filteredElement.length; i++) {
+
+             	var inner = [];
+
+             	var percent = ((filteredElement[i].count/filteredElement[i].totalHosts)*100).toFixed(1);
+
+             	var text = '<b>'+  filteredElement[i].count +'</b><br> <b> ('+ percent +'% </b> of all Sites who enabled PFS ) <br> total Hosts: '+ filteredElement[i].totalHosts;
+
+             	datas[i+1] = [filteredElement[i].kxStrength, filteredElement[i].count, 'silver', + percent +'%' , text ];
+             }
+
+
+             //alert(datas[0]);
+
+             google.setOnLoadCallback(drawDHE(datas));
+
+
+         });
+
+
+/** ECDHE Google Chart **/ 
+
+jQuery.get("https://hotcat.de:1337/api/v0/pfs/distribution?", function(response) {
+
+	var filtered = filterResponseByTimespan(response, new Date(2015,11), new Date(2015,11));
+
+		//alert(JSON.stringify(response));
+
+		var filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(2015,11), new Date(2015,11));
+
+             // remove ECDHE data
+             var filteredElement = filtered[0].distribution;
+
+             for (var i = filteredElement.length - 1; i >= 0; i--) {
+
+             	filteredElement[i].totalHosts = filteredTotalHosts[0].monthlyPfsEnabled;
+             	
+                // remove ECDHE elements
+                if (filteredElement[i].kx === "DH" || filteredElement[i].count < 1000) {
+                	filteredElement.splice(i, 1);
+                }
+
+
+
+
+
+            }
+
+            // alert(JSON.stringify(filteredTotalHosts));
+
+            var datas = [];
+
+            datas[0] = ['Keysize', 'Count', { role: 'style' }, { role: 'annotation' }, {type: 'string', role: 'tooltip',  'p': {'html': true}}];
+
+            for (i = 0; i < filteredElement.length; i++) {
+
+            	var inner = [];
+
+            	var percent = ((filteredElement[i].count/filteredElement[i].totalHosts)*100).toFixed(1);
+
+            	var text = '<b>'+  filteredElement[i].count +'</b><br> <b> ('+ percent  +'% </b> of all Sites who enabled PFS ) <br> total Hosts: '+ filteredElement[i].totalHosts;
+
+            	datas[i+1] = [filteredElement[i].kxStrength, filteredElement[i].count, 'silver', percent + '%', text ];
+            }
+
+
+             //alert(datas[0]);
+
+             google.setOnLoadCallback(drawECDHE(datas));
+
+
+         });
+
+
+
+
+
+
+
+
+
+	//alert(JSON.stringify(totalHosts));
+});
+
+
+
+
+function drawDHE(datas, type) {
+	var data = google.visualization.arrayToDataTable(datas);
+
+
+	var options = {
+		title: 'Distribution of DHE Parameters',
+		subtitle: 'Keysize, Count, and test',
+		focusTarget: 'category',
+		legend: { position: "none" },
+		tooltip: { isHtml: true },
+        //width: 620,
+        hAxis: {
+        	title: 'Key Strength',
+        	viewWindow: {
+        		min: [7, 30, 0],
+        		max: [17, 30, 0]
+        	},
+        	textStyle: {
+        		fontSize: 12,
+        		color: '#053061',
+        		bold: true,
+        		italic: false
+        	},
+        	titleTextStyle: {
+        		fontSize: 12,
+        		color: '#053061',
+        		bold: true,
+        		italic: false
+        	}
+        },
+        vAxis: {
+        	title: 'Count',
+        	textStyle: {
+        		fontSize: 12,
+        		color: '#000000',
+        		bold: false,
+        		italic: false
+        	},
+        	titleTextStyle: {
+        		fontSize: 12,
+        		color: '#000000',
+        		bold: true,
+        		italic: false
+        	}
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('dhe'));
+    chart.draw(data, options);
+}
+
+
+/**** ECHDE **/
+
+
+
+function drawECDHE(datas, type) {
+	var data = google.visualization.arrayToDataTable(datas);
+
+
+	var options = {
+		title: 'Distribution of ECDHE Parameters',
+		subtitle: 'Keysize, Count, and test',
+		focusTarget: 'category',
+		legend: { position: "none" },
+		tooltip: { isHtml: true },
+        //width: 620,
+        hAxis: {
+        	title: 'Key Strength',
+        	viewWindow: {
+        		min: [7, 30, 0],
+        		max: [17, 30, 0]
+        	},
+        	textStyle: {
+        		fontSize: 12,
+        		color: '#053061',
+        		bold: true,
+        		italic: false
+        	},
+        	titleTextStyle: {
+        		fontSize: 12,
+        		color: '#053061',
+        		bold: true,
+        		italic: false
+        	}
+        },
+        vAxis: {
+        	title: 'Count',
+        	textStyle: {
+        		fontSize: 12,
+        		color: '#000000',
+        		bold: false,
+        		italic: false
+        	},
+        	titleTextStyle: {
+        		fontSize: 12,
+        		color: '#000000',
+        		bold: true,
+        		italic: false
+        	}
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('ecdhe'));
+    chart.draw(data, options);
+}
+
+
+
+</script>
+
+
 </html>

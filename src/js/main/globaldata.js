@@ -50,8 +50,7 @@ window.onload = function() {
         loadMac();
         break;
       default:
-        loadPFS();
-        window.location.hash = "PFS";
+        document.location.href = 'index.html';
         break;
     }
   }
@@ -73,6 +72,10 @@ window.onload = function() {
 
   $("#filterDateEndInput").change(function() {
     loadChartByHash(window.location.hash.substring(1));
+  });
+
+  $("#openGlobaldata").click(function() {
+    document.location.href = 'index.html';
   });
 
   $("#loadPFS").click(function() {
@@ -912,7 +915,7 @@ function loadLogjam() {
 
       if (start[0] !== start[1]) {
 
-       filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
         // filter response Array by timespan
         filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
@@ -964,7 +967,7 @@ function loadLogjam() {
       } else {
         filtered = filterResponseByTimespan(response, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
 
-       filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
+        filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
         var hostcount = filteredTotalHosts[0].hostCount;
 
         filtered[0].total = hostcount;

@@ -7,9 +7,11 @@ document.getElementById("nav01").innerHTML =
     "<div class='container'>" +
     "<div class='row'>" +
     "<div class='col-md-8'><ul class='nav navbar-nav'>" +
-    "<li><a href='index.html'>Home</a></li>" +
-    "<li id='openGlobaldata' class='dropdown'><a href='globaldata.html' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Universal Summary<span class='caret'></span></a>" +
+    "<li><a href='home.html'>Home</a></li>" +
+    "<li  class='dropdown'><a href='globaldata.html' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Universal Summary<span class='caret'></span></a>" +
     "<ul class='dropdown-menu'>" +
+    "<li id='openGlobaldata'><a href='globaldata.html#'>Summary</a></li>" +
+    "<li role='separator' class='divider'></li>" +
     "<li id='loadPFS'><a href='globaldata.html#PFS'>Perfect Forward Secrecy Support</a></li>" +
     "<li id='loadDHE'><a href='globaldata.html#DHE'>Diffie Hellman Keygroups</a></li>" +
     "<li id='loadECDHE'><a href='globaldata.html#ECDHE'>Elliptic Curve Diffie Hellman</a></li>" +
@@ -36,10 +38,10 @@ document.getElementById("nav01").innerHTML =
 var n = new Date();
 var d = n.getFullYear(); // dynamic Date
 document.getElementById("footer").innerHTML =
-    "<div class='container'>"+
-    " &copy; 2015 - "+d+" "+
-    " HfT Stuttgart "+
-    " &#124;<a href='#subscribtion' id='sub' data-toggle='modal'> Subscribe </a> "+
+    "<div class='container'>" +
+    " &copy; 2015 - " + d + " " +
+    " HfT Stuttgart " +
+    " &#124;<a href='#subscribtion' id='sub' data-toggle='modal'> Subscribe </a> " +
     "</div>";
 
 // open Subscribe Modal and this modal will open the subscriber count modal on subscribe.php file
@@ -209,4 +211,3 @@ else {
     });
 
 }
-

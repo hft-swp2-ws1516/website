@@ -82,3 +82,27 @@ ul#menu li a:hover {
 table th {
     cursor: pointer;
 }
+
+
+
+/* PULSE Page */
+.donut-text{
+    position: absolute;
+    top: 35%;
+    left: 30%;
+    right: 70%;
+    width: 150px;
+    font-size: 1.2em;
+    text-align: center;
+
+}
+
+.percentage{
+    font-weight:bold;
+    font-size: 1.5em;
+}
+
+.header-legend{
+    text-decoration: underline;
+    font-weight:bold;
+}
