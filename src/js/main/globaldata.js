@@ -316,7 +316,7 @@ function loadKx() {
 
     // Load data from the server using a HTTP GET request
     // jquery.get is a equivalent to $.ajax({....
-    jQuery.get("https://hotcat.de:1337/api/v0/auth/overview?tld=" + tld, function(response) {
+    jQuery.get("https://hotcat.de:1337/api/v0/kx/overview?tld=" + tld, function(response) {
       var start = getTimespan();
 
       if (start[0] !== start[1]) {
@@ -327,7 +327,7 @@ function loadKx() {
         //fill months for x-axis
         var months = [];
         for (var i = 0; i < filtered.length; i++) {
-          months.push(filtered[i]._id);
+          months.push(filtered[i].month);
         }
 
         // filter hostcount endpoint by given timespan
@@ -336,7 +336,7 @@ function loadKx() {
         // percentual line
         for (var i = 0; i < filtered.length; i++) {
           filtered[i].totalHosts = filteredTotalHosts[i].hostCount;
-          var distribution = filtered[i].auths;
+          var distribution = filtered[i].kxs;
           for (var j = 0; j < distribution.length; j++) {
             // if TLD is given match the total host correctly
             if (tld) {
@@ -353,24 +353,24 @@ function loadKx() {
 
         for (var i = 0; i < filtered.length; i++) {
           // get distribution array
-          var distribution = filtered[i].auths;
+          var distribution = filtered[i].kxs;
           for (var j = 0; j < distribution.length; j++) {
             // only take dh keygorups
-            if (!(Array.isArray(json[distribution[j].auth]))) {
-              json[distribution[j].auth] = [];
+            if (!(Array.isArray(json[distribution[j].kx]))) {
+              json[distribution[j].kx] = [];
             }
             // if there is ja new key and the previous elements in the array are null, then c3 will not work
-            if (i >= 1 && !json[distribution[j].auth][i - 1]) {
-              json[distribution[j].auth][i - 1] = 0;
+            if (i >= 1 && !json[distribution[j].kx][i - 1]) {
+              json[distribution[j].kx][i - 1] = 0;
             }
-            json[distribution[j].auth][i] = distribution[j].percent;
+            json[distribution[j].kx][i] = distribution[j].percent;
 
 
           }
         }
 
         // draw Table 
-        drawTable(["month", "auths", "totalHosts"], filtered, ["auth", "count", "percent"]);
+        drawTable(["month", "kxs", "totalHosts"], filtered, ["kx", "count", "percent"]);
 
         chart = c3.generate({
           bindto: '#chart',
@@ -400,12 +400,12 @@ function loadKx() {
         // filter hostcount endpoint by given timespan
         filteredTotalHosts = filterResponseByTimespan(totalHosts, new Date(parseInt(start[0])), new Date(parseInt(start[1])));
         
-        var distribution = filtered[0].auths;
+        var distribution = filtered[0].kxs;
         // add total hosts number fo each value
         for (var i = 0; i < distribution.length; i++) {
           // if tld is given set the total number of hosts correctly
-          if (distribution[i].auth === null) {
-                distribution[i].auth = "unkown";
+          if (distribution[i].kx === null) {
+                distribution[i].kx = "unkown";
           }
           distribution[i].totalHosts = filteredTotalHosts[0].hostCount;
         }
@@ -415,7 +415,7 @@ function loadKx() {
           data: {
             json: distribution,
             keys: {
-              x: 'auth',
+              x: 'kx',
               value: ['count']
             },
             type: 'bar',
@@ -432,7 +432,7 @@ function loadKx() {
             }
           },
         });
-        drawTable(["auth", "count", "totalHosts"], distribution);
+        drawTable(["kx", "count", "totalHosts"], distribution);
       }
     }).error(function() {
       $('#error-message').html('<div class="alert alert-danger" role="alert">Error loading JSON!</div>');
