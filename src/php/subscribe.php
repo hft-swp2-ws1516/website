@@ -66,7 +66,7 @@ if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) &&
             $messageBody .="<br/></p><h1>Last Crawl of alexa top 1 m Websites: YYYY:MM:DD HH:MM:SS</h1></div></div></body></html>";
 
             /*----------------------------SERVER EMAIL-------------------------------*/
-            $headers     = "From: noreplay@hotcat.de" . "\r\n"; // set from headers
+            $headers     = "From: noreply@hotcat.de" . "\r\n"; // set from headers
             /*----------------------------SERVER EMAIL-------------------------------*/
 
             $headers     .= "Content-type: text/html; charset=iso-8859-1\n";
