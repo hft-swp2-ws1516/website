@@ -5,8 +5,8 @@
  * Date: 05.12.15
  * Time: 18:28
  *
- * This subscribe.php file includes the mongo.php file in which an Instance($n), database($db->learningmongo --> change in whatever you like)
- * and a collection($people --> change in whatever you like) of MongoDb are defined/created. Here we have also included the index.html file, which will be the
+ * This subscribe.php file includes the mongo.php file in which an Instance($n), database($db->learningmongo)
+ * and a collection($people) of MongoDb are defined/created. Here we have also included the index.html file, which will be the
  * clone of subscribe.php by showing exactly the content of index.html.
  * The subscribe.php  insert the given values from (subscribtion Modal) by the users into the database.
  *
@@ -21,10 +21,17 @@ if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) &&
         $email = $_POST['email']; // Turn our post-email into a local variable
 
         // Generate random 32 character hash for the validation and assign it to a local variable
-        $hash    = md5(rand(0,1000));
+        // Is used in verify.php
+        $hash_subscribe    = md5(rand(333, 1000000));
+        // Generate random 32 character hash for the unsubscribe and assign it to a local variable
+        // Is used in unsubscribe.php
+        $hash_unsubscribe  = md5(rand(333, 1000000));
         // Default value for the activation. If 0, means user has not activated through the link
         // If the link has been clicked once the activation will change to 1
         $active  = "0";
+
+        $lastscan = new DOMDocument();
+        $lastscan->getElementById('lastScan');
     if(!preg_match("/^([a-zA-z0-9])+([a-zA-Z0-9._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9._-]+)+$/", $email)||empty($name))
     {
         // Return an Error if Mail doe not match. Server side looking
@@ -35,10 +42,11 @@ if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) &&
         try{
             /** if not blank we will insert the given values in the collection */
             $people->insert( array(
-                "name"   => $name,
-                "email"  => $email,
-                "hash"   => $hash,
-                "active" => $active
+                "name"              => $name,
+                "email"             => $email,
+                "hash_subscribe"    => $hash_subscribe,
+                "hash_unsubscribe"  => $hash_unsubscribe,
+                "active"            => $active
             ));
 
             // Send the email
@@ -58,17 +66,11 @@ if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) &&
             $messageBody .="<p>Tanks for subscribing! We will sent as soon as possible the";
             $messageBody .="Crawling-Results to " .$name. " and " .$email. " </p><hr>";
             $messageBody .="<p>Please click the link to activate your account:";
-
-            /*----------------------------ADJUST THE PATH TO SERVER------------------------------------*/
-            $messageBody .="http://localhost/src/php/verify.php?email=$email&hash=$hash"; // You should adjust the Path
-            /*----------------------------ADJUST THE PATH TO SERVER------------------------------------*/
-
-            $messageBody .="<br/></p><h1>Last Crawl of alexa top 1 m Websites: YYYY:MM:DD HH:MM:SS</h1></div></div></body></html>";
-
-            /*----------------------------SERVER EMAIL-------------------------------*/
+            $messageBody .="http://localhost/src/php/verify.php?email=$email&hash_subscribe=$hash_subscribe"; // You should adjust the Path
+            $messageBody .="<br/>";
+            $messageBody .="http://localhost/src/php/unsubscribe.php?email=$email&hash_unsubscribe=$hash_unsubscribe"; // adjust path
+            $messageBody .="<br/>Thank you for subscribing!</p></div></div></body></html>";
             $headers     = "From: noreply@hotcat.de" . "\r\n"; // set from headers
-            /*----------------------------SERVER EMAIL-------------------------------*/
-
             $headers     .= "Content-type: text/html; charset=iso-8859-1\n";
             mail($to, $subject, $messageBody, $headers); // Send mail
         }catch(Exception $e){
@@ -113,7 +115,13 @@ $cursor = $people->find(); //handling with result
                         <h3>
                             <p id="subscribe">
                                 <?php
-                                    echo $msg;
+                                    if(empty($name) || empty($email))
+                                    {
+                                        $msg = "You should fill the name and email fields! Please try again.";
+                                    }else{
+                                        $msg = $msg;
+                                    }
+                                echo $msg;
                                 ?>
                                 <strong>
                                     <span class="badge">
