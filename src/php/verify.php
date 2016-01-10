@@ -6,16 +6,9 @@
     <title>Experimental Study on TLS-Handshakes</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Place favicon.ico in the root directory -->
-    <link href="../css/site.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/checkbox.css">
-    <!-- Bootstrap -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link href="../css/forSubAndUnsubscribe.css" rel="stylesheet">
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -23,15 +16,9 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<!-- Add your site or application content here -->
-
-<!-- Use this for the new menuitems. If they are any changes just remember you should change the menu.js file into js-folder
-and the menu item will display dynamicly-->
-<nav id="nav01" class="navbar navbar-default navbar-fixed-top"></nav>
 
 <div class="container">
     <div class="content-wrapper">
-
         <?php
         /**
          * Created by PhpStorm.
@@ -51,78 +38,91 @@ and the menu item will display dynamicly-->
         // include Mongo-Connection
         include('mongo.php'); // Connect to database
         // look for email and hash are set and are not empty
-        if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash']) && !empty($_GET['hash']))
+        if(isset($_GET['email']) && !empty($_GET['email']) AND isset($_GET['hash_subscribe']) && !empty($_GET['hash_subscribe']))
         {
             // Verify Data
             $email  = $_GET['email']; // Store email locally
-            $hash   = $_GET['hash'];  // Store hash locally
+            $hash_subscribe   = $_GET['hash_subscribe'];  // Store hash locally
 
-            // Find Query. Looking for Users or subscriber where activation is 0
-            $search = $people->find(
-                array('$and' => array(
-                    array('active' => "0"),
-                    array('hash' => $hash),
-                    array("email" => $email))
+            /**
+             * Try to get connection to MongoDb. If there is no connection we will throw the MongoException
+             */
+            try{
+                $connect = $n->selectDB("learningmongo");
+                $people = $connect->selectCollection("people");
+            }catch(MongoConnectionException $e){
+                die("Problem during mongodb initialization. Please start mongodb server." . $e->getMessage());
+            }
+
+            /**
+             * The query below is comparable with the sql query as follow : "SELECT email, hash_subscribe, active
+             * FROM collection-name WHERE email = $email AND hash_subscribe = $hash_subscribe AND active = 0"
+             */
+            $where = array(
+                '$and' => array(
+                    array(  'email'             =>    $email            ),
+                    array(  'hash_subscribe'    =>    $hash_subscribe   ),
+                    array(  'active'            =>    '0'               )
                 )
             );
 
-            // looking if we have a match
-            $match  = $people->count($search);
+            try{
+                $search = $people->find($where);
+            }catch(MongoCursorException $e){
+                die("Could not aggregate over the Documents. For more information see ". $e->getMessage());
+            }
 
+            /**
+             * Use $match to search for the one and only document that correspond
+             * with hash_subscribe = $hash_subscribe and active = 0
+             */
+            $match  = $people->count(array('active' => '0'), array('hash_subscribe' => $hash_subscribe));
 
             // returns true if we have match
             if($match > 0)
             {
                 // The mail address is not a fake one. Activate the account
                 $people->update(
-                    array("hash" => $hash),
+                    array("hash_subscribe" => $hash_subscribe),
                     array('$set' => array("active" => "1")));
-                $mes = "<h1>Your Subscription is successfully verified!</h1>";
+                $mes = "<h3>Your Subscription is successfully verified! As soon as possible we will send the data<br> to ";
+                $mes .= "<a href='#'>".$email."</a> . If you like you can directly navigate to our Website by<br> ";
+                $mes .= "clicking the <p style='background: #ffb81c''>GO TO HOTCAT</p> Link or colse the current Tab by clicking the ";
+                $mes .= "<p style='background: #ffb81c'>CLOSE THE TAB</p> below!<h3>";
             }else{
-                $notValid = "<h1>The URL is either invalid or you already";
-                $notValid .="have activated your Subscription!</h1>";
-                echo $notValid;
+                $mes = "<h3>The URL is either invalid or you already ";
+                $mes .="have activated your Subscription!</h3>";
             }
         }else{
-            $notValid = "<h1>Invalid approach, please use the link that";
-            $notValid .="has been send to your email!</h1>";
-            echo $notValid;
+            $mes = "<h3>Invalid approach, please use the link that ";
+            $mes .="has been send to your email!</h3>";
         }
-            echo $mes;
+        ?>
+        <pre>
+        <div id="wrap">
+
+        <!-- Displaying the corresponding message -->
+        <?php
+            if(isset($mes))
+            {
+                echo "<div class='statusmsg'>".$mes."</div>";
+            }
         ?>
 
+<a href="../index.html" id="go-to-index">GO TO HOTCAT</a>  <a href="javascript:close_window();">CLOSE THE TAB</a>
+        </div>
+        </pre>
+    <!-- end wrap div -->
 
     </div>
 </div>
-
-<footer id="footer"></footer>
-<div id="subscribe"></div>
-<script src="../js/menu.js"></script>
-<!--
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/{{JQUERY_VERSION}}/jquery.min.js"></script>
- <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script>
- //Dynamic Menu
-
-
- // Google Analytics: change UA-XXXXX-X to be your site's ID.
- <script>
- (function (b, o, i, l, e, r) {
-     b.GoogleAnalyticsObject = l;
-     b[l] || (b[l] =
-         function () {
-             (b[l].q = b[l].q || []).push(arguments)
-         });
-     b[l].l = +new Date;
-     e = o.createElement(i);
-     r = o.getElementsByTagName(i)[0];
-     e.src = 'https://www.google-analytics.com/analytics.js';
-     r.parentNode.insertBefore(e, r)
- }(window, document, 'script', 'ga'));
- ga('create', 'UA-XXXXX-X', 'auto');
- ga('send', 'pageview');
- </script>
-
--->
+<script>
+    function close_window(){
+        if(confirm("Close Window?")){
+            close();
+        }
+    }
+</script>
 </body>
 </html>
 
