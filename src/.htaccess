@@ -4,10 +4,10 @@ deny from all
 </Files>
 
 #If you like to use this just adjust the path for each and every Document
-ErrorDocument 403 /src/php/servererrormessage.php
-ErrorDocument 404 /src/php/servererrormessage.php
-ErrorDocument 405 /src/php/servererrormessage.php
-ErrorDocument 408 /src/php/servererrormessage.php
-ErrorDocument 500 /src/php/servererrormessage.php
-ErrorDocument 502 /src/php/servererrormessage.php
-ErrorDocument 504 /src/php/servererrormessage.php
+ErrorDocument 403 /php/servererrormessage.php
+ErrorDocument 404 /php/servererrormessage.php
+ErrorDocument 405 /php/servererrormessage.php
+ErrorDocument 408 /php/servererrormessage.php
+ErrorDocument 500 /php/servererrormessage.php
+ErrorDocument 502 /php/servererrormessage.php
+ErrorDocument 504 /php/servererrormessage.php
