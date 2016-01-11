@@ -12,8 +12,8 @@
  *
  */
 
-include('mongo.php'); /** path should be adjusted later on the server */
-include('../index.html');/** path should be adjusted later on the server */
+include('mongo.php'); /** no need for adjusting  */
+include('../index.html');/** should be the right path */
 /** Checking if the name-field is not blank */
 if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) && !empty($_POST['email']))
 {
@@ -66,7 +66,7 @@ if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) &&
             $messageBody .="<p>Tanks for subscribing! We will sent as soon as possible the";
             $messageBody .="Crawling-Results to " .$name. " and " .$email. " </p><hr>";
             $messageBody .="<p>Please click the link to activate your account:";
-            $messageBody .="http://localhost/src/php/verify.php?email=$email&hash_subscribe=$hash_subscribe"; // You should adjust the Path
+            $messageBody .="https://www.hotcat.de/php/verify.php?email=$email&hash_subscribe=$hash_subscribe"; // You should adjust the Path
             $messageBody .="<br/>Thank you for subscribing!</p></div></div></body></html>";
             $headers     = "From: noreply@hotcat.de" . "\r\n"; // set from headers
             $headers     .= "Content-type: text/html; charset=iso-8859-1\n";
@@ -160,6 +160,6 @@ $cursor = $people->find(); //handling with result
         this.location.href="../index.html";
     }
 </script>
-<script src="../js/menu.js"></script>
+<script src="../js/main/menu.js"></script>
 </body>
 </html>
