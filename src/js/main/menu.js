@@ -7,6 +7,7 @@ document.getElementById("nav01").innerHTML =
     "<div class='container'>" +
     "<div class='row'>" +
     "<div class='col-md-8'><ul class='nav navbar-nav'>" +
+    "<li><img class='img-fluid' width='200' src='img/hotcat.svg'  alt='Hotcat Logo'/></li>" +
     "<li><a href='home.html'>Home</a></li>" +
     "<li  class='dropdown'><a href='globaldata.html' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Universal Summary<span class='caret'></span></a>" +
     "<ul class='dropdown-menu'>" +

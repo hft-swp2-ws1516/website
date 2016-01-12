@@ -119,37 +119,6 @@ window.onload = function() {
   });
 
 
-  $('#filterDateEnd').datepicker({
-    format: "yyyy_mm",
-    startView: 1,
-    minViewMode: 1,
-    autoclose: true,
-    //setDate: new Date(2015,11),
-    startDate: new Date(2015, 10),
-    endDate: new Date(),
-  });
-
-  // default end date, this syntax is weird but it worked
-  $('#filterDateEnd').datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth()));
-
-  $('#filterDateStart').datepicker({
-    format: "yyyy_mm",
-    viewMode: "months",
-    minViewMode: "months",
-    autoclose: true,
-    startDate: new Date(2015, 10),
-    endDate: new Date(),
-  }).on('changeDate', function(e) {
-    var month = e.date.getMonth();
-    var year = e.date.getFullYear();
-    var startDate = new Date(year, month);
-    $('#filterDateEnd').datepicker('setStartDate', startDate);
-    //$('#filterDateEnd').datepicker('setDate',  startDate);
-  });
-
-
-  // set default Beginn date
-  $('#filterDateStart').datepicker('setDate', new Date(2015, 10));
 
 
 };
