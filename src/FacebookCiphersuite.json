@@ -1,0 +1,3263 @@
+{
+  "error": false,
+  "result": [
+    {
+      "errors": {},
+      "acceptedCipherSuites": {
+        "DES-CBC3-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          112,
+          null
+        ],
+        "AES256-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          256,
+          null
+        ],
+        "ECDHE-ECDSA-AES256-GCM-SHA384": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          256,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "ECDHE-RSA-DES-CBC3-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          112,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "RC4-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          null
+        ],
+        "ECDHE-RSA-AES128-GCM-SHA256": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "ECDHE-RSA-AES128-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "ECDHE-ECDSA-AES256-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          256,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "RC4-MD5": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          null
+        ],
+        "ECDHE-RSA-AES256-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          256,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "ECDHE-ECDSA-AES128-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "AES128-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          null
+        ],
+        "ECDHE-ECDSA-RC4-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "ECDHE-RSA-RC4-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "AES128-GCM-SHA256": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          null
+        ],
+        "ECDHE-RSA-AES256-GCM-SHA384": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          256,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "AES256-GCM-SHA384": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          256,
+          null
+        ],
+        "ECDHE-ECDSA-AES128-GCM-SHA256": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "ECDHE-ECDSA-DES-CBC3-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          112,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ]
+      },
+      "rejectedCipherSuites": {
+        "DHE-RSA-AES256-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES128-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES256-GCM-SHA384": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "SRP-DSS-AES-256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-DSS-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-AES-128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES128-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES128-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "SRP-DSS-AES-128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-RSA-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES256-SHA384": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "PSK-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-AES256-GCM-SHA384": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-RC4-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES256-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "SRP-RSA-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AES256-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES256-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-AES256-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES256-SHA384": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EDH-RSA-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-EDH-DSS-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES128-GCM-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "SRP-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "NULL-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "PSK-AES128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EXP-RC2-CBC-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES128-GCM-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES256-SHA384": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES128-GCM-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "SRP-AES-256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-RSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES128-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "SRP-RSA-AES-256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES128-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES256-GCM-SHA384": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-AES128-GCM-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-RSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES256-GCM-SHA384": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES256-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AECDH-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES256-SHA384": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-RC4-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AECDH-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES128-GCM-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AES128-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-ADH-RC4-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-AES128-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "NULL-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES256-GCM-SHA384": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "IDEA-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES128-GCM-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES128-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AECDH-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AECDH-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-AES256-GCM-SHA384": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EDH-DSS-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-EDH-RSA-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES256-GCM-SHA384": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "PSK-RC4-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-RSA-AES-128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EDH-RSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES128-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES128-GCM-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "PSK-AES256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES128-SHA256": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AECDH-RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EDH-DSS-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-ADH-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ]
+      },
+      "command": "tlsv1_2",
+      "preferredCipherSuite": {
+        "ECDHE-ECDSA-AES128-GCM-SHA256": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ]
+      },
+      "error": false
+    },
+    {
+      "errors": {},
+      "acceptedCipherSuites": {
+        "RC4-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          null
+        ],
+        "AES256-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          256,
+          null
+        ],
+        "ECDHE-RSA-DES-CBC3-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          112,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "DES-CBC3-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          112,
+          null
+        ],
+        "ECDHE-ECDSA-AES128-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "ECDHE-RSA-AES128-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "ECDHE-ECDSA-AES256-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          256,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "RC4-MD5": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          null
+        ],
+        "ECDHE-RSA-AES256-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          256,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "ECDHE-RSA-RC4-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "AES128-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          null
+        ],
+        "ECDHE-ECDSA-RC4-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "ECDHE-ECDSA-DES-CBC3-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          112,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ]
+      },
+      "rejectedCipherSuites": {
+        "DHE-RSA-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-DSS-AES-256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-DSS-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-AES-128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-RSA-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-RSA-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-DSS-AES-128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-RSA-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES256-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "PSK-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-RC4-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-RSA-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES256-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EDH-RSA-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-EDH-DSS-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "SRP-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "NULL-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "PSK-AES128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EXP-RC2-CBC-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES256-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "SRP-AES-256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-RSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-RSA-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-RSA-AES-256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-RSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "AECDH-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES256-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EXP-RC4-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AECDH-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EXP-ADH-RC4-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-RSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "IDEA-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-DSS-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "AECDH-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AECDH-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-RSA-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EDH-DSS-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-EDH-RSA-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "PSK-RC4-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-RSA-AES-128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EDH-RSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "PSK-AES256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "NULL-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-RSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AECDH-RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EDH-DSS-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-ADH-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ]
+      },
+      "command": "tlsv1_1",
+      "preferredCipherSuite": {
+        "ECDHE-ECDSA-AES128-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ]
+      },
+      "error": false
+    },
+    {
+      "errors": {},
+      "acceptedCipherSuites": {
+        "RC4-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          null
+        ],
+        "AES256-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          256,
+          null
+        ],
+        "ECDHE-RSA-DES-CBC3-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          112,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "DES-CBC3-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          112,
+          null
+        ],
+        "ECDHE-ECDSA-AES128-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "ECDHE-RSA-AES128-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "ECDHE-ECDSA-AES256-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          256,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "RC4-MD5": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          null
+        ],
+        "ECDHE-RSA-AES256-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          256,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "ECDHE-RSA-RC4-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "AES128-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          null
+        ],
+        "ECDHE-ECDSA-RC4-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ],
+        "ECDHE-ECDSA-DES-CBC3-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          112,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ]
+      },
+      "rejectedCipherSuites": {
+        "DHE-RSA-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-DSS-AES-256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-DSS-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-AES-128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-RSA-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-RSA-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-DSS-AES-128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-RSA-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES256-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "PSK-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-RC4-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-RSA-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES256-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EDH-RSA-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-EDH-DSS-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "SRP-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "NULL-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "PSK-AES128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EXP-RC2-CBC-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES256-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "SRP-AES-256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-RSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-RSA-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-RSA-AES-256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-RSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "AECDH-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES256-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EXP-RC4-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AECDH-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EXP-ADH-RC4-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-RSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "IDEA-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-DSS-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "AECDH-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AECDH-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-RSA-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EDH-DSS-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-EDH-RSA-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "PSK-RC4-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-RSA-AES-128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EDH-RSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "PSK-AES256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "NULL-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-RSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AECDH-RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EDH-DSS-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-ADH-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ]
+      },
+      "command": "tlsv1",
+      "preferredCipherSuite": {
+        "ECDHE-ECDSA-AES128-SHA": [
+          "HTTP 301 Moved Permanently - https://de-de.facebook.com/",
+          128,
+          {
+            "Prime": "0x00ffffffff00000001000000000000000000000000ffffffffffffffffffffffff",
+            "Field_Type": "prime-field",
+            "B": "0x5ac635d8aa3a93e7b3ebbd55769886bc651d06b0cc53b0f63bce3c3e27d2604b",
+            "Generator": "0x046b17d1f2e12c4247f8bce6e563a440f277037d812deb33a0f4a13945d898c2964fe342e2fe1a7f9b8ee7eb4a7c0f9e162bce33576b315ececbb6406837bf51f5",
+            "Seed": "0xc49d360886e704936a6678e1139d26b7819f7e90",
+            "A": "0x00ffffffff00000001000000000000000000000000fffffffffffffffffffffffc",
+            "GeneratorType": "uncompressed",
+            "GroupSize": "256",
+            "Type": "ECDH",
+            "Order": "0x00ffffffff00000000ffffffffffffffffbce6faada7179e84f3b9cac2fc632551",
+            "Cofactor": "1"
+          }
+        ]
+      },
+      "error": false
+    },
+    {
+      "errors": {},
+      "acceptedCipherSuites": {},
+      "rejectedCipherSuites": {
+        "DHE-RSA-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-DSS-AES-256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-DSS-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-AES-128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-RSA-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-RSA-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "SRP-DSS-AES-128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-RSA-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "PSK-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-RC4-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-RSA-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EDH-RSA-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-RSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES256-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EXP-EDH-DSS-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "SRP-3DES-EDE-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "NULL-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "PSK-AES128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EXP-RC2-CBC-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES256-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "RC4-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "SRP-AES-256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-RSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-RSA-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-RSA-AES-256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-RSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-AES256-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "AECDH-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-RC4-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AECDH-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EXP-ADH-RC4-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDHE-ECDSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-RSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ADH-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "IDEA-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-RSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DHE-DSS-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "AECDH-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AECDH-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-AES128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ADH-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-RSA-CAMELLIA256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EDH-DSS-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-EDH-RSA-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-AES256-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "PSK-RC4-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "SRP-RSA-AES-128-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "EDH-RSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DHE-DSS-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-RSA-AES128-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES128-GCM-SHA256": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-ECDSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "PSK-AES256-CBC-SHA": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "DH-DSS-CAMELLIA128-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-SEED-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDH-RSA-AES256-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-RSA-DES-CBC3-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "NULL-MD5": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AES256-GCM-SHA384": [
+          "TLS / No ciphers available",
+          null,
+          null
+        ],
+        "ECDH-RSA-NULL-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "AECDH-RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "ECDHE-RSA-RC4-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "DH-DSS-AES256-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EDH-DSS-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ],
+        "EXP-ADH-DES-CBC-SHA": [
+          "TLS / Alert handshake failure",
+          null,
+          null
+        ]
+      },
+      "command": "sslv3",
+      "preferredCipherSuite": {},
+      "error": false
+    },
+    {
+      "errors": {},
+      "acceptedCipherSuites": {},
+      "rejectedCipherSuites": {
+        "DES-CBC3-MD5": [
+          "TCP / Received RST",
+          null,
+          null
+        ],
+        "EXP-RC2-CBC-MD5": [
+          "TCP / Received RST",
+          null,
+          null
+        ],
+        "DES-CBC-MD5": [
+          "TCP / Received RST",
+          null,
+          null
+        ],
+        "RC4-MD5": [
+          "TCP / Received RST",
+          null,
+          null
+        ],
+        "EXP-RC4-MD5": [
+          "TCP / Received RST",
+          null,
+          null
+        ],
+        "IDEA-CBC-MD5": [
+          "TCP / Received RST",
+          null,
+          null
+        ],
+        "RC2-CBC-MD5": [
+          "TCP / Received RST",
+          null,
+          null
+        ]
+      },
+      "command": "sslv2",
+      "preferredCipherSuite": {},
+      "error": false
+    },
+    {
+      "issuer": {
+        "countryName": "US",
+        "commonName": "DigiCert High Assurance CA-3",
+        "organizationalUnitName": "www.digicert.com",
+        "organizationName": "DigiCert Inc"
+      },
+      "serialNumber": "0761BDBAF5C5715891F13E600B46D10D",
+      "validity": {
+        "notAfter": "Dec 31 12:00:00 2015 GMT",
+        "notBefore": "Aug 28 00:00:00 2014 GMT"
+      },
+      "subjectPublicKeyInfo": {
+        "publicKey": {
+          "curve": "prime256v1",
+          "pub": "04:d8:d1:dd:35:bd:e2:59:b6:fb:9b:1f:54:15:8c:db:bf:4e:58:bd:47:be:b8:10:fc:22:e9:d2:9e:98:f8:49:2a:25:fb:94:46:e4:42:99:84:50:1c:5f:01:fd:14:25:31:5c:4e:d9:64:fd:c5:0c:b3:46:d2:a1:bc:70:b4:87:8e"
+        },
+        "publicKeyAlgorithm": "id-ecPublicKey",
+        "publicKeySize": "256"
+      },
+      "version": 2,
+      "extensions": {
+        "X509v3 Subject Key Identifier": "43:09:93:40:FA:11:4B:30:33:EC:F2:87:6E:8D:71:18:CF:8A:BC:8E",
+        "X509v3 Extended Key Usage": {
+          "TLS Web Client Authentication": "",
+          "TLS Web Server Authentication": ""
+        },
+        "Authority Information Access": {
+          "CAIssuers": {
+            "URI": [
+              "http://cacerts.digicert.com/DigiCertHighAssuranceCA-3.crt"
+            ]
+          },
+          "OCSP": {
+            "URI": [
+              "http://ocsp.digicert.com"
+            ]
+          }
+        },
+        "X509v3 CRL Distribution Points": {
+          "Full Name": [
+            "",
+            ""
+          ],
+          "URI": [
+            "http://crl3.digicert.com/ca3-g29.crl",
+            "http://crl4.digicert.com/ca3-g29.crl"
+          ]
+        },
+        "X509v3 Basic Constraints": "CA:FALSE",
+        "X509v3 Key Usage": {
+          "Digital Signature": ""
+        },
+        "X509v3 Subject Alternative Name": {
+          "DNS": [
+            "*.facebook.com",
+            "facebook.com",
+            "*.xz.fbcdn.net",
+            "messenger.com",
+            "fb.com",
+            "*.m.facebook.com",
+            "*.fbsbx.com",
+            "*.xy.fbcdn.net",
+            "*.messenger.com",
+            "*.fb.com",
+            "*.fbcdn.net",
+            "*.xx.fbcdn.net",
+            "*.facebook.net"
+          ]
+        },
+        "X509v3 Authority Key Identifier": "keyid:50:EA:73:89:DB:29:FB:10:8F:9E:E5:01:20:D4:DE:79:99:48:83:F7",
+        "X509v3 Certificate Policies": {
+          "Policy": [
+            "2.16.840.1.114412.1.1"
+          ],
+          "CPS": [
+            "https://www.digicert.com/CPS"
+          ]
+        }
+      },
+      "signatureValue": "97:a6:32:3c:4a:29:0a:3b:54:2d:b5:83:34:5d:0b:30:45:89:dc:85:ea:40:12:ed:74:d5:c8:44:df:47:84:49:f5:6a:4c:73:cb:b7:c6:67:43:55:a1:23:98:ca:97:b7:4a:78:e0:10:f9:85:86:9d:8b:c1:fa:78:a0:3d:11:63:ff:19:5c:c5:6a:ba:f4:db:67:71:1f:b1:ec:fe:5c:3f:f8:da:94:92:bd:2e:0b:02:f1:b8:f5:82:6d:38:1d:e5:59:ad:08:84:3b:54:04:0a:00:50:3c:fb:b9:42:0d:f4:9d:23:74:bf:0d:63:d1:c5:ef:8a:08:74:0b:2b:bb:f1:aa:74:24:04:db:90:c7:18:59:96:9c:44:3e:e2:2a:07:47:39:7a:62:7e:41:f4:0a:cd:be:1c:33:67:8e:d1:a9:5d:bf:bc:30:11:3f:44:b2:b9:6f:75:1f:73:68:07:65:33:2a:8e:f0:9f:ec:c5:e3:45:bb:0a:5a:b2:cb:e4:03:bd:1e:5a:6b:d5:bb:27:78:8a:5e:73:51:e7:5e:86:16:5b:58:a1:20:27:a0:08:a8:45:d5:d9:3b:6b:69:11:db:49:5b:97:e5:ff:ab:82:28:fd:93:cd:ac:af:de:63:61:82:db:7f:fc:26:b9:46:6c:55:c3:6e:ca:e8:61:14:12",
+      "error": false,
+      "command": "certinfo",
+      "signatureAlgorithm": "sha1WithRSAEncryption",
+      "trusted": {
+        "Java 6": "ok",
+        "Google": "ok",
+        "Mozilla NSS": "ok",
+        "Microsoft": "ok",
+        "Apple": "ok"
+      },
+      "subject": {
+        "countryName": "US",
+        "commonName": "*.facebook.com",
+        "organizationName": "Facebook, Inc.",
+        "localityName": "Menlo Park",
+        "stateOrProvinceName": "CA"
+      }
+    }
+  ],
+  "target": [
+    "facebook.de",
+    "66.220.158.19",
+    443,
+    3
+  ]
+}
