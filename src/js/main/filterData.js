@@ -78,6 +78,11 @@ function displayFilter() {
         cipherString = cipherString.replace(/[^\w\s||.||-]/gi, '');
 
         document.getElementById("displayFilterSelection").innerHTML = cipherString;
+        
+    } else {
+        
+        document.getElementById("displayFilterSelection").innerHTML = "[none]";
+        
     }
 }
 
@@ -278,7 +283,7 @@ function parseResponse(response, protocol, cipherString) {
         if (endDate !== undefined && i + 1 === endIndex && inInterval) {
             break;
         }
-        if(!monthSkipped){
+        if (!monthSkipped) {
             loops++;
         }
     }
@@ -316,7 +321,7 @@ function parseResponse(response, protocol, cipherString) {
 
 function doEntryInsertion(outer, manualProtocolAggregation, matchLiterally, protocol, cipherString, loops, monthSkipped) {
 
-    loops++;    
+    loops++;
     outer.match(/{(.*?)}/g).forEach(function (inner) {
         if (!manualProtocolAggregation) {
             if (matchLiterally) {
