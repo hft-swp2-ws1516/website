@@ -81,10 +81,10 @@ document.getElementById("subscribe").innerHTML =
     "                                       </div>" +
     "                                       <div id='terms-conditions' class='panel-collapse collapse'>" +
     "                                               <div class='alert alert-info'>" +
-    "                                                   By clicking the Subscribe Button bellow you agree that your Name and e-mail Address" +
-    "                                                   will be saved into our Database. We are using those to send you monthly an e-mail " +
-    "                                                   about the last CRAWLING results. We assure you that your Name and e-mail address" +
-    "                                                   will not be disclosed to third parties!" +
+    "                                                   In order to get the monthly TLS results from HOTCAT, a very important step is needed as part" +
+    "                                                   of your consent. By clicking the 'I accept the Terms & Conditions', you are giving us the" +
+    "                                                   permission to save the Name and E-Mail address. We assure you that your Name and E-Mail address" +
+    "                                                   will not be disclosed to third parties!  " +
     "                                               </div>" +
     "                                       </div>" +
     "                                   </div>" +
