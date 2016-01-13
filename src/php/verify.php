@@ -59,7 +59,7 @@
              * FROM collection-name WHERE email = $email AND hash_subscribe = $hash_subscribe AND active = 0"
              */
             $where = array(
-                '$and' => array(
+              '$and' => array(
                     array(  'email'             =>    $email            ),
                     array(  'hash_subscribe'    =>    $hash_subscribe   ),
                     array(  'active'            =>    '0'               )
@@ -67,7 +67,7 @@
             );
 
             try{
-                $search = $people->find($where);
+                $search = $people->findOne($where);
             }catch(MongoCursorException $e){
                 die("Could not aggregate over the Documents. For more information see ". $e->getMessage());
             }
@@ -76,7 +76,7 @@
              * Use $match to search for the one and only document that correspond
              * with hash_subscribe = $hash_subscribe and active = 0
              */
-            $match  = $people->count(array('active' => '0'), array('hash_subscribe' => $hash_subscribe));
+            $match  = $people->count($search);
 
             // returns true if we have match
             if($match > 0)
