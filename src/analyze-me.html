@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Analyse Me</title>
+    <title>Experimental Study on TLS-Handshakes</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
@@ -30,7 +30,15 @@
 and the menu item will display dynamicly-->
   <div id="nav01"></div>
 
-
+<style>
+.test
+{
+	border:1px;
+	border-style:solid;
+	border-color:#000000;
+	padding:15px;
+}
+</style>
 <!--Begin of Modal-Window
 <div class="container">
     -- Modal --
@@ -104,17 +112,34 @@ End of Modal-Window-->
             <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
         </div>
         <br>
-        <button type="button" id=btn class="btn btn-info btn-block">Analyze my specified URL</button>
+        <button type="button"; style="background-color:#CC9900"; id=btn class="btn btn-block"><b>Analyze my specified URL</b></button>
         <br>
-
+		<div id="div1" class="test" hidden="true">
         <label id="result"><br></label><br>
- 		  	<ul2 id="ul2"  hidden="true" ><b>Akzeptierte Ciphersuites: </b></b><br><br></ul2><br><br>
-			<ul3 id="ul3"  hidden="true"><b>Bevorzugte Ciphersuites: </b></b><br><br></ul3><br><br>
+ 		  	<ul2 id="ul2"  hidden="true"><b>Akzeptierte Ciphersuites: </b></ul2><br><br>
+ 		</div>
+ 		<div id="div2" class="test" hidden="true">
+ 		  	<ul3 id="ul3"  hidden="true"></ul3>
+ 		</div>
+ 		<div id="div3" class="test" hidden="true">
+			<ul4 id="ul4"  hidden="true"><b><br>Bevorzugte Ciphersuites: </b></b><br><br></ul4><br>
+		</div>
+		<div id="div4"class="test" hidden="true">
+			<ul5 id="ul5"  hidden="true"></ul5>
+		</div>
+		
     </div>
 </div>
 
 <script>
 //URL Check Button Click
+//accept via enter
+	$("#basic-url").keyup(function(event){
+    	if(event.keyCode == 13){
+        $("#btn").click();
+    }
+});
+//accept via click
   $("#btn").click(function(){
 	    var url = $("#basic-url").val();
 	    console.log(url);
@@ -122,6 +147,12 @@ End of Modal-Window-->
 	      //$("#result").text("URL Syntax akzeptiert");
 	        document.getElementById('ul2').hidden = false;
 	        document.getElementById('ul3').hidden = false;
+	        document.getElementById('ul4').hidden = false;
+	        document.getElementById('ul5').hidden = false;
+	        document.getElementById('div1').hidden = false;
+	        document.getElementById('div2').hidden = false;
+	        document.getElementById('div3').hidden = false;
+	        document.getElementById('div4').hidden = false;
 			$(function() {
 
 				$.getJSON('FacebookCiphersuite.json', function(data) {
@@ -134,10 +165,10 @@ End of Modal-Window-->
 						var pref = emp.preferredCipherSuite;
 						var com = emp.command;
 						$.each(accepted, function(j, value) {
-						$('ul2').append('<li>' + j + '  ---- Keygroesse: '+ value[1] + '</li>');
+						$('ul3').append('<br>' + j + '  ---- Keygroesse: '+ value[1]);
 						});
 						$.each(pref, function(k, value2) {
-						$('ul3').append('<li>'   +'Typ: '    + com +'   -----  Bevorzugte Ciphersuite: ' + k +'  ---- Keygroesse: '+ value2[1] + '</li>');
+						$('ul5').append('<br>'   +'Typ: '    + com +'   -----  Bevorzugte Ciphersuite: ' + k +'  ---- Keygroesse: '+ value2[1]);
 						});
 
 
@@ -152,18 +183,6 @@ End of Modal-Window-->
 	    	alert("URL Syntax nicht akzeptiert");
 	    }
 	});
-	
-
-	//Check Press-Enter-Key linked to "URL Check Button Click"
-
-
-    $('#basic-url').keypress(function(e){
-    	if(e.keyCode==13)
-    $('#btn').click();
-    });
-
-
-
   
   //Parse Json Object
   //URL Syntax Check
@@ -183,7 +202,7 @@ End of Modal-Window-->
 <script src="js/main/menu.js"></script>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-<script>x
+<script>
     (function (b, o, i, l, e, r) {
         b.GoogleAnalyticsObject = l;
         b[l] || (b[l] =
