@@ -58,15 +58,55 @@ if($title == false || strlen($status) != 3)
         }
 
         p{
-            font-size: 1rem;
-            line-height: 1.5;
+            font-size: 1.3rem;
+            line-height: 2.5;
         }
     </style>
 </head>
 <body>
     <div id="content">
-        <h1><?php echo $title; ?></h1>
+        <h1><?php echo "Server response code: " . $title; ?></h1>
+        <?php
+            $statusCodeImg = $title;
+            $imgSource = "";
+        /* Lets get dynamically the Server Code images for each and every code defined by tittle */
+            switch ($statusCodeImg)
+            {
+                case "403 Forbidden":
+                    $imgSource = "/src/img/forbidden.jpg";
+                    break;
+                case "404 File Not Found":
+                    $imgSource = "/src/img/filenotfound404.jpg";
+                    break;
+                case "405 Method Not Allowed":
+                    $imgSource = "/src/img/methodNotAllowed.jpg";
+                    break;
+                case "408 Request Timeout":
+                    $imgSource = "/src/img/requestTimeout.jpg";
+                    break;
+                case "500 Internal Server Error":
+                    $imgSource = "/src/img/internalError.jpg";
+                    break;
+                case "502 Bad Gateway":
+                    $imgSource = "/src/img/badGateway.jpg";
+                    break;
+                case "504 Bad Gateway Timeout":
+                    $imgSource = "/src/img/badGatewayTimeout.jpg";
+                    break;
+                default:
+                    $imgSource = "/src/img/unrecogized.jpg";
+            }
+        ?>
+        <img src="<?php echo $imgSource ?>"/>
         <p><?php echo $message; ?></p>
+        <a href="/src/index.html" id="go-to-index">Return to Website</a>  <a href="javascript:close_window();">CLOSE THE TAB</a>
     </div>
+    <script>
+        function close_window(){
+            if(confirm("Close Window?")){
+                close();
+            }
+        }
+    </script>
 </body>
 </html>
