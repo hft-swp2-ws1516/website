@@ -106,7 +106,10 @@ End of Modal-Window-->
         <br>
         <button type="button" id=btn class="btn btn-info btn-block">Analyze my specified URL</button>
         <br>
-        <label id="result"></label>
+
+        <label id="result"><br></label><br>
+ 		  	<ul2 id="ul2"  hidden="true" ><b>Akzeptierte Ciphersuites: </b></b><br><br></ul2><br><br>
+			<ul3 id="ul3"  hidden="true"><b>Bevorzugte Ciphersuites: </b></b><br><br></ul3><br><br>
     </div>
 </div>
 
@@ -116,8 +119,9 @@ End of Modal-Window-->
 	    var url = $("#basic-url").val();
 	    console.log(url);
 	    if(checkURL(url)){
-	      $("#result").text("URL Syntax akzeptiert");
-	      //url weitergeben und auf Antwort warten
+	      //$("#result").text("URL Syntax akzeptiert");
+	        document.getElementById('ul2').hidden = false;
+	        document.getElementById('ul3').hidden = false;
 			$(function() {
 
 				$.getJSON('FacebookCiphersuite.json', function(data) {
@@ -130,10 +134,10 @@ End of Modal-Window-->
 						var pref = emp.preferredCipherSuite;
 						var com = emp.command;
 						$.each(accepted, function(j, value) {
-						$('ul').append('<li>' + j + '  ---- Keygroesse: '+ value[1] + '</li>');
+						$('ul2').append('<li>' + j + '  ---- Keygroesse: '+ value[1] + '</li>');
 						});
 						$.each(pref, function(k, value2) {
-						$('ul2').append('<li>'   +'Typ: '    + com +'-----  Bevorzugte Ciphersuite: ' + k +'  ---- Keygroesse: '+ value2[1] + '</li>');
+						$('ul3').append('<li>'   +'Typ: '    + com +'   -----  Bevorzugte Ciphersuite: ' + k +'  ---- Keygroesse: '+ value2[1] + '</li>');
 						});
 
 
@@ -145,7 +149,7 @@ End of Modal-Window-->
 			});
 	    }
 	    else{
-	      $("#result").text("URL Syntax nicht akzeptiert");
+	    	alert("URL Syntax nicht akzeptiert");
 	    }
 	});
   
@@ -159,10 +163,6 @@ End of Modal-Window-->
 	    return (false);
 	}
 </script>
-	<ul>Akzeptierte Ciphersuites: <br></ul>
-	_______________________________________________________<br>
-	<ul2>Bevorzugte Ciphersuites: <br></ul2>
-
 <footer id="footer"></footer>
 <div id="subscribe"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/{{JQUERY_VERSION}}/jquery.min.js"></script>
