@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Experimental Study on TLS-Handshakes</title>
+    <title>Analyse Me</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
@@ -152,6 +152,18 @@ End of Modal-Window-->
 	    	alert("URL Syntax nicht akzeptiert");
 	    }
 	});
+	
+
+	//Check Press-Enter-Key linked to "URL Check Button Click"
+
+
+    $('#basic-url').keypress(function(e){
+    	if(e.keyCode==13)
+    $('#btn').click();
+    });
+
+
+
   
   //Parse Json Object
   //URL Syntax Check
@@ -171,7 +183,7 @@ End of Modal-Window-->
 <script src="js/main/menu.js"></script>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-<script>
+<script>x
     (function (b, o, i, l, e, r) {
         b.GoogleAnalyticsObject = l;
         b[l] || (b[l] =
