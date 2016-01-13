@@ -87,7 +87,7 @@ function sendEmail($recipientName,$recipientEmail,$pdfFile,$senderEmail,$date,$s
         'host' => "ssl://smtp.googlemail.com",
         'port' => "465",
         'auth' => true,
-        'username' => "username,
+        'username' => "username",
         'password' => "password"
     ));
 
