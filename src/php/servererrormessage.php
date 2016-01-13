@@ -70,7 +70,32 @@ if($title == false || strlen($status) != 3)
             $statusCodeImg = $title;
             $imgSource = "";
         /* Lets get dynamically the Server Code images for each and every code defined by tittle */
-
+            switch ($statusCodeImg)
+            {
+                case "403 Forbidden":
+                    $imgSource = "/src/img/forbidden.jpg";
+                    break;
+                case "404 File Not Found":
+                    $imgSource = "/src/img/filenotfound404.jpg";
+                    break;
+                case "405 Method Not Allowed":
+                    $imgSource = "/src/img/methodNotAllowed.jpg";
+                    break;
+                case "408 Request Timeout":
+                    $imgSource = "/src/img/requestTimeout.jpg";
+                    break;
+                case "500 Internal Server Error":
+                    $imgSource = "/src/img/internalError.jpg";
+                    break;
+                case "502 Bad Gateway":
+                    $imgSource = "/src/img/badGateway.jpg";
+                    break;
+                case "504 Bad Gateway Timeout":
+                    $imgSource = "/src/img/badGatewayTimeout.jpg";
+                    break;
+                default:
+                    $imgSource = "/src/img/unrecogized.jpg";
+            }
         ?>
         <img src="<?php echo $imgSource ?>"/>
         <p><?php echo $message; ?></p>
