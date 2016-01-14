@@ -86,11 +86,9 @@ if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) &&
                     $messageBody .="<p>Tanks for subscribing! We will sent as soon as possible the";
                     $messageBody .="Crawling-Results to " .$name. " and " .$email. " </p><hr>";
                     $messageBody .="<p>Please click the link to activate your account: ";
-                    $messageBody .="http://localhost/src/php/verify.php?email=$email&hash_subscribe=$hash_subscribe";
-                    $messageBody .="<br/>"; // You should adjust the Path
-                    $messageBody .="http://localhost/src/php/unsubscribe.php?email=$email&hash_unsubscribe=$hash_unsubscribe";
+                    $messageBody .="https:/hotcat.de/php/verify.php?email=$email&hash_subscribe=$hash_subscribe"
                     $messageBody .="<br/>Thank you for subscribing!</p></div></div></body></html>";
-                    $headers     = "From: geermebe@gmail.com" . "\r\n"; // set from headers
+                    $headers     = "From: noreply@hotcat.de" . "\r\n"; // set from headers
                     $headers     .= "Content-type: text/html; charset=iso-8859-1\n";
                     mail($to, $subject, $messageBody, $headers); // Send mail
 
@@ -110,8 +108,8 @@ if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) &&
                     //    'host' => 'ssl://smtp.googlemail.com',
                     //    'port' => '465',
                     //    'auth' => true,
-                    //    'username' => 'tls.hotcat',
-                    //    'password' => 'hotdog2015-2016',
+                    //    'username' => '',
+                    //    'password' => '',
                     //));
 
                     //$smtp->send($to, $header, $messageBody); // send mail
