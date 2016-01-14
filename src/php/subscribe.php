@@ -206,6 +206,6 @@ $cursor = $people->find(); //handling with result
         this.location.href="../index.html";
     }
 </script>
-<script src="../js/menu.js"></script>
+<script src="../js/main/menu.js"></script>
 </body>
 </html>
