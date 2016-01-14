@@ -86,7 +86,7 @@ if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) &&
                     $messageBody .="<p>Tanks for subscribing! We will sent as soon as possible the";
                     $messageBody .="Crawling-Results to " .$name. " and " .$email. " </p><hr>";
                     $messageBody .="<p>Please click the link to activate your account: ";
-                    $messageBody .="https:/hotcat.de/php/verify.php?email=$email&hash_subscribe=$hash_subscribe"
+                    $messageBody .="https://hotcat.de/php/verify.php?email=$email&hash_subscribe=$hash_subscribe"
                     $messageBody .="<br/>Thank you for subscribing!</p></div></div></body></html>";
                     $headers     = "From: noreply@hotcat.de" . "\r\n"; // set from headers
                     $headers     .= "Content-type: text/html; charset=iso-8859-1\n";
