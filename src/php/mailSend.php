@@ -63,13 +63,13 @@ function sendEmail($recipientData,$pdfFile,$date,$senderName)
 $recipientName=$recipientData["name"];
 $recipientMail=$recipientData["email"];
 $recipientHashUn=$recipientData["hash_unsubscribe"];
-$message = "Hello .$recipientName.\n\nyour HOTCAT  Newsletter for " . $date . " has arrived.
-\nWe have got for you the new TLS Scanning results in the attached pdf.
-\nTo know the detailed results please visit us at: "."https://hotcat.de \n\n".
-"If you Want UNSBSCRIBE our Newsletter you can click the following Link:\n
+$message = "Dear .$recipientName.\n\nyour Hotcat report for " . $date . " has arrived!
+\nThe attached PDF file contains the most recent SSL/TLS scanning results, aggregated just for you (and all the other subscribers).
+\nIn case you are interested in more detailed results and other awesome stuff, please visit: "."https://hotcat.de \n\n".
+"If you are, on the other hand, not interested any more in receiving Hotcat reports, please use the following link in order to cancel your subscription:\n
 https://hotcat.de/php/unsubscribe.php?email=".$recipientMail."&hash_unsubscribe=".$recipientHashUn."
-\nThanks you for your Subscription.\n with best Regards\n\n " . $senderName;
-$subject = "your new TLS Scanning result ";
+\nPlease be advised that we kill a really cute baby kitten for every user that unsubscribes. Anyway, thanks for your subscription and have a lovely day!\n With hot regards\n\n " . $senderName;
+$subject = "Your monthly Hotcat report";
 $mime = new Mail_mime();
 $mime->setTXTBody($message);
 

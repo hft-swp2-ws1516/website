@@ -81,10 +81,11 @@ document.getElementById("subscribe").innerHTML =
     "                                       </div>" +
     "                                       <div id='terms-conditions' class='panel-collapse collapse'>" +
     "                                               <div class='alert alert-info'>" +
-    "                                                   In order to get the monthly TLS results from HOTCAT, a very important step is needed as part" +
-    "                                                   of your consent. By clicking the 'I accept the Terms & Conditions', you are giving us the" +
-    "                                                   permission to save the Name and E-Mail address. We assure you that your Name and E-Mail address" +
-    "                                                   will not be disclosed to third parties!  " +
+    "                                                   By clicking the 'Subscribe' button below, you agree that Hotcat will send you an e-mail containing" +
+    "                                                   the most recent results of our SSL/TLS scanner on a monthly basis. You also agree that the name and"+
+    "                                                   e-mail address you provided will be saved in our database. Neither your name nor your e-mail address will be"+
+    "                                                   used outside the scope of Hotcat's subscription function. Particularly, they will not be given to any third"+
+    "                                                   party." +
     "                                               </div>" +
     "                                       </div>" +
     "                                   </div>" +
