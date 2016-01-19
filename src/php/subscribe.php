@@ -169,7 +169,7 @@ $cursor = $people->find(); //handling with result
                                 <strong>
                                     <span class="badge">
                                         <?php
-                                            echo ". $cursor->count($_GET['_id']) . " users have already subscribed to Hotcat.";
+                                            echo $cursor->count($_GET['_id']) . " users have already subscribed to Hotcat.";
                                         ?>
                                     </span>
                                 </strong>
