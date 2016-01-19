@@ -114,20 +114,20 @@ End of Modal-Window-->
         <br>
         <button type="button"; style="background-color:#CC9900"; id=btn class="btn btn-block"><b>Analyze my specified URL</b></button>
         <br>
+
 		<div id="div1" class="test" hidden="true">
         <label id="result"><br></label><br>
- 		  	<ul2 id="ul2"  hidden="true"><b>Akzeptierte Ciphersuites: </b></ul2><br><br>
+ 		  	<ul2 id="ul2"  hidden="true"><b>Accepted Ciphersuites: </b></ul2><br><br>
  		</div>
  		<div id="div2" class="test" hidden="true">
  		  	<ul3 id="ul3"  hidden="true"></ul3>
  		</div>
  		<div id="div3" class="test" hidden="true">
-			<ul4 id="ul4"  hidden="true"><b><br>Bevorzugte Ciphersuites: </b></b><br><br></ul4><br>
+			<ul4 id="ul4"  hidden="true"><b><br>Preferred Ciphersuites: </font></b></b><br><br></ul4><br>
 		</div>
 		<div id="div4"class="test" hidden="true">
 			<ul5 id="ul5"  hidden="true"></ul5>
 		</div>
-		
     </div>
 </div>
 
@@ -165,13 +165,16 @@ End of Modal-Window-->
 						var pref = emp.preferredCipherSuite;
 						var com = emp.command;
 						$.each(accepted, function(j, value) {
-						$('ul3').append('<br>' + j + '  ---- Keygroesse: '+ value[1]);
+						$('ul3').append('<br>' + j + '  ---- keysize: '+ value[1]);
+							if(j.match('DHE')){
+								$('ul3').append(' ---- PFS: Yes');
+							}else{
+								$('ul3').append(' ---- PFS: No');
+							}
 						});
 						$.each(pref, function(k, value2) {
-						$('ul5').append('<br>'   +'Typ: '    + com +'   -----  Bevorzugte Ciphersuite: ' + k +'  ---- Keygroesse: '+ value2[1]);
+						$('ul5').append('<br>'   +'type: '    + com + ' ---- '+ k +'  ---- Keysize: '+ value2[1]);
 						});
-
-
 
 					});
 				}).error(function() {
@@ -180,7 +183,7 @@ End of Modal-Window-->
 			});
 	    }
 	    else{
-	    	alert("URL Syntax nicht akzeptiert");
+	    	alert("Wrong Syntax");
 	    }
 	});
   
