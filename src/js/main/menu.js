@@ -126,8 +126,28 @@ $("#t-c").click(function() {
 });
 
 
-// Validate
-/* form validation  that shows the user the correct format of name and email */
+/* form validation  that shows the user the correct format of name and email on keyup and change event*/
+$(document).ready(function() {
+    $("#name").change(function() {
+        if (/^[a-zA-Z ]+$/.test($(this).val()) && $(this).val().trim() !== "") {
+            name_tocheck = true;
+            $(this).css("border-color", "#0F0");
+        } else {
+            name_tocheck = false;
+            $(this).css("border-color", "#F00");
+        }
+    });
+    $("#email").change(function() {
+        if (/^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/.test($(this).val()) && $(this).val().trim() !== "") {
+            email_tocheck = true;
+            $(this).css("border-color", "#0F0");
+        } else {
+            email_tocheck = false;
+            $(this).css("border-color", "#F00");
+        }
+    });
+});
+
 $(document).ready(function() {
     $("#name").keyup(function() {
         if (/^[a-zA-Z ]+$/.test($(this).val()) && $(this).val().trim() !== "") {
@@ -148,7 +168,6 @@ $(document).ready(function() {
         }
     });
 });
-
 function disableBtn() {
     document.getElementById("save").disabled = true;
 }
