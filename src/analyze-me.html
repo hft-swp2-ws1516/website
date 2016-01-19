@@ -38,6 +38,9 @@ and the menu item will display dynamicly-->
 	border-color:#000000;
 	padding:15px;
 }
+oldCiphers{
+    background-color: #FF0000;
+}
 </style>
 <!--Begin of Modal-Window
 <div class="container">
@@ -120,10 +123,11 @@ End of Modal-Window-->
  		  	<ul2 id="ul2"  hidden="true"><b>Accepted Ciphersuites: </b></ul2><br><br>
  		</div>
  		<div id="div2" class="test" hidden="true">
- 		  	<ul3 id="ul3"  hidden="true"></ul3>
+ 		  	<ul3 id="ul3"  hidden="true"></ul3><br><br>
+ 		  	<ocs id="ocs1"><b><font color="#FF0000"> Red marked = Outdated Ciphersuites</font></b> </ocs>
  		</div>
  		<div id="div3" class="test" hidden="true">
-			<ul4 id="ul4"  hidden="true"><b><br>Preferred Ciphersuites: </font></b></b><br><br></ul4><br>
+			<ul4 id="ul4"  hidden="true"><b><br>Preferred Ciphersuites: </font></b></b><br></ul4><br>
 		</div>
 		<div id="div4"class="test" hidden="true">
 			<ul5 id="ul5"  hidden="true"></ul5>
@@ -132,19 +136,19 @@ End of Modal-Window-->
 </div>
 
 <script>
-//URL Check Button Click
-//accept via enter
+//--------------URL Check Button Click-----------------
+//--------------accept via enter-----------------
 	$("#basic-url").keyup(function(event){
     	if(event.keyCode == 13){
         $("#btn").click();
     }
 });
-//accept via click
+//------------accept via click-----------------
   $("#btn").click(function(){
 	    var url = $("#basic-url").val();
 	    console.log(url);
 	    if(checkURL(url)){
-	      //$("#result").text("URL Syntax akzeptiert");
+	      //$("#result").text("URL Syntax accepted");
 	        document.getElementById('ul2').hidden = false;
 	        document.getElementById('ul3').hidden = false;
 	        document.getElementById('ul4').hidden = false;
@@ -154,24 +158,92 @@ End of Modal-Window-->
 	        document.getElementById('div3').hidden = false;
 	        document.getElementById('div4').hidden = false;
 			$(function() {
-
+				
+                //---------getting Data out of Json-----------
+                
 				$.getJSON('FacebookCiphersuite.json', function(data) {
 					console.log('success');
 					// alert(JSON.stringify(data));
 					var result = data.result;
 		   		    //alert(JSON.stringify(result));
+		   		    
+		   		    //----------save Data in Variables----------
+		   		    
 					$.each(result, function(i, emp) {
 						var accepted = emp.acceptedCipherSuites;
 						var pref = emp.preferredCipherSuite;
 						var com = emp.command;
+						
+						//---------- Regex to check for bad Ciphers--------
+						
+						var matchregex = new RegExp("(MD5|SRP|PSK|DSS|RSP|RC4)");
+						
+						//--------- Check for bad Ciphers-----------
 						$.each(accepted, function(j, value) {
+							if(j.match(matchregex)){
+								$('ul3').append('<oldCiphers><br>' + j + '  ---- keysize: '+ value[1]+'</oldCiphers>');
+								if(j.match('DHE')){
+									$('ul3').append('<oldCiphers>'+' ---- PFS: Yes'+'</oldCiphers>');
+								}else{
+									$('ul3').append('<oldCiphers>'+' ---- PFS: No'+'</oldCiphers>');
+								}
+							}
+					//-------- earlier try to check for bad Ciphers -----------
+					
+						/*else if(j.match('MD5')){
+								$('ul3').append('<oldCiphers><br>' + j + '  ---- keysize: '+ value[1]+'</oldCiphers>');
+								if(j.match('DHE')){
+									$('ul3').append('<oldCiphers>'+' ---- PFS: Yes'+'</oldCiphers>');
+								}else{
+									$('ul3').append('<oldCiphers>'+' ---- PFS: No'+'</oldCiphers>');
+								}
+							}
+						else if(j.match('PSK')){
+							$('ul3').append('<oldCiphers><br>' + j + '  ---- keysize: '+ value[1]+'</oldCiphers>');
+							if(j.match('DHE')){
+								$('ul3').append('<oldCiphers>'+' ---- PFS: Yes'+'</oldCiphers>');
+							}else{
+								$('ul3').append('<oldCiphers>'+' ---- PFS: No'+'</oldCiphers>');
+							}
+						}
+						else if(j.match('DSS')){
+							$('ul3').append('<oldCiphers><br>' + j + '  ---- keysize: '+ value[1]+'</oldCiphers>');
+							if(j.match('DHE')){
+								$('ul3').append('<oldCiphers>'+' ---- PFS: Yes'+'</oldCiphers>');
+							}else{
+								$('ul3').append('<oldCiphers>'+' ---- PFS: No'+'</oldCiphers>');
+							}
+						}
+						else if(j.match('SRP')){
+							$('ul3').append('<oldCiphers><br>' + j + '  ---- keysize: '+ value[1]+'</oldCiphers>');
+							if(j.match('DHE')){
+								$('ul3').append('<oldCiphers>'+' ---- PFS: Yes'+'</oldCiphers>');
+							}else{
+								$('ul3').append('<oldCiphers>'+' ---- PFS: No'+'</oldCiphers>');
+							}
+						}
+						else if(j.match('RSP')){
+							$('ul3').append('<oldCiphers><br>' + j + '  ---- keysize: '+ value[1]+'</oldCiphers>');
+							if(j.match('DHE')){
+								$('ul3').append('<oldCiphers>'+' ---- PFS: Yes'+'</oldCiphers>');
+							}else{
+								$('ul3').append('<oldCiphers>'+' ---- PFS: No'+'</oldCiphers>');
+							}
+						}*/
+						
+						//------------ Show Ciphers + Keysize----------
+						else{
 						$('ul3').append('<br>' + j + '  ---- keysize: '+ value[1]);
+						
+						//------------ Check for PFS --------------
 							if(j.match('DHE')){
 								$('ul3').append(' ---- PFS: Yes');
 							}else{
 								$('ul3').append(' ---- PFS: No');
 							}
-						});
+						}});
+						
+						//--------------- Show Preferred Ciphers -----------
 						$.each(pref, function(k, value2) {
 						$('ul5').append('<br>'   +'type: '    + com + ' ---- '+ k +'  ---- Keysize: '+ value2[1]);
 						});
@@ -187,8 +259,8 @@ End of Modal-Window-->
 	    }
 	});
   
-  //Parse Json Object
-  //URL Syntax Check
+
+  //----------------URL Syntax Check-------------------
 	function checkURL(value) {
 	    var urlregex = new RegExp("^(http://[w]{3}\.)?(https://[w]{3}\.)?((([w]{3}).)?[a-zA-Z0-9\.\-]+(\:[a-zA-Z0-9\.&amp;%\$\-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\.(museum|travel|aero|arpa|asia|coop|info|name|biz|cat|com|int|jobs|net|org|pro|tel|ac|ad|ae|af|ag|ai|al|am|an|ao|aq|ar|as|at|au|au|aw|ax|az|ba|bb|bd|be|bf|bg|bh|bi|bj|bl|bm|bn|bo|br|bs|bt|bv|bw|by|bz|ca|cc|cd|cf|cg|ch|ci|ck|cl|cm|cn|co|cr|cu|cv|cx|cy|cz|de|dj|dk|dm|do|dz|ec|edu|ee|eg|eh|er|es|et|eu|fi|fj|fk|fm|fo|fr|ga|gb|gd|ge|gf|gg|gh|gi|gl|gm|gn|gov|gp|gq|gr|gs|gt|gu|gw|gy|hk|hm|hn|hr|ht|hu|id|ie|il|im|in|io|iq|ir|is|it|je|jm|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|ls|lt|lu|lv|ly|ma|mc|md|me|mf|mg|mh|mil|mk|ml|mm|mn|mo|mobi|mp|mq|mr|ms|mt|mu|mv|mw|mx|my|mz|na|nc|ne|nf|ng|ni|nl|no|np|nr|nu|nz|om|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|ps|pt|pw|py|qa|re|ro|rs|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|sk|sl|sm|sn|so|sr|st|su|sv|sy|sz|tc|td|tf|tg|th|tj|tk|tl|tm|tn|to|r|h|tp|tr|tt|tv|tw|tz|ua|ug|uk|um|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|yu|za|zm|zw))(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\?\'\\\+&amp;%\$#\=~_\-]+))*$");
 	    if (urlregex.test(value)) {
