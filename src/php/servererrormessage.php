@@ -6,6 +6,12 @@
  * Time: 21:13
  */
 
+
+/*********************************************************************************************************************
+ *                                                                                                                   *
+ *                      The array below [$codes] can be extended if they are any needs                               *
+ *                                                                                                                   *
+ *********************************************************************************************************************/
 $status = $_SERVER['REDIRECT_STATUS'];
 $codes = array(
     403 => array('403 Forbidden', 'You are not authorized to access this file.'),
@@ -17,12 +23,12 @@ $codes = array(
     504 => array('504 Bad Gateway Timeout', 'The upstream server failed to send a request in the time allowed by the server.'),
 );
 
-$title = $codes[$status][0];
+$title   = $codes[$status][0];
 $message = $codes[$status][1];
 
 if($title == false || strlen($status) != 3)
 {
-    $title = 'Unrecognized Status Code';
+    $title   = 'Unrecognized Status Code';
     $message = 'The website returned an unrecognised status code';
 }
 ?>
@@ -73,27 +79,35 @@ if($title == false || strlen($status) != 3)
             switch ($statusCodeImg)
             {
                 case "403 Forbidden":
+                    // forbidden.jpg doesn´t exist. Should be created by Photoshop artists :)
                     $imgSource = "/src/img/forbidden.jpg";
                     break;
                 case "404 File Not Found":
+                    // filenotfound404.jpg doesn´t exist. Should be created by Photoshop artists :)
                     $imgSource = "/src/img/filenotfound404.jpg";
                     break;
                 case "405 Method Not Allowed":
+                    // methodNotAllowed.jpg doesn´t exist. Should be created by Photoshop artists :)
                     $imgSource = "/src/img/methodNotAllowed.jpg";
                     break;
                 case "408 Request Timeout":
+                    // requestTimeout.jpg doesn´t exist. Should be created by Photoshop artists :)
                     $imgSource = "/src/img/requestTimeout.jpg";
                     break;
                 case "500 Internal Server Error":
+                    // internalError.jpg doesn´t exist. Should be created by Photoshop artists :)
                     $imgSource = "/src/img/internalError.jpg";
                     break;
                 case "502 Bad Gateway":
+                    // badGateway.jpg doesn´t exist. Should be created by Photoshop artists :)
                     $imgSource = "/src/img/badGateway.jpg";
                     break;
                 case "504 Bad Gateway Timeout":
+                    // badGatewayTimeout.jpg doesn´t exist. Should be created by Photoshop artists :)
                     $imgSource = "/src/img/badGatewayTimeout.jpg";
                     break;
                 default:
+                    // unrecogized.jpg doesn´t exist. Should be created by Photoshop artists :)
                     $imgSource = "/src/img/unrecogized.jpg";
             }
         ?>
