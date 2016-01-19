@@ -81,7 +81,7 @@
                 // The user will be removed from the Database
                 $people->remove(
                     array("hash_unsubscribe" => $hash_unsubscribe));
-                $mes = "<h3>Your personal subscription to Hotcat was successfully deactivated. <br>";
+                $mes = "<h3>Your personal subscription to Hotcat is successfully deactivated. <br>";
                 $mes .= "If you are still interested in some neatly visualized scanning results, you can directly navigate to Hotcat by ";
                 $mes .= "clicking the <p style='background: #ffb81c''>GO TO HOTCAT</p> link. You may also close this tab by hitting";
                 $mes .= "<p style='background: #ffb81c'>CLOSE THE TAB</p>.<h3>";
