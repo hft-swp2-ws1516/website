@@ -13,7 +13,6 @@
  */
 
 include('mongo.php'); /** path should be adjusted later on the server */
-include('../index.html');/** path should be adjusted later on the server */
 /** Checking if the name-field is not blank */
 if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) && !empty($_POST['email']))
 {
@@ -118,8 +117,6 @@ if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) &&
             echo "Message: ".$e->getMessage();
         }
     }
-     /** path should be adjusted later on the server */
-    header("Refresh: ../index.html");
 }
 
 
@@ -205,6 +202,5 @@ $cursor = $people->find(); //handling with result
         this.location.href="../index.html";
     }
 </script>
-<script src="../js/main/menu.js"></script>
 </body>
 </html>
