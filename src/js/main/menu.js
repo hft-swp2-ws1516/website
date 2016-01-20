@@ -7,7 +7,7 @@ document.getElementById("nav01").innerHTML =
     "<div class='container'>" +
     "<div class='row'>" +
     "<div class='col-md-8'><ul class='nav navbar-nav'>" +
-    "<li><img class='img-fluid' width='200' src='img/hotcat.svg'  alt='Hotcat Logo'/></li>" +
+    "<li><img class='img-fluid' width='200' src='img/hotcat_logo.svg'  alt='Hotcat Logo'/></li>" +
     "<li><a href='home.html'>Home</a></li>" +
     "<li  class='dropdown'><a href='globaldata.html' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Universal Summary<span class='caret'></span></a>" +
     "<ul class='dropdown-menu'>" +
@@ -29,7 +29,7 @@ document.getElementById("nav01").innerHTML =
     "<li><a href='worldmap.html'>Worldmap</a></li>" +
     "<li><a href='analyze-me.html'>Analyse Me</a></li>" +
     "</ul></div>" +
-    "<div class='col-md-4 '>Last Scan: <span id='lastScan'> DD.MM.YYYY</span></div>" +
+    "<div class='col-md-4 '>Last Scan: <span id='lastScan'>DD.MM.YYYY</span></div>" +
     "</div>" +
     "</div>" +
     "</nav>";
@@ -116,7 +116,7 @@ var name_tocheck = false;
 var email_tocheck = false;
 
 // enable the Subscribe
-$(document).ready(function(){
+$(document).ready(function() {
     validate();
     $("#name, #email").change(validate);
 });
@@ -156,10 +156,10 @@ function undisableBtn() {
     document.getElementById("save").disabled = false;
 }
 
-function validate(){
-    if(name_tocheck == true && email_tocheck == true){
+function validate() {
+    if (name_tocheck == true && email_tocheck == true) {
         undisableBtn();
-    }else {
+    } else {
         disableBtn();
     }
 }
