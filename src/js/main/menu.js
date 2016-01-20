@@ -7,23 +7,30 @@ document.getElementById("nav01").innerHTML =
     "<div class='container'>" +
     "<div class='row'>" +
     "<div class='col-md-8'>" +
-    "<a href='home.html'><img class='img-fluid' width='200' src='img/hotcat_logo.svg'  alt='Hotcat Logo'/></a>" +
+    "<div style='float:left'><a href='home.html'><img class='img-fluid' width='200' src='img/hotcat_logo.svg'  alt='Hotcat Logo'/></a></div>" +
+    "<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#bs-example-navbar-collapse-2' aria-expanded='false'>" +
+    "<span class='sr-only'>Toggle navigation</span>" +
+    "<span class='icon-bar'></span>" +
+    "<span class='icon-bar'></span>" +
+    "<span class='icon-bar'></span>" +
+    "</button>" +
+    "<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-2'>" +
     "<ul style='float:right' class='nav navbar-nav'>" +
     "<li></li>" +
     "<li  class='dropdown'><a href='globaldata.html' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Universal Summary<span class='caret'></span></a>" +
     "<ul class='dropdown-menu'>" +
     "<li id='openGlobaldata'><a href='globaldata.html#'>Summary</a></li>" +
     "<li role='separator' class='divider'></li>" +
-    "<li id='loadPFS'><a href='globaldata.html#PFS'>Perfect Forward Secrecy Support</a></li>" +
-    "<li id='loadDHE'><a href='globaldata.html#DHE'>Diffie Hellman Keygroups</a></li>" +
-    "<li id='loadECDHE'><a href='globaldata.html#ECDHE'>Elliptic Curve Diffie Hellman</a></li>" +
-    "<li id='loadCiphers'><a href='globaldata.html#Ciphers'>Cipher Suites</a></li>" +
-    "<li id='loadKx'><a href='globaldata.html#Kx'>Key Exchange</a></li>" +
-    "<li id='loadAuth'><a href='globaldata.html#Auth'>Authentification Methods</a></li>" +
-    "<li id='loadEnc'><a href='globaldata.html#Enc'>Bulk Encryption</a></li>" +
-    "<li id='loadMAC'><a href='globaldata.html#MAC'>MAC Distribution</a></li>" +
+    "<li class='loadPFS'><a href='globaldata.html#PFS'>Perfect Forward Secrecy Support</a></li>" +
+    "<li class='loadDHE'><a href='globaldata.html#DHE'>Diffie Hellman Keygroups</a></li>" +
+    "<li class='loadECDHE'><a href='globaldata.html#ECDHE'>Elliptic Curve Diffie Hellman</a></li>" +
+    "<li class='loadCiphers'><a href='globaldata.html#Ciphers'>Cipher Suites</a></li>" +
+    "<li class='loadKx'><a href='globaldata.html#Kx'>Key Exchange</a></li>" +
+    "<li class='loadAuth'><a href='globaldata.html#Auth'>Authentification Methods</a></li>" +
+    "<li class='loadEnc'><a href='globaldata.html#Enc'>Bulk Encryption</a></li>" +
+    "<li class='loadMAC'><a href='globaldata.html#MAC'>MAC Distribution</a></li>" +
     "<li role='separator' class='divider'></li>" +
-    "<li id='loadlogjam'><a href='globaldata.html#logjam'>Logjam Attack</a></li>" +
+    "<li class='loadlogjam'><a href='globaldata.html#logjam'>Logjam Attack</a></li>" +
     "</ul>" +
     "</li>" +
     "<li><a href='filtering.html'>Detailed Filter</a></li>" +
@@ -31,7 +38,7 @@ document.getElementById("nav01").innerHTML =
     "<li><a href='analyze-me.html'>Analyse Me</a></li>" +
     "</ul></div>" +
     "<div class='col-md-4 '></div>" +
-    "</div>" +
+    "</div></div>" +
     "</div>" +
     "</nav>";
 
@@ -43,9 +50,11 @@ document.getElementById("footer").innerHTML =
     "<div class='container'>" +
     "<div class='row'>" +
     "<div class='col-md-8'>" +
+
+    " <a href='#subscribtion' id='sub' data-toggle='modal'> Subscribe </a> &#124;"+
+    " <a href='https://github.com/hft-swp2-ws1516'>Github</a> <br> " +
     " &copy; 2015 - " + currentYear + " " +
     " HfT Stuttgart " +
-    " &#124;<a href='#subscribtion' id='sub' data-toggle='modal'> Subscribe </a> " +
     "</div>" +
     "<div class='col-md-4 '></div>" +
     " Last Scan: <span id='lastScan'>DD.MM.YYYY</span> " +
