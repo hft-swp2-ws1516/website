@@ -47,7 +47,7 @@ document.getElementById("footer").innerHTML =
 
 // open Subscribe Modal and this modal will open the subscriber count modal on subscribe.php file
 document.getElementById("subscribe").innerHTML =
-    "<form id='formCheck' method='post' action='../../php/subscribe.php'>" +
+    "<form id='formCheck' method='post' action='./php/subscribe.php'>" +
     "<div class='container'>" +
     "<div class='modal fade' id='subscribtion' role='dialog'>" +
     "   <div class='modal-dialog'>" +
