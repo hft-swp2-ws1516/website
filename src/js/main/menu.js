@@ -7,7 +7,7 @@ document.getElementById("nav01").innerHTML =
     "<div class='container'>" +
     "<div class='row'>" +
     "<div class='col-md-8'>" +
-    "<div style='float:left'><a href='home.html'><img class='img-fluid' width='200' src='img/hotcat_logo.svg'  alt='Hotcat Logo'/></a></div>" +
+    "<div style='float:left; margin-top: 7px;'><a href='home.html'><img class='img-fluid' width='200' src='img/hotcat_logo.svg'  alt='Hotcat Logo'/></a></div>" +
     "<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#bs-example-navbar-collapse-2' aria-expanded='false'>" +
     "<span class='sr-only'>Toggle navigation</span>" +
     "<span class='icon-bar'></span>" +
