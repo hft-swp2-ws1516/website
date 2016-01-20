@@ -7,7 +7,14 @@ document.getElementById("nav01").innerHTML =
     "<div class='container'>" +
     "<div class='row'>" +
     "<div class='col-md-8'>" +
-    "<a href='home.html'><img class='img-fluid' width='200' src='img/hotcat_logo.svg'  alt='Hotcat Logo'/></a>" +
+    "<div style='float:left'><a href='home.html'><img class='img-fluid' width='200' src='img/hotcat_logo.svg'  alt='Hotcat Logo'/></a></div>" +
+    "<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#bs-example-navbar-collapse-2' aria-expanded='false'>" +
+    "<span class='sr-only'>Toggle navigation</span>" +
+    "<span class='icon-bar'></span>" +
+    "<span class='icon-bar'></span>" +
+    "<span class='icon-bar'></span>" +
+    "</button>" +
+    "<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-2'>" +
     "<ul style='float:right' class='nav navbar-nav'>" +
     "<li></li>" +
     "<li  class='dropdown'><a href='globaldata.html' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Universal Summary<span class='caret'></span></a>" +
@@ -31,7 +38,7 @@ document.getElementById("nav01").innerHTML =
     "<li><a href='analyze-me.html'>Analyse Me</a></li>" +
     "</ul></div>" +
     "<div class='col-md-4 '></div>" +
-    "</div>" +
+    "</div></div>" +
     "</div>" +
     "</nav>";
 
