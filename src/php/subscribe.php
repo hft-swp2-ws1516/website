@@ -45,8 +45,7 @@ if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) &&
         $msg = "Please fill in the name field and enter a valid name";
     }else{
         // Return success - Valid email and name field not empty
-        $msg = "<b>".$name."</b> one last step is needed in order to complete your Subscribing. <br/>";
-        $msg .="Please activate your Subscription by clicking the link we have sent to <a href='#'>".$email."</a><br/>";
+        $msg .="Thanks for your subscription! Please click the activation link we have sent to: <a href='#'>".$email."</a><br/>";
         try{
             /** if not blank we will insert the given values in the collection */
             if($connect)
@@ -71,7 +70,7 @@ if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) &&
 
                     // Send the email
                     $to          = $email;
-                    $subject     = "Subscribing for Crawler-Results";
+                    $subject     = "Your subscription to Hotcat";
                     $messageBody = "<!doctype html><html class='no-js' lang=''>";
                     $messageBody .="<head><meta charset='utf-8'><meta http-equiv='x-ua-compatible' content='ie=edge'>";
                     $messageBody .="<title>Experimental Study on TLS-Handshakes</title><meta name='description' content=''>";
@@ -82,15 +81,13 @@ if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) &&
                     $messageBody .="<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'>";
                     $messageBody .="</script><script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'>";
                     $messageBody .="</script></head><body><div class='container'><div class='content-wrapper'>";
-                    $messageBody .="<h1>Crawling-Results are right on the way to you!</h1><hr>";
-                    $messageBody .="<p>Tanks for subscribing! We will sent as soon as possible the";
-                    $messageBody .="Crawling-Results to " .$name. " and " .$email. " </p><hr>";
-                    $messageBody .="<p>Please click the link to activate your account: ";
-                    $messageBody .="http://localhost/src/php/verify.php?email=$email&hash_subscribe=$hash_subscribe";
-                    $messageBody .="<br/>"; // You should adjust the Path
-                    $messageBody .="http://localhost/src/php/unsubscribe.php?email=$email&hash_unsubscribe=$hash_unsubscribe";
-                    $messageBody .="<br/>Thank you for subscribing!</p></div></div></body></html>";
-                    $headers     = "From: geermebe@gmail.com" . "\r\n"; // set from headers
+                    $messageBody .="<h1>Almost there....</h1><hr>";
+                    $messageBody .="<p>Dear " .$name. ",</p><hr><br/>";
+                    $messageBody .="<p>there is only one last step left on the way to the most recent SSL/TLS scanning results, delivered free to your door!</p>";
+                    $messageBody .="<p>Please hit the following link in order to complete your subscription: ";
+                    $messageBody .="https://hotcat.de/php/verify.php?email=$email&hash_subscribe=$hash_subscribe"
+                    $messageBody .="<br/>The hottest cat in the world says 'Thank You'!</p></div></div></body></html>";
+                    $headers     = "From: noreply@hotcat.de" . "\r\n"; // set from headers
                     $headers     .= "Content-type: text/html; charset=iso-8859-1\n";
                     mail($to, $subject, $messageBody, $headers); // Send mail
 
@@ -110,8 +107,8 @@ if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) &&
                     //    'host' => 'ssl://smtp.googlemail.com',
                     //    'port' => '465',
                     //    'auth' => true,
-                    //    'username' => 'tls.hotcat',
-                    //    'password' => 'hotdog2015-2016',
+                    //    'username' => '',
+                    //    'password' => '',
                     //));
 
                     //$smtp->send($to, $header, $messageBody); // send mail
@@ -161,9 +158,9 @@ $cursor = $people->find(); //handling with result
                                 <?php
                                     if(empty($name) || empty($email))
                                     {
-                                        $msg = "You should fill the name and email fields! Please try again.<br>";
+                                        $msg = "Please provide a valid name and a valid e-mail address.<br>";
                                     }elseif($emailIsUnique == false){
-                                        $msg = "<a href='#'>".$email."</a> is taken by an other Subscriber. Please try an other e-mail!<br>";
+                                        $msg = "Sorry, <a href='#'>".$email."</a> is already linked to a subscription. Please provide another e-mail address.<br>";
                                     }else{
                                         $msg = $msg;
                                     }
@@ -172,7 +169,7 @@ $cursor = $people->find(); //handling with result
                                 <strong>
                                     <span class="badge">
                                         <?php
-                                            echo "In total, they are " . $cursor->count($_GET['_id']) . " Subscriber";
+                                            echo $cursor->count($_GET['_id']) . " users have already subscribed to Hotcat.";
                                         ?>
                                     </span>
                                 </strong>
@@ -208,6 +205,6 @@ $cursor = $people->find(); //handling with result
         this.location.href="../index.html";
     }
 </script>
-<script src="../js/menu.js"></script>
+<script src="../js/main/menu.js"></script>
 </body>
 </html>

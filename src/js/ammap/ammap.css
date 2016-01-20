@@ -1,4 +1,4 @@
-.ammapAlert
+/*.ammapAlert
 {
     display:table-cell;
     vertical-align:middle;
@@ -6,8 +6,8 @@
     font-family:verdana,helvetica,arial,sans-serif;
     font-size:12px;
     color:#CC0000;
-}
-
+}*/
+/*
 .ammapDescriptionWindow
 {
    font-size:11px;
@@ -22,7 +22,24 @@
    -moz-box-sizing: border-box;
    box-sizing: border-box;
 }
+*/
+.ammapDescriptionWindow {
+    background-color: #4e4e4e;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: Verdana;
+    font-size: 10px;
+    opacity: 0.95;
+    overflow: auto;
+}
 
+.ammapDescriptionTitle {
+    font-weight: bold;
+    color:#FFFFff;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+/*
 .ammapDescriptionTitle
 {
    font-size:12px;
@@ -30,39 +47,40 @@
    font-family:verdana,helvetica,arial,sans-serif;
    padding-bottom:5px;
 }
-
+*/
 .ammapDescriptionWindowCloseButton
 {
 
 }
 
-.ammapObjectList ul
+/*.ammapObjectList ul
 {
     padding-left:20px;
     list-style:square outside;
     color:#999999;
     font-family:verdana,helvetica,arial,sans-serif;
     font-size: 12px;
-}
+}*/
 
 .ammapObjectList ul ul
 {
     padding-left:14px;
 }
 
-.ammapObjectList a
+/*.ammapObjectList a
 {
     color:#000000;
-}
+}*/
 
-.ammapObjectList a
+/*.ammapObjectList a
 {
     color:#000000;
     text-decoration:none;
     display:block;
     padding:2px;
-}
+}*/
 
+/*
 .ammapObjectList a:hover
 {
     color:#CC0000;
@@ -71,10 +89,13 @@
     cursor:pointer;
     display:block;
 }
+*/
 
 .ammapDescriptionText
 {
-	overflow: auto;
+    background-color: #e2e2e2;
+
+    overflow: auto;
 }
 
 

@@ -68,7 +68,7 @@
             try{
                 $search = $people->find($where);
             }catch(MongoCursorException $e){
-                die("Could not aggregate over the Documents. For more information see ". $e->getMessage());
+                die("Could not iterate over the Documents. For more information see ". $e->getMessage());
             }
 
             /**
@@ -81,17 +81,17 @@
                 // The user will be removed from the Database
                 $people->remove(
                     array("hash_unsubscribe" => $hash_unsubscribe));
-                $mes = "<h3>Your Subscription has been successfully canceled! ";
-                $mes .= "<a href='#'>" . $email . "</a>. <br>If you like you can directly navigate to our Website by ";
-                $mes .= "clicking the <p style='background: #ffb81c''>GO TO HOTCAT</p> Link or colse the current Tab by clicking the ";
-                $mes .= "<p style='background: #ffb81c'>CLOSE THE TAB</p>below!<h3>";
+                $mes = "<h3>Your personal subscription to Hotcat is successfully deactivated. <br>";
+                $mes .= "If you are still interested in some neatly visualized scanning results, you can directly navigate to Hotcat by ";
+                $mes .= "clicking the <p style='background: #ffb81c''>GO TO HOTCAT</p> link. You may also close this tab by hitting";
+                $mes .= "<p style='background: #ffb81c'>CLOSE THE TAB</p>.<h3>";
             }else{
-                $mes = "<h3>The URL is either invalid or you already ";
-                $mes .="have canceled your Subscription!</h3>";
+                $mes = "<h3>The URL is either invalid or you have already ";
+                $mes .="cancelled your subscription.</h3>";
             }
         }else{
-            $mes = "<h3>Invalid approach, please use the link that ";
-            $mes .="has been send to your email!</h3>";
+            $mes = "<h3>Invalid URL.";
+            $mes .="Please use the link that we have sent to your e-mail address.</h3>";
         }
         ?>
         <pre>

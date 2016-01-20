@@ -81,10 +81,11 @@ document.getElementById("subscribe").innerHTML =
     "                                       </div>" +
     "                                       <div id='terms-conditions' class='panel-collapse collapse'>" +
     "                                               <div class='alert alert-info'>" +
-    "                                                   In order to get the monthly TLS results from HOTCAT, a very important step is needed as part" +
-    "                                                   of your consent. By clicking the 'I accept the Terms & Conditions', you are giving us the" +
-    "                                                   permission to save the Name and E-Mail address. We assure you that your Name and E-Mail address" +
-    "                                                   will not be disclosed to third parties!  " +
+    "                                                   By clicking the 'Subscribe' button below, you agree that Hotcat will send you an e-mail containing" +
+    "                                                   the most recent results of our SSL/TLS scanner on a monthly basis. You also agree that the name and"+
+    "                                                   e-mail address you provided will be saved in our database. Neither your name nor your e-mail address will be"+
+    "                                                   used outside the scope of Hotcat's subscription function. Particularly, they will not be given to any third"+
+    "                                                   party." +
     "                                               </div>" +
     "                                       </div>" +
     "                                   </div>" +
@@ -125,8 +126,28 @@ $("#t-c").click(function() {
 });
 
 
-// Validate
-/* form validation  that shows the user the correct format of name and email */
+/* form validation  that shows the user the correct format of name and email on keyup and change event*/
+$(document).ready(function() {
+    $("#name").change(function() {
+        if (/^[a-zA-Z ]+$/.test($(this).val()) && $(this).val().trim() !== "") {
+            name_tocheck = true;
+            $(this).css("border-color", "#0F0");
+        } else {
+            name_tocheck = false;
+            $(this).css("border-color", "#F00");
+        }
+    });
+    $("#email").change(function() {
+        if (/^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/.test($(this).val()) && $(this).val().trim() !== "") {
+            email_tocheck = true;
+            $(this).css("border-color", "#0F0");
+        } else {
+            email_tocheck = false;
+            $(this).css("border-color", "#F00");
+        }
+    });
+});
+
 $(document).ready(function() {
     $("#name").keyup(function() {
         if (/^[a-zA-Z ]+$/.test($(this).val()) && $(this).val().trim() !== "") {
@@ -147,7 +168,6 @@ $(document).ready(function() {
         }
     });
 });
-
 function disableBtn() {
     document.getElementById("save").disabled = true;
 }

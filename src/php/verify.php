@@ -85,17 +85,17 @@
                 $people->update(
                     array("hash_subscribe" => $hash_subscribe),
                     array('$set' => array("active" => "1")));
-                $mes = "<h3>Your Subscription is successfully verified! As soon as possible we will send the data<br> to ";
-                $mes .= "<a href='#'>".$email."</a> . If you like you can directly navigate to our Website by<br> ";
-                $mes .= "clicking the <p style='background: #ffb81c''>GO TO HOTCAT</p> Link or colse the current Tab by clicking the ";
-                $mes .= "<p style='background: #ffb81c'>CLOSE THE TAB</p> below!<h3>";
+                $mes = "<h3>Congratulations, you have just verified and activated your subscription! As a reward, you may now get yourself a cookie.";
+                $mes .= "As soon as the process of URL scanning and result aggregation is completed, we will send a report to: <a href='#'>".$email."</a>";
+                $mes .= "By hitting the <p style='background: #ffb81c''>GO TO HOTCAT</p> link, you can directly navigate to Hotcat's homepage.";
+                $mes .= "Alternatively, you can <p style='background: #ffb81c'>CLOSE THE TAB</p>.<h3>";
             }else{
-                $mes = "<h3>The URL is either invalid or you already ";
-                $mes .="have activated your Subscription!</h3>";
+                $mes = "<h3>The URL is either invalid or you have already ";
+                $mes .="activated your subscription.</h3>";
             }
         }else{
-            $mes = "<h3>Invalid approach, please use the link that ";
-            $mes .="has been send to your email!</h3>";
+            $mes = "<h3>Invalid URL.";
+            $mes .="Please use the link that we have sent to your e-mail address.</h3>";
         }
         ?>
         <pre>

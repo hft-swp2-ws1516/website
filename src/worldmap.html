@@ -14,6 +14,8 @@
     <!-- jquery ui css -->
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
     <link rel="stylesheet" type="text/css" media="screen" href="css/datepicker/bootstrap-datepicker3.css">
+    <!-- ammap style -->
+    <link rel="stylesheet" type="text/css" href="js/ammap/ammap.css">
 </head>
 
 </html>
@@ -23,6 +25,8 @@
     <div class="container">
         <div class="col-md-12 col-xs-12 col-lg-12" align="center" >
             <div id="map" style="width: 100%; height: 500px; "></div>
+            <div id="chartDiv" style="width: 200px; height: 150px;
+            position: absolute; bottom: 0; right: 0; z-index: 100;"></div>
             <div id="results" style=" width: 160px;
             height: 160px;
             position: absolute;
@@ -70,147 +74,199 @@
     <script type="text/javascript" src="js/ammap/ammap.js"></script>
     <script type="text/javascript" src="js/ammap/maps/js/worldLow.js"></script>
 
-    <!-- amCharts javascript code -->
-    <script type="text/javascript">
-    var map =AmCharts.makeChart("map", {
-        "type": "map",
-        "pathToImages": "js/ammap/images/",
-        "addClassNames": true,
-        "fontSize": 15,
-        "color": "#FFFFFF",
-        "backgroundAlpha": 1,
-        "backgroundColor": "#FFFFFF",
-        "dataProvider": {
-            "map": "worldLow",
-            "getAreasFromMap": true,
-            "images": [
-            {
-                "top": 40,
-                "left": 60,
-                "width": 80,
-                "height": 40,
-                "pixelMapperLogo": true,
+<!-- amCharts javascript code -->
+<script src="https://www.amcharts.com/lib/3/amcharts.js" type="text/javascript"></script>
+<script src="https://www.amcharts.com/lib/3/pie.js" type="text/javascript"></script>
+<script src="https://www.amcharts.com/lib/3/ammap_amcharts_extension.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    var dateObj= new Date();
+    var month=dateObj.getUTCMonth()+1;
+    var year=dateObj.getUTCFullYear();
+    // please uncomment the next line to preform dynamical date change
+    //var dateFormat=year+"_"+month;
+    var dateFormat="2015_12";
+    var jsonRespond;
+    var jsonOnDate;
+    var pfsWorld;
+    testJson=[];
+    var chart;
+    var PFSLand=jQuery.get("https://www.hotcat.de:1337/api/v0/pfs/overview", function (response) {
+        jsonRespond=response;
+        console.log(jsonRespond);
+        pfsWorld=jsonRespond.filter(function(a){return a._id ==dateFormat})[0];
+        jsonOnDate=jsonRespond.filter(function(a){return a._id ==dateFormat})[0].overviews;
+        console.log(jsonOnDate);
+        /*
+         *this function return an array for the map description modal which is in the map object under :
+         * dataProvider->areas->[{areaArray}]
+         * areArray objects must have this format {"id":<landISO>,"description":<can be any thing but in html >}
+         */
+        function descriptionModal(jsonObject){
+            var areaArray=[];
+            jsonObject.forEach( function (i) {
+
+                areaArray.push({
+                    "id": upperCamel(i.tld), "description": "pfs Enabled" + ": " + i.pfsEnabled + "<br >"
+                    + "pfs Disabled" + ": " + i.pfsDisabled + "<br >" + "Total Hosts" + ": " + i.totalHosts + "<br >"
+                });
+            });
+            return areaArray;
+        }
+
+
+        function upperCamel(str){
+            return str.toUpperCase();
+        }
+        // chart pie : the first one for global pfs
+        var forChartStart=[
+            { pfs :"Enabled ",count:pfsWorld.monthlyPfsEnabled},
+            { pfs :"Disabled ",count:pfsWorld.monthlyPfsDisabled}
+        ];
+        /*
+         *please leave the script src for the pie chart from cdn
+         * the download version was not working
+         */
+        chart=  new AmCharts.AmPieChart();
+        chart.addLabel("0", "!20", "World PFS", "center", 16);
+        chart.backgroundAlpha= 0.4;
+        chart.backgroundColor= "#000000";
+        chart.dataProvider =forChartStart;
+        chart.titleField="pfs";
+        chart.valueField = "count";
+        chart.sequencedAnimation= true;
+        chart.startEffect= "elastic";
+        chart.labelsEnabled =false;
+        chart.startDuration= 2;
+        chart.labelRadius=20;
+
+        chart.write("chartDiv");
+        /*world map
+         *to change descreption box please take care of areas in dataprovider
+         *or change descriptionModal methode
+         */
+        var areaArray =descriptionModal(jsonOnDate);
+        var map =AmCharts.makeChart("map", {
+            "type": "map",
+            "pathToImages": "js/ammap/images/",
+            "addClassNames": true,
+            "fontSize": 15,
+            "color": "#FFFFFF",
+            "backgroundAlpha": 1,
+            "backgroundColor": "#FFFFFF",
+            "dataProvider": {
+                "map": "worldLow",
+                "getAreasFromMap": true,
+                "areas" :areaArray,
+                "images": [
+                    {
+                        "top": 40,
+                        "left": 60,
+                        "width": 80,
+                        "height": 40,
+                        "pixelMapperLogo": true,
+                    }
+                ]
+            },
+            "balloon": {
+                "horizontalPadding": 15,
+                "borderAlpha": 0,
+                "borderThickness": 1,
+                "verticalPadding": 15
+            },
+            "areasSettings": {
+                "color": "rgba(129,129,129,1)",
+                "outlineColor": "rgba(80,80,80,1)",
+                "rollOverOutlineColor": "rgba(80,80,80,1)",
+                "rollOverBrightness": 20,
+                "selectedBrightness": 20,
+                "selectable": true,
+                "unlistedAreasAlpha": 0,
+                "unlistedAreasOutlineAlpha": 0
+            },
+            "imagesSettings": {
+                "alpha": 1,
+                "color": "rgba(129,129,129,1)",
+                "outlineAlpha": 0,
+                "rollOverOutlineAlpha": 0,
+                "outlineColor": "rgba(80,80,80,1)",
+                "rollOverBrightness": 20,
+                "selectedBrightness": 20,
+                "selectable": true
+            },
+            "linesSettings": {
+                "color": "rgba(129,129,129,1)",
+                "selectable": true,
+                "rollOverBrightness": 20,
+                "selectedBrightness": 20
+            },
+            "zoomControl": {
+                "zoomControlEnabled": true,
+                "homeButtonEnabled": true,
+                "panControlEnabled": true,
+                "left": 38,
+                "top": 10,
+                "minZoomLevel": 0.25,
+                "gridHeight": 100,
+                "gridAlpha": 0.1,
+                "gridBackgroundAlpha": 0,
+                "gridColor": "#FFFFFF",
+                "draggerAlpha": 1,
+                "buttonCornerRadius": 2
             }
-            ]
-        },
-        "balloon": {
-            "horizontalPadding": 15,
-            "borderAlpha": 0,
-            "borderThickness": 1,
-            "verticalPadding": 15
-        },
-        "areasSettings": {
-            "color": "rgba(129,129,129,1)",
-            "outlineColor": "rgba(80,80,80,1)",
-            "rollOverOutlineColor": "rgba(80,80,80,1)",
-            "rollOverBrightness": 20,
-            "selectedBrightness": 20,
-            "selectable": true,
-            "unlistedAreasAlpha": 0,
-            "unlistedAreasOutlineAlpha": 0
-        },
-        "imagesSettings": {
-            "alpha": 1,
-            "color": "rgba(129,129,129,1)",
-            "outlineAlpha": 0,
-            "rollOverOutlineAlpha": 0,
-            "outlineColor": "rgba(80,80,80,1)",
-            "rollOverBrightness": 20,
-            "selectedBrightness": 20,
-            "selectable": true
-        },
-        "linesSettings": {
-            "color": "rgba(129,129,129,1)",
-            "selectable": true,
-            "rollOverBrightness": 20,
-            "selectedBrightness": 20
-        },
-        "zoomControl": {
-            "zoomControlEnabled": true,
-            "homeButtonEnabled": true,
-            "panControlEnabled": true,
-            "right": 38,
-            "bottom": 30,
-            "minZoomLevel": 0.25,
-            "gridHeight": 100,
-            "gridAlpha": 0.1,
-            "gridBackgroundAlpha": 0,
-            "gridColor": "#FFFFFF",
-            "draggerAlpha": 1,
-            "buttonCornerRadius": 2
-        }
-    });
-var dateObj= new Date();
-var month=dateObj.getUTCMonth()+1;
-var year=dateObj.getUTCFullYear();
-var dateFormat=year+"_"+month;
-console.log(dateFormat+" what");
-var jsonRespond;
-var jsonOnDate;
-var PFSLand=jQuery.get("https://www.hotcat.de:1337/api/v0/pfs/overview", function (response) {
-    jsonRespond=response;
-    jsonOnDate=jsonRespond.filter(function(a){return a._id ==dateFormat})[0].overviews;
+        });
+        /*
+         *the objectFindByKey methode search  in the jsonobject for the tld as key
+         * for a given value like in json us and on the map us and give us the data
+         * we are looking for as
+         */
+        function objectFindByKey(array, key, value) {
+            if (value=='gb'){
+                value='uk';
+            }
+            for (var i = 0; i < array.length; i++) {
+                if (array[i][key] === value) {
+                    console.log(array[i]);
+                    return array[i];
+                }
+            }
+            return null;
 
-    console.log(jsonOnDate);
+        };
+        /*
+         *for rollover : we could replace "clickMapObject"with "rollOverMapObject"
+         * to change the maplistener to hoover
+         */
+        map.addListener("clickMapObject",function(event){
+            // the toLower function to change the tld in json to capital
+            //to match the iso in ammap in worldLow.js
+            function toLower(str){
+                return str.toLowerCase();
+            }
 
+            var obj=objectFindByKey(jsonOnDate, 'tld', toLower(event.mapObject.id));
 
-});
-function objectFindByKey(array, key, value) {
-    if (value=='gb'){
-        value='uk';
-    }
-    for (var i = 0; i < array.length; i++) {
-        if (array[i][key] === value) {
-            console.log(array[i]);
-            return array[i];
-        }
-    }
-    return null;
+            var land =event.mapObject.title;
+            var tld=JSON.stringify(obj.tld);
+            var pfsEnabled=JSON.stringify(obj.pfsEnabled);
+            var pfsDisabled=JSON.stringify(obj.pfsDisabled);
+            var totalHosts=JSON.stringify(obj.totalHosts);
+            // data for the pie chart must have following pattern
+            var foreChart=[{pfs :"Enabled ",count: pfsEnabled},
+                {pfs :"Disabled ",count : pfsDisabled}];
+            document.getElementById("land").innerHTML=land+'<br >' ;
+            document.getElementById("resultTld").innerHTML=tld+'<br >' ;
+            document.getElementById("resultPFSen").innerHTML=pfsEnabled+'<br >';
+            document.getElementById("resultPFSdis").innerHTML=pfsDisabled+'<br >';
+            document.getElementById("resultTotalHosts").innerHTML=totalHosts+'<br >';
+            chart.dataProvider = foreChart;
+            chart.clearLabels();
+            //change the titel in the chart window with land name
+            chart.addLabel("0", "!20", event.mapObject.title+ " PFS", "center", 16);
+            chart.validateData();
 
-};
-    //    var chart=c3.generate({
-    //        bindto:'result',
-    //        data:{
-    //            json:jsonTLD,
-    //            keys:{
-    //                value:['pfsEnabled', 'pfsDisabled']
-    //            },
-    //            type:'pie'
-    //        },
-    //    });
-
-    /*  var div=document.createElement('div');
-     div.setAttribute('tld',elements.tld);
-     div.innerHTML=elements.pfsEnabled+'<br />'+elements.pfsDisabled+'<br />'
-     +elements.totalHosts+'<br />';
-     document.body.appendChild(div);
- };*/
-    /*
-     array[i].forEach(function(elements){
-     arrayElement(elements);
-     });
-*/
-map.addListener("clickMapObject",function(event){
-        //event.mapObject.title
-        function toLower(str){
-            return str.toLowerCase();
-        }
-        console.log(toLower(event.mapObject.id+" EVENT id"));
-        var obj=objectFindByKey(jsonOnDate, 'tld', toLower(event.mapObject.id));
-        console.log(obj+" ;obj");
-        console.log(JSON.stringify(obj.tld)+" ;obj stringfy");
-        var land =event.mapObject.title;
-        var tld=JSON.stringify(obj.tld);
-        var pfsEnabled=JSON.stringify(obj.pfsEnabled);
-        var pfsDisabled=JSON.stringify(obj.pfsDisabled);
-        var totalHosts=JSON.stringify(obj.totalHosts);
-        // var refString=reformedObj[0].NodeName[1];
-        //console.log(refString);
-        document.getElementById("land").innerHTML=land+'<br >' ;
-        document.getElementById("resultTld").innerHTML=tld+'<br >' ;
-        document.getElementById("resultPFSen").innerHTML=pfsEnabled+'<br >';
-        document.getElementById("resultPFSdis").innerHTML=pfsDisabled+'<br >';
-        document.getElementById("resultTotalHosts").innerHTML=totalHosts+'<br >';
+        });
 
     });
+
 </script>

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TLS analyzer</title>
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="css/statistics.css">
+    <link href="css/site.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/toggle.css">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Load c3.css -->
+    <link href="css/c3/c3.css" rel="stylesheet" type="text/css">
+    <!-- noUISlider c3.css -->
+    <link rel="stylesheet" type="text/css" href="css/nouislider.min.css">
+    <!-- jquery ui css -->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/datepicker/bootstrap-datepicker3.css">
+
+
+</head>
+
+<body>
+<div class="container " >
+
+    <div class="col-md-12 col-xs-12 col-lg-12" align="center" >
+        <br><br>
+
+        <h3>That is the new HOTCAT TLS Scanning Result for this Month.</h3>
+        <br><br>
+        <P>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+            eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+            voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+            clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+            amet.
+        </p>
+        <h2>Perfect forward secrecy support(PFS)</h2>
+        <br><br>
+        <div id="pfs" ></div>
+        <p>Stetclita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        <p id="pfsTable"></p>
+        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molesti
+        Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming
+        id quod mazim placerat</p>
+        <br><br><br>
+
+        <h2>Deffie Hellman Keygroups</h2>
+        <P>
+
+            Stetclita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molesti
+            Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id
+            quod mazim placerat
+        </P>
+        <br><br><br> <br>
+
+        <div id="dh"></div>
+
+        <p>Stetclita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molesti
+            Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming
+            id quod mazim placerat</p>
+        <br><br><br>
+        <h2>Elliptec Curve Deffie Hellman </h2>
+        <P>
+
+            Stetclita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molesti
+            Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id
+            quod mazim placerat
+        </P>
+        <br><br><br> <br>
+
+        <div id="ecdh"></div>
+
+        <p>Stetclita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molesti
+            Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming
+            id quod mazim placerat</p>
+        <br><br><br>
+        <h2>Encryption</h2>
+        <P>
+
+        </P>
+        <br><br><br>
+
+        <div id="encryption"></div>
+
+        <p>Stetclita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+        <p id="encTable">
+        </p>
+        Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molesti
+        Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming
+        id quod mazim placerat</p>
+        <br><br><br>
+        <h2>MAC Distribution</h2>
+        <P>
+
+            Stetclita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molesti
+            Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id
+            quod mazim placerat
+        </P>
+        <br><br><br>
+
+        <div id="mac"></div>
+
+        <p>Stetclita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molesti
+            Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming
+            id quod mazim placerat</p>
+        <br><br><br>
+        <h2>Key Exchange</h2>
+        <div id="keyx"></div>
+
+        <p>Stetclita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molesti
+            Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming
+            id quod mazim placerat</p>
+        <br><br><br>
+
+
+        <h2>Public Key Size ?</h2>
+        <div id="auth"></div>
+        <p>Stetclita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molesti
+            Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming
+            id quod mazim placerat</p>logjam
+        <br><br><br><br>
+
+        <h2>Logjam </h2>
+        <div id="logjam" ></div>
+        <p>Stetclita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molesti
+            Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming
+            id quod mazim placerat</p>
+
+    </div>
+</div>
+<!-- To edit footer please edit menu.js -->
+<footer id="footer"></footer>
+<div id="subscribe"></div>
+<!-- Skripts -->
+<!-- Load d3.js and c3.js -->
+<script src="js/c3/d3.min.js" charset="utf-8"></script>
+<script src="js/c3/c3.min.js"></script>
+<!-- JQuery CDN -->
+<script src="js/jquery-1.11.3.min.js"></script>
+<!-- Filter Menu -->
+<script type="text/javascript" src="js/filterData.js"></script>
+<!-- noUislider -->
+<script type="text/javascript" src="js/timeslider/nouislider.min.js"></script>
+<script type="text/javascript" src="js/timeslider/timeslider.js"></script>
+<!-- Bootstrap -->
+<script src="js/bootstrap.min.js"></script>
+<!-- for the menu -->
+<script src="js/menu.js"></script>
+<script type="text/javascript" src="js/datepicker/bootstrap-datepicker.js"></script>
+
+<script type="text/javascript" src="js/helperClass.js"></script>
+
+<script>
+    // Code will be executed  once the entire page (images or iframes), not just the DOM, is ready.
+    pfsObje=[];
+    window.onload = function () {
+        var pattern=['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78',
+            '#2ca02c', '#98df8a', '#d62728', '#ff9896', '#9467bd',
+            '#c5b0d5', '#8c564b', '#c49c94', '#e377c2', '#f7b6d2',
+            '#7f7f7f', '#c7c7c7', '#bcbd22', '#dbdb8d', '#17becf',
+            '#9edae5'];
+        var dateObj= new Date();
+
+        var month=dateObj.getUTCMonth()+1;
+        var year=dateObj.getUTCFullYear();
+        //var dateFormat=year+"_"+month;
+        /*last month data only for temporar use till there data for this month is available
+         *the dateFormate must be not in comment
+         * */
+        var dateFormat="2015_12";
+
+
+        var test_array_JSONs = [
+            {"PFS Enabled": 80, "PFS Disabled": 20},
+        ];
+
+        function createTable(objArray,div) {
+            //Create a HTML Table element.
+            var table = document.createElement("table");
+            table.border = "1";
+
+            //Get the count of columns.
+            var columnCount = objArray.length;
+
+            //Add the header row.
+            var row = table.insertRow(-1);
+            for (var i = 0; i < columnCount; i++) {
+                var headerCell = document.createElement("th");
+                headerCell.innerHTML = objArray[0][i];
+                row.appendChild(headerCell);
+            }
+
+            //Add the data rows.
+            for (var i = 1; i < objArray.length; i++) {
+                row = table.insertRow(-1);
+                for (var j = 0; j < columnCount; j++) {
+                    var cell = row.insertCell(-1);
+                    cell.innerHTML = objArray[i][j];
+                }
+            }
+
+            var dvTable = document.getElementById(div);
+            dvTable.innerHTML = "";
+            dvTable.appendChild(table);
+        }
+
+
+        function getJsonFromFile(source) {
+            var json = null;
+            $.ajax({
+                'async': false,
+                'global': false,
+                'url': source,
+                'dataType': "json",
+                'success': function (data) {
+                    json = data;
+                }
+            });
+            return json;
+        }
+
+
+
+
+        function findInJson (jsonObject, key, val) {
+            for (var ai, i = jsonObject.length; i--;)
+                if ((ai = jsonObject[i]) && ai[key] == val)
+                    return ai;
+            return null;
+        }
+
+        function findAndPush (jsonObject, key, val){
+
+            var temp=[];
+            for (var ai, i = jsonObject.length; i--;)
+                if ((ai = jsonObject[i]) && ai[key] == val){
+
+                    console.log(i);
+                    console.log(ai);
+                    temp.push(ai);
+                }
+            //return ai;
+            return temp;
+        }
+
+        pfsObje=getJsonFromFile("./json/pfs.json");
+        var jsonPFSOnDate= findInJson(pfsObje,"_id",dateFormat );
+        createTable(jsonPFSOnDate,"pfsTable");
+        console.log(jsonPFSOnDate+77);
+        var pfsPieObject=[0];
+
+
+        var pfsEn=jsonPFSOnDate.monthlyPfsEnabled;
+        var pfsDis=jsonPFSOnDate.monthlyPfsDisabled;
+        var pfstotal=jsonPFSOnDate.monthlyTotalHosts
+        console.log(pfsEn);
+        console.log(pfsDis);
+        pfsPieObject[0]={"PFS Enabled":pfsEn,"PFS Disabled":pfsDis};
+        console.log(jsonPFSOnDate);
+
+        var pfs = c3.generate({
+            bindto:'#pfs',
+            data: {
+                json: pfsPieObject,
+                type: 'pie',
+                keys:{
+                    value:['PFS Enabled','PFS Disabled'],
+                },
+            },
+
+
+        });
+
+
+        //dh and ecdh graphs
+
+        var jsonDH=getJsonFromFile("./json/distribution.json");
+        var jsonDHOnDate=findInJson(jsonDH,"month",dateFormat).distribution;
+        //var jsonDH=findAndPush(jsonDHOnDate,"kx","DH");
+        //console.log(jsonDHOnDate);
+        var dh=c3.generate({
+            bindto: '#dh',
+            size:{
+                height:400,
+                width:600,
+            },
+            data: {
+
+                json: jsonDHOnDate,
+                keys: {
+                    x: 'kxStrength',
+                    value: ['count']
+                },
+                type: 'bar',
+                color:function(color,d){
+                    return pattern[d.index];
+                },
+
+            },
+            axis:{
+                x:{
+                    type:"category",
+                    label: {
+                        text:'DH-Strength'
+                    },
+
+                }
+            },y: {
+                label: {
+                    text: 'Counts'
+
+                },
+            },
+
+        });
+
+        var jsonECDH=findAndPush(jsonDHOnDate,"kx","ECDH");
+
+        console.log(jsonECDH);
+        var ecdh=c3.generate({
+
+            bindto: '#ecdh',
+            size:{
+                height:400,
+                width:600,
+            },
+            data: {
+
+                json: jsonECDH,
+                keys: {
+                    x: 'kxStrength',
+                    value: ['count']
+                },
+                type: 'bar',
+                color:function(color,d){
+                    return pattern[d.index];
+                },
+
+            },
+            axis:{
+                x:{
+                    type:"category",
+                    label: {
+                        text:'DH-Strength'
+                    },
+
+                }
+            },y: {
+                label: {
+                    text: 'Counts'
+
+                },
+            },
+
+        });
+
+
+        var macJson=getJsonFromFile('./json/mac.json');
+        var macDate=findInJson(macJson,"month",dateFormat).distribution;
+        console.log(macDate);
+        var macChart=c3.generate({
+            bindto: '#mac',
+            size:{
+                width:900,
+            },
+            data: {
+
+                json: macDate,
+                type: 'bar',
+                color:function(color,d){
+                    return pattern[d.index];
+
+                },
+                keys: {
+                    x: 'mac',
+                    value: ['count']
+                },
+            },axis:{
+                x:{
+                    type:"category",
+                    categories:macDate.mac,
+                    label: {
+                        text:'mac'
+                    },
+
+                }
+            },y: {
+                label: {
+                    text: 'Counts'
+                },
+            }
+
+        });
+        var encJson=getJsonFromFile("./json/encryption.json");
+        var encJsonDate=findInJson(encJson,"month",dateFormat);
+        createTable(encJsonDate,"encTable");
+        console.log(encJsonDate);
+
+        var cipherChart=c3.generate({
+            bindto: '#encryption',
+            size:{
+                width:900,
+            },
+            data: {
+
+                json: encJsonDate.encs,
+                keys: {
+                    x: 'enc',
+                    value: ['count'],
+
+                },
+                type: 'bar',
+                color:function(color,d){
+                    return pattern[d.index];
+
+
+                },
+            },
+
+            axis:{
+                x:{
+                    type:"category",
+                    categories:encJsonDate.count,
+                    label: {
+                        text:'encryption',
+
+                    },
+
+                }
+            },y: {
+                label: {
+                    text: 'Counts',
+
+                },
+            },
+
+        });
+        var keyXJson=getJsonFromFile('./json/kx.json');
+        var keyXDate=findInJson(keyXJson,"month",dateFormat).kxs;
+        console.log(keyXDate);
+        var keyXChart=c3.generate({
+            bindto: '#keyx',
+            size:{
+                width:900,
+            },
+            data: {
+
+                json: keyXDate,
+                keys: {
+                    x: 'kx',
+                    value: ['count'],
+
+                },
+                type: 'bar',
+                color:function(color,d){
+                    return pattern[d.index];
+
+
+                },
+            },
+
+            axis:{
+                x:{
+                    type:"category",
+                    categories:keyXDate.count,
+                    label: {
+                        text:'kex exchange',
+
+                    },
+
+                }
+            },y: {
+                label: {
+                    text: 'Counts',
+
+                },
+            },
+
+        });
+        var authJson =getJsonFromFile("./json/auth.json");
+        var authDate=findInJson(authJson,"month",dateFormat);
+        var authChart=c3.generate({
+            bindto: '#auth',
+            size:{
+                width:900,
+            },
+            data: {
+
+                json: authDate.auths,
+                keys: {
+                    x: 'auth',
+                    value: ['count'],
+
+                },
+                type: 'bar',
+                color:function(color,d){
+                    return pattern[d.index];
+
+
+                },
+            },
+
+            axis:{
+                x:{
+                    type:"category",
+                    categories:keyXDate.count,
+                    label: {
+                        text:'Authorisation Methode',
+
+                    },
+
+                }
+            },y: {
+                label: {
+                    text: 'Counts',
+
+                },
+            },
+
+        });
+        var cipherJson =getJsonFromFile("./json/cipher.json");
+        var cipherDate=findInJson(cipherJson,"month",dateFormat);
+        console.log(cipherDate);
+        var authChart=c3.generate({
+            bindto: '#dcipher',
+            size:{
+                width:900,
+            },
+            data: {
+
+                json: cipherDate.summary,
+                keys: {
+                    x: 'cipher',
+                    value: ['count'],
+
+                },
+                type: 'bar',
+                color:function(color,d){
+                    return pattern[d.index];
+
+
+                },
+            },
+
+            axis:{
+                x:{
+                    type:"category",
+                    categories:cipherDate.count,
+                    label: {
+                        text:'Authorisation Methode',
+
+                    },
+
+                }
+            },y: {
+                label: {
+                    text: 'cipher',
+
+                },
+            },
+
+        });
+
+        var logjamJson=getJsonFromFile("./json/jam.json");
+        var countJson=getJsonFromFile("./json/hostCount.json");
+        var hostCountJas=findInJson(countJson,"month",dateFormat);
+        var logjamOnDate= findInJson(logjamJson,"month",dateFormat );
+
+        var expPieObject=[0];
+
+
+        var expEn=logjamOnDate.expEnabled;
+        var totalScan=hostCountJas.hostCount;
+        var expDis=totalScan-expEn;
+        expPieObject[0]={"exp Enabled":expEn,"exp Disabled":expDis};
+
+
+        var pfs = c3.generate({
+            bindto:'#logjam',
+            data: {
+                json: expPieObject,
+                type: 'donut',
+                keys:{
+                    value:['exp Enabled','exp Disabled'],
+                },
+            },
+
+
+        });
+
+    };
+</script>
+</div>
+</body>
+</html>
