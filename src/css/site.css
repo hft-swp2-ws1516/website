@@ -6,6 +6,18 @@ body {
     color: #696969;
 }
 
+/* Sticky footer without blank space with pages with little content */
+#footer{
+   background: #242729;
+   color: #B9BDC1;
+   height: 70px;
+   margin-top: 50px;
+   padding-top: 10px;
+}
+
+#footer a {
+    color: #99D4FF;
+}
 
 h1 {
     font-family: Georgia, serif;
@@ -70,9 +82,9 @@ ul#menu li a:hover {
 }
 
 #loader{
-   position:absolute; 
-   top: 50%;
-   left: 50%;
+ position:absolute; 
+ top: 50%;
+ left: 50%;
 }
 
 #generic{

@@ -50,9 +50,11 @@ document.getElementById("footer").innerHTML =
     "<div class='container'>" +
     "<div class='row'>" +
     "<div class='col-md-8'>" +
+
+    " <a href='#subscribtion' id='sub' data-toggle='modal'> Subscribe </a> &#124;"+
+    " <a href='https://github.com/hft-swp2-ws1516'>Github</a> <br> " +
     " &copy; 2015 - " + currentYear + " " +
     " HfT Stuttgart " +
-    " &#124;<a href='#subscribtion' id='sub' data-toggle='modal'> Subscribe </a> " +
     "</div>" +
     "<div class='col-md-4 '></div>" +
     " Last Scan: <span id='lastScan'>DD.MM.YYYY</span> " +
