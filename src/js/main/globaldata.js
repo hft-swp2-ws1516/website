@@ -78,46 +78,46 @@ window.onload = function() {
     document.location.href = 'index.html';
   });
 
-  $("#loadPFS").click(function() {
+  $(".loadPFS").click(function() {
+
     loadPFS();
     $("#filterTLS").hide();
   });
 
-  $("#loadDHE").click(function() {
+  $(".loadDHE").click(function() {
     loadDHE();
     $("#filterTLS").hide();
   });
 
-  $("#loadECDHE").click(function() {
+  $(".loadECDHE").click(function() {
     $("#filterTLS").hide();
     loadECDHE();
   });
 
-  $("#loadlogjam").click(function() {
+  $(".loadlogjam").click(function() {
     $("#filterTLS").hide();
     loadLogjam();
   });
-  $("#loadCiphers").click(function() {
+  $(".loadCiphers").click(function() {
     $("#filterTLS").show();
     loadCiphers();
   });
-  $("#loadMAC").click(function() {
+  $(".loadMAC").click(function() {
     $("#filterTLS").hide();
     loadMac();
   });
-  $("#loadAuth").click(function() {
+  $(".loadAuth").click(function() {
     $("#filterTLS").hide();
     loadAuth();
   });
-  $("#loadKx").click(function() {
+  $(".loadKx").click(function() {
     $("#filterTLS").hide();
     loadKx();
   });
-  $("#loadEnc").click(function() {
+  $(".loadEnc").click(function() {
     $("#filterTLS").hide();
     loadEnc();
   });
-
 
 
 
