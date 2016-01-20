@@ -43,7 +43,7 @@
 
     </div>
 </div>
-   <footer id="footer"></footer>
+<footer id="footer"></footer>
 </body>
 <div id="subscribe"></div>
 <!-- Skripts are located in the end of the Body tag for faster Page Loading -->
@@ -73,12 +73,12 @@
     <script type="text/javascript" src="js/ammap/ammap.js"></script>
     <script type="text/javascript" src="js/ammap/maps/js/worldLow.js"></script>
 
-<!-- amCharts javascript code -->
-<script src="https://www.amcharts.com/lib/3/amcharts.js" type="text/javascript"></script>
-<script src="https://www.amcharts.com/lib/3/pie.js" type="text/javascript"></script>
-<script src="https://www.amcharts.com/lib/3/ammap_amcharts_extension.js" type="text/javascript"></script>
+    <!-- amCharts javascript code -->
+    <script src="https://www.amcharts.com/lib/3/amcharts.js" type="text/javascript"></script>
+    <script src="https://www.amcharts.com/lib/3/pie.js" type="text/javascript"></script>
+    <script src="https://www.amcharts.com/lib/3/ammap_amcharts_extension.js" type="text/javascript"></script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
     var dateObj= new Date();
     var month=dateObj.getUTCMonth()+1;
     var year=dateObj.getUTCFullYear();
@@ -91,25 +91,38 @@
     testJson=[];
     var chart;
     var PFSLand=jQuery.get("https://www.hotcat.de:1337/api/v0/pfs/overview", function (response) {
+
         jsonRespond=response;
         console.log(jsonRespond);
         pfsWorld=jsonRespond.filter(function(a){return a._id ==dateFormat})[0];
         jsonOnDate=jsonRespond.filter(function(a){return a._id ==dateFormat})[0].overviews;
         console.log(jsonOnDate);
+         
+         // change country code of uk into gb for ammap
+        for (var i = 0; i < jsonOnDate.length; i++) {
+            if (jsonOnDate[i].tld == "uk") {
+               jsonOnDate[i].tld = "gb";
+            };
+        };
         /*
          *this function return an array for the map description modal which is in the map object under :
          * dataProvider->areas->[{areaArray}]
          * areArray objects must have this format {"id":<landISO>,"description":<can be any thing but in html >}
          */
-        function descriptionModal(jsonObject){
+         function descriptionModal(jsonObject){
             var areaArray=[];
             jsonObject.forEach( function (i) {
 
+                var percent = i.pfsDisabled/ i.totalHosts;
+
+                // alpha property sets the opacity of mapArea instance
                 areaArray.push({
-                    "id": upperCamel(i.tld), "description": "pfs Enabled" + ": " + i.pfsEnabled + "<br >"
+                    "id": upperCamel(i.tld),  "color":"#CC0000", "alpha": percent, "description": "pfs Enabled" + ": " + i.pfsEnabled + "<br >"
                     + "pfs Disabled" + ": " + i.pfsDisabled + "<br >" + "Total Hosts" + ": " + i.totalHosts + "<br >"
                 });
+
             });
+
             return areaArray;
         }
 
@@ -119,33 +132,33 @@
         }
         // chart pie : the first one for global pfs
         var forChartStart=[
-            { pfs :"Enabled ",count:pfsWorld.monthlyPfsEnabled},
-            { pfs :"Disabled ",count:pfsWorld.monthlyPfsDisabled}
+        { pf :"Enabled ",count:pfsWorld.monthlyPfsEnabled, },
+        { pfs :"Disabled ",count:pfsWorld.monthlyPfsDisabled}
         ];
         /*
          *please leave the script src for the pie chart from cdn
          * the download version was not working
          */
-        chart=  new AmCharts.AmPieChart();
-        chart.addLabel("0", "!20", "World PFS", "center", 16);
-        chart.backgroundAlpha= 0.4;
-        chart.backgroundColor= "#000000";
-        chart.dataProvider =forChartStart;
-        chart.titleField="pfs";
-        chart.valueField = "count";
-        chart.sequencedAnimation= true;
-        chart.startEffect= "elastic";
-        chart.labelsEnabled =false;
-        chart.startDuration= 2;
-        chart.labelRadius=20;
+         chart=  new AmCharts.AmPieChart();
+         chart.addLabel("0", "!20", "World PFS", "center", 16);
+         chart.backgroundAlpha= 0.4;
+         chart.backgroundColor= "#00000";
+         chart.dataProvider =forChartStart;
+         chart.titleField="pfs";
+         chart.valueField = "count";
+         chart.sequencedAnimation= true;
+         chart.startEffect= "elastic";
+         chart.labelsEnabled =false;
+         chart.startDuration= 2;
+         chart.labelRadius=20;
 
-        chart.write("chartDiv");
+         chart.write("chartDiv");
         /*world map
          *to change descreption box please take care of areas in dataprovider
          *or change descriptionModal methode
          */
-        var areaArray =descriptionModal(jsonOnDate);
-        var map =AmCharts.makeChart("map", {
+         var areaArray =descriptionModal(jsonOnDate);
+         var map =AmCharts.makeChart("map", {
             "type": "map",
             "pathToImages": "js/ammap/images/",
             "addClassNames": true,
@@ -158,13 +171,13 @@
                 "getAreasFromMap": true,
                 "areas" :areaArray,
                 "images": [
-                    {
-                        "top": 40,
-                        "left": 60,
-                        "width": 80,
-                        "height": 40,
-                        "pixelMapperLogo": true,
-                    }
+                {
+                    "top": 40,
+                    "left": 60,
+                    "width": 80,
+                    "height": 40,
+                    "pixelMapperLogo": true,
+                }
                 ]
             },
             "balloon": {
@@ -174,7 +187,6 @@
                 "verticalPadding": 15
             },
             "areasSettings": {
-                "color": "rgba(129,129,129,1)",
                 "outlineColor": "rgba(80,80,80,1)",
                 "rollOverOutlineColor": "rgba(80,80,80,1)",
                 "rollOverBrightness": 20,
@@ -219,7 +231,7 @@
          * for a given value like in json us and on the map us and give us the data
          * we are looking for as
          */
-        function objectFindByKey(array, key, value) {
+         function objectFindByKey(array, key, value) {
             if (value=='gb'){
                 value='uk';
             }
@@ -236,7 +248,7 @@
          *for rollover : we could replace "clickMapObject"with "rollOverMapObject"
          * to change the maplistener to hoover
          */
-        map.addListener("clickMapObject",function(event){
+         map.addListener("clickMapObject",function(event){
             // the toLower function to change the tld in json to capital
             //to match the iso in ammap in worldLow.js
             function toLower(str){
@@ -252,7 +264,7 @@
             var totalHosts=JSON.stringify(obj.totalHosts);
             // data for the pie chart must have following pattern
             var foreChart=[{pfs :"Enabled ",count: pfsEnabled},
-                {pfs :"Disabled ",count : pfsDisabled}];
+            {pfs :"Disabled ",count : pfsDisabled}];
             document.getElementById("land").innerHTML=land+'<br >' ;
             document.getElementById("resultTld").innerHTML=tld+'<br >' ;
             document.getElementById("resultPFSen").innerHTML=pfsEnabled+'<br >';
@@ -266,6 +278,6 @@
 
         });
 
-    });
+});
 
 </script>
