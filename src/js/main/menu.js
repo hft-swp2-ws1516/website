@@ -6,9 +6,10 @@ document.getElementById("nav01").innerHTML =
     "<nav class='navbar navbar-default'>" +
     "<div class='container'>" +
     "<div class='row'>" +
-    "<div class='col-md-8'><ul class='nav navbar-nav'>" +
-    "<li><img class='img-fluid' width='200' src='img/hotcat_logo.svg'  alt='Hotcat Logo'/></li>" +
-    "<li><a href='home.html'>Home</a></li>" +
+    "<div class='col-md-8'>" +
+    "<a href='home.html'><img class='img-fluid' width='200' src='img/hotcat_logo.svg'  alt='Hotcat Logo'/></a>" +
+    "<ul style='float:right' class='nav navbar-nav'>" +
+    "<li></li>" +
     "<li  class='dropdown'><a href='globaldata.html' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>Universal Summary<span class='caret'></span></a>" +
     "<ul class='dropdown-menu'>" +
     "<li id='openGlobaldata'><a href='globaldata.html#'>Summary</a></li>" +
@@ -29,7 +30,7 @@ document.getElementById("nav01").innerHTML =
     "<li><a href='worldmap.html'>Worldmap</a></li>" +
     "<li><a href='analyze-me.html'>Analyse Me</a></li>" +
     "</ul></div>" +
-    "<div class='col-md-4 '>Last Scan: <span id='lastScan'>DD.MM.YYYY</span></div>" +
+    "<div class='col-md-4 '></div>" +
     "</div>" +
     "</div>" +
     "</nav>";
@@ -40,9 +41,15 @@ var dateObject = new Date();
 var currentYear = dateObject.getFullYear(); // dynamic Date
 document.getElementById("footer").innerHTML =
     "<div class='container'>" +
+    "<div class='row'>" +
+    "<div class='col-md-8'>" +
     " &copy; 2015 - " + currentYear + " " +
     " HfT Stuttgart " +
     " &#124;<a href='#subscribtion' id='sub' data-toggle='modal'> Subscribe </a> " +
+    "</div>" +
+    "<div class='col-md-4 '></div>" +
+    " Last Scan: <span id='lastScan'>DD.MM.YYYY</span> " +
+    "</div></div>" +
     "</div>";
 
 // open Subscribe Modal and this modal will open the subscriber count modal on subscribe.php file
@@ -82,9 +89,9 @@ document.getElementById("subscribe").innerHTML =
     "                                       <div id='terms-conditions' class='panel-collapse collapse'>" +
     "                                               <div class='alert alert-info'>" +
     "                                                   By clicking the 'Subscribe' button below, you agree that Hotcat will send you an e-mail containing" +
-    "                                                   the most recent results of our SSL/TLS scanner on a monthly basis. You also agree that the name and"+
-    "                                                   e-mail address you provided will be saved in our database. Neither your name nor your e-mail address will be"+
-    "                                                   used outside the scope of Hotcat's subscription function. Particularly, they will not be given to any third"+
+    "                                                   the most recent results of our SSL/TLS scanner on a monthly basis. You also agree that the name and" +
+    "                                                   e-mail address you provided will be saved in our database. Neither your name nor your e-mail address will be" +
+    "                                                   used outside the scope of Hotcat's subscription function. Particularly, they will not be given to any third" +
     "                                                   party." +
     "                                               </div>" +
     "                                       </div>" +
@@ -168,6 +175,7 @@ $(document).ready(function() {
         }
     });
 });
+
 function disableBtn() {
     document.getElementById("save").disabled = true;
 }
