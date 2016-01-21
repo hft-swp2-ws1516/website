@@ -52,7 +52,7 @@ document.getElementById("footer").innerHTML =
     "<div class='col-md-8'>" +
 
     " <a href='#subscribtion' id='sub' data-toggle='modal'> Subscribe </a> &#124;"+
-    " <a href='https://github.com/hft-swp2-ws1516'>Github</a> <br> " +
+    " <a href='https://github.com/hft-swp2-ws1516' target='_blank'>Github</a> <br> " +
     " &copy; 2015 - " + currentYear + " " +
     " HfT Stuttgart " +
     "</div>" +
