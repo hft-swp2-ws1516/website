@@ -558,7 +558,7 @@
                                                 }
                                             }
                                         });
-                                        document.getElementById("rememberGeneral").style = "display: block; margin: 0 auto;";
+                                        document.getElementById("rememberGeneral").style.cssText = "display: block; margin: 0 auto;";
                                     } else {
                                         noCipherSuites_Accepted = c3.generate({
                                             bindto: '#noCipherSuites_Accepted',
@@ -643,7 +643,7 @@
                                                 }
                                             }
                                         });
-                                        document.getElementById("rememberNoCipherSuites_Accepted").style = "display: block; margin: 0 auto;";
+                                        document.getElementById("rememberNoCipherSuites_Accepted").style.cssText = "display: block; margin: 0 auto;";
                                         noCipherSuites_Preferred = c3.generate({
                                             bindto: '#noCipherSuites_Preferred',
                                             legend: {
@@ -727,7 +727,7 @@
                                                 }
                                             }
                                         });
-                                        document.getElementById("rememberNoCipherSuites_Preferred").style = "display: block; margin: 0 auto;";
+                                        document.getElementById("rememberNoCipherSuites_Preferred").style.cssText =  "display: block; margin: 0 auto;";
                                         var totalCiphersAcceptedKey = result.totalCiphersAccepting[0];
                                         var totalCiphersAcceptedValue = result.totalCiphersAccepting[result.totalCiphersAccepting.length - 1];
                                         var hostsAcceptingKey = result.hostsAccepting[0];
@@ -807,7 +807,7 @@
                                                 type: 'gauge'
                                             }
                                         });
-                                        document.getElementById("rememberLastMonth_Accepted").style = "display: block; margin: 0 auto;";
+                                        document.getElementById("rememberLastMonth_Accepted").style.cssText = "display: block; margin: 0 auto;";
                                         lastMonth_Preferred = c3.generate({
                                             bindto: '#lastMonth_Preferred',
                                             legend: {
@@ -877,7 +877,7 @@
                                                 type: 'gauge'
                                             }
                                         });
-                                        document.getElementById("rememberLastMonth_Preferred").style = "display: block; margin: 0 auto;";
+                                        document.getElementById("rememberLastMonth_Preferred").style.cssText = "display: block; margin: 0 auto;";
                                     }
                                 } else {
                                     if (document.getElementById("matchingKindLiteral").checked) {
@@ -946,7 +946,7 @@
                                                 }
                                             }
                                         });
-                                        document.getElementById("rememberGeneral").style = "display: block; margin: 0 auto;";
+                                        document.getElementById("rememberGeneral").style.cssText = "display: block; margin: 0 auto;";
                                         if (result.months.length > 1) {
                                             var totalHostsKey = result.totalHosts[0];
                                             var totalHostsValue = result.totalHosts[result.totalHosts.length - 1];
@@ -1027,7 +1027,7 @@
                                                     type: 'gauge'
                                                 }
                                             });
-                                            document.getElementById("rememberLastMonth_General").style = "display: block; margin: 0 auto;";
+                                            document.getElementById("rememberLastMonth_General").style.cssText = "display: block; margin: 0 auto;";
                                         }
                                     } else {
                                         noCipherSuites_Accepted = c3.generate({
@@ -1091,7 +1091,7 @@
                                                 }
                                             }
                                         });
-                                        document.getElementById("rememberNoCipherSuites_Accepted").style = "display: block; margin: 0 auto;";
+                                        document.getElementById("rememberNoCipherSuites_Accepted").style.cssText = "display: block; margin: 0 auto;";
                                         noCipherSuites_Preferred = c3.generate({
                                             bindto: '#noCipherSuites_Preferred',
                                             legend: {
@@ -1153,7 +1153,7 @@
                                                 }
                                             }
                                         });
-                                        document.getElementById("rememberNoCipherSuites_Preferred").style = "display: block; margin: 0 auto;";
+                                        document.getElementById("rememberNoCipherSuites_Preferred").style.cssText = "display: block; margin: 0 auto;";
                                         if (result.months.length > 1) {
                                             var totalCiphersAcceptedKey = result.totalCiphersAccepting[0];
                                             var totalCiphersAcceptedValue = result.totalCiphersAccepting[result.totalCiphersAccepting.length - 1];
@@ -1235,7 +1235,7 @@
                                                     type: 'gauge'
                                                 }
                                             });
-                                            document.getElementById("rememberLastMonth_Accepted").style = "display: block; margin: 0 auto;";
+                                            document.getElementById("rememberLastMonth_Accepted").style.cssText = "display: block; margin: 0 auto;";
                                             lastMonth_Preferred = c3.generate({
                                                 bindto: '#lastMonth_Preferred',
                                                 legend: {
@@ -1305,7 +1305,7 @@
                                                     type: 'gauge'
                                                 }
                                             });
-                                            document.getElementById("rememberLastMonth_Preferred").style = "display: block; margin: 0 auto;";
+                                            document.getElementById("rememberLastMonth_Preferred").style.cssText = "display: block; margin: 0 auto;";
                                         }
                                     }
 

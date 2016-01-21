@@ -99,18 +99,18 @@ function removeSpecialChars(textbox) {
 function displayWarning() {
 
     if (document.getElementById("matchingKindAsPart").checked) {
-        document.getElementById("warningMessage").style = "text-align: center; display: block; padding-top: 30px";
+        document.getElementById("warningMessage").style.cssText = "text-align: center; display: block; padding-top: 30px";
     } else {
-        document.getElementById("warningMessage").style = "text-align: center; display: none";
+        document.getElementById("warningMessage").style.cssText = "text-align: center; display: none";
     }
 
 }
 
 function displayWarningNoGraphs(makeVisibile) {
     if (makeVisibile) {
-        document.getElementById("warningMessageNoGraphs").style = "text-align: center; display: block; padding-top: 30px";
+        document.getElementById("warningMessageNoGraphs").style.cssText = "text-align: center; display: block; padding-top: 30px";
     } else {
-        document.getElementById("warningMessageNoGraphs").style.display = "none";
+        document.getElementById("warningMessageNoGraphs").style.cssText = "display: none";
     }
 }
 
@@ -139,39 +139,40 @@ function displayDescriptions() {
     var description = tld.concat(protocol).concat(cipherString);
     if (document.getElementById("general").innerHTML !== "") {
         document.getElementById("descriptionGeneral").innerHTML = description;
-        document.getElementById("descriptionGeneral").style.display = "block";
+        document.getElementById("descriptionGeneral").style.cssText = "display: block";
     }
     if (document.getElementById("lastMonth_General").innerHTML !== "") {
         document.getElementById("descriptionLastMonth_General").innerHTML = description.concat(" - Percentage View");
-        document.getElementById("descriptionLastMonth_General").style.display = "block";
+        document.getElementById("descriptionLastMonth_General").style.cssText = "display: block";
     }
     if (document.getElementById("noCipherSuites_Accepted").innerHTML !== "") {
         document.getElementById("descriptionNoCipherSuites_Accepted").innerHTML = description.concat(" - Accepted");
-        document.getElementById("descriptionNoCipherSuites_Accepted").style.display = "block";
+        document.getElementById("descriptionNoCipherSuites_Accepted").style.cssText = "display: block";
     }
     if (document.getElementById("lastMonth_Accepted").innerHTML !== "") {
         document.getElementById("descriptionLastMonth_Accepted").innerHTML = description.concat(" - Percentage View - Accepted");
-        document.getElementById("descriptionLastMonth_Accepted").style.display = "block";
+        document.getElementById("descriptionLastMonth_Accepted").style.cssText = "display: block";
     }
     if (document.getElementById("noCipherSuites_Preferred").innerHTML !== "") {
         document.getElementById("descriptionNoCipherSuites_Preferred").innerHTML = description.concat(" - Preferred");
-        document.getElementById("descriptionNoCipherSuites_Preferred").style.display = "block";
+        document.getElementById("descriptionNoCipherSuites_Preferred").style.cssText = "display: block";
     }
     if (document.getElementById("lastMonth_Preferred").innerHTML !== "") {
         document.getElementById("descriptionLastMonth_Preferred").innerHTML = description.concat(" - Percentage View - Preferred");
-        document.getElementById("descriptionLastMonth_Preferred").style.display = "block";
+        document.getElementById("descriptionLastMonth_Preferred").style.cssText = "display: block";
     }
 
 }
 
 function hideDescriptions() {
 
-    document.getElementById("descriptionGeneral").style.display = "none";
-    document.getElementById("descriptionLastMonth_General").style.display = "none";
-    document.getElementById("descriptionNoCipherSuites_Accepted").style.display = "none";
-    document.getElementById("descriptionLastMonth_Accepted").style.display = "none";
-    document.getElementById("descriptionNoCipherSuites_Preferred").style.display = "none";
-    document.getElementById("descriptionLastMonth_Preferred").style.display = "none";
+    document.getElementById("descriptionGeneral").style.cssText = "display: none";
+    document.getElementById("descriptionLastMonth_General").style.cssText = "display: none";
+    document.getElementById("descriptionNoCipherSuites_Accepted").style.cssText = "display: none";
+    document.getElementById("descriptionLastMonth_Accepted").style.cssText = "display: none";
+    document.getElementById("descriptionNoCipherSuites_Preferred").style.cssText = "display: none";
+    document.getElementById("descriptionLastMonth_Preferred").style.cssText = "display: none";
+    
 }
 
 
@@ -673,21 +674,21 @@ function forgetGraphs() {
 
 function manageElementVisibility(makeVisible) {
     if (makeVisible) {
-        document.getElementById("detailedFilterColumn").style.display = "block";
-        document.getElementById("nav01").style.display = "block";
-        document.getElementById("filterBoxPanel").style.display = "block";
-        document.getElementById("graphComparisonButtonPanel").style.display = "block";
-        document.getElementById("footer").style.display = "block";
-        document.getElementById("detailedFilterBody").style = "background-color: #ffffff";
-        document.getElementById("displayGraphComparison").style = "display: none; z-index: -100";
+        document.getElementById("detailedFilterColumn").style.cssText = "display: block";
+        document.getElementById("nav01").style.cssText =  "display: block";
+        document.getElementById("filterBoxPanel").style.cssText = "display: block";
+        document.getElementById("graphComparisonButtonPanel").style.cssText = "display: block";
+        document.getElementById("footer").style.cssText = "display: block";
+        document.getElementById("detailedFilterBody").style.cssText = "background-color: #ffffff";
+        document.getElementById("displayGraphComparison").style.cssText = "display: none; z-index: -100";
     } else {
-        document.getElementById("detailedFilterColumn").style.display = "none";
-        document.getElementById("nav01").style.display = "none";
-        document.getElementById("filterBoxPanel").style.display = "none";
-        document.getElementById("graphComparisonButtonPanel").style.display = "none";
-        document.getElementById("footer").style.display = "none";
-        document.getElementById("detailedFilterBody").style = "background-color: #a0a0a0";
-        document.getElementById("displayGraphComparison").style = "display: block;";
+        document.getElementById("detailedFilterColumn").style.cssText = "display: none";
+        document.getElementById("nav01").style.cssText = "display: none";
+        document.getElementById("filterBoxPanel").style.cssText = "display: none";
+        document.getElementById("graphComparisonButtonPanel").style.cssText = "display: none";
+        document.getElementById("footer").style.cssText = "display: none";
+        document.getElementById("detailedFilterBody").style.cssText = "background-color: #a0a0a0";
+        document.getElementById("displayGraphComparison").style.cssText = "display: block;";
     }
 }
 
@@ -743,12 +744,12 @@ function resetGraphs() {
 }
 
 function resetButtons() {
-    document.getElementById("rememberGeneral").style.display = "none";
-    document.getElementById("rememberLastMonth_General").style.display = "none";
-    document.getElementById("rememberNoCipherSuites_Accepted").style.display = "none";
-    document.getElementById("rememberLastMonth_Accepted").style.display = "none";
-    document.getElementById("rememberNoCipherSuites_Preferred").style.display = "none";
-    document.getElementById("rememberLastMonth_Preferred").style.display = "none";
+    document.getElementById("rememberGeneral").style.cssText = "display: none";
+    document.getElementById("rememberLastMonth_General").style.cssText = "display: none";
+    document.getElementById("rememberNoCipherSuites_Accepted").style.cssText = "display: none";
+    document.getElementById("rememberLastMonth_Accepted").style.cssText = "display: none";
+    document.getElementById("rememberNoCipherSuites_Preferred").style.cssText = "display: none";
+    document.getElementById("rememberLastMonth_Preferred").style.cssText = "display: none";
 }
 
 function enableButtons() {
