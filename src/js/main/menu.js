@@ -194,7 +194,7 @@ function undisableBtn() {
 }
 
 function validate() {
-    if (name_tocheck == true && email_tocheck == true) {
+    if (name_tocheck === true && email_tocheck === true) {
         undisableBtn();
     } else {
         disableBtn();
