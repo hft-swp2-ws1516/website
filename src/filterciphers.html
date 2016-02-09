@@ -5,6 +5,9 @@
     </div>
     <div class="panel-body">
         <div>
+            <!--
+                Contains the box that provides the user with the entirety of filter options.
+            -->
             <form id="filterBox" name="filterBox">
                 <fieldset>
                     <fieldset>
@@ -375,6 +378,14 @@
                                 </span>
                             </div>
                             <script type="text/javascript">
+                                /*
+                                 * Sets and manages the dates available for selection
+                                 * of the first datepicker element that contains
+                                 * the start date for a time interval to be specified
+                                 * by the user.
+                                 * 
+                                 * @returns {undefined}
+                                 */
                                 $('#filterDateStart').datepicker({
                                     format: "mm-yyyy",
                                     startView: 1,
@@ -405,6 +416,14 @@
                                 </span>
                             </div>
                             <script type="text/javascript">
+                                /*
+                                 * Sets and manages the dates available for selection
+                                 * of the second datepicker element that contains
+                                 * the end date for a time interval to be specified
+                                 * by the user.
+                                 * 
+                                 * @returns {undefined}
+                                 */
                                 $('#filterDateEnd').datepicker({
                                     format: "mm-yyyy",
                                     startView: 1,
@@ -449,6 +468,13 @@
                     <script>
                         var result = null;
                         var tryCount = 0;
+                        /*
+                         * Manages entirety of graph creation according to results 
+                         * delivered by the "applyFilters()" function using the c3.js
+                         * graph library.
+                         * 
+                         * @returns {undefined}
+                         */
                         $("#filterApply").click(function () {
                             result = applyFilters();
                             if (result !== null) {

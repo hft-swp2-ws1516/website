@@ -1,5 +1,13 @@
 /*jslint browser: true*/
 'use strict';
+
+
+/* 
+ * Retrieves the response text of an HTTP request.
+ * 
+ * @returns {HttpClient}
+ */
+
 var HttpClient = function () {
     this.get = function (url, callback) {
         var httpRequest = new XMLHttpRequest();
@@ -12,6 +20,10 @@ var HttpClient = function () {
         httpRequest.send(null);
     };
 };
+
+/*
+ * Data structures for storing aggregation results.
+ */
 
 var httpResponse;
 var months = [];
@@ -39,9 +51,27 @@ var graphsToRemember = [];
 
 
 
+/*
+ * Used as the callback function to be passed as a parameter to the function encapsulated
+ * by the HttpClient object above in order to store the response of an HTTP request.
+ * 
+ * @param {type} response - The HTTP response that is to be saved.
+ * @returns {undefined}
+ */
+
 function setHttpResponse(response) {
     httpResponse = response;
 }
+
+
+/*
+ * After having removed special characters from the input field, this function puts
+ * strings given by the user for the different text boxes available on the "Detailed Filter"
+ * page in the correct order and finally displays the user's entries as the currently
+ * selected cipher suite to search for.
+ * 
+ * @returns {undefined}
+ */
 
 function displayFilter() {
 
@@ -76,15 +106,23 @@ function displayFilter() {
         }
 
         cipherString = cipherString.replace(/[^\w\s||.||-]/gi, '');
-
         document.getElementById("displayFilterSelection").innerHTML = cipherString;
-        
+
     } else {
-        
+
         document.getElementById("displayFilterSelection").innerHTML = "[none]";
-        
+
     }
 }
+
+
+/*
+ * Removes special characters from a given textbox.
+ * 
+ * @param {type} textbox - Textbox whose input the special characters are to be
+ * removed from.
+ * @returns {undefined}
+ */
 
 function removeSpecialChars(textbox) {
 
@@ -96,6 +134,15 @@ function removeSpecialChars(textbox) {
 
 }
 
+
+/*
+ * Displays a warning message if a user has applied a filter while in "match as part
+ * of a larger cipher string" operation mode. If a filter is applied using the
+ * "match literally" mode, the function hides the warning message.
+ * 
+ * @returns {undefined}
+ */
+
 function displayWarning() {
 
     if (document.getElementById("matchingKindAsPart").checked) {
@@ -106,6 +153,18 @@ function displayWarning() {
 
 }
 
+
+/*
+ * If a user hits the "Show Graphs" button in order to display remembered graphs
+ * but there are no graphs to display yet, this function makes the according warning
+ * message visible. If, on the other hand, a user makes the application remember a 
+ * graph, the message is hidden.
+ * 
+ * @param {type} makeVisibile - True if the warning message is to be shown, false otherwise.
+ * 
+ * @returns {undefined}
+ */
+
 function displayWarningNoGraphs(makeVisibile) {
     if (makeVisibile) {
         document.getElementById("warningMessageNoGraphs").style.cssText = "text-align: center; display: block; padding-top: 30px";
@@ -113,6 +172,18 @@ function displayWarningNoGraphs(makeVisibile) {
         document.getElementById("warningMessageNoGraphs").style.cssText = "display: none";
     }
 }
+
+
+/*
+ * Shows descriptions for every graph currently displayed. A description consists 
+ * of the selected Top-Level Domain (if given), the protocol (if given), filter settings
+ * regarding the actual cipher suite, as well as information concerning the operation
+ * mode used to create the graph (cipher suite matched literally or as part of a 
+ * larger cipher string), and if the hosts that were counted accepted or preferred
+ * the given cipher suite.
+ *  
+ * @returns {undefined}
+ */
 
 function displayDescriptions() {
 
@@ -164,6 +235,13 @@ function displayDescriptions() {
 
 }
 
+
+/*
+ * Hides all graph descriptions.
+ * 
+ * @returns {undefined}
+ */
+
 function hideDescriptions() {
 
     document.getElementById("descriptionGeneral").style.cssText = "display: none";
@@ -172,9 +250,22 @@ function hideDescriptions() {
     document.getElementById("descriptionLastMonth_Accepted").style.cssText = "display: none";
     document.getElementById("descriptionNoCipherSuites_Preferred").style.cssText = "display: none";
     document.getElementById("descriptionLastMonth_Preferred").style.cssText = "display: none";
-    
+
 }
 
+
+/*
+ * Function immediately called as soon as a user hits the "Apply Filter" button 
+ * and thus one of the main functions of the filtering process as it controls a number
+ * of other functions clearing results, displaying or hiding elements, enabling or 
+ * disabling buttons, and, most importantly, executing the process of parsing
+ * the database's HTTP response and carrying out data aggregations based on the former.
+ * 
+ * @returns {parseResponse.filterDataAnonym$1} - An object consisting of arrays containing
+ * the result of filtering and aggregation steps carried out by the "parseResponse()" function.
+ * On the "filterciphers.html" page, the results are directly used to generate graphs which
+ * are then displayed to the user.
+ */
 
 function applyFilters() {
 
@@ -204,6 +295,26 @@ function applyFilters() {
 
 }
 
+
+/*
+ * Another main function called by the "applyFilters()" method above. "parseResponse()"
+ * is, as the name suggests, responsible for parsing the HTTP response of the database's 
+ * communication end point acquired during execution of the "applyFilters()" function.
+ * According to the user's input not only concerning the cipher suite itself, but 
+ * possibly also considering a specified time interval that prevents data out of the
+ * interval from being evaluated in the first place, "parseResponse()" aggregates host
+ * counts for each month present in the HTTP response while also taking into consideration
+ * the currently selected execution mode ("match literally" or "match as part of a larger
+ * cipher string").
+ * 
+ * @param {type} response - The HTTP response delivered by the database's end point.
+ * @param {type} protocol - Protocol originally selected by the user. May be null.
+ * @param {type} cipherString - The cipher suite provided by the user. May be null.
+ * 
+ * @returns {parseResponse.filterDataAnonym$1} - An object consisting of all possible
+ * result arrays. Depending on the user's selections, arrays returned may be empty. 
+ */
+
 function parseResponse(response, protocol, cipherString) {
 
     months.push('x');
@@ -229,6 +340,12 @@ function parseResponse(response, protocol, cipherString) {
         endDate = new Date(getInternalDate(document.getElementById("endDate").value));
     }
 
+    /*
+     * Pushes all such months to the "months" array that lie within the time interval
+     * specified by the user. If neither a start date nor an end date was specified, 
+     * all months present in the HTTP response are processed.
+     * 
+     */
     var allMonths = response.match(/month.:.(\d*).(\d*)/g);
     var inInterval = false;
     var startIndex = 1;
@@ -251,6 +368,12 @@ function parseResponse(response, protocol, cipherString) {
     }
     inInterval = false;
 
+    /*
+     * Pushes the number of total hosts to the "totalHosts" aray according the the time
+     * interval possibly specified; again if no time span is given, entries for each
+     * and every month are pushed to the array.
+     * 
+     */
     var allTotalHosts = response.match(/totalHosts.:.(\d*)/g);
     for (var i = 0; i < allTotalHosts.length; i++) {
         var number = allTotalHosts[i].split(":")[1];
@@ -265,6 +388,13 @@ function parseResponse(response, protocol, cipherString) {
         }
     }
 
+    /*
+     * Initiates the actual process of data filtering by calling "insertEntry()"
+     * if and only if the set of entries ("allOuterEntries") belongs to a month that
+     * lies within the boundaries of a possibly specified time span (no time span
+     * given leads to all sets of entries being considered).
+     * 
+     */
     inInterval = false;
     var manualProtocolAggregation = protocol === "" ? true : false;
     initResultArrays(months.length, matchLiterally, manualProtocolAggregation);
@@ -279,7 +409,7 @@ function parseResponse(response, protocol, cipherString) {
                 inInterval = true;
                 monthSkipped = false;
             }
-            doEntryInsertion(outer, manualProtocolAggregation, matchLiterally, protocol, cipherString, loops);
+            insertEntry(outer, manualProtocolAggregation, matchLiterally, protocol, cipherString, loops);
         }
         if (endDate !== undefined && i + 1 === endIndex && inInterval) {
             break;
@@ -320,35 +450,93 @@ function parseResponse(response, protocol, cipherString) {
 
 }
 
-function doEntryInsertion(outer, manualProtocolAggregation, matchLiterally, protocol, cipherString, loops, monthSkipped) {
+
+/*
+ * Function responsible for inserting entries into result arrays by calling further
+ * delegate functions if certain conditions are evaluated to be true. The function
+ * distinguishes four cases in total that exactly represent the selections a user
+ * is provided with, namely (1) the user provided a protocol and (1.1) wants the 
+ * specified cipher suite to be matched literally or (1.2) to be matched as part 
+ * of a larger cipher string. On the other hand, (2) if no protocol was given, both
+ * execution modes have to be considered separately again similar to case (1), namely 
+ * (2.1) and (2.2). The conditions that have to be true for an entry in order to 
+ * actually be pushed to a result array are as follows: For case (1.1), both the
+ * protocol and the cipher string must match the entry in question, whereas in 
+ * case (1.2) the protocol and the several parts of the cipher string must match.
+ * In case the user has not specified a protocol (2), the two operation modes are 
+ * represented similarly ((2.1), (2.2)).
+ * 
+ * @param {type} outer - Cipher suite entries for one entire month.
+ * @param {type} manualProtocolAggregation - True if a user has not specified a protocol,
+ * false otherwise.
+ * @param {type} matchLiterally - True if the user wants the cipher suite he provided
+ * to be matched literally, false otherwise.
+ * @param {type} protocol - The protocol a user has provided. May be null.
+ * @param {type} cipherString - The cipher suite a user has provided. May be null.
+ * @param {type} loops - Number of times the function was already called, providing for
+ * index synchronisation within the result arrays.
+ * 
+ * @returns {undefined}
+ */
+
+function insertEntry(outer, manualProtocolAggregation, matchLiterally, protocol, cipherString, loops) {
 
     loops++;
     outer.match(/{(.*?)}/g).forEach(function (inner) {
         if (!manualProtocolAggregation) {
+            /*
+             * 1
+             */
             if (matchLiterally) {
+                /*
+                 * 1.1
+                 */
                 if (inner.match("\"" + protocol + "\"") !== null && inner.match(cipherString) !== null) {
-                    writeToHosts(loops, inner, matchLiterally);
+                    writeToHosts(loops, inner);
                 }
             } else {
+                /*
+                 * 1.2
+                 */
                 writeToTotalCiphers(loops, inner);
                 if (inner.match("\"" + protocol + "\"") !== null && testIfPartsMatch(inner, cipherString)) {
-                    writeToHosts(loops, inner, matchLiterally);
+                    writeToHosts(loops, inner);
                 }
             }
         } else {
+            /*
+             * 2
+             */
             if (!matchLiterally) {
+                /*
+                 * 2.2
+                 */
                 writeToTotalCiphers(loops, inner);
             }
             if (inner.match(cipherString) !== null || (!matchLiterally && testIfPartsMatch(inner, cipherString))) {
+                /*
+                 * 2.1 || 2.2
+                 */
                 if (inner.match(/.protocol.:.([A-Z || v || \. || \d]*)/g) !== null) {
                     writeToHostsByProtocol(loops, inner);
-                    writeToHosts(loops, inner, matchLiterally);
+                    writeToHosts(loops, inner);
                 }
             }
         }
     });
 
 }
+
+
+/*
+ * Transforms a given date from the format provided by the HTTP response into
+ * JavaScript date format so that it can be used as a parameter to the "Date.parse()"
+ * function.
+ * 
+ * @param {type} date - Date that is to be transformed.
+ * 
+ * @returns {undefined}
+ */
 
 function getInternalDate(date) {
 
@@ -365,6 +553,22 @@ function getInternalDate(date) {
 
     return tmpYear.concat("-").concat(tmpMonth);
 }
+
+
+/*
+ * Populates the result arrays with a short description of the data that will be written
+ * to the former later in the process as well as with zeros based on the number of months
+ * that is to be considered. The graph library used in "filterciphers.html" 
+ * will use the descriptions to label the data that gets saved along with them.
+ * 
+ * @param {type} months - The number of months to be considered.
+ * @param {type} matchLiterally - Indicates the current operation mode of the application
+ * ("match literally" or "match as part of a larger cipher string").
+ * @param {type} manualProtocolAggregation - True if a user has not specified a protocol,
+ * false otherwise.
+ * 
+ * @returns {undefined}
+ */
 
 function initResultArrays(months, matchLiterally, manualProtocolAggregation) {
 
@@ -403,6 +607,14 @@ function initResultArrays(months, matchLiterally, manualProtocolAggregation) {
     totalCiphersPreferring[0] = "Total: Cipher Suites Preferred";
 
 }
+
+
+/*
+ * Considers every result array and clears it to be an empty array if it only 
+ * contains zeros.
+ * 
+ * @returns {undefined}
+ */
 
 function filterResultArrays() {
 
@@ -576,6 +788,21 @@ function filterResultArrays() {
 
 }
 
+
+/*
+ * Determines if a certain cipher suite entry contains all parts of the cipher suite
+ * specified by the user. This function is used as soon as a user-specified filter is
+ * to be applied in the application's "match as part of a larger cipher string" 
+ * operation mode. If the several parts of the user-provided cipher suite are contained
+ * in the questionable month entry, its number of hosts can be considered in the final
+ * result displayed to the user.
+ * 
+ * @param {type} match - A match within the current month.
+ * @param {type} cipherString - The user-provided cipher suite.
+ * 
+ * @returns {Boolean} True if "match" contains all parts of the user-provided cipher suite,
+ * false otherwise.
+ */
 function testIfPartsMatch(match, cipherString) {
     match = ("" + match.match(/cipher.:.(.*,)/g) + "").split(":")[1];
     var cipherParts = cipherString.split(" ");
@@ -587,6 +814,18 @@ function testIfPartsMatch(match, cipherString) {
     return true;
 }
 
+
+/*
+ * Writes the host count of a certain match to "totalCiphersPreferring" (in case the
+ * status of the cipher suite on the host was "preferred") or "totalCiphersAccepting"
+ * (in case the status of the cipher suite on the host was "accepted").
+ * 
+ * @param {type} currentMonth - Current month considered, thus the index of the result array
+ * the host count is written to.
+ * @param {type} match - The month's match containing the host count.
+ * 
+ * @returns {undefined}
+ */
 function writeToTotalCiphers(currentMonth, match) {
     var count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
     if (match.indexOf("preferred") > -1) {
@@ -597,7 +836,19 @@ function writeToTotalCiphers(currentMonth, match) {
 
 }
 
-function writeToHosts(currentMonth, match, matchLiterally) {
+
+/*
+ * Writes the host count of a certain match to "hostsPreferring" (in case the
+ * status of the cipher suite on the host was "preferred") or "hostsAccepting"
+ * (in case the status of the cipher suite on the host was "accepted").
+ * 
+ * @param {type} currentMonth - Current month considered, thus the index of the result array
+ * the host count is written to.
+ * @param {type} match - The month's match containing the host count.
+ * 
+ * @returns {undefined}
+ */
+function writeToHosts(currentMonth, match) {
     var count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
     if (match.indexOf("preferred") > -1) {
         hostsPreferring[currentMonth] += count;
@@ -605,6 +856,19 @@ function writeToHosts(currentMonth, match, matchLiterally) {
         hostsAccepting[currentMonth] += count;
     }
 }
+
+
+/*
+ * Writes the host count of a certain match to result arrays according to the protocol
+ * contained in "match" and according to the cipher suite's status on the host (either
+ * "accepted" or "prefererred").
+ * 
+ * @param {type} currentMonth - Current month considered, thus the index of the result array
+ * the host count is written to.
+ * @param {type} match - The month's match containing the host count as well as the protocol.
+ * 
+ * @returns {undefined}
+ */
 
 function writeToHostsByProtocol(currentMonth, match) {
     var count = parseInt(("" + match.match(/.count.:(\d*)/g) + "").split(":")[1]);
@@ -652,12 +916,35 @@ function writeToHostsByProtocol(currentMonth, match) {
 }
 
 
+/*
+ * Function called as soon as one of the "Remember Graph" buttons is pushed. It inserts
+ * the graph itself as well as its description text in the according arrays, hides the
+ * warning that was previously displayed in case a user hit the "Show Graphs" button while
+ * there was no graphs available, and finally disables the button for the graph that was
+ * just saved to the "graphsToRemember" array so that the same graph cannot be inserted
+ * more than one time.
+ *         
+ * @param {type} labelText - Description text shown along with the graph.
+ * @param {type} graph - The graph to be remembered.
+ * @param {type} button - "Remember Graph" button to be disabled.
+ * 
+ * @returns {undefined} 
+ */
+
 function rememberGraph(labelText, graph, button) {
     labelsToRemember.push(labelText);
     graphsToRemember.push(graph);
     displayWarningNoGraphs(false);
     button.disabled = true;
 }
+
+
+/*
+ * Returns all previously saved graphs along with their descriptions.
+ * 
+ * @returns {getRememberedElements.filterDataAnonym$2} - Previously remembered graphs
+ * as well as their descriptions.
+ */
 
 function getRememberedElements() {
     return {
@@ -666,16 +953,36 @@ function getRememberedElements() {
     };
 }
 
+
+/*
+ * Empties both the array of saved descriptions as well as the array of saved graphs, 
+ * thus making the application "forget" all graphs.
+ *  
+ * @returns {undefined} 
+ */
+
 function forgetGraphs() {
     labelsToRemember = [];
     graphsToRemember = [];
     enableButtons();
 }
 
+
+/*
+ * Hides or shows elements in conjunction with displaying or hiding a subpage in form of
+ * an HTML "iframe" element containing all remembered graphs along with their descriptions.
+ * 
+ * @param {type} makeVisible - True if the contents of "graphcomparison.html" are to be hidden,
+ * making the elements of "filterciphers.html" visible again, false if the contrary case 
+ * is desired.
+ * 
+ * @returns {undefined} 
+ */
+
 function manageElementVisibility(makeVisible) {
     if (makeVisible) {
         document.getElementById("detailedFilterColumn").style.cssText = "display: block";
-        document.getElementById("nav01").style.cssText =  "display: block";
+        document.getElementById("nav01").style.cssText = "display: block";
         document.getElementById("filterBoxPanel").style.cssText = "display: block";
         document.getElementById("graphComparisonButtonPanel").style.cssText = "display: block";
         document.getElementById("footer").style.cssText = "display: block";
@@ -693,6 +1000,12 @@ function manageElementVisibility(makeVisible) {
 }
 
 
+/*
+ * Resets all arrays containing any data related to filtering and aggregating results 
+ * provided by the database's HTTP response.
+ * 
+ * @returns {undefined} 
+ */
 
 function resetResults() {
 
@@ -717,6 +1030,14 @@ function resetResults() {
 
 }
 
+
+/*
+ * Used for resetting any filter settings and reverting the page's status to when
+ * a user opened it for the first time.
+ * 
+ * @returns {undefined} 
+ */
+
 function resetFilters() {
 
     document.getElementById("displayFilterSelection").innerHTML = "[none]";
@@ -729,6 +1050,14 @@ function resetFilters() {
 
 }
 
+
+/*
+ * Resets all graphs possibly displayed to the user (meaning that afterwards a blank
+ * white page is shown where the graphs were previously displayed).
+ * 
+ * @returns {undefined} 
+ */
+
 function resetGraphs() {
 
     document.getElementById("general").innerHTML = "";
@@ -738,12 +1067,19 @@ function resetGraphs() {
     document.getElementById("noCipherSuites_Preferred").innerHTML = "";
     document.getElementById("lastMonth_Preferred").innerHTML = "";
 
-    resetButtons();
+    hideRememberButtons();
     hideDescriptions();
 
 }
 
-function resetButtons() {
+
+/*
+ * Hides the "Remember Graph" button for each graph.
+ * 
+ * @returns {undefined} 
+ */
+
+function hideRememberButtons() {
     document.getElementById("rememberGeneral").style.cssText = "display: none";
     document.getElementById("rememberLastMonth_General").style.cssText = "display: none";
     document.getElementById("rememberNoCipherSuites_Accepted").style.cssText = "display: none";
@@ -751,6 +1087,13 @@ function resetButtons() {
     document.getElementById("rememberNoCipherSuites_Preferred").style.cssText = "display: none";
     document.getElementById("rememberLastMonth_Preferred").style.cssText = "display: none";
 }
+
+
+/*
+ * Enables the "Remember Graph" button for each graph.
+ *  
+ * @returns {undefined} 
+ */
 
 function enableButtons() {
     document.getElementById("rememberGeneral").disabled = false;

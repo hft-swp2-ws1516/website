@@ -24,11 +24,14 @@
         <div id="nav01"></div>
         <div  class="container">
             <div class="row">
-                <!-- Left Bar -->
+                <!-- Left bar -->
                 <div class="col-md-4">
                     <div id="dynamic"></div>
                 </div>
-                <!-- Right bar -->
+                <!-- 
+                    Right bar; provides "div" element for graphs to be displayed, labels to be filled with their descriptions 
+                    as well as a "Remember Graph" button for each and every graph possibly displayed.
+                -->
                 <div id="detailedFilterColumn" class="col-md-8">
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -68,6 +71,9 @@
                         </div>
                     </div>
                 </div>
+                <!--
+                    "div" element for storing the "iframe" used for displaying the graph comparison.
+                -->
                 <div id="displayGraphComparison" style="display: none; z-index: -100">
                     <iframe id="graphComparison" src="graphcomparison.html" allowtransparency="false" ></iframe>
                 </div>
