@@ -4,8 +4,16 @@ var globalThead;
 var globalInnerKeys;
 var asc = true;
 
+/* 
+ * Draws sortable Table from json object.
+ * @param theadArray - Array with keys for the json object
+ * @param json - json object 
+ * @param theadArray - Name of Table headings
+ * @returns void
+ */
+
 function drawTable(theadArray, json, innerArrayKeys) {
-  // for sorting and drawing again
+  // Global Variables for sorting and drawing the chart again
   globalJson = json;
   globalThead = theadArray;
   globalInnerKeys = innerArrayKeys;
@@ -51,6 +59,12 @@ function drawTable(theadArray, json, innerArrayKeys) {
   $('#table-data').html(html);
 }
 
+/* 
+ * Sort alternating table by given element(table heading/key) and draws the Table again
+ * @param element - the compare element
+ * @returns void -
+ */
+
 function sortTable(element) {
   var id = element.id;
   //var asc = element.getAttribute('asc'); // switch the order, true if not set
@@ -60,9 +74,11 @@ function sortTable(element) {
 }
 
 
-/* Get Timespan from Datepicker or Timeslider, depending which of them is visible
-   return : array with first element 1st datetime in ms and second 2nd datetime in ms
-   */
+/* 
+ * Get Timespan from Datepicker or Timeslider, depending which of them is visible
+ * @returns array with first element 1st datetime in ms and second 2nd datetime in ms
+ */
+
 
 function getTimespan() {
   var timespan = [];
@@ -82,9 +98,14 @@ function getTimespan() {
 }
 
 
-/* Merge double Entry of Ciphersuites from different TLS Versions in the ciphers/summary response JSON 
-   returns summarized array
-   */
+
+/* 
+ *  Merge double entries of Ciphersuites from different TLS Versions in the ciphers/summary response JSON 
+ * @param json - the json object to work in
+ * @param tlsVersion - the TLS Version (1.2,1.1 or 1.0) 
+ * @param totalHosts - Number of totals hosts for calculating the percentage
+ * @returns summarized array
+ */
 
 function mergeDoubleEntrys(json, tlsVersion, totalHosts) {
   var summarized = [];
@@ -124,7 +145,14 @@ function mergeDoubleEntrys(json, tlsVersion, totalHosts) {
 }
 
 
-// Compare function for sorting Array of JSONs 
+/* 
+ *   Compare function for sorting Array of JSONs 
+ * @param arr - the json object to work in
+ * @param prop - the prop which is sorted by
+ * @param {bool} asc - sort ascending or descending
+ * @returns comparator
+ */
+
 function sortResults(arr, prop, asc) {
   arr = arr.sort(function(a, b) {
     if (asc) {
@@ -135,10 +163,27 @@ function sortResults(arr, prop, asc) {
   });
 }
 
+
+/* 
+ * Date is stored in databse in specifig way (2015_12 e.g)
+ * @param date - {date} the date
+ * @returns formatted date
+ */
+
 function formatDate2(date) {
   var string = date.getFullYear() + "_" + (date.getMonth() + 1);
   return string;
 }
+
+
+/* 
+ * Filter response from API by given timespan.
+ * @param response - the response json
+ * @param start - start date
+ * @param end - end date
+ * @returns filtered json
+ */
+
 
 function filterResponseByTimespan(response, start, end) {
   var filtered = [];
@@ -157,6 +202,12 @@ function filterResponseByTimespan(response, start, end) {
   return filtered;
 }
 
+/* 
+ * Get the Index of the Latest Element in the response JSON.
+ * @param response - the response json
+ * @returns Index of latest Element in the response JSON
+ */
+
 function getLatestElementIndex(response) {
   var latestElement = 0;
   for (var i = 0; i < response.length; i++) {
@@ -173,34 +224,38 @@ function getLatestElementIndex(response) {
 }
 
 
-  $('#filterDateEnd').datepicker({
-    format: "yyyy_mm",
-    startView: 1,
-    minViewMode: 1,
-    autoclose: true,
-    //setDate: new Date(2015,11),
-    startDate: new Date(2015, 10),
-    endDate: new Date(),
-  });
+// Bootstrap Datepicker - The End Time
 
-  // default end date, this syntax is weird but it worked
-  $('#filterDateEnd').datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth()));
+$('#filterDateEnd').datepicker({
+  format: "yyyy_mm",
+  startView: 1,
+  minViewMode: 1,
+  autoclose: true,
+  //setDate: new Date(2015,11),
+  startDate: new Date(2015, 10),
+  endDate: new Date(),
+});
 
-  $('#filterDateStart').datepicker({
-    format: "yyyy_mm",
-    viewMode: "months",
-    minViewMode: "months",
-    autoclose: true,
-    startDate: new Date(2015, 10),
-    endDate: new Date(),
-  }).on('changeDate', function(e) {
-    var month = e.date.getMonth();
-    var year = e.date.getFullYear();
-    var startDate = new Date(year, month);
-    $('#filterDateEnd').datepicker('setStartDate', startDate);
-    //$('#filterDateEnd').datepicker('setDate',  startDate);
-  });
+// default end date, this syntax is weird but it worked
+$('#filterDateEnd').datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth()));
 
 
-  // set default Beginn date
-  $('#filterDateStart').datepicker('setDate', new Date(2015, 10));
+// Boostrap Datepicker - Start time
+$('#filterDateStart').datepicker({
+  format: "yyyy_mm",
+  viewMode: "months",
+  minViewMode: "months",
+  autoclose: true,
+  startDate: new Date(2015, 10),
+  endDate: new Date(),
+}).on('changeDate', function(e) {
+  var month = e.date.getMonth();
+  var year = e.date.getFullYear();
+  var startDate = new Date(year, month);
+  $('#filterDateEnd').datepicker('setStartDate', startDate);
+  //$('#filterDateEnd').datepicker('setDate',  startDate);
+});
+
+
+// set default Beginn date
+$('#filterDateStart').datepicker('setDate', new Date(2015, 10));
